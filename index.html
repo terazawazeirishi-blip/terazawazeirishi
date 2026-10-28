@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福岡市天神のアテナ税理士法人 | freeeに強い女性チームの会計事務所</title>
+  
+  <!-- Webフォント（Cinzel: ギリシャセリフ体 / Shippori Mincho: 美麗な明朝体） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       【画像・写真・イラストの一括管理エリア】
+       背景や右側のイラストはお手持ちの画像パス（./img/character.png等）に変更可能です。
+    ========================================================================== */
+    :root {
+      /* 1. ファーストビューの右側キービジュアル（女神アテナのイラスト） */
+      --img-hero-character: url('hero_character.png');
+
+      /* 2. 背景グラデーション（透き通るような白〜淡いアイスブルー） */
+      --bg-hero-gradient: linear-gradient(135deg, #f2f5f9 0%, #ebf1f8 50%, #e2ecf7 100%);
+
+      /* 3. 各種写真（About / 代表写真 / CTA） */
+      --img-representative: url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80');
+      --bg-cta: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
+
+      /* カラーパレット（スクリーンショットからスポイト抽出した完全一致色） */
+      --color-text-main: #222222;       /* 見出しの黒 */
+      --color-text-sub: #555555;        /* サブテキスト */
+      --color-btn-olive: #96955d;       /* 右上「無料相談」ボタンのオリーブ・カーキ */
+      --color-btn-olive-hover: #82814d;
+      --color-watermark: rgba(255, 255, 255, 0.72); /* 背面の白い巨大ATHENA */
+      --color-laurel: #8b9bb0;          /* 月桂冠・オリーブリースのシルバーグレー */
+      --font-serif-en: 'Cinzel', serif;
+      --font-mincho: 'Shippori Mincho', serif;
+      --font-sans: 'Noto Sans JP', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text-main);
+      background-color: #ffffff;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1440px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       HEADER (完全再現)
+    ========================================================================== */
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* ロゴエリア */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-diamond {
+      width: 40px;
+      height: 40px;
+      background: #a8a8a4;
+      transform: rotate(45deg);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-diamond::before {
+      content: "🪶";
+      transform: rotate(-45deg);
+      font-size: 1.2rem;
+      color: #ffffff;
+      filter: brightness(10);
+    }
+
+    .logo-text {
+      font-family: var(--font-mincho);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2b2b2b;
+      letter-spacing: 0.12em;
+    }
+
+    /* ナビゲーション */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #333333;
+      letter-spacing: 0.05em;
+    }
+
+    .header-nav a:hover {
+      color: var(--color-btn-olive);
+    }
+
+    .btn-free-consult {
+      background: var(--color-btn-olive);
+      color: #ffffff !important;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: 0.95rem !important;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(150, 149, 93, 0.25);
+    }
+
+    .btn-free-consult:hover {
+      background: var(--color-btn-olive-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       HERO FIRST VIEW (スクリーンショット完全一致)
+    ========================================================================== */
+    .hero-view {
+      position: relative;
+      min-height: 940px;
+      background: var(--bg-hero-gradient);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 1. 背面の巨大透かし文字 "A T H E N A" "TAX CORPORATION" */
+    .watermark-athena {
+      position: absolute;
+      top: 130px;
+      left: 3%;
+      width: 94%;
+      font-family: var(--font-serif-en);
+      font-size: clamp(6rem, 14vw, 13.5rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.28em;
+      line-height: 0.85;
+      pointer-events: none;
+      z-index: 1;
+      text-shadow: 0 0 30px rgba(255,255,255,0.8);
+      user-select: none;
+    }
+
+    .watermark-tax {
+      position: absolute;
+      top: 450px;
+      left: 3%;
+      font-family: var(--font-serif-en);
+      font-size: clamp(4rem, 9.5vw, 9.5rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.72);
+      letter-spacing: 0.26em;
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+    }
+
+    /* 2. 右側：女神アテナの美麗キービジュアルイラスト */
+    .hero-illust-wrap {
+      position: absolute;
+      right: -20px;
+      bottom: 0;
+      width: 62%;
+      max-width: 1100px;
+      height: 90%;
+      background: var(--img-hero-character) no-repeat right bottom;
+      background-size: contain;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 30px rgba(180, 200, 220, 0.3));
+    }
+
+    /* 3. 左側：キャッチコピーとバッジ */
+    .hero-main-content {
+      position: relative;
+      z-index: 4;
+      max-width: 680px;
+      padding-top: 60px;
+      margin-left: 4%;
+    }
+
+    .hero-copy-1 {
+      font-family: var(--font-mincho);
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: #1a1a1a;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .hero-copy-2 {
+      font-family: var(--font-mincho);
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: #1a1a1a;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-mincho);
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      color: #4a4a4a;
+      letter-spacing: 0.16em;
+      margin-bottom: 70px;
+    }
+
+    /* ==========================================================================
+       月桂冠（オリーブのリース冠）バッジ群 (完全再現)
+    ========================================================================== */
+    .laurel-badges-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .laurel-row-top {
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 20px;
+    }
+
+    .laurel-row-bottom {
+      display: flex;
+      gap: 36px;
+    }
+
+    .laurel-badge-unit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* オリーブ月桂冠のSVG */
+    .laurel-branch {
+      width: 24px;
+      height: 48px;
+      fill: none;
+      stroke: var(--color-laurel);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      opacity: 0.85;
+    }
+
+    .laurel-branch.right {
+      transform: scaleX(-1);
+    }
+
+    .laurel-badge-text {
+      text-align: center;
+    }
+
+    .laurel-badge-text .title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #222222;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .freee-arrow {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-right: -2px;
+    }
+
+    .laurel-badge-text .subtitle {
+      font-size: 0.8rem;
+      color: #666666;
+      margin-top: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    .stars {
+      color: #c9b072;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      margin-left: 4px;
+    }
+
+    /* ==========================================================================
+       舞い散る白い羽根（フェザーアニメーション）
+    ========================================================================== */
+    .feather-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .feather {
+      position: absolute;
+      top: -60px;
+      width: 28px;
+      height: 48px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0) 80%);
+      border-radius: 50% 50% 20% 80%;
+      filter: blur(1px) drop-shadow(0 4px 8px rgba(0,0,0,0.06));
+      animation: featherFall 10s infinite linear;
+      opacity: 0.85;
+    }
+
+    .feather:nth-child(1) { left: 45%; animation-duration: 9s; animation-delay: 0s; transform: rotate(20deg) scale(0.9); }
+    .feather:nth-child(2) { left: 65%; animation-duration: 12s; animation-delay: 3s; transform: rotate(-35deg) scale(1.1); }
+    .feather:nth-child(3) { left: 80%; animation-duration: 8s; animation-delay: 1.5s; transform: rotate(15deg) scale(0.8); }
+    .feather:nth-child(4) { left: 30%; animation-duration: 14s; animation-delay: 5s; transform: rotate(-10deg) scale(0.7); }
+
+    @keyframes featherFall {
+      0% {
+        top: -60px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.85;
+      }
+      80% {
+        opacity: 0.85;
+      }
+      100% {
+        top: 105%;
+        transform: translateX(120px) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    /* ==========================================================================
+       SECTION COMMON (私たちについて・サービス等)
+    ========================================================================== */
+    section {
+      padding: 100px 0;
+      scroll-margin-top: 90px;
+    }
+
+    .sec-center {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .sec-en {
+      font-family: var(--font-serif-en);
+      font-size: 0.95rem;
+      letter-spacing: 0.25em;
+      color: var(--color-btn-olive);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .sec-jp {
+      font-family: var(--font-mincho);
+      font-size: 2.2rem;
+      color: #1a1a1a;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       ABOUT (5つの強み)
+    ========================================================================== */
+    .about-item-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 70px;
+    }
+
+    .about-item-row.rev {
+      direction: rtl;
+    }
+
+    .about-item-row.rev .about-txt,
+    .about-item-row.rev .about-img {
+      direction: ltr;
+    }
+
+    .about-idx {
+      font-family: var(--font-serif-en);
+      font-size: 2.8rem;
+      color: rgba(150, 149, 93, 0.4);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .about-txt h3 {
+      font-family: var(--font-mincho);
+      font-size: 1.45rem;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    .about-txt p {
+      font-size: 0.95rem;
+      color: var(--color-text-sub);
+      line-height: 1.85;
+    }
+
+    .about-img {
+      height: 320px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+
+    /* ==========================================================================
+       SERVICES & FAQ
+    ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 26px;
+    }
+
+    .service-card {
+      background: #fafaf8;
+      border: 1px solid #ebebe5;
+      border-radius: 8px;
+      padding: 34px 28px;
+      transition: all 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: var(--color-btn-olive);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transform: translateY(-4px);
+    }
+
+    .service-card h3 {
+      font-family: var(--font-mincho);
+      font-size: 1.25rem;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      border-left: 3px solid var(--color-btn-olive);
+      padding-left: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-sub);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .service-card .more {
+      color: var(--color-btn-olive);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       FOOTER
+    ========================================================================== */
+    footer {
+      background: #19212c;
+      color: #9cb1ce;
+      padding: 80px 0 35px;
+      font-size: 0.88rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand h2 {
+      color: #ffffff;
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      font-family: var(--font-mincho);
+    }
+
+    .footer-col h4 {
+      color: #ffffff;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--color-btn-olive);
+      padding-left: 8px;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+      list-style: none;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffffff;
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 25px;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
+    ========================================================================== */
+    @media (max-width: 1024px) {
+      .header-nav { display: none; }
+      .hero-illust-wrap { width: 70%; opacity: 0.6; }
+      .hero-main-content { max-width: 100%; margin-left: 0; }
+      .about-item-row, .about-item-row.rev { grid-template-columns: 1fr; direction: ltr; }
+      .about-item-row.rev .about-txt { direction: ltr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .laurel-row-bottom { flex-direction: column; gap: 20px; }
+      .watermark-athena { font-size: 5rem; }
+      .watermark-tax { font-size: 3.5rem; top: 380px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- ==========================================================================
+       HEADER (完全再現)
+  ========================================================================== -->
+  <header>
+    <div class="container header-inner">
+      <!-- ロゴ -->
+      <a href="#top" class="header-logo">
+        <div class="logo-diamond"></div>
+        <div class="logo-text">アテナ税理士法人</div>
+      </a>
+
+      <!-- ナビゲーションメニュー -->
+      <nav class="header-nav">
+        <a href="#about">私たちについて</a>
+        <a href="#services">サービス</a>
+        <a href="#column">お役立ちコラム</a>
+        <a href="#company">会社情報</a>
+        <a href="#recruit">採用情報</a>
+        <a href="#contact" class="btn-free-consult">
+          <span>✉</span> 無料相談
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO VIEW (スクリーンショット完全一致)
+  ========================================================================== -->
+  <section class="hero-view">
+    
+    <!-- 1. 白銀の巨大透かし文字 -->
+    <div class="watermark-athena">A T H E N A</div>
+    <div class="watermark-tax">TAX CORPORATION</div>
+
+    <!-- 2. 女神アテナの美麗キービジュアルイラスト -->
+    <div class="hero-illust-wrap"></div>
+
+    <!-- 3. ふわふわと舞い散る白い羽根（フェザー） -->
+    <div class="feather-layer">
+      <div class="feather"></div>
+      <div class="feather"></div>
+      <div class="feather"></div>
+      <div class="feather"></div>
+    </div>
+
+    <!-- 4. メインコピー＆オリーブ月桂冠バッジ群 -->
+    <div class="container">
+      <div class="hero-main-content">
+        <h2 class="hero-copy-1">数字を、経営の</h2>
+        <h2 class="hero-copy-2">最強の武器に。</h2>
+        <p class="hero-tagline">福岡の女性チームの税理士法人</p>
+
+        <!-- 月桂冠バッジ群 -->
+        <div class="laurel-badges-container">
+          
+          <!-- 上段：freee認定アドバイザー -->
+          <div class="laurel-row-top">
+            <div class="laurel-badge-unit">
+              <!-- 左オリーブの枝 -->
+              <svg class="laurel-branch" viewBox="0 0 24 48">
+                <path d="M18 4 C10 12, 6 24, 6 44"/>
+                <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
+                <path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/>
+                <path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/>
+              </svg>
+              <div class="laurel-badge-text">
+                <div class="title">
+                  <span class="freee-arrow">←</span> <strong>freee</strong> 認定アドバイザー
+                </div>
+                <div class="subtitle">最高ランク <span class="stars">★★★★★</span></div>
+              </div>
+              <!-- 右オリーブの枝 -->
+              <svg class="laurel-branch right" viewBox="0 0 24 48">
+                <path d="M18 4 C10 12, 6 24, 6 44"/>
+                <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
+                <path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/>
+                <path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 下段：スタートアップ創業支援 ＆ AI×会計 -->
+          <div class="laurel-row-bottom">
+            <!-- バッジ 2 -->
+            <div class="laurel-badge-unit">
+              <svg class="laurel-branch" viewBox="0 0 24 48">
+                <path d="M18 4 C10 12, 6 24, 6 44"/>
+                <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
+                <path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/>
+                <path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/>
+              </svg>
+              <div class="laurel-badge-text">
+                <div class="title">スタートアップ創業支援</div>
+                <div class="subtitle">事業計画〜資金調達まで伴走</div>
+              </div>
+              <svg class="laurel-branch right" viewBox="0 0 24 48">
+                <path d="M18 4 C10 12, 6 24, 6 44"/>
+                <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
+                <path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/>
+                <path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/>
+              </svg>
+            </div>
+
+            <!-- バッジ 3 -->
+            <div class="laurel-badge-unit">
+              <svg class="laurel-branch" viewBox="0 0 24 48">
+                <path d="M18 4 C10 12, 6 24, 6 44"/>
+                <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
+                <path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/>
+                <path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/>
+              </svg>
+              <div class="laurel-badge-text">
+                <div class="title">AI×会計で業務の効率化</div>
+                <div class="subtitle">Claude等を活用した自動化設計</div>
+              </div>
+              <svg class="laurel-branch right" viewBox="0 0 24 48">
+                <path d="M18 4 C10 12, 6 24, 6 44"/>
+                <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
+                <path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/>
+                <path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/>
+              </svg>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ABOUT (5つの強み)
+  ========================================================================== -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-center">
+        <span class="sec-en">About us</span>
+        <h2 class="sec-jp">クラウド会計特化のアテナ税理士法人</h2>
+      </div>
+
+      <div class="about-item-row">
+        <div class="about-txt">
+          <div class="about-idx">01</div>
+          <h3>福岡の創業に強い、女性税理士チーム</h3>
+          <p>事業計画の策定から融資申込、法人設立届出まで。「何から始めればいいか分からない」段階から、創業の実務をワンストップで担います。</p>
+        </div>
+        <div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80');"></div>
+      </div>
+
+      <div class="about-item-row rev">
+        <div class="about-txt">
+          <div class="about-idx">02</div>
+          <h3>freee認定アドバイザー5つ星が設計するクラウド会計</h3>
+          <p>freee最高ランクの税理士が、導入設計から自動化の構築まで対応。紙やExcelの手作業から解放され、経営数字をリアルタイムで把握できる仕組みを作ります。</p>
+        </div>
+        <div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SERVICES
+  ========================================================================== -->
+  <section id="services" style="background:#f8f9fa;">
+    <div class="container">
+      <div class="sec-center">
+        <span class="sec-en">Service</span>
+        <h2 class="sec-jp">サービス</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>税務顧問</h3>
+          <p>日々の会計・税務から申告まで、事業運営の不安を伴走しながら解消します。</p>
+          <span class="more" onclick="alert('税務顧問の詳細ページへ遷移します')">More &rarr;</span>
+        </div>
+        <div class="service-card">
+          <h3>会社設立サービス</h3>
+          <p>事業計画から手続きまで、創業期の不安を伴走しながら解消します。</p>
+          <span class="more" onclick="alert('会社設立サービスの詳細ページへ遷移します')">More &rarr;</span>
+        </div>
+        <div class="service-card">
+          <h3>創業融資サービス</h3>
+          <p>金融機関向け資料の作成から交渉サポートまで丁寧に支援します。</p>
+          <span class="more" onclick="alert('創業融資サービスの詳細ページへ遷移します')">More &rarr;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+  ========================================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>アテナ税理士法人</h2>
+          <p>
+            〒810-0041<br>
+            福岡県福岡市中央区大名２丁目４−２２ 新日本ビル２階<br>
+            TEL: 092-725-0675
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>会社情報</h4>
+          <ul>
+            <li><a href="#top">TOP</a></li>
+            <li><a href="#about">私たちについて</a></li>
+            <li><a href="#company">会社概要</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="#services">税務顧問</a></li>
+            <li><a href="#services">会社設立</a></li>
+            <li><a href="#services">創業融資</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="#contact">無料相談・お問い合わせ</a></li>
+            <li><a href="#">個人情報保護方針</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Copyright (C) 2026 アテナ税理士法人 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
