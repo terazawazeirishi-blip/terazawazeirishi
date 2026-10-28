@@ -3,41 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>福岡市天神のアテナ税理士法人 | freeeに強い女性チームの会計事務所</title>
+  <title>福岡市天神のミネルヴァ税理士法人 | freee・AIに強い女性チームの会計事務所</title>
   
-  <!-- Webフォント（Cinzel: ギリシャセリフ体 / Shippori Mincho: 美麗な明朝体） -->
+  <!-- Webフォント（Cinzel: クラシックなギリシャ神話セリフ体 / Shippori Mincho: 流麗な明朝体） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       【画像・写真・イラストの一括管理エリア】
-       背景や右側のイラストはお手持ちの画像パス（./img/character.png等）に変更可能です。
+       【1. 画像・写真・イラストの一括管理エリア】
+       背景写真や右側のキービジュアルはお手持ちの画像パスに変更可能です。
     ========================================================================== */
     :root {
-      /* 1. ファーストビューの右側キービジュアル（女神アテナのイラスト） */
+      /* 1. ファーストビュー右側のキービジュアル（女神イラストの透過画像など） */
       --img-hero-character: url('hero_character.png');
 
-      /* 2. 背景グラデーション（透き通るような白〜淡いアイスブルー） */
+      /* 2. 背景グラデーション（透き通るような白〜淡いペールアイスブルー） */
       --bg-hero-gradient: linear-gradient(135deg, #f2f5f9 0%, #ebf1f8 50%, #e2ecf7 100%);
 
-      /* 3. 各種写真（About / 代表写真 / CTA） */
+      /* 3. 各種イメージ写真 */
+      --img-about-01: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80');
+      --img-about-02: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');
+      --img-about-03: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80');
       --img-representative: url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80');
       --bg-cta: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
 
-      /* カラーパレット（スクリーンショットからスポイト抽出した完全一致色） */
-      --color-text-main: #222222;       /* 見出しの黒 */
-      --color-text-sub: #555555;        /* サブテキスト */
-      --color-btn-olive: #96955d;       /* 右上「無料相談」ボタンのオリーブ・カーキ */
-      --color-btn-olive-hover: #82814d;
-      --color-watermark: rgba(255, 255, 255, 0.72); /* 背面の白い巨大ATHENA */
-      --color-laurel: #8b9bb0;          /* 月桂冠・オリーブリースのシルバーグレー */
+      /* カラーパレット */
+      --color-text-main: #1f1f1f;
+      --color-text-sub: #5a5a5a;
+      --color-btn-olive: #96955d;       /* 本家と完全同色の品のあるオリーブカーキ */
+      --color-btn-olive-hover: #7f7e4b;
+      --color-watermark: rgba(255, 255, 255, 0.76);
+      --color-laurel: #8b9bb0;          /* 月桂冠・オリーブリースの繊細なシルバーグレー */
       --font-serif-en: 'Cinzel', serif;
       --font-mincho: 'Shippori Mincho', serif;
       --font-sans: 'Noto Sans JP', sans-serif;
     }
 
+    /* ==========================================================================
+       BASE RESET & STYLES
+    ========================================================================== */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -52,7 +58,7 @@
       font-family: var(--font-sans);
       color: var(--color-text-main);
       background-color: #ffffff;
-      line-height: 1.8;
+      line-height: 1.85;
       overflow-x: hidden;
     }
 
@@ -70,7 +76,7 @@
     }
 
     /* ==========================================================================
-       HEADER (完全再現)
+       HEADER
     ========================================================================== */
     header {
       position: absolute;
@@ -90,7 +96,6 @@
       width: 100%;
     }
 
-    /* ロゴエリア */
     .header-logo {
       display: flex;
       align-items: center;
@@ -107,7 +112,6 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      position: relative;
       flex-shrink: 0;
     }
 
@@ -127,7 +131,6 @@
       letter-spacing: 0.12em;
     }
 
-    /* ナビゲーション */
     .header-nav {
       display: flex;
       align-items: center;
@@ -163,8 +166,51 @@
       transform: translateY(-2px);
     }
 
+    /* ハンバーガーメニュー */
+    .menu-trigger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .menu-trigger span {
+      width: 25px;
+      height: 2px;
+      background: #333;
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 90px);
+      background: #ffffff;
+      padding: 40px 24px;
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+      overflow-y: auto;
+      z-index: 990;
+    }
+
+    .mobile-menu-overlay.active {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-overlay a {
+      display: block;
+      padding: 14px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-bottom: 1px solid #eee;
+    }
+
     /* ==========================================================================
-       HERO FIRST VIEW (スクリーンショット完全一致)
+       HERO VIEW (完全一致の構成・配置)
     ========================================================================== */
     .hero-view {
       position: relative;
@@ -175,40 +221,40 @@
       align-items: center;
     }
 
-    /* 1. 背面の巨大透かし文字 "A T H E N A" "TAX CORPORATION" */
-    .watermark-athena {
+    /* 1. 背面の白銀透かし文字 */
+    .watermark-brand {
       position: absolute;
       top: 130px;
       left: 3%;
       width: 94%;
       font-family: var(--font-serif-en);
-      font-size: clamp(6rem, 14vw, 13.5rem);
+      font-size: clamp(5.5rem, 13vw, 13rem);
       font-weight: 400;
-      color: rgba(255, 255, 255, 0.78);
-      letter-spacing: 0.28em;
+      color: var(--color-watermark);
+      letter-spacing: 0.25em;
       line-height: 0.85;
       pointer-events: none;
       z-index: 1;
-      text-shadow: 0 0 30px rgba(255,255,255,0.8);
+      text-shadow: 0 0 30px rgba(255,255,255,0.85);
       user-select: none;
     }
 
-    .watermark-tax {
+    .watermark-sub {
       position: absolute;
       top: 450px;
       left: 3%;
       font-family: var(--font-serif-en);
-      font-size: clamp(4rem, 9.5vw, 9.5rem);
+      font-size: clamp(3.8rem, 9.2vw, 9.5rem);
       font-weight: 400;
-      color: rgba(255, 255, 255, 0.72);
+      color: var(--color-watermark);
       letter-spacing: 0.26em;
       pointer-events: none;
       z-index: 1;
       user-select: none;
     }
 
-    /* 2. 右側：女神アテナの美麗キービジュアルイラスト */
-    .hero-illust-wrap {
+    /* 2. 右側キービジュアルイラスト */
+    .hero-character-wrap {
       position: absolute;
       right: -20px;
       bottom: 0;
@@ -222,11 +268,11 @@
       filter: drop-shadow(0 10px 30px rgba(180, 200, 220, 0.3));
     }
 
-    /* 3. 左側：キャッチコピーとバッジ */
+    /* 3. 左側メインコピー */
     .hero-main-content {
       position: relative;
       z-index: 4;
-      max-width: 680px;
+      max-width: 700px;
       padding-top: 60px;
       margin-left: 4%;
     }
@@ -260,7 +306,7 @@
     }
 
     /* ==========================================================================
-       月桂冠（オリーブのリース冠）バッジ群 (完全再現)
+       月桂冠（オリーブのリース冠）バッジ群
     ========================================================================== */
     .laurel-badges-container {
       display: flex;
@@ -271,7 +317,7 @@
     .laurel-row-top {
       display: flex;
       justify-content: flex-start;
-      padding-left: 20px;
+      padding-left: 18px;
     }
 
     .laurel-row-bottom {
@@ -285,7 +331,6 @@
       gap: 10px;
     }
 
-    /* オリーブ月桂冠のSVG */
     .laurel-branch {
       width: 24px;
       height: 48px;
@@ -315,11 +360,10 @@
       gap: 6px;
     }
 
-    .freee-arrow {
+    .arrow-icon {
       font-size: 1.1rem;
       font-weight: 700;
       color: #1a1a1a;
-      margin-right: -2px;
     }
 
     .laurel-badge-text .subtitle {
@@ -370,12 +414,8 @@
         transform: translateX(0) rotate(0deg);
         opacity: 0;
       }
-      20% {
-        opacity: 0.85;
-      }
-      80% {
-        opacity: 0.85;
-      }
+      20% { opacity: 0.85; }
+      80% { opacity: 0.85; }
       100% {
         top: 105%;
         transform: translateX(120px) rotate(180deg);
@@ -384,10 +424,10 @@
     }
 
     /* ==========================================================================
-       SECTION COMMON (私たちについて・サービス等)
+       SECTION COMMON
     ========================================================================== */
     section {
-      padding: 100px 0;
+      padding: 110px 0;
       scroll-margin-top: 90px;
     }
 
@@ -414,14 +454,14 @@
     }
 
     /* ==========================================================================
-       ABOUT (5つの強み)
+       ABOUT (私たちについて)
     ========================================================================== */
     .about-item-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
-      margin-bottom: 70px;
+      margin-bottom: 80px;
     }
 
     .about-item-row.rev {
@@ -455,7 +495,7 @@
     }
 
     .about-img {
-      height: 320px;
+      height: 330px;
       border-radius: 8px;
       background-size: cover;
       background-position: center;
@@ -463,7 +503,7 @@
     }
 
     /* ==========================================================================
-       SERVICES & FAQ
+       SERVICES
     ========================================================================== */
     .services-grid {
       display: grid;
@@ -476,6 +516,9 @@
       border: 1px solid #ebebe5;
       border-radius: 8px;
       padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       transition: all 0.3s;
     }
 
@@ -506,10 +549,142 @@
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
+      align-self: flex-start;
     }
 
     /* ==========================================================================
-       FOOTER
+       MESSAGE (代表挨拶)
+    ========================================================================== */
+    .message-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 50px;
+      background: #fafaf8;
+      border: 1px solid #ebebe5;
+      border-radius: 8px;
+      padding: 46px;
+      align-items: center;
+    }
+
+    .message-photo {
+      height: 380px;
+      border-radius: 6px;
+      background: var(--img-representative) center center/cover no-repeat;
+    }
+
+    .rep-post {
+      font-size: 0.88rem;
+      color: var(--color-btn-olive);
+      font-weight: 700;
+    }
+
+    .rep-name {
+      font-family: var(--font-mincho);
+      font-size: 1.8rem;
+      color: #1a1a1a;
+      margin: 6px 0 18px;
+    }
+
+    .rep-name span {
+      font-family: var(--font-serif-en);
+      font-size: 1rem;
+      color: var(--color-text-sub);
+      margin-left: 10px;
+    }
+
+    .rep-bio {
+      font-size: 0.92rem;
+      color: var(--color-text-sub);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    /* ==========================================================================
+       COMPANY (会社情報)
+    ========================================================================== */
+    .company-table {
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ebebe5;
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .company-table th,
+    .company-table td {
+      padding: 18px 24px;
+      border-bottom: 1px solid #ebebe5;
+      font-size: 0.92rem;
+    }
+
+    .company-table th {
+      background: #fafaf8;
+      width: 160px;
+      text-align: left;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* ==========================================================================
+       FAQ ACCORDION
+    ========================================================================== */
+    .faq-container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border: 1px solid #ebebe5;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .faq-question:hover {
+      background: #fafaf8;
+    }
+
+    .faq-toggle {
+      color: var(--color-btn-olive);
+      font-size: 1.3rem;
+      transition: transform 0.3s;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 0.92rem;
+      color: var(--color-text-sub);
+      line-height: 1.8;
+      border-top: 1px dashed #ebebe5;
+      padding-top: 16px;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    /* ==========================================================================
+       FOOTER & MODAL
     ========================================================================== */
     footer {
       background: #19212c;
@@ -557,22 +732,66 @@
       font-size: 0.78rem;
     }
 
+    /* モーダル */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(14, 26, 47, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 660px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-sub);
+    }
+
     /* ==========================================================================
        RESPONSIVE
     ========================================================================== */
     @media (max-width: 1024px) {
       .header-nav { display: none; }
-      .hero-illust-wrap { width: 70%; opacity: 0.6; }
+      .menu-trigger { display: flex; }
+      .hero-character-wrap { width: 70%; opacity: 0.6; }
       .hero-main-content { max-width: 100%; margin-left: 0; }
       .about-item-row, .about-item-row.rev { grid-template-columns: 1fr; direction: ltr; }
       .about-item-row.rev .about-txt { direction: ltr; }
+      .message-layout { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 600px) {
       .laurel-row-bottom { flex-direction: column; gap: 20px; }
-      .watermark-athena { font-size: 5rem; }
-      .watermark-tax { font-size: 3.5rem; top: 380px; }
+      .watermark-brand { font-size: 4.8rem; }
+      .watermark-sub { font-size: 3.2rem; top: 380px; }
       .footer-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -584,10 +803,10 @@
   ========================================================================== -->
   <header>
     <div class="container header-inner">
-      <!-- ロゴ -->
+      <!-- 架空ロゴ -->
       <a href="#top" class="header-logo">
         <div class="logo-diamond"></div>
-        <div class="logo-text">アテナ税理士法人</div>
+        <div class="logo-text">ミネルヴァ税理士法人</div>
       </a>
 
       <!-- ナビゲーションメニュー -->
@@ -596,27 +815,44 @@
         <a href="#services">サービス</a>
         <a href="#column">お役立ちコラム</a>
         <a href="#company">会社情報</a>
-        <a href="#recruit">採用情報</a>
-        <a href="#contact" class="btn-free-consult">
+        <a href="#message">代表挨拶</a>
+        <a href="javascript:void(0)" onclick="openModal('contact')" class="btn-free-consult">
           <span>✉</span> 無料相談
         </a>
       </nav>
+
+      <!-- モバイル用ハンバーガー -->
+      <button class="menu-trigger" id="menuToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- モバイルドロワー -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+      <a href="#about" class="m-link">私たちについて</a>
+      <a href="#services" class="m-link">サービス一覧</a>
+      <a href="#column" class="m-link">お役立ちコラム</a>
+      <a href="#company" class="m-link">会社情報</a>
+      <a href="#message" class="m-link">代表挨拶</a>
+      <a href="javascript:void(0)" onclick="openModal('contact')" class="m-link" style="color:var(--color-btn-olive);">無料相談</a>
     </div>
   </header>
 
   <!-- ==========================================================================
-       HERO VIEW (スクリーンショット完全一致)
+       HERO VIEW (完全一致のタイポグラフィ・配置)
   ========================================================================== -->
   <section class="hero-view">
     
-    <!-- 1. 白銀の巨大透かし文字 -->
-    <div class="watermark-athena">A T H E N A</div>
-    <div class="watermark-tax">TAX CORPORATION</div>
+    <!-- 1. 白銀の巨大透かし文字（架空ブランド名） -->
+    <div class="watermark-brand">M I N E R V A</div>
+    <div class="watermark-sub">TAX CORPORATION</div>
 
-    <!-- 2. 女神アテナの美麗キービジュアルイラスト -->
-    <div class="hero-illust-wrap"></div>
+    <!-- 2. 女神アテナ/ミネルヴァのキービジュアルイラスト -->
+    <div class="hero-character-wrap"></div>
 
-    <!-- 3. ふわふわと舞い散る白い羽根（フェザー） -->
+    <!-- 3. ふわふわと舞い散る白い羽根（フェザーアニメーション） -->
     <div class="feather-layer">
       <div class="feather"></div>
       <div class="feather"></div>
@@ -637,7 +873,7 @@
           <!-- 上段：freee認定アドバイザー -->
           <div class="laurel-row-top">
             <div class="laurel-badge-unit">
-              <!-- 左オリーブの枝 -->
+              <!-- 左オリーブの枝SVG -->
               <svg class="laurel-branch" viewBox="0 0 24 48">
                 <path d="M18 4 C10 12, 6 24, 6 44"/>
                 <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
@@ -646,11 +882,11 @@
               </svg>
               <div class="laurel-badge-text">
                 <div class="title">
-                  <span class="freee-arrow">←</span> <strong>freee</strong> 認定アドバイザー
+                  <span class="arrow-icon">←</span> <strong>freee</strong> 認定アドバイザー
                 </div>
                 <div class="subtitle">最高ランク <span class="stars">★★★★★</span></div>
               </div>
-              <!-- 右オリーブの枝 -->
+              <!-- 右オリーブの枝SVG -->
               <svg class="laurel-branch right" viewBox="0 0 24 48">
                 <path d="M18 4 C10 12, 6 24, 6 44"/>
                 <path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/>
@@ -711,31 +947,40 @@
   </section>
 
   <!-- ==========================================================================
-       ABOUT (5つの強み)
+       ABOUT (私たちについて: 架空データ)
   ========================================================================== -->
   <section id="about">
     <div class="container">
       <div class="sec-center">
         <span class="sec-en">About us</span>
-        <h2 class="sec-jp">クラウド会計特化のアテナ税理士法人</h2>
+        <h2 class="sec-jp">クラウド会計特化のミネルヴァ税理士法人</h2>
       </div>
 
       <div class="about-item-row">
         <div class="about-txt">
           <div class="about-idx">01</div>
           <h3>福岡の創業に強い、女性税理士チーム</h3>
-          <p>事業計画の策定から融資申込、法人設立届出まで。「何から始めればいいか分からない」段階から、創業の実務をワンストップで担います。</p>
+          <p>事業計画の策定から日本政策金融公庫等の融資申込、法人設立届出まで。「何から始めればいいか分からない」創業前の段階から、伴走体制でバックオフィスを立ち上げます。</p>
         </div>
-        <div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80');"></div>
+        <div class="about-img" style="background-image: var(--img-about-01);"></div>
       </div>
 
       <div class="about-item-row rev">
         <div class="about-txt">
           <div class="about-idx">02</div>
           <h3>freee認定アドバイザー5つ星が設計するクラウド会計</h3>
-          <p>freee最高ランクの税理士が、導入設計から自動化の構築まで対応。紙やExcelの手作業から解放され、経営数字をリアルタイムで把握できる仕組みを作ります。</p>
+          <p>最高ランクのアドバイザーが、初期設計からAI連携・自動仕訳までフルサポート。紙やExcelの手作業から経営者を解放し、数字がリアルタイムに見える環境を整えます。</p>
         </div>
-        <div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');"></div>
+        <div class="about-img" style="background-image: var(--img-about-02);"></div>
+      </div>
+
+      <div class="about-item-row">
+        <div class="about-txt">
+          <div class="about-idx">03</div>
+          <h3>月次決算を「経営の武器」に変える管理会計</h3>
+          <p>過去の実績を集計するだけの税務にとどまらず、部門別の収益性や資金繰りシミュレーションを毎月フィードバック。次の一手を打つための確かな羅針盤を提供します。</p>
+        </div>
+        <div class="about-img" style="background-image: var(--img-about-03);"></div>
       </div>
     </div>
   </section>
@@ -743,45 +988,198 @@
   <!-- ==========================================================================
        SERVICES
   ========================================================================== -->
-  <section id="services" style="background:#f8f9fa;">
+  <section id="services" style="background:#fafaf8;">
     <div class="container">
       <div class="sec-center">
-        <span class="sec-en">Service</span>
-        <h2 class="sec-jp">サービス</h2>
+        <span class="sec-en">Services</span>
+        <h2 class="sec-jp">サービス一覧</h2>
       </div>
 
       <div class="services-grid">
         <div class="service-card">
-          <h3>税務顧問</h3>
-          <p>日々の会計・税務から申告まで、事業運営の不安を伴走しながら解消します。</p>
-          <span class="more" onclick="alert('税務顧問の詳細ページへ遷移します')">More &rarr;</span>
+          <div>
+            <h3>月次税務顧問</h3>
+            <p>日々の税務相談、クラウド試算表の精査、タックスプランニングから決算申告までトータルで伴走します。</p>
+          </div>
+          <span class="more" onclick="openModal('tax')">More &rarr;</span>
         </div>
+
         <div class="service-card">
-          <h3>会社設立サービス</h3>
-          <p>事業計画から手続きまで、創業期の不安を伴走しながら解消します。</p>
-          <span class="more" onclick="alert('会社設立サービスの詳細ページへ遷移します')">More &rarr;</span>
+          <div>
+            <h3>会社設立・法人化支援</h3>
+            <p>最適な法人形態の選択から電子定款認証、登記手配、税務署への各種届出までスピーディに完了させます。</p>
+          </div>
+          <span class="more" onclick="openModal('startup')">More &rarr;</span>
         </div>
+
         <div class="service-card">
-          <h3>創業融資サービス</h3>
-          <p>金融機関向け資料の作成から交渉サポートまで丁寧に支援します。</p>
-          <span class="more" onclick="alert('創業融資サービスの詳細ページへ遷移します')">More &rarr;</span>
+          <div>
+            <h3>創業融資・資金調達サポート</h3>
+            <p>公庫や地銀の創業融資に対応。審査官の目線を押さえた説得力ある事業計画書の作成を支援します。</p>
+          </div>
+          <span class="more" onclick="openModal('finance')">More &rarr;</span>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <h3>経理・記帳代行（BPO）</h3>
+            <p>領収書スキャンから振込データ作成、請求書発行まで経理実務を丸投げ可能。手入力ゼロの運用を構築します。</p>
+          </div>
+          <span class="more" onclick="openModal('bpo')">More &rarr;</span>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <h3>補助金・助成金申請支援</h3>
+            <p>IT導入補助金やものづくり補助金など、成長フェーズに合わせた公的支援の選定と申請書作成をサポートします。</p>
+          </div>
+          <span class="more" onclick="openModal('subsidy')">More &rarr;</span>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <h3>企業評価・財務デューデリジェンス</h3>
+            <p>M&Aや事業承継における税務リスク・簿外債務の徹底調査と、客観的で高精度な企業価値算定を行います。</p>
+          </div>
+          <span class="more" onclick="openModal('dd')">More &rarr;</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ==========================================================================
-       FOOTER
+       MESSAGE (代表挨拶: 架空人物設定)
+  ========================================================================== -->
+  <section id="message">
+    <div class="container">
+      <div class="sec-center">
+        <span class="sec-en">Message</span>
+        <h2 class="sec-jp">代表挨拶</h2>
+      </div>
+
+      <div class="message-layout">
+        <div class="message-photo"></div>
+        <div class="message-content">
+          <span class="rep-post">代表社員 公認会計士・税理士</span>
+          <h3 class="rep-name">神崎 玲香 <span>Reika Kanzaki</span></h3>
+          <p class="rep-bio">
+            大手監査法人にて国内外の上場企業監査や財務デューデリジェンスに従事した後、「もっと経営者の顔が見える距離で、その挑戦に伴走したい」という想いから当法人を福岡・天神に設立いたしました。
+          </p>
+          <p class="rep-bio">
+            数字は、過去を記録するだけのものではありません。不確実な未来に向かって正しい舵を切るための、経営者にとって最強の武器です。専門用語を使わず、親しみやすく、かつ監査法人レベルの専門性をもって皆様の歩みを力強く支えてまいります。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       COMPANY (架空の運営情報)
+  ========================================================================== -->
+  <section id="company" style="background:#fafaf8;">
+    <div class="container">
+      <div class="sec-center">
+        <span class="sec-en">Company</span>
+        <h2 class="sec-jp">運営情報</h2>
+      </div>
+
+      <table class="company-table">
+        <tbody>
+          <tr>
+            <th>法人名</th>
+            <td>ミネルヴァ税理士法人（Minerva Tax Corporation）</td>
+          </tr>
+          <tr>
+            <th>所在地</th>
+            <td>〒810-0001 福岡県福岡市中央区天神2丁目8-36 天神NKビル4階</td>
+          </tr>
+          <tr>
+            <th>最寄駅</th>
+            <td>地下鉄空港線「天神駅」徒歩2分 / 西鉄「福岡(天神)駅」徒歩4分</td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td>092-700-0000（平日 9:30〜18:00）</td>
+          </tr>
+          <tr>
+            <th>設立</th>
+            <td>2024年4月</td>
+          </tr>
+          <tr>
+            <th>所属専門家</th>
+            <td>公認会計士・税理士 神崎 玲香（代表社員） / 税理士 白石 遥香</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FAQ (よくある質問)
+  ========================================================================== -->
+  <section id="faq">
+    <div class="container">
+      <div class="sec-center">
+        <span class="sec-en">FAQ</span>
+        <h2 class="sec-jp">よくある質問</h2>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Q. 初回の面談相談は無料ですか？</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            はい、初回面談（約60分）は完全無料です。現在の状況やお悩みをお伺いし、最適なサポート内容とお見積りの方向性をご案内いたします。無理な営業は一切行いませんのでご安心ください。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Q. freee以外の会計ソフト（マネーフォワードや弥生など）でも対応可能ですか？</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            はい、柔軟に対応しております。マネーフォワード クラウド、弥生会計、勘定奉行等をご利用中の企業様も多数担当しております。貴社の業務フローに最も適したソフトウェアを提案いたします。
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Q. 福岡県外の企業でも依頼できますか？</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            はい、全国対応しております。ZoomやSlack、LINEを活用し、東京や大阪など全国のお客様とスムーズに連携しております。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MODAL (詳細ポップアップ)
+  ========================================================================== -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER (完全な相互リンク)
   ========================================================================== -->
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <h2>アテナ税理士法人</h2>
+          <h2>ミネルヴァ税理士法人</h2>
           <p>
-            〒810-0041<br>
-            福岡県福岡市中央区大名２丁目４−２２ 新日本ビル２階<br>
-            TEL: 092-725-0675
+            〒810-0001<br>
+            福岡県福岡市中央区天神2丁目8-36 天神NKビル4階<br>
+            TEL: 092-700-0000（平日 9:30-18:00）
           </p>
         </div>
 
@@ -791,32 +1189,130 @@
             <li><a href="#top">TOP</a></li>
             <li><a href="#about">私たちについて</a></li>
             <li><a href="#company">会社概要</a></li>
+            <li><a href="#message">代表挨拶</a></li>
+            <li><a href="#faq">よくある質問</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4>サービス</h4>
+          <h4>サービス一覧</h4>
           <ul>
-            <li><a href="#services">税務顧問</a></li>
-            <li><a href="#services">会社設立</a></li>
-            <li><a href="#services">創業融資</a></li>
+            <li><a href="#services" onclick="openModal('tax')">月次税務顧問</a></li>
+            <li><a href="#services" onclick="openModal('startup')">会社設立・創業支援</a></li>
+            <li><a href="#services" onclick="openModal('finance')">創業融資サポート</a></li>
+            <li><a href="#services" onclick="openModal('bpo')">経理・記帳代行</a></li>
+            <li><a href="#services" onclick="openModal('dd')">企業評価(DD)</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <h4>お問い合わせ</h4>
           <ul>
-            <li><a href="#contact">無料相談・お問い合わせ</a></li>
-            <li><a href="#">個人情報保護方針</a></li>
+            <li><a href="javascript:void(0)" onclick="openModal('contact')">無料相談フォーム</a></li>
+            <li><a href="javascript:void(0)" onclick="openModal('privacy')">個人情報保護方針</a></li>
+            <li><a href="javascript:void(0)" onclick="openModal('recruit')">採用情報</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>Copyright (C) 2026 アテナ税理士法人 All Rights Reserved.</p>
+        <p>Copyright (C) 2026 Minerva Tax Corporation. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
 
+  <!-- ==========================================================================
+       JAVASCRIPT
+  ========================================================================== -->
+  <script>
+    // 1. モバイルメニュートグル
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+    document.querySelectorAll('.m-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    });
+
+    // 2. FAQアコーディオン
+    function toggleFaq(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    // 3. モーダル用データ（架空対応）
+    const modalData = {
+      tax: {
+        title: "月次税務顧問",
+        body: "<p>月次試算表の精査から節税対策、決算申告まで監査法人品質でご支援します。定期面談で将来の資金繰りまでクリアに見通せます。</p>"
+      },
+      startup: {
+        title: "会社設立・法人化支援",
+        body: "<p>提携司法書士と連携し、最短・低コストで法人設立をサポート。電子定款認証で印紙代4万円を削減可能です。</p>"
+      },
+      finance: {
+        title: "創業融資・資金調達サポート",
+        body: "<p>日本政策金融公庫の創業融資や制度融資に対応。融資担当者が重視するツボを押さえた事業計画書を作成指導します。</p>"
+      },
+      bpo: {
+        title: "経理・記帳代行（BPO）",
+        body: "<p>振込データ作成から請求書発行、領収書スキャンまで丸投げ可能。freeeの自動連携を活用し、手入力のないスマートな経理基盤を構築します。</p>"
+      },
+      subsidy: {
+        title: "補助金・助成金支援",
+        body: "<p>IT導入補助金やものづくり補助金など、事業フェーズに合った制度の診断から申請書作成まで丁寧に伴走します。</p>"
+      },
+      dd: {
+        title: "企業評価・財務デューデリジェンス",
+        body: "<p>M&Aや事業承継時に、簿外債務や税務リスクを徹底監査。適正な企業価値を算出し、安全な取引をバックアップします。</p>"
+      },
+      privacy: {
+        title: "個人情報保護方針",
+        body: "<p>当法人は取得した個人情報を相談対応および受託業務の遂行目的以外に利用せず、厳重なセキュリティ下で安全に管理いたします。</p>"
+      },
+      recruit: {
+        title: "採用情報",
+        body: "<p>公認会計士・税理士・税務アシスタントを募集しています。リモートワーク推奨、フレックスタイム制導入。お気軽にご相談フォームよりご連絡ください。</p>"
+      },
+      contact: {
+        title: "初回無料相談のお申し込み",
+        body: `
+          <form onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。担当者より24時間以内にご連絡いたします。'); closeModal();">
+            <div style="margin-bottom:14px;">
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:4px;">お名前 <span style="color:#d9534f;">*</span></label>
+              <input type="text" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div style="margin-bottom:14px;">
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:4px;">メールアドレス <span style="color:#d9534f;">*</span></label>
+              <input type="email" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <div style="margin-bottom:14px;">
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:4px;">ご相談内容 <span style="color:#d9534f;">*</span></label>
+              <textarea required style="width:100%; min-height:100px; padding:10px; border:1px solid #ccc; border-radius:4px;" placeholder="創業融資について相談したい、税務顧問の料金を知りたい等"></textarea>
+            </div>
+            <button type="submit" style="width:100%; padding:14px; background:var(--color-btn-olive); color:#fff; border:none; border-radius:50px; font-weight:700; cursor:pointer;">上記内容で無料相談を申し込む</button>
+          </form>
+        `
+      }
+    };
+
+    function openModal(key) {
+      const data = modalData[key];
+      if (!data) return;
+      document.getElementById('modalBody').innerHTML = `
+        <h3 style="color:#1a1a1a; font-size:1.35rem; margin-bottom:16px; border-bottom:2px solid var(--color-btn-olive); padding-bottom:8px; font-family:var(--font-mincho);">${data.title}</h3>
+        <div>${data.body}</div>
+      `;
+      document.getElementById('detailModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.remove('open');
+    }
+
+    document.getElementById('detailModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('detailModal')) closeModal();
+    });
+  </script>
 </body>
 </html>
