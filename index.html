@@ -5,295 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>福岡市天神のミネルヴァ税理士法人 | freeeに強い女性チームの会計事務所</title>
   
-  <!-- Webフォント（Cinzel: ギリシャセリフ体 / Shippori Mincho: 流麗な明朝体 / Noto Sans JP） -->
+  <!-- Webフォント（Cinzel / Noto Sans JP / Shippori Mincho） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* ==========================================================================
-       【1. 写真・背景画像・カラーの一括管理エリア】
-       背景グラデーションや右側のイラストはお手持ちのパスに変更可能です。
-    ========================================================================== */
-    :root {
-      /* ファーストビュー右側のキービジュアル（女神イラストの透過画像など） */
-      --img-hero-character: url('hero_character.png');
-
-      /* 背景グラデーション（透き通るような白〜淡いペールアイスブルー） */
-      --bg-hero-gradient: linear-gradient(135deg, #f2f5f9 0%, #ebf1f8 50%, #e2ecf7 100%);
-
-      /* 各種写真 */
-      --img-about-01: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80');
-      --img-about-02: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');
-      --img-about-03: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80');
-      --img-representative: url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80');
-      --img-staff-02: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80');
-
-      /* カラーパレット */
-      --color-text-main: #1f1f1f;
-      --color-text-sub: #555555;
-      --color-btn-olive: #96955d;       /* 本家と完全一致のオリーブカーキ */
-      --color-btn-olive-hover: #7f7e4b;
-      --color-watermark: rgba(255, 255, 255, 0.78);
-      --color-laurel: #8b9bb0;          /* 月桂樹リースのシルバーグレー */
-      --bg-light: #fafaf8;
-      --border-color: #ebebe5;
-      --font-serif-en: 'Cinzel', serif;
-      --font-mincho: 'Shippori Mincho', serif;
-      --font-sans: 'Noto Sans JP', sans-serif;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-sans);
-      color: var(--color-text-main);
-      background-color: #ffffff;
-      line-height: 1.85;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; transition: all 0.3s; }
-    ul, ol { list-style: none; }
-    .container { width: 92%; max-width: 1400px; margin: 0 auto; position: relative; }
-
-    /* ==========================================================================
-       HEADER & MEGA MENU DRAWER (完全再現)
-    ========================================================================== */
-    header {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: 90px;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-      display: flex;
-      align-items: center;
-    }
-    .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-    
-    .header-logo { display: flex; align-items: center; gap: 14px; cursor: pointer; }
-    .logo-diamond {
-      width: 38px; height: 38px; background: #a8a8a4; transform: rotate(45deg); border-radius: 4px;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .logo-diamond::before { content: "🪶"; transform: rotate(-45deg); font-size: 1.1rem; color: #ffffff; filter: brightness(10); }
-    .logo-text { font-family: var(--font-mincho); font-size: 1.3rem; font-weight: 600; color: #2b2b2b; letter-spacing: 0.12em; }
-    
-    .header-right { display: flex; align-items: center; gap: 32px; }
-    .header-nav { display: flex; align-items: center; gap: 28px; }
-    .header-nav a { font-size: 0.92rem; font-weight: 500; color: #333333; letter-spacing: 0.05em; }
-    .header-nav a:hover { color: var(--color-btn-olive); }
-    
-    .btn-free-consult {
-      background: var(--color-btn-olive); color: #ffffff !important; padding: 12px 28px;
-      border-radius: 50px; font-size: 0.95rem !important; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(150, 149, 93, 0.25);
-    }
-    .btn-free-consult:hover { background: var(--color-btn-olive-hover); transform: translateY(-2px); }
-
-    .menu-trigger-btn {
-      background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 8px;
-    }
-    .menu-trigger-btn span { width: 26px; height: 2px; background: #2b2b2b; transition: 0.3s; }
-
-    /* 本家メガドロワーメニュー */
-    .mega-drawer {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff;
-      z-index: 2000; transform: translateY(-100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-      overflow-y: auto; padding: 40px 60px 80px;
-    }
-    .mega-drawer.active { transform: translateY(0); }
-    .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
-    .drawer-close { font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-    
-    .drawer-grid { display: grid; grid-template-columns: 1.2fr 1.5fr 1fr 1.2fr; gap: 50px; }
-    .drawer-group h3 { font-family: var(--font-mincho); font-size: 1.25rem; margin-bottom: 16px; border-left: 3px solid var(--color-btn-olive); padding-left: 10px; color: #1a1a1a; }
-    .drawer-group ul li { margin-bottom: 12px; font-size: 0.95rem; }
-    .drawer-group ul li a:hover { color: var(--color-btn-olive); padding-left: 4px; }
-    .drawer-contact-card { background: var(--bg-light); border-radius: 8px; padding: 30px; text-align: center; }
-    .drawer-contact-card h4 { font-family: var(--font-mincho); font-size: 1.1rem; margin-bottom: 12px; }
-    .drawer-tel { font-family: var(--font-serif-en); font-size: 1.6rem; color: var(--color-btn-olive); font-weight: 700; margin: 10px 0; }
-
-    /* ==========================================================================
-       PAGES ROUTING SYSTEM (SPA)
-    ========================================================================== */
-    .page-view { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
-    .page-view.active { display: block; opacity: 1; }
-
-    /* パンくずリスト */
-    .breadcrumb-bar { background: var(--bg-light); padding: 16px 0; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; color: var(--color-text-sub); }
-    .breadcrumb-bar a:hover { color: var(--color-btn-olive); }
-    .breadcrumb-bar span { margin: 0 8px; }
-
-    /* 下層ページヘッダー */
-    .subpage-header { background: var(--bg-hero-gradient); padding: 70px 0 60px; text-align: center; position: relative; }
-    .subpage-en { font-family: var(--font-serif-en); font-size: 1.1rem; letter-spacing: 0.25em; color: var(--color-btn-olive); font-weight: 600; }
-    .subpage-title { font-family: var(--font-mincho); font-size: 2.6rem; color: #1a1a1a; margin-top: 10px; letter-spacing: 0.05em; }
-
-    /* ==========================================================================
-       TOP VIEW (スクリーンショット完全一致のファーストビュー)
-    ========================================================================== */
-    .hero-view {
-      position: relative; min-height: 940px; background: var(--bg-hero-gradient);
-      overflow: hidden; display: flex; align-items: center;
-    }
-    .watermark-athena {
-      position: absolute; top: 130px; left: 3%; width: 94%; font-family: var(--font-serif-en);
-      font-size: clamp(5.5rem, 13vw, 13rem); font-weight: 400; color: var(--color-watermark);
-      letter-spacing: 0.25em; line-height: 0.85; pointer-events: none; z-index: 1;
-      text-shadow: 0 0 30px rgba(255,255,255,0.85); user-select: none;
-    }
-    .watermark-tax {
-      position: absolute; top: 450px; left: 3%; font-family: var(--font-serif-en);
-      font-size: clamp(3.8rem, 9.2vw, 9.5rem); font-weight: 400; color: var(--color-watermark);
-      letter-spacing: 0.26em; pointer-events: none; z-index: 1; user-select: none;
-    }
-    .hero-illust-wrap {
-      position: absolute; right: -20px; bottom: 0; width: 62%; max-width: 1100px; height: 90%;
-      background: var(--img-hero-character) no-repeat right bottom; background-size: contain;
-      z-index: 3; pointer-events: none; filter: drop-shadow(0 10px 30px rgba(180, 200, 220, 0.3));
-    }
-    .hero-main-content { position: relative; z-index: 4; max-width: 700px; padding-top: 60px; margin-left: 4%; }
-    .hero-copy-1, .hero-copy-2 {
-      font-family: var(--font-mincho); font-size: clamp(2.4rem, 4.2vw, 3.8rem); font-weight: 600;
-      letter-spacing: 0.22em; color: #1a1a1a; line-height: 1.4;
-    }
-    .hero-copy-1 { margin-bottom: 8px; }
-    .hero-copy-2 { margin-bottom: 24px; }
-    .hero-tagline { font-family: var(--font-mincho); font-size: clamp(1.1rem, 1.8vw, 1.45rem); color: #4a4a4a; letter-spacing: 0.16em; margin-bottom: 70px; }
-
-    /* 月桂冠バッジ */
-    .laurel-badges-container { display: flex; flex-direction: column; gap: 24px; }
-    .laurel-row-top { display: flex; justify-content: flex-start; padding-left: 18px; }
-    .laurel-row-bottom { display: flex; gap: 36px; }
-    .laurel-badge-unit { display: inline-flex; align-items: center; gap: 10px; }
-    .laurel-branch { width: 24px; height: 48px; fill: none; stroke: var(--color-laurel); stroke-width: 1.5; stroke-linecap: round; opacity: 0.85; }
-    .laurel-branch.right { transform: scaleX(-1); }
-    .laurel-badge-text { text-align: center; }
-    .laurel-badge-text .title { font-size: 0.95rem; font-weight: 600; color: #222222; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .arrow-icon { font-size: 1.1rem; font-weight: 700; color: #1a1a1a; }
-    .laurel-badge-text .subtitle { font-size: 0.8rem; color: #666666; margin-top: 3px; letter-spacing: 0.04em; }
-    .stars { color: #c9b072; font-size: 0.9rem; letter-spacing: 0.15em; margin-left: 4px; }
-
-    /* 羽根アニメーション */
-    .feather-layer { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
-    .feather {
-      position: absolute; top: -60px; width: 28px; height: 48px;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0) 80%);
-      border-radius: 50% 50% 20% 80%; filter: blur(1px) drop-shadow(0 4px 8px rgba(0,0,0,0.06));
-      animation: featherFall 10s infinite linear; opacity: 0.85;
-    }
-    .feather:nth-child(1) { left: 45%; animation-duration: 9s; transform: rotate(20deg) scale(0.9); }
-    .feather:nth-child(2) { left: 65%; animation-duration: 12s; animation-delay: 3s; transform: rotate(-35deg) scale(1.1); }
-    .feather:nth-child(3) { left: 80%; animation-duration: 8s; animation-delay: 1.5s; transform: rotate(15deg) scale(0.8); }
-    .feather:nth-child(4) { left: 30%; animation-duration: 14s; animation-delay: 5s; transform: rotate(-10deg) scale(0.7); }
-    @keyframes featherFall {
-      0% { top: -60px; transform: translateX(0) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.85; }
-      80% { opacity: 0.85; }
-      100% { top: 105%; transform: translateX(120px) rotate(180deg); opacity: 0; }
-    }
-
-    /* ==========================================================================
-       TOP CONTENT SECTIONS
-    ========================================================================== */
-    section { padding: 100px 0; scroll-margin-top: 90px; }
-    .sec-center { text-align: center; margin-bottom: 60px; }
-    .sec-en { font-family: var(--font-serif-en); font-size: 0.95rem; letter-spacing: 0.25em; color: var(--color-btn-olive); font-weight: 700; display: block; margin-bottom: 8px; }
-    .sec-jp { font-family: var(--font-mincho); font-size: 2.2rem; color: #1a1a1a; letter-spacing: 0.05em; }
-
-    .about-item-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 80px; }
-    .about-item-row.rev { direction: rtl; }
-    .about-item-row.rev .about-txt, .about-item-row.rev .about-img { direction: ltr; }
-    .about-idx { font-family: var(--font-serif-en); font-size: 2.8rem; color: rgba(150, 149, 93, 0.4); line-height: 1; margin-bottom: 8px; }
-    .about-txt h3 { font-family: var(--font-mincho); font-size: 1.45rem; color: #1a1a1a; margin-bottom: 16px; }
-    .about-txt p { font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.85; }
-    .about-img { height: 330px; border-radius: 8px; background-size: cover; background-position: center; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
-
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 28px; }
-    .service-card { background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; padding: 36px 30px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s; }
-    .service-card:hover { border-color: var(--color-btn-olive); box-shadow: 0 10px 24px rgba(0,0,0,0.06); transform: translateY(-4px); }
-    .service-card h3 { font-family: var(--font-mincho); font-size: 1.25rem; color: #1a1a1a; margin-bottom: 12px; border-left: 3px solid var(--color-btn-olive); padding-left: 10px; }
-    .service-card p { font-size: 0.9rem; color: var(--color-text-sub); line-height: 1.75; margin-bottom: 22px; }
-    .service-card .more-btn { color: var(--color-btn-olive); font-weight: 700; font-size: 0.88rem; cursor: pointer; align-self: flex-start; }
-
-    /* ==========================================================================
-       SUBPAGES STYLING (各リンク先の完全構造)
-    ========================================================================== */
-    .subpage-container { padding: 80px 0 120px; max-width: 1080px; margin: 0 auto; }
-    .subpage-layout-sidebar { display: grid; grid-template-columns: 1fr 320px; gap: 50px; }
-    
-    .article-block { margin-bottom: 50px; }
-    .article-block h2 { font-family: var(--font-mincho); font-size: 1.8rem; color: #1a1a1a; border-bottom: 2px solid var(--color-btn-olive); padding-bottom: 12px; margin-bottom: 24px; }
-    .article-block h3 { font-family: var(--font-mincho); font-size: 1.35rem; color: #1a1a1a; margin: 30px 0 14px; border-left: 4px solid var(--color-btn-olive); padding-left: 12px; }
-    .article-block p { font-size: 0.98rem; color: #3a3a3a; line-height: 1.9; margin-bottom: 18px; }
-
-    /* 料金テーブル */
-    .price-data-table { width: 100%; border-collapse: collapse; margin: 24px 0 40px; background: #ffffff; border: 1px solid var(--border-color); }
-    .price-data-table th, .price-data-table td { padding: 18px 24px; border-bottom: 1px solid var(--border-color); font-size: 0.92rem; }
-    .price-data-table th { background: var(--bg-light); text-align: left; font-weight: 600; width: 35%; color: #1a1a1a; }
-    .price-data-table .highlight { font-weight: 700; color: var(--color-btn-olive); font-size: 1.1rem; }
-
-    /* 会社概要テーブル */
-    .company-spec-table { width: 100%; border-collapse: collapse; margin-bottom: 50px; border: 1px solid var(--border-color); }
-    .company-spec-table th, .company-spec-table td { padding: 18px 24px; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
-    .company-spec-table th { background: var(--bg-light); text-align: left; width: 25%; font-weight: 600; }
-
-    /* 採用要項テーブル */
-    .recruit-card { background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; padding: 40px; margin-bottom: 30px; }
-    .recruit-card h4 { font-family: var(--font-mincho); font-size: 1.3rem; margin-bottom: 16px; color: #1a1a1a; }
-
-    /* サイドバー関連リンク */
-    .side-card { background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; padding: 28px; margin-bottom: 30px; }
-    .side-card h4 { font-family: var(--font-mincho); font-size: 1.1rem; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 16px; }
-    .side-nav-list li { margin-bottom: 10px; font-size: 0.92rem; }
-    .side-nav-list li a:hover { color: var(--color-btn-olive); }
-
-    /* ==========================================================================
-       FOOTER & CTA BANNER
-    ========================================================================== */
-    .cta-global-banner { background: #162233; color: #ffffff; padding: 90px 0; text-align: center; }
-    .cta-global-banner h2 { font-family: var(--font-mincho); font-size: 2.2rem; margin-bottom: 16px; }
-    .cta-global-banner p { font-size: 1rem; color: #d0d8e2; max-width: 680px; margin: 0 auto 36px; }
-    .cta-action-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .btn-cta-lg { background: var(--color-btn-olive); color: #fff; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1rem; }
-    .btn-cta-lg:hover { background: var(--color-btn-olive-hover); }
-    .btn-line-lg { background: #06c755; color: #fff; padding: 16px 40px; border-radius: 50px; font-weight: 700; font-size: 1rem; }
-
-    footer { background: #0f1622; color: #9cb1ce; padding: 90px 0 40px; font-size: 0.88rem; border-top: 3px solid var(--color-btn-olive); }
-    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
-    .footer-brand h2 { color: #ffffff; font-size: 1.35rem; margin-bottom: 14px; font-family: var(--font-mincho); }
-    .footer-col h4 { color: #ffffff; font-size: 0.95rem; margin-bottom: 18px; border-left: 3px solid var(--color-btn-olive); padding-left: 8px; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul li a:hover { color: #ffffff; padding-left: 4px; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 25px; text-align: center; font-size: 0.78rem; }
-
-    /* ==========================================================================
-       RESPONSIVE
-    ========================================================================== */
-    @media (max-width: 1024px) {
-      .header-nav { display: none; }
-      .hero-illust-wrap { width: 75%; opacity: 0.45; }
-      .drawer-grid { grid-template-columns: 1fr 1fr; }
-      .subpage-layout-sidebar { grid-template-columns: 1fr; }
-      .about-item-row, .about-item-row.rev { grid-template-columns: 1fr; direction: ltr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      .drawer-grid { grid-template-columns: 1fr; }
-      .laurel-row-bottom { flex-direction: column; gap: 20px; }
-      .watermark-athena { font-size: 4.8rem; }
-      .watermark-tax { font-size: 3.2rem; top: 380px; }
-      .footer-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <!-- 切り出した外部スタイルシート -->
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body id="top">
 
   <!-- ==========================================================================
-       HEADER (完全再現)
+       HEADER
   ========================================================================== -->
   <header>
     <div class="container header-inner">
@@ -326,7 +49,7 @@
   </header>
 
   <!-- ==========================================================================
-       MEGA DRAWER MENU (本家全リンク網羅)
+       MEGA DRAWER MENU
   ========================================================================== -->
   <div class="mega-drawer" id="megaDrawer">
     <div class="drawer-header">
@@ -388,7 +111,7 @@
   </div>
 
   <!-- ==========================================================================
-       VIEW 1: TOP PAGE (ファーストビュー完全一致)
+       VIEW 1: TOP PAGE
   ========================================================================== -->
   <div id="view-home" class="page-view active">
     <!-- ファーストビュー -->
@@ -397,7 +120,7 @@
       <div class="watermark-tax">TAX CORPORATION</div>
       <div class="hero-illust-wrap"></div>
 
-      <!-- 舞い散る羽根アニメーション -->
+      <!-- 羽根アニメーション -->
       <div class="feather-layer">
         <div class="feather"></div>
         <div class="feather"></div>
@@ -413,7 +136,6 @@
 
           <!-- 月桂冠バッジ群 -->
           <div class="laurel-badges-container">
-            <!-- freeeアドバイザー -->
             <div class="laurel-row-top">
               <div class="laurel-badge-unit">
                 <svg class="laurel-branch" viewBox="0 0 24 48"><path d="M18 4 C10 12, 6 24, 6 44"/><path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/><path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/><path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/></svg>
@@ -425,7 +147,6 @@
               </div>
             </div>
 
-            <!-- スタートアップ ＆ AI会計 -->
             <div class="laurel-row-bottom">
               <div class="laurel-badge-unit">
                 <svg class="laurel-branch" viewBox="0 0 24 48"><path d="M18 4 C10 12, 6 24, 6 44"/><path d="M16 8 Q8 6, 12 12 Q16 18, 16 8 Z" fill="#8b9bb0"/><path d="M12 18 Q4 16, 8 22 Q12 28, 12 18 Z" fill="#8b9bb0"/><path d="M8 30 Q0 28, 4 34 Q8 40, 8 30 Z" fill="#8b9bb0"/></svg>
@@ -542,7 +263,7 @@
           <div class="article-block">
             <h2>ミネルヴァ税理士法人とは</h2>
             <p>ミネルヴァ税理士法人は、freeeと管理会計を軸にした伴走支援によって、「今の数字」がリアルタイムで把握できる状態をつくる税理士法人です。</p>
-            <p>月次決算の早期化を起点に、予実管理や資金繰り、KPIの可視化まで一貫してつなげることで、経営者の意思決定をシンプルかつスムーズにします。その結果、月次が早く締まり、資金が残るための具体的な打ち手が見えるようになり、freeeの運用も無理なく社内に定着していきます。</p>
+            <p>月次決算の早期化を起点に、予実管理や資金繰り、KPIの可視化まで一貫してつなげることで、経営者の意思決定をシンプルかつスムーズにします。</p>
           </div>
 
           <div class="article-block">
@@ -564,7 +285,6 @@
           </div>
         </div>
 
-        <!-- サイドバー -->
         <aside class="sidebar">
           <div class="side-card">
             <h4>会社案内メニュー</h4>
@@ -597,7 +317,7 @@
         <div class="main-content">
           <div class="article-block">
             <h2>数字が見える状態をつくり、未来の意思決定を支える</h2>
-            <p>福岡で顧問税理士をお探しなら、freee認定アドバイザー5つ星のミネルヴァ税理士法人にお任せください。クラウド会計×管理会計で「今、会社がどうなっているか」をリアルタイムで見える化し、日々の記帳・申告から役員報酬設計、資金繰り予測まで経営者に寄り添って伴走します。</p>
+            <p>福岡で顧問税理士をお探しなら、freee認定アドバイザー5つ星のミネルヴァ税理士法人にお任せください。クラウド会計×管理会計で「今、会社がどうなっているか」をリアルタイムで見える化します。</p>
           </div>
 
           <div class="article-block">
@@ -612,11 +332,6 @@
                 <tr><td>年商 1億円以上</td><td class="highlight">55,000円〜</td><td>個別御見積</td></tr>
               </tbody>
             </table>
-          </div>
-
-          <div class="article-block">
-            <h2>請求書発行・振込申請代行などの経理BPOオプション</h2>
-            <p>取引先への請求書発行、入金消込・売掛金管理、インターネットバンキングでの振込データ作成まで、月次の経理実務を一括代行可能です。freeeと完全連携し、社内の経理工数を最大90%削減します。</p>
           </div>
         </div>
 
@@ -652,7 +367,6 @@
       <div class="article-block">
         <h2>創業期の不安を解消し、最短・適正コストで法人化</h2>
         <p>株式会社・合同会社の設立手続きから、電子定款認証による印紙税4万円削減、税務署・自治体への設立届出書作成まで提携司法書士と連携してワンストップでサポートします。</p>
-        <p>設立後の税務顧問契約とセットでお申し込みいただく場合、実質設立手数料0円プランもご用意しております。</p>
       </div>
     </div>
   </div>
@@ -671,7 +385,7 @@
     <div class="container subpage-container">
       <div class="article-block">
         <h2>日本政策金融公庫・制度融資の満額獲得をサポート</h2>
-        <p>審査官の視点を知り尽くした公認会計士・税理士が、説得力ある事業計画書・資金繰り計画の策定を支援。面談時のシミュレーションロールプレイングまで徹底して伴走します（完全成功報酬制）。</p>
+        <p>審査官の視点を知り尽くした公認会計士・税理士が、説得力ある事業計画書・資金繰り計画の策定を支援。面談時のロールプレイングまで徹底して伴走します。</p>
       </div>
     </div>
   </div>
@@ -690,7 +404,7 @@
     <div class="container subpage-container">
       <div class="article-block">
         <h2>事業計画の策定から採択後の圧縮記帳までトータル支援</h2>
-        <p>ものづくり補助金、IT導入補助金、小規模事業者持続化補助金など、返済不要の資金調達を支援します。補助金獲得後の税金負担を抑える「圧縮記帳」を含めた会計処理まで一括対応できるのが税理士法人の強みです。</p>
+        <p>ものづくり補助金、IT導入補助金、小規模事業者持続化補助金など、返済不要の資金調達を支援します。補助金獲得後の税金負担を抑える「圧縮記帳」を含めた会計処理まで一括対応します。</p>
       </div>
     </div>
   </div>
@@ -979,7 +693,7 @@
   </div>
 
   <!-- ==========================================================================
-       FOOTER (完全な相互リンク集)
+       FOOTER
   ========================================================================== -->
   <footer>
     <div class="container">
@@ -1034,74 +748,7 @@
     </div>
   </footer>
 
-  <!-- ==========================================================================
-       SPA ROUTING JAVASCRIPT ENGINE
-  ========================================================================== -->
-  <script>
-    // 1. メガドロワー開閉
-    const megaMenuBtn = document.getElementById('megaMenuBtn');
-    const megaDrawer = document.getElementById('megaDrawer');
-    function toggleDrawer() {
-      megaDrawer.classList.toggle('active');
-    }
-    megaMenuBtn.addEventListener('click', toggleDrawer);
-
-    // 2. SPAページルーター（全リンクの相互遷移制御）
-    function navigateTo(viewKey, scrollToId = null) {
-      // 全ページを非表示
-      document.querySelectorAll('.page-view').forEach(view => {
-        view.classList.remove('active');
-      });
-
-      // 対象ページを表示
-      const targetView = document.getElementById(`view-${viewKey}`);
-      if (targetView) {
-        targetView.classList.add('active');
-        if (scrollToId) {
-          setTimeout(() => {
-            const el = document.getElementById(scrollToId);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }, 100);
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      }
-    }
-
-    // 3. URLハッシュ連動（ブラウザの戻る・進む対応）
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash) {
-        const viewMap = {
-          'about': 'about',
-          'services': 'home',
-          'service-tax': 'service-tax',
-          'service-startup': 'service-startup',
-          'service-finance': 'service-finance',
-          'service-subsidy': 'service-subsidy',
-          'service-bpo': 'service-bpo',
-          'service-dd': 'service-dd',
-          'service-global': 'service-global',
-          'company-overview': 'company-overview',
-          'company-message': 'company-message',
-          'company-faq': 'company-faq',
-          'price': 'price',
-          'recruit': 'recruit',
-          'column': 'column',
-          'contact': 'contact'
-        };
-        if (viewMap[hash]) {
-          navigateTo(viewMap[hash], hash === 'services' ? 'services' : null);
-        }
-      } else {
-        navigateTo('home');
-      }
-    });
-
-    // 初期読み込み時のハッシュ判定
-    if (window.location.hash) {
-      window.dispatchEvent(new Event('hashchange'));
-    }
-  </script>
+  <!-- 切り出した外部JavaScript -->
+  <script src="./js/main.js"></script>
 </body>
 </html>
