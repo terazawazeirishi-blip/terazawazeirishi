@@ -1,17 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="100%" height="100%">
   <defs>
-    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#C5A059" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#E5C887" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#9E7B35" stop-opacity="0.7"/>
+    <linearGradient id="wmG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C5A059" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#E5C887" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#1B2A4A" stop-opacity="0.15"/>
     </linearGradient>
   </defs>
-  <g fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.35">
-    <circle cx="400" cy="400" r="380" stroke-dasharray="4 8" stroke-width="1"/>
-    <circle cx="400" cy="400" r="350" stroke-width="2"/>
-    <polygon points="400,60 480,320 740,400 480,480 400,740 320,480 60,400 320,320" stroke-width="1.8"/>
-    <polygon points="400,120 460,340 680,400 460,460 400,680 340,460 120,400 340,340" stroke-width="1" stroke-dasharray="6 6"/>
-    <circle cx="400" cy="400" r="60" stroke-width="2.5"/>
-    <circle cx="400" cy="400" r="15" fill="url(#goldGrad)" opacity="0.6"/>
+  <g fill="none" stroke="url(#wmG)" stroke-width="1.5">
+    <circle cx="450" cy="450" r="420" stroke-width="1.5" stroke-dasharray="8 8"/>
+    <circle cx="450" cy="450" r="380" stroke-width="2"/>
+    <polygon points="450,50 530,350 830,450 530,550 450,850 370,550 70,450 370,350" stroke-width="2"/>
+    <polygon points="450,130 510,370 750,450 510,530 450,770 390,530 150,450 390,370" stroke-width="1.2" stroke-dasharray="6 6"/>
+    <path d="M 250 600 C 180 500, 180 380, 240 280 C 270 230, 320 180, 390 150" stroke-width="2.5"/>
+    <path d="M 650 600 C 720 500, 720 380, 660 280 C 630 230, 580 180, 510 150" stroke-width="2.5"/>
+    <circle cx="450" cy="450" r="75" stroke-width="2.5"/>
+    <circle cx="450" cy="450" r="16" fill="url(#wmG)"/>
   </g>
 </svg>
