@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: your-github-username/your-tax-office-repo
+  repo: terazawazeirishi-blip/terazawazeirishi
   branch: main
 
 media_folder: "assets/images/uploads"
