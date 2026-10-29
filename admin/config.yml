@@ -1,7 +1,45 @@
 backend:
   name: github
-  repo: your-name/tax-office
+  repo: your-github-username/your-tax-office-repo
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+locale: "ja"
+
 collections:
-  - name: blog
-    label: Blog
-    folder: content/blog
+  - name: "blog"
+    label: "税務・経営コラム"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "タイトル", name: "title", widget: "string", required: true }
+      - { label: "公開日", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false, required: true }
+      - { label: "カテゴリー", name: "category", widget: "select", options: ["法人税務", "確定申告", "クラウド会計", "創業支援", "相続税", "お知らせ"], required: true }
+      - { label: "概要（ディスクリプション）", name: "description", widget: "string", required: true }
+      - { label: "アイキャッチ画像", name: "thumbnail", widget: "image", required: false }
+      - { label: "本文", name: "body", widget: "markdown", required: true }
+
+  - name: "news"
+    label: "事務所からのお知らせ"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "件名", name: "title", widget: "string", required: true }
+      - { label: "掲載日", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false, required: true }
+      - { label: "重要度", name: "importance", widget: "select", options: ["通常", "重要", "夏季/冬季休業"], default: "通常" }
+      - { label: "内容", name: "body", widget: "markdown", required: true }
+
+  - name: "faq"
+    label: "よくあるご質問 (FAQ)"
+    file: "content/faq.json"
+    fields:
+      - label: "質問リスト"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "カテゴリー", name: "category", widget: "string" }
+          - { label: "質問内容", name: "question", widget: "string" }
+          - { label: "回答内容", name: "answer", widget: "text" }
