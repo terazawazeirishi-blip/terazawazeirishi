@@ -1,12 +1,9 @@
-# Pages CMS 設定ファイル (.pages.yml)
-# APIキー不要・GitHub公式連携
-
+# Pages CMS Configuration (.pages.yml)
 media:
   input: assets/images/uploads
   output: /assets/images/uploads
 
 content:
-  # 1. 税務・経営コラム
   - name: blog
     label: 税務・経営コラム
     type: collection
@@ -27,12 +24,13 @@ content:
         label: カテゴリー
         type: select
         options:
-          - 法人税務
-          - 確定申告
-          - クラウド会計
-          - 創業支援
-          - 相続税
-          - お知らせ
+          values:
+            - 法人税務
+            - 確定申告
+            - クラウド会計
+            - 創業支援
+            - 相続税
+            - お知らせ
         required: true
       - name: description
         label: 概要（ディスクリプション）
@@ -43,7 +41,6 @@ content:
         type: rich-text
         required: true
 
-  # 2. 事務所からのお知らせ
   - name: news
     label: 事務所からのお知らせ
     type: collection
@@ -64,9 +61,10 @@ content:
         label: 重要度
         type: select
         options:
-          - 通常
-          - 重要
-          - 夏季/冬季休業
+          values:
+            - 通常
+            - 重要
+            - 夏季/冬季休業
         default: 通常
       - name: body
         label: お知らせ内容
