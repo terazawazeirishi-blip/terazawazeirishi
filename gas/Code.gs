@@ -20,7 +20,7 @@ function onFormSubmit(e) {
     const adminEmail = Session.getEffectiveUser().getEmail();
     const adminSubject = `【新規お問い合わせ】${clientName}様よりご相談（${serviceInterest}）`;
     const adminBody = `
-寺澤景子税理士事務所 受付システムです。
+リュミエール税理士事務所 受付システムです。
 Webサイトのフォームより新規のお問い合わせを受付いたしました。
 
 ■ 受信日時: ${timestamp}
@@ -40,12 +40,12 @@ ${SpreadsheetApp.getActiveSpreadsheet().getUrl()}
     GmailApp.sendEmail(adminEmail, adminSubject, adminBody);
 
     if (clientEmail && clientEmail.includes('@')) {
-      const customerSubject = '【寺澤景子税理士事務所】無料相談・お問い合わせを受け付けいたしました';
+      const customerSubject = '【リュミエール税理士事務所】無料相談・お問い合わせを受け付けいたしました';
       const customerBody = `
 ${clientName} 様
 
-この度は、寺澤景子税理士事務所のWebサイトよりお問い合わせいただき、誠にありがとうございます。
-代表税理士の寺澤景子でございます。
+この度は、リュミエール税理士事務所のWebサイトよりお問い合わせいただき、誠にありがとうございます。
+代表税理士の【氏名要入力】でございます。
 
 以下の内容でお問い合わせを正常に受け付けいたしました。
 内容を確認の上、原則1営業日以内に代表税理士よりご連絡を差し上げます。
@@ -59,10 +59,10 @@ ${clientName} 様
 ${consultationDetail}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-寺澤景子税理士事務所
-代表税理士：寺澤景子
-所在地：〒863-0023　熊本県天草市南町5-22
-公式サイト：https://terazawazeirishi-blip.github.io/terazawazeirishi/index.html
+リュミエール税理士事務所【仮設定】
+代表税理士：【氏名要入力】
+所在地：〒104-0061 東京都中央区銀座【仮設定・要入力】
+公式サイト：https://example.com/
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 `;
       GmailApp.sendEmail(clientEmail, customerSubject, customerBody);

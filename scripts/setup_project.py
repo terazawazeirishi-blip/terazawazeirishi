@@ -36,7 +36,7 @@ print("[INFO] ディレクトリ構造を作成しました。")
 header_html = """  <header class="site-header">
     <div class="container header-container">
       <a href="index.html" class="site-logo">
-        <span class="site-logo-main">リュミエール税理士事務所</span>
+        <span class="site-logo-main">寺澤景子税理士事務所</span>
         <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
       </a>
       <button class="mobile-menu-btn" aria-label="メニューを開く" aria-expanded="false">
@@ -64,7 +64,7 @@ footer_html = """  <footer class="site-footer">
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="site-logo">
-            <span class="site-logo-main" style="color: #FFFFFF;">リュミエール税理士事務所</span>
+            <span class="site-logo-main" style="color: #FFFFFF;">寺澤景子税理士事務所</span>
             <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
           </a>
           <p>
@@ -98,7 +98,7 @@ footer_html = """  <footer class="site-footer">
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; 2026 リュミエール税理士事務所【仮設定】. All Rights Reserved.</div>
+        <div>&copy; 2026 寺澤景子税理士事務所【仮設定】. All Rights Reserved.</div>
         <div>API-Key-Free System Architecture</div>
       </div>
     </div>
@@ -433,7 +433,7 @@ files_data["index.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>リュミエール税理士事務所【仮設定】 | 知性と安心を届ける女性税理士のパートナーシップ</title>
+  <title>寺澤景子税理士事務所【仮設定】 | 知性と安心を届ける女性税理士のパートナーシップ</title>
   <meta name="description" content="【仮設定・要入力】女性税理士が親身に寄り添う、信頼の税務会計パートナー。法人税務顧問、スタートアップ創業支援、クラウド会計導入（freee/マネーフォワード）、相続税対策まで。上品で明瞭なサポートを提供します。">
   <link rel="canonical" href="https://example.com/index.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -447,7 +447,7 @@ files_data["index.html"] = f"""<!DOCTYPE html>
   {{
     "@context": "https://schema.org",
     "@type": "AccountingService",
-    "name": "リュミエール税理士事務所【仮設定】",
+    "name": "寺澤景子税理士事務所【仮設定】",
     "description": "女性税理士によるきめ細やかな税務顧問・クラウド会計支援・創業支援サービス。",
     "address": {{ "@type": "PostalAddress", "addressLocality": "東京都中央区【仮設定・要入力】", "addressCountry": "JP" }}
   }}
@@ -625,7 +625,7 @@ files_data["services.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>提供サービス一覧 | リュミエール税理士事務所【仮設定】</title>
+  <title>提供サービス一覧 | 寺澤景子税理士事務所【仮設定】</title>
   <meta name="description" content="法人税務顧問、個人事業主確定申告、会社設立・創業融資支援、クラウド会計導入、相続税申告など。高品質で寄り添う税務サービスの詳細をご案内します。">
   <link rel="canonical" href="https://example.com/services.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -823,7 +823,7 @@ files_data["pricing.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>料金案内 | リュミエール税理士事務所【仮設定】</title>
+  <title>料金案内 | 寺澤景子税理士事務所【仮設定】</title>
   <meta name="description" content="【仮設定・要入力】明瞭で安心な料金体系。法人税務顧問、個人事業主確定申告、会社設立、クラウド会計導入の報酬基準を公開。後から不明な追加請求は一切ありません。">
   <link rel="canonical" href="https://example.com/pricing.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -981,8 +981,8 @@ files_data["profile.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>代表紹介・事務所概要 | リュミエール税理士事務所【仮設定】</title>
-  <meta name="description" content="【仮設定・要入力】リュミエール税理士事務所代表の女性税理士プロフィール、理念、事務所概要のご案内。経営者の想いに寄り添い、確かな専門性で未来に伴走します。">
+  <title>代表紹介・事務所概要 | 寺澤景子税理士事務所【仮設定】</title>
+  <meta name="description" content="【仮設定・要入力】寺澤景子税理士事務所代表の女性税理士プロフィール、理念、事務所概要のご案内。経営者の想いに寄り添い、確かな専門性で未来に伴走します。">
   <link rel="canonical" href="https://example.com/profile.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1038,7 +1038,7 @@ files_data["profile.html"] = f"""<!DOCTYPE html>
               <li>・都内中堅税理士法人および総合会計事務所にて約10年間勤務</li>
               <li>・スタートアップ、IT企業、飲食、医療法人等の税務顧問を多数担当</li>
               <li>・クラウド会計導入プロジェクト、事業承継・相続税申告に精通</li>
-              <li>・2026年 リュミエール税理士事務所を開業</li>
+              <li>・2026年 寺澤景子税理士事務所を開業</li>
             </ul>
           </div>
         </div>
@@ -1051,7 +1051,7 @@ files_data["profile.html"] = f"""<!DOCTYPE html>
         <div style="background: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
           <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
             <tbody>
-              <tr style="border-bottom: 1px solid var(--color-border);"><th style="padding: 1.25rem; width: 30%; background-color: var(--color-bg-subtle); color: var(--color-primary-dark);">事務所名</th><td style="padding: 1.25rem;">リュミエール税理士事務所 【仮設定・要入力】</td></tr>
+              <tr style="border-bottom: 1px solid var(--color-border);"><th style="padding: 1.25rem; width: 30%; background-color: var(--color-bg-subtle); color: var(--color-primary-dark);">事務所名</th><td style="padding: 1.25rem;">寺澤景子税理士事務所 【仮設定・要入力】</td></tr>
               <tr style="border-bottom: 1px solid var(--color-border);"><th style="padding: 1.25rem; background-color: var(--color-bg-subtle); color: var(--color-primary-dark);">代表者</th><td style="padding: 1.25rem;">代表税理士 【氏名要入力】</td></tr>
               <tr style="border-bottom: 1px solid var(--color-border);"><th style="padding: 1.25rem; background-color: var(--color-bg-subtle); color: var(--color-primary-dark);">所属</th><td style="padding: 1.25rem;">東京税理士会 所属（登録番号：第000000号）【要入力】</td></tr>
               <tr style="border-bottom: 1px solid var(--color-border);"><th style="padding: 1.25rem; background-color: var(--color-bg-subtle); color: var(--color-primary-dark);">所在地</th><td style="padding: 1.25rem;">〒104-0061 東京都中央区銀座【仮設定・要入力】</td></tr>
@@ -1076,8 +1076,8 @@ files_data["faq.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>よくあるご質問 (FAQ) | リュミエール税理士事務所【仮設定】</title>
-  <meta name="description" content="リュミエール税理士事務所へのご依頼・ご相談に関するよくあるご質問と回答。顧問契約の流れ、クラウド会計対応、料金、対応地域など。">
+  <title>よくあるご質問 (FAQ) | 寺澤景子税理士事務所【仮設定】</title>
+  <meta name="description" content="寺澤景子税理士事務所へのご依頼・ご相談に関するよくあるご質問と回答。顧問契約の流れ、クラウド会計対応、料金、対応地域など。">
   <link rel="canonical" href="https://example.com/faq.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1145,8 +1145,8 @@ files_data["contact.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>無料相談・お問い合わせ | リュミエール税理士事務所【仮設定】</title>
-  <meta name="description" content="リュミエール税理士事務所の初回無料相談お申し込み・お問い合わせ窓口。法人税務、創業支援、クラウド会計、相続等のご相談を承ります。">
+  <title>無料相談・お問い合わせ | 寺澤景子税理士事務所【仮設定】</title>
+  <meta name="description" content="寺澤景子税理士事務所の初回無料相談お申し込み・お問い合わせ窓口。法人税務、創業支援、クラウド会計、相続等のご相談を承ります。">
   <link rel="canonical" href="https://example.com/contact.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1257,8 +1257,8 @@ files_data["privacy.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プライバシーポリシー・免責事項 | リュミエール税理士事務所【仮設定】</title>
-  <meta name="description" content="リュミエール税理士事務所の個人情報保護方針および免責事項、情報セキュリティ基準について。">
+  <title>プライバシーポリシー・免責事項 | 寺澤景子税理士事務所【仮設定】</title>
+  <meta name="description" content="寺澤景子税理士事務所の個人情報保護方針および免責事項、情報セキュリティ基準について。">
   <link rel="canonical" href="https://example.com/privacy.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1284,7 +1284,7 @@ files_data["privacy.html"] = f"""<!DOCTYPE html>
       <div class="container container-narrow">
         <h1 class="font-serif" style="margin-bottom: 2rem;">個人情報保護方針（プライバシーポリシー）</h1>
         <p style="margin-bottom: 1.5rem; line-height: 1.8;">
-          リュミエール税理士事務所（以下「当事務所」）は、税務・会計コンサルティング業務等において取得するお客様の個人情報を重要な財産と認識し、個人情報の保護に関する法律（個人情報保護法）及び税理士法第38条（守秘義務）を厳格に遵守し、適切に保護・管理いたします。
+          寺澤景子税理士事務所（以下「当事務所」）は、税務・会計コンサルティング業務等において取得するお客様の個人情報を重要な財産と認識し、個人情報の保護に関する法律（個人情報保護法）及び税理士法第38条（守秘義務）を厳格に遵守し、適切に保護・管理いたします。
         </p>
         <h3 class="font-serif" style="margin-top: 2rem; margin-bottom: 1rem;">1. 個人情報の取得</h3>
         <p style="line-height: 1.8; color: var(--color-text-muted);">当事務所は、適法かつ公正な手段によって個人情報を取得します。お問い合わせフォーム、面談、ご契約書類等を通じて、利用目的を明確にした上で必要な範囲の情報を取得します。</p>
@@ -1302,7 +1302,7 @@ files_data["privacy.html"] = f"""<!DOCTYPE html>
         <p style="line-height: 1.8; color: var(--color-text-muted);">個人情報への不正アクセス、紛失、改ざん、漏洩等を防止するため、Google Workspaceの多要素認証、強固なアクセス権限管理、SSL/TLS通信の徹底など適切なセキュリティ対策を実施します。</p>
         <h3 class="font-serif" style="margin-top: 2rem; margin-bottom: 1rem;">5. 免責事項</h3>
         <p style="line-height: 1.8; color: var(--color-text-muted);">当サイトに掲載されている税務・経営情報は、執筆時点の法令等に基づき細心の注意を払って作成しておりますが、その完全性・正確性を保証するものではありません。個別の税務判断や申告にあたっては、必ず当事務所または管轄税務署等へご相談ください。</p>
-        <p style="margin-top: 3rem; font-size: 0.85rem; color: var(--color-text-light);">制定日：2026年10月1日<br>リュミエール税理士事務所 代表税理士 【氏名要入力】</p>
+        <p style="margin-top: 3rem; font-size: 0.85rem; color: var(--color-text-light);">制定日：2026年10月1日<br>寺澤景子税理士事務所 代表税理士 【氏名要入力】</p>
       </div>
     </section>
   </main>
@@ -1318,7 +1318,7 @@ files_data["404.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 Not Found - ページが見つかりません | リュミエール税理士事務所【仮設定】</title>
+  <title>404 Not Found - ページが見つかりません | 寺澤景子税理士事務所【仮設定】</title>
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -1342,7 +1342,7 @@ files_data["404.html"] = f"""<!DOCTYPE html>
 blog_header = """  <header class="site-header">
     <div class="container header-container">
       <a href="../index.html" class="site-logo">
-        <span class="site-logo-main">リュミエール税理士事務所</span>
+        <span class="site-logo-main">寺澤景子税理士事務所</span>
         <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
       </a>
       <button class="mobile-menu-btn" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -1362,7 +1362,7 @@ blog_header = """  <header class="site-header">
 """
 blog_footer = """  <footer class="site-footer">
     <div class="container text-center" style="padding: 2rem 0;">
-      <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">&copy; 2026 リュミエール税理士事務所【仮設定】. All Rights Reserved.</p>
+      <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">&copy; 2026 寺澤景子税理士事務所【仮設定】. All Rights Reserved.</p>
     </div>
   </footer>
 """
@@ -1372,7 +1372,7 @@ files_data["blog/index.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>税務・経営コラム | リュミエール税理士事務所【仮設定】</title>
+  <title>税務・経営コラム | 寺澤景子税理士事務所【仮設定】</title>
   <meta name="description" content="女性税理士がわかりやすく解説する税務・経営・クラウド会計コラム。最新の税制改正、インボイス、節税対策、起業ノウハウを発信します。">
   <link rel="canonical" href="https://example.com/blog/index.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1425,7 +1425,7 @@ files_data["blog/sample-post.html"] = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>クラウド会計導入で経理工数を8割削減する具体手順 | リュミエール税理士事務所【仮設定】</title>
+  <title>クラウド会計導入で経理工数を8割削減する具体手順 | 寺澤景子税理士事務所【仮設定】</title>
   <meta name="description" content="freeeやマネーフォワード クラウドを活用して経理業務を劇的に効率化するための初期設定から仕訳自動化までのステップを女性税理士が解説。">
   <link rel="canonical" href="https://example.com/blog/sample-post.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1484,7 +1484,7 @@ files_data["admin/index.html"] = """<!doctype html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>コンテンツ管理システム (CMS) | リュミエール税理士事務所</title>
+  <title>コンテンツ管理システム (CMS) | 寺澤景子税理士事務所</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
@@ -1640,7 +1640,7 @@ files_data["gas/Code.gs"] = """function onFormSubmit(e) {
     const adminEmail = Session.getEffectiveUser().getEmail();
     const adminSubject = `【新規お問い合わせ】${clientName}様よりご相談（${serviceInterest}）`;
     const adminBody = `
-リュミエール税理士事務所 受付システムです。
+寺澤景子税理士事務所 受付システムです。
 Webサイトのフォームより新規のお問い合わせを受付いたしました。
 
 ■ 受信日時: ${timestamp}
@@ -1660,11 +1660,11 @@ ${SpreadsheetApp.getActiveSpreadsheet().getUrl()}
     GmailApp.sendEmail(adminEmail, adminSubject, adminBody);
 
     if (clientEmail && clientEmail.includes('@')) {
-      const customerSubject = '【リュミエール税理士事務所】無料相談・お問い合わせを受け付けいたしました';
+      const customerSubject = '【寺澤景子税理士事務所】無料相談・お問い合わせを受け付けいたしました';
       const customerBody = `
 ${clientName} 様
 
-この度は、リュミエール税理士事務所のWebサイトよりお問い合わせいただき、誠にありがとうございます。
+この度は、寺澤景子税理士事務所のWebサイトよりお問い合わせいただき、誠にありがとうございます。
 代表税理士の【氏名要入力】でございます。
 
 以下の内容でお問い合わせを正常に受け付けいたしました。
@@ -1679,7 +1679,7 @@ ${clientName} 様
 ${consultationDetail}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-リュミエール税理士事務所【仮設定】
+寺澤景子税理士事務所【仮設定】
 代表税理士：【氏名要入力】
 所在地：〒104-0061 東京都中央区銀座【仮設定・要入力】
 公式サイト：https://example.com/
@@ -1803,7 +1803,7 @@ files_data["docs/07_TEST_AND_QA_REPORT.md"] = """# テスト・QA報告書 & 費
 初期費用: 0円 / 月額費用: 実質0円（ドメイン更新費年約2,000円のみ）。
 """
 
-files_data["README.md"] = """# リュミエール税理士事務所 Webサイト & 運用管理システム
+files_data["README.md"] = """# 寺澤景子税理士事務所 Webサイト & 運用管理システム
 APIキー完全不使用仕様・GitHub Pages & Decap CMS & Google連携完全統合版。
 """
 

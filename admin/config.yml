@@ -1,17 +1,13 @@
-# Decap CMS Configuration (完全修正版)
-# APIキー完全不使用 / GitHubバックエンド構成
-
 backend:
   name: github
-  repo: terazawazeirishi-blip/terazawazeirishi # 【要入力】ユーザーのリポジトリ名（例: yamada/lumiere-tax）
-  branch: main # デプロイブランチ
+  repo: your-github-username/your-tax-office-repo
+  branch: main
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 locale: "ja"
 
 collections:
-  # 1. 税務・経営コラム (Folder Collection)
   - name: "blog"
     label: "税務・経営コラム"
     folder: "content/blog"
@@ -25,7 +21,6 @@ collections:
       - { label: "アイキャッチ画像", name: "thumbnail", widget: "image", required: false }
       - { label: "本文", name: "body", widget: "markdown", required: true }
 
-  # 2. 事務所からのお知らせ (Folder Collection)
   - name: "news"
     label: "事務所からのお知らせ"
     folder: "content/news"
@@ -37,18 +32,14 @@ collections:
       - { label: "重要度", name: "importance", widget: "select", options: ["通常", "重要", "夏季/冬季休業"], default: "通常" }
       - { label: "内容", name: "body", widget: "markdown", required: true }
 
-  # 3. よくあるご質問 (File Collection: files配下に定義)
-  - name: "page_settings"
-    label: "固定データ管理"
-    files:
-      - name: "faq"
-        label: "よくあるご質問 (FAQ)"
-        file: "content/faq.json"
+  - name: "faq"
+    label: "よくあるご質問 (FAQ)"
+    file: "content/faq.json"
+    fields:
+      - label: "質問リスト"
+        name: "items"
+        widget: "list"
         fields:
-          - label: "質問リスト"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "カテゴリー", name: "category", widget: "string" }
-              - { label: "質問内容", name: "question", widget: "string" }
-              - { label: "回答内容", name: "answer", widget: "text" }
+          - { label: "カテゴリー", name: "category", widget: "string" }
+          - { label: "質問内容", name: "question", widget: "string" }
+          - { label: "回答内容", name: "answer", widget: "text" }
