@@ -1,0 +1,7 @@
+backend:
+  name: github
+  repo: your-name/tax-office
+collections:
+  - name: blog
+    label: Blog
+    folder: content/blog
