@@ -3,626 +3,430 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>寺沢恵子税理士事務所 | 数字を、経営の最強の武器に。元国税統括官・税務調査のプロ</title>
-  <meta name="description" content="熊本県天草市の寺沢恵子税理士事務所。税務署21年在職・法人課税部門統括官歴任の女性税理士。税務調査対策から会社設立、創業融資、クラウド会計まで。社労士（ザワテラス社労士）とも連携しワンストップ支援。">
-  <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/index.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>寺沢恵子税理士事務所 | 熊本・天草の税務調査対策・税務顧問</title>
+  <meta name="description" content="税務署在職21年・元法人課税統括官の寺沢恵子が率いる税理士事務所。熊本県天草市を拠点に、税務調査に強い法人税務顧問、創業支援、クラウド会計導入を支援します。ザワテラス社労士との提携で労務も一体対応。">
   
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="寺沢恵子税理士事務所 | 熊本・天草の税務調査対策・税務顧問">
+  <meta property="og:description" content="税務署21年・法人課税統括官歴任のプロフェッショナルが貴社の税務と経営を守ります。">
+  <meta property="og:url" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/">
+  <meta property="og:site_name" content="寺沢恵子税理士事務所">
+
+  <!-- スタイルシート -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 構造化データ（JSON-LD） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AccountingService",
     "name": "寺沢恵子税理士事務所",
-    "description": "税務署21年在職・元法人課税部門統括官の女性税理士による税務顧問・税務調査対策・創業支援サービス。",
+    "image": "https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/logo.png",
+    "@id": "https://terazawazeirishi-blip.github.io/terazawazeirishi/",
+    "url": "https://terazawazeirishi-blip.github.io/terazawazeirishi/",
+    "telephone": "0969-22-1166",
+    "faxNumber": "0969-22-1167",
     "address": {
       "@type": "PostalAddress",
-      "postalCode": "863-0023",
-      "addressRegion": "熊本県",
-      "addressLocality": "天草市",
       "streetAddress": "南町5-22",
+      "addressLocality": "天草市",
+      "addressRegion": "熊本県",
+      "postalCode": "863-0023",
       "addressCountry": "JP"
     },
-    "telephone": "0969-22-1166",
-    "priceRange": "¥¥"
+    "founder": {
+      "@type": "Person",
+      "name": "寺沢恵子",
+      "jobTitle": "税理士",
+      "description": "税務署21年在職、法人課税部門統括官歴任。南九州税理士会熊本県連 第154978号"
+    },
+    "openingHours": "Mo-Fr 09:00-17:00"
   }
   </script>
 </head>
 <body>
 
-  <!-- Header (アテナ税理士法人完全再現) -->
-  <header class="site-header">
+  <!-- ヘッダー -->
+  <header class="header">
     <div class="container header-container">
-      <a href="./index.html" class="site-logo">
-        <img src="./assets/images/logo-athena-wing.svg" alt="寺沢恵子税理士事務所 ロゴ" class="site-logo-icon">
-        <span class="site-logo-main">寺沢恵子税理士事務所</span>
+      <a href="index.html" class="brand-logo">
+        <span class="firm-sub">TAX & CONSULTING</span>
+        <span class="firm-name">寺沢恵子税理士事務所</span>
       </a>
-      <button class="mobile-menu-btn" aria-label="メニューを開く" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="main-nav">
-        <ul class="nav-links">
-          <li><a href="#about" class="nav-link">私たちについて</a></li>
-          <li><a href="#services" class="nav-link">サービス</a></li>
-          <li><a href="#flow" class="nav-link">契約の流れ</a></li>
-          <li><a href="#message" class="nav-link">代表挨拶</a></li>
-          <li><a href="#company" class="nav-link">事務所概要</a></li>
-          <li><a href="./faq.html" class="nav-link">よくあるご質問</a></li>
-        </ul>
-        <div class="header-actions">
-          <a href="./contact.html" class="btn-header-cta">✉ 無料相談</a>
-        </div>
+
+      <nav class="nav-menu">
+        <a href="#about" class="nav-link">事務所案内</a>
+        <a href="#features" class="nav-link">当事務所の強み</a>
+        <a href="#services" class="nav-link">業務案内</a>
+        <a href="#price" class="nav-link">料金案内</a>
+        <a href="#faq" class="nav-link">よくあるご質問</a>
+        <a href="#contact" class="nav-link">お問い合わせ</a>
       </nav>
+
+      <div class="header-action">
+        <div class="tel-link">
+          <span class="tel-label">お電話でのご相談</span>
+          <a href="tel:0969221166" class="tel-num">0969-22-1166</a>
+        </div>
+        <a href="#contact" class="btn-contact">無料相談へ</a>
+      </div>
+
+      <button class="menu-toggle" aria-label="メニュー開閉">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
   <main>
-    <!-- ==========================================================================
-         1. ファーストビュー (アテナ税理士法人 完全再現)
-         ========================================================================== -->
-    <section class="athena-hero">
-      <!-- 巨大英字ウォーターマーク背景 -->
-      <div class="athena-hero-bg-text">
-        T E R A S A W A<br>
-        <span>TAX &amp; CONSULTING</span>
-      </div>
-
-      <div class="container athena-hero-grid">
-        <div class="athena-hero-copy">
-          <h1 class="athena-hero-h1">
-            数字を、経営の<br>
-            最強の武器に。
+    <!-- ヒーローセクション -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="hero-subheading">Trust & Professional Tax Partner</span>
+          <h1 class="hero-title">
+            税務署21年の知見が、<br>
+            貴社の経営と未来を<span>守り抜く</span>。
           </h1>
-          <p class="athena-hero-sub">税務調査のプロフェッショナル × 女性税理士</p>
-
-          <!-- 3連の月桂樹・オリーブ実績バッジ -->
-          <div class="athena-laurel-badges">
-            <div class="athena-laurel-item">
-              <span class="tag">国税・税務署21年在職</span>
-              <span class="sub">法人課税部門 統括官歴任 ★★★★★</span>
-            </div>
-            <div class="athena-laurel-item">
-              <span class="tag">税務調査のプロフェッショナル</span>
-              <span class="sub">的確な事前対策と安心の折衝力</span>
-            </div>
-            <div class="athena-laurel-item">
-              <span class="tag">社会保険労務士と連携</span>
-              <span class="sub">ザワテラス社労士とワンストップ</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="athena-hero-visual">
-          <img src="./assets/images/athena-hero-character.svg" alt="アテナの象徴：知性と戦略の女性プロフェッショナル" loading="eager">
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         2. About us (01〜05 ジグザグ写真レイアウト完全再現)
-         ========================================================================== -->
-    <section id="about" class="section athena-about-section">
-      <div class="container">
-        <div class="section-title" data-en="ABOUT">
-          <span class="section-title-en">ABOUT US</span>
-          <h2 class="section-title-ja">元国税統括官が率いる、頼れる税理士事務所</h2>
-          <p class="athena-about-lead">
-            寺沢恵子税理士事務所は、熊本県天草市を拠点に全国の経営者様をサポートする女性税理士事務所です。<br>
-            税務署21年在職・法人課税統括官の確かな経験と、社労士との強固な連携で、創業期から成長期まで一貫して経営に伴走します。
+          <p class="hero-lead">
+            元法人課税部門の統括官として培った確固たる税務調査の眼と、温かく寄り添う伴走支援。熊本・天草から全国の企業様へ、透明性の高い税務顧問と強固な経営防衛を提供します。
           </p>
-          <div class="athena-about-btn-wrap">
-            <a href="#message" class="athena-circle-btn">
-              <span>About us</span>
-              <span class="arrow">&rarr;</span>
-            </a>
+          <div class="hero-badges">
+            <span class="badge">元法人課税部門統括官</span>
+            <span class="badge">税務署21年在職</span>
+            <span class="badge">社労士とのワンストップ連携</span>
+            <span class="badge">クラウド会計対応（全国）</span>
           </div>
         </div>
 
-        <div class="athena-zigzag-list">
-          <!-- 01 -->
-          <div class="athena-zigzag-item">
-            <div class="athena-zigzag-img">
-              <img src="./assets/images/about-01-team.svg" alt="創業に強い、女性税理士チーム" loading="lazy">
-            </div>
-            <div class="athena-zigzag-content">
-              <div class="athena-num-bg">01</div>
-              <h3 class="athena-zigzag-title">創業・企業支援に強い、<br>女性税理士の伴走体制</h3>
-              <div class="athena-zigzag-line"></div>
-              <p class="athena-zigzag-desc">
-                事業計画の策定から融資申込、法人設立届出まで。<br>
-                「何から始めればいいか分からない」段階から、創業・経営の実務をワンストップで親身に担います。
-              </p>
-            </div>
-          </div>
-
-          <!-- 02 (Reverse) -->
-          <div class="athena-zigzag-item is-reverse">
-            <div class="athena-zigzag-img">
-              <img src="./assets/images/about-02-meeting.svg" alt="税務署21年在職・法人課税統括官の圧倒的知見" loading="lazy">
-            </div>
-            <div class="athena-zigzag-content">
-              <div class="athena-num-bg">02</div>
-              <h3 class="athena-zigzag-title">税務署21年在職・法人課税統括官<br>税務調査のプロフェッショナル</h3>
-              <div class="athena-zigzag-line"></div>
-              <p class="athena-zigzag-desc">
-                国税の最前線で法人税調査を統括してきた圧倒的な専門知識。<br>
-                税務署側の着眼点や指摘事項を熟知しているからこそ、適法かつ万全な事前対策と安心のサポートを提供します。
-              </p>
-            </div>
-          </div>
-
-          <!-- 03 -->
-          <div class="athena-zigzag-item">
-            <div class="athena-zigzag-img">
-              <img src="./assets/images/about-03-accounting.svg" alt="月次決算を経営の武器に変える管理会計" loading="lazy">
-            </div>
-            <div class="athena-zigzag-content">
-              <div class="athena-num-bg">03</div>
-              <h3 class="athena-zigzag-title">月次決算を「経営の武器」に<br>変える的確な管理会計</h3>
-              <div class="athena-zigzag-line"></div>
-              <p class="athena-zigzag-desc">
-                部門別の収益分析、資金繰り予測、適正な節税対策。<br>
-                試算表を眺めるだけで終わらせず、次の意思決定に直結する数字の見方を経営者様と一緒に設計します。
-              </p>
-            </div>
-          </div>
-
-          <!-- 04 (Reverse) -->
-          <div class="athena-zigzag-item is-reverse">
-            <div class="athena-zigzag-img">
-              <img src="./assets/images/about-04-network.svg" alt="社会保険労務士と連携・ザワテラス社労士" loading="lazy">
-            </div>
-            <div class="athena-zigzag-content">
-              <div class="athena-num-bg">04</div>
-              <h3 class="athena-zigzag-title">社会保険労務士と連携<br>ザワテラス社労士とワンストップ</h3>
-              <div class="athena-zigzag-line"></div>
-              <p class="athena-zigzag-desc">
-                雇用・就業規則、助成金申請、社会保険手続き。<br>
-                提携の「ザワテラス社労士」と密に連携し、税務と労務を一括対応。経営者が専門家を探し回る負担をゼロにします。
-              </p>
-            </div>
-          </div>
-
-          <!-- 05 -->
-          <div class="athena-zigzag-item">
-            <div class="athena-zigzag-img">
-              <img src="./assets/images/about-05-representative.svg" alt="代表税理士 寺沢恵子の発信力と突破力" loading="lazy">
-            </div>
-            <div class="athena-zigzag-content">
-              <div class="athena-num-bg">05</div>
-              <h3 class="athena-zigzag-title">代表税理士 寺沢恵子が持つ<br>確かな突破力と親身な対話</h3>
-              <div class="athena-zigzag-line"></div>
-              <p class="athena-zigzag-desc">
-                「こんな質問をして怒られないだろうか」という不安は一切不要です。<br>
-                女性税理士ならではの細やかな心配りと、豊富な国税キャリアに裏打ちされた頼もしい突破力でお応えします。
-              </p>
-            </div>
-          </div>
+        <div class="hero-card">
+          <h3 class="card-title">初回無料相談を受付中</h3>
+          <p class="card-desc">
+            「税務調査の連絡が届いて不安」「今の税理士からの切り替えを検討している」「創業期の融資や記帳を任せたい」など、些細なことでもお気軽にご相談ください。
+          </p>
+          <a href="#contact" class="btn-contact" style="width: 100%;">Webから無料相談を予約する</a>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         3. SERVICE (アテナの左固定タイトル ＆ 右縦スクロールリスト完全再現)
-         ========================================================================== -->
-    <section id="services" class="section athena-service-section">
-      <div class="container athena-service-layout">
-        <!-- 左固定タイトル -->
-        <div class="athena-service-sticky">
-          <h2>SERVICE</h2>
-          <p>サービス</p>
-        </div>
-
-        <!-- 右サービスリスト -->
-        <div class="athena-service-list">
-          <!-- 1 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/service-corporate-photo.svg" alt="税務顧問 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>税務顧問</h3>
-              <p>日々の会計・税務から申告まで、事業運営の不安を伴走しながら解消します。元国税統括官の視点で万全のサポートを提供。</p>
-              <a href="./services.html#corporate" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-
-          <!-- 2 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/service-startup-photo.svg" alt="税務調査対策 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>税務調査対策・事前模擬調査</h3>
-              <p>国税21年・統括官の知見を活かした模擬調査と事前点検。調査当日の立ち会いから税務署との折衝まで完全防御。</p>
-              <a href="./services.html#audit" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-
-          <!-- 3 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/hero-bg-photo.svg" alt="会社設立サービス 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>会社設立サービス</h3>
-              <p>事業計画から定款作成、税務署届出まで。創業期の不安を解消し、最も有利な条件でのスタートを支援します。</p>
-              <a href="./services.html#startup" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-
-          <!-- 4 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/consultation-scene.svg" alt="創業融資サービス 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>創業融資サービス</h3>
-              <p>日本政策金融公庫や地元金融機関向けの説得力ある事業計画書作成と、面談対策を丁寧に支援します。</p>
-              <a href="./services.html#finance" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-
-          <!-- 5 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/service-cloud-photo.svg" alt="クラウド会計導入支援 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>クラウド会計導入・自計化支援</h3>
-              <p>freeeやマネーフォワードの自動仕訳ルール構築。経理作業を8割削減し、最新の数字をいつでも可視化します。</p>
-              <a href="./services.html#cloud" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-
-          <!-- 6 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/service-inheritance-photo.svg" alt="相続税申告・事業承継 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>相続税申告・事業承継</h3>
-              <p>特例を最大限活用した適正な財産評価と、円満な生前対策。大切な資産を次世代へ守り継ぐお手伝いをします。</p>
-              <a href="./services.html#inheritance" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-
-          <!-- 7 -->
-          <div class="athena-service-row">
-            <div class="athena-service-photo">
-              <img src="./assets/images/service-individual-photo.svg" alt="労務・助成金ワンストップ支援 写真" loading="lazy">
-            </div>
-            <div class="athena-service-info">
-              <h3>労務相談・助成金支援（ザワテラス社労士連携）</h3>
-              <p>提携の社会保険労務士と連携し、雇用契約書の整備や雇用系助成金の活用をトータルサポートいたします。</p>
-              <a href="./services.html#labor" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         4. FLOW (アテナの横並び4ステップ完全再現)
-         ========================================================================== -->
-    <section id="flow" class="section section-subtle">
+    <!-- 当事務所の強み（Features） -->
+    <section id="features" class="section">
       <div class="container">
-        <div class="section-title" data-en="FLOW">
-          <span class="section-title-en">FLOW</span>
-          <h2 class="section-title-ja">ご契約までの流れ</h2>
+        <div class="section-header">
+          <span class="section-en">Why Choose Us</span>
+          <h2 class="section-title">選ばれる3つの理由</h2>
+          <p class="section-desc">元統括官としての専門知見と、他士業との連携が生み出す独自の価値</p>
         </div>
 
-        <div class="athena-flow-grid">
-          <!-- Step 1 -->
-          <div class="athena-flow-item">
-            <div class="athena-flow-num">1</div>
-            <div class="athena-flow-icon">
-              <svg viewBox="0 0 64 64" fill="none" stroke-width="2.5"><rect x="8" y="14" width="48" height="36" rx="4"/><path d="M 8 18 L 32 36 L 56 18"/></svg>
-            </div>
-            <h4>お問い合わせ</h4>
-            <p>まずはフォームまたはお電話（0969-22-1166）でお気軽にご連絡ください。初回相談は無料ですので安心してお話しください。</p>
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-num">01</div>
+            <h3 class="feature-heading">税務署21年在職・元法人課税統括官の卓越した防衛力</h3>
+            <p class="feature-body">
+              国税組織の最前線で法人調査を統括してきた経験から、調査官が着目するポイントや税法解釈の境界線を精緻に把握。適法かつ最大の節税を実現しつつ、税務調査にも一切動じない盤石な申告書を作成します。
+            </p>
           </div>
 
-          <!-- Step 2 -->
-          <div class="athena-flow-item">
-            <div class="athena-flow-num">2</div>
-            <div class="athena-flow-icon">
-              <svg viewBox="0 0 64 64" fill="none" stroke-width="2.5"><path d="M 12 14 L 52 14 C 56 14, 56 38, 52 38 L 24 38 L 12 50 Z"/></svg>
-            </div>
-            <h4>面談</h4>
-            <p>WEBまたは事務所にてお悩みをお伺いします。難しい専門用語は使わず、お客様の状況に合わせた解決策を分かりやすく提案します。</p>
+          <div class="feature-box">
+            <div class="feature-num">02</div>
+            <h3 class="feature-heading">ザワテラス社労士との強固なワンストップ支援体制</h3>
+            <p class="feature-body">
+              社会保険労務士と緊密に連携。税務・決算だけでなく、従業員の雇用・社会保険手続き、就業規則作成、各種雇用関係助成金の受給まで、バックオフィス業務をワンストップで完結できます。
+            </p>
           </div>
 
-          <!-- Step 3 -->
-          <div class="athena-flow-item">
-            <div class="athena-flow-num">3</div>
-            <div class="athena-flow-icon">
-              <svg viewBox="0 0 64 64" fill="none" stroke-width="2.5"><rect x="14" y="10" width="36" height="44" rx="4"/><line x1="20" y1="20" x2="44" y2="20"/><circle cx="24" cy="30" r="2"/><circle cx="32" cy="30" r="2"/><circle cx="40" cy="30" r="2"/></svg>
-            </div>
-            <h4>お見積もり</h4>
-            <p>サポート内容と料金を明確にしたお見積もりをご提示します。追加費用の不安がないよう、丁寧にご説明いたします。</p>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="athena-flow-item">
-            <div class="athena-flow-num">4</div>
-            <div class="athena-flow-icon">
-              <svg viewBox="0 0 64 64" fill="none" stroke-width="2.5"><path d="M 32 10 L 50 18 L 50 36 C 50 48, 32 54, 32 54 C 32 54, 14 48, 14 36 L 14 18 Z"/><path d="M 24 32 L 30 38 L 42 24"/></svg>
-            </div>
-            <h4>契約</h4>
-            <p>プランにご満足いただけましたら契約となります。二人三脚のパートナーとして、一番身近な相談相手となりサポートします。</p>
+          <div class="feature-box">
+            <div class="feature-num">03</div>
+            <h3 class="feature-heading">天草密着 × クラウド会計による全国シームレス対応</h3>
+            <p class="feature-body">
+              天草市・熊本県の地域企業を対面で手厚く支える一方、freeeやマネーフォワード等のクラウド会計をフル活用。リアルタイムな経営データの共有により、全国の事業主様ともオンラインで緊密に連携します。
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         5. NEWS & MEDIA / COLUMN (アテナの2カラムレイアウト完全再現)
-         ========================================================================== -->
-    <section class="section">
+    <!-- 業務案内（Services） -->
+    <section id="services" class="section section-bg-subtle">
       <div class="container">
-        <div class="athena-media-grid">
-          <!-- NEWS & MEDIA -->
-          <div class="athena-media-col">
-            <h3>NEWS &amp; MEDIA</h3>
-            <span class="sub">ニュース・メディア掲載</span>
+        <div class="section-header">
+          <span class="section-en">Our Services</span>
+          <h2 class="section-title">業務案内</h2>
+          <p class="section-desc">企業の成長フェーズや個人の資産状況に応じたオーダーメイドの税務支援</p>
+        </div>
 
-            <div class="athena-article-list">
-              <article class="athena-article-item">
-                <div class="athena-article-thumb">
-                  <img src="./assets/images/consultation-scene.svg" alt="お知らせ">
-                </div>
-                <div class="athena-article-info">
-                  <span class="date">2026.10.29</span>
-                  <a href="./blog/index.html" class="title">寺沢恵子税理士事務所の公式Webサイトを開設いたしました</a>
-                </div>
-              </article>
-              <article class="athena-article-item">
-                <div class="athena-article-thumb">
-                  <img src="./assets/images/about-04-network.svg" alt="社労士連携">
-                </div>
-                <div class="athena-article-info">
-                  <span class="date">2026.10.20</span>
-                  <a href="./blog/index.html" class="title">社会保険労務士（ザワテラス社労士）とのワンストップ連携を開始</a>
-                </div>
-              </article>
-            </div>
-            <a href="./blog/index.html" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🏢</div>
+            <h3 class="service-title">法人税務顧問</h3>
+            <p class="service-text">
+              月次決算、試算表の作成、期末の節税対策、法人税・消費税の申告書作成までトータルで支援。税務リスクを未然に排除し、健全な黒字経営を伴走します。
+            </p>
           </div>
 
-          <!-- COLUMN -->
-          <div class="athena-media-col">
-            <h3>COLUMN</h3>
-            <span class="sub">コラム</span>
+          <div class="service-card">
+            <div class="service-icon">🔍</div>
+            <h3 class="service-title">税務調査対策・立会い</h3>
+            <p class="service-text">
+              元統括官としてのノウハウを凝縮。事前シミュレーションから当日の立会い、税務署との折衝・交渉までを代表税理士自らが直接担当し、不当な課税から会社を守ります。
+            </p>
+          </div>
 
-            <div class="athena-article-list">
-              <article class="athena-article-item">
-                <div class="athena-article-thumb">
-                  <img src="./assets/images/blog-thumb-cloud.svg" alt="コラム">
-                </div>
-                <div class="athena-article-info">
-                  <span class="date">2026.10.15</span>
-                  <a href="./blog/sample-post.html" class="title">元国税統括官が教える「税務調査で慌てないための3つの鉄則」</a>
-                </div>
-              </article>
-              <article class="athena-article-item">
-                <div class="athena-article-thumb">
-                  <img src="./assets/images/blog-thumb-startup.svg" alt="コラム">
-                </div>
-                <div class="athena-article-info">
-                  <span class="date">2026.10.01</span>
-                  <a href="./blog/index.html" class="title">クラウド会計導入で経理工数を8割削減し、経営判断を加速させる方法</a>
-                </div>
-              </article>
-            </div>
-            <a href="./blog/index.html" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
+          <div class="service-card">
+            <div class="service-icon">🚀</div>
+            <h3 class="service-title">会社設立・創業融資支援</h3>
+            <p class="service-text">
+              事業計画書の策定から、日本政策金融公庫などの創業融資獲得、各種税務署への届出書提出まで一貫代行。スタートアップの確実な立ち上げを後押しします。
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">💻</div>
+            <h3 class="service-title">クラウド会計導入支援</h3>
+            <p class="service-text">
+              freee・マネーフォワード・弥生オンライン等の導入・初期設定から自動仕訳連携までサポート。経理工数を激減させ、本業に集中できる体制を構築します。
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">👤</div>
+            <h3 class="service-title">個人事業主・確定申告</h3>
+            <p class="service-text">
+              所得税・消費税の確定申告、青色申告特別控除の最大活用、法人化（法人成り）の有利不利判定などをわかりやすく丁寧に支援いたします。
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🌿</div>
+            <h3 class="service-title">相続税申告・事業承継</h3>
+            <p class="service-text">
+              財産評価を適正に行い、小規模宅地等の特例等をフル活用した相続税申告を実施。後継者への円滑な株式移転など、長期的視野に立った承継対策を設計します。
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         6. MESSAGE (アテナ代表挨拶完全再現・英字名前オーバーレイ)
-         ========================================================================== -->
-    <section id="message" class="section section-subtle">
+    <!-- 料金案内（Price） -->
+    <section id="price" class="section">
       <div class="container">
-        <div class="section-title" data-en="MESSAGE">
-          <span class="section-title-en">MESSAGE</span>
-          <h2 class="section-title-ja">代表挨拶</h2>
+        <div class="section-header">
+          <span class="section-en">Price Guide</span>
+          <h2 class="section-title">明朗な料金体系</h2>
+          <p class="section-desc">事業規模やご要望に応じた透明性の高い報酬体系を定めています</p>
         </div>
 
-        <div class="athena-message-layout">
-          <div class="athena-message-photo">
-            <img src="./assets/images/representative-photo.svg" alt="代表税理士 寺沢恵子">
-          </div>
-
-          <div class="athena-message-info">
-            <div class="athena-message-title-wrap">
-              <span class="athena-message-role">代表税理士 / 元国税統括官</span>
-              <h3 class="athena-message-name">寺沢 恵子</h3>
-              <div class="athena-message-name-en">Keiko Terasawa</div>
-            </div>
-            <div class="athena-message-body">
-              <p>
-                税務署に21年間在職し、最終役職として法人課税部門の統括官を務めてまいりました。数多くの税務調査や申告指導を指揮してきた現場経験を通じて痛感したのは、「正しい知識と事前の備えこそが、企業経営者の最大の武器になる」という事実です。
-              </p>
-              <p>
-                税務調査は、決して恐れるものではありません。日々の適正な帳簿管理と、税務署側の視点を熟知した専門家のサポートがあれば、堂々と自信を持って事業を成長させることができます。
-              </p>
-              <p>
-                また、当事務所では提携の社会保険労務士（ザワテラス社労士）とワンチームで連携し、税務・財務のみならず労務管理や助成金まで幅広く対応いたします。「数字を武器にして、経営者の挑戦を支える」――どんな些細なお悩みも、どうぞお気軽にご相談ください。
-              </p>
-            </div>
-            <a href="./profile.html" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
-          </div>
+        <div class="table-wrapper">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>年間売上高</th>
+                <th>月額顧問料</th>
+                <th>決算申告料</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>〜1,000万円未満（創業期）</td>
+                <td>22,000円〜</td>
+                <td>110,000円〜</td>
+              </tr>
+              <tr>
+                <td>1,000万円〜3,000万円未満</td>
+                <td>27,500円〜</td>
+                <td>143,000円〜</td>
+              </tr>
+              <tr>
+                <td>3,000万円〜5,000万円未満</td>
+                <td>33,000円〜</td>
+                <td>176,000円〜</td>
+              </tr>
+              <tr>
+                <td>5,000万円〜1億円未満</td>
+                <td>44,000円〜</td>
+                <td>220,000円〜</td>
+              </tr>
+              <tr>
+                <td>1億円以上</td>
+                <td>別途お見積り</td>
+                <td>別途お見積り</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <p class="price-notice">※金額はすべて消費税込みの目安表記です。訪問頻度や記帳代行の有無に応じて正式なお見積りをご提示いたします。</p>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         7. COMPANY (アテナ運営情報完全再現・Googleマップ ＆ ザワテラス社労士リンク)
-         ========================================================================== -->
-    <section id="company" class="section">
+    <!-- 代表者プロフィール（About） -->
+    <section id="about" class="section section-bg-subtle">
       <div class="container">
-        <div class="section-title" data-en="COMPANY">
-          <span class="section-title-en">COMPANY</span>
-          <h2 class="section-title-ja">運営情報</h2>
+        <div class="section-header">
+          <span class="section-en">Representative</span>
+          <h2 class="section-title">代表挨拶・プロフィール</h2>
         </div>
 
-        <div class="athena-company-layout">
-          <!-- Googleマップ (熊本県天草市南町5-22) -->
-          <div class="athena-company-map">
-            <iframe 
-              src="https://maps.google.com/maps?q=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%A4%A9%E8%8D%89%E5%B8%82%E5%8D%97%E7%94%BA5-22&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-
-          <div>
-            <h3 style="font-size: 1.4rem; color: var(--color-primary-dark); margin-bottom: 1.5rem;">寺沢恵子税理士事務所</h3>
-            <table class="athena-company-table">
-              <tbody>
-                <tr>
-                  <th>所在地</th>
-                  <td>
-                    〒863-0023<br>
-                    熊本県天草市南町5-22
-                  </td>
-                </tr>
-                <tr>
-                  <th>電話番号</th>
-                  <td><a href="tel:0969-22-1166" style="text-decoration: none; color: inherit;">0969-22-1166</a></td>
-                </tr>
-                <tr>
-                  <th>FAX番号</th>
-                  <td>0969-22-1167</td>
-                </tr>
-                <tr>
-                  <th>代表者</th>
-                  <td>税理士 寺沢 恵子（南九州税理士会熊本県連所属 / 税理士登録番号：第154978号）</td>
-                </tr>
-                <tr>
-                  <th>経歴</th>
-                  <td>税務署21年在職 / 最終経歴業務：法人課税部門 統括官</td>
-                </tr>
-                <tr>
-                  <th>連携士業</th>
-                  <td>
-                    社会保険労務士と連携<br>
-                    <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer">👉 ザワテラス社労士（公式リンク）</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th>対応地域</th>
-                  <td>熊本県全域（天草地域・熊本市等）、およびオンラインにて全国対応</td>
-                </tr>
-              </tbody>
-            </table>
-            <div style="margin-top: 2rem;">
-              <a href="./profile.html" class="athena-more-btn">More <span class="circle-arrow">&rarr;</span></a>
+        <div class="profile-card">
+          <div class="profile-visual">
+            <div class="profile-image-placeholder">
+              <span>代表税理士</span>
+              <strong style="font-size: 1.3rem; margin-top: 8px;">寺沢 恵子</strong>
+              <small style="margin-top: 12px; color: #475569;">Keiko Terazawa</small>
             </div>
           </div>
+
+          <div class="profile-detail">
+            <span class="profile-title">代表税理士 / 元法人課税部門統括官</span>
+            <h3 class="profile-name">寺沢 恵子</h3>
+            <p class="profile-reg">南九州税理士会熊本県連 所属（税理士登録番号：第154978号）</p>
+
+            <p class="profile-bio">
+              国税組織に21年間在職し、長年にわたり法人税・消費税等の税務調査および組織統括に従事してまいりました。税務署の視点を知り尽くしているからこそ、経営者の皆様が抱える不安や疑問に、最も具体的かつ確実な安心でお応えできると自負しております。<br>
+              天草の地で新規開業し、地域の事業主様はもちろん、オンラインを通じて全国の挑戦する企業様を誠心誠意サポートいたします。
+            </p>
+
+            <ul class="profile-history">
+              <li>国税組織（税務署）に21年間在職</li>
+              <li>法人課税部門 統括官歴任（税務調査・審査のプロフェッショナル）</li>
+              <li>南九州税理士会熊本県連にて税理士登録（第154978号）</li>
+              <li>寺沢恵子税理士事務所 開業</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 提携社労士案内 -->
+        <div class="partner-banner">
+          <div class="partner-info">
+            <h4>社会保険労務士とのシームレスな連携</h4>
+            <p>労務トラブル防止、就業規則整備、助成金申請は提携の「ザワテラス社労士」とワンチームで支援いたします。</p>
+          </div>
+          <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            ザワテラス社労士 公式サイト ↗
+          </a>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section section-subtle">
-      <div class="container container-narrow">
-        <div class="section-title" data-en="Q &amp; A">
-          <span class="section-title-en">Q&amp;A</span>
-          <h2 class="section-title-ja">よくあるご質問</h2>
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-en">FAQ</span>
+          <h2 class="section-title">よくあるご質問</h2>
         </div>
+
         <div class="faq-list">
           <div class="faq-item">
-            <button class="faq-question">税務調査の事前対策や立ち会いのみをお願いできますか？ <span class="faq-toggle-icon">+</span></button>
+            <button class="faq-question">
+              <span>初回の相談は本当に無料ですか？</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
             <div class="faq-answer">
-              はい、もちろん可能です。税務署より調査通知が届いた段階での事前点検・想定問答の準備から、当日の立ち会い、調査官との意見調整まで、国税21年・統括官の知見を活かして全面的にバックアップいたします。
+              <div class="faq-answer-inner">
+                はい、初回の面談（オンラインまたは事務所での対面、約60分）は完全無料で承っております。現在の状況やお悩みをお伺いし、最適なサポート方針とお見積りをご提示いたします。
+              </div>
             </div>
           </div>
+
           <div class="faq-item">
-            <button class="faq-question">社労士業務（社会保険や助成金）も一緒に相談できますか？ <span class="faq-toggle-icon">+</span></button>
+            <button class="faq-question">
+              <span>天草以外の遠方や他県でも対応可能ですか？</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
             <div class="faq-answer">
-              はい、当事務所は「ザワテラス社労士」と強固に提携しております。税務と労務の窓口を一本化し、雇用の助成金申請や就業規則作成までスムーズにワンストップで対応可能です。
+              <div class="faq-answer-inner">
+                もちろん対応可能です。ZoomやGoogle Meet等のオンライン会議ツール、freeeやマネーフォワード等のクラウド会計を活用することで、全国どちらからでも対面と変わらない手厚いサポートを提供いたします。
+              </div>
             </div>
           </div>
+
           <div class="faq-item">
-            <button class="faq-question">天草市外や遠方からでも相談・契約できますか？ <span class="faq-toggle-icon">+</span></button>
+            <button class="faq-question">
+              <span>税務調査の連絡が突然来ました。今すぐ相談できますか？</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
             <div class="faq-answer">
-              はい、ZoomやGoogle Meet等のオンライン面談とクラウド会計データ共有を活用し、熊本市をはじめ全国の事業者様に対応しております。
+              <div class="faq-answer-inner">
+                緊急のご相談も迅速に対応いたします。税務署21年の調査統括経験を活かし、調査前の準備から当日の立会い、指摘事項の精査まで全面的に防御サポートを行います。
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>他の税理士からの顧問変更はスムーズに行えますか？</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                はい、前任の税理士様からの過去の申告書控や総勘定元帳をお預かりできれば、当事務所にて引き継ぎ作業を円滑に進めます。期中での変更も柔軟に対応可能です。
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Call to Action Banner -->
-    <section class="cta-banner">
+    <!-- お問い合わせ・CTA -->
+    <section id="contact" class="cta-section">
       <div class="container">
-        <h2>まずは、あなたのビジネスの想いをお聞かせください</h2>
-        <p>
-          「こんなことを聞いていいのかな？」と迷う前に、お気軽にご相談ください。<br>
-          豊富な税務署キャリアと親身な対話を通じて、確かな解決の道筋をご案内します。
-        </p>
-        <a href="./contact.html" class="btn-header-cta" style="padding: 1.1rem 2.5rem; font-size: 1.05rem;">初回無料相談のお申し込みはこちら</a>
+        <h2 class="cta-title">まずは、お気軽にご相談ください</h2>
+        <p class="cta-desc">税務調査への備え、顧問税理士の変更、創業融資など、専門家が誠意をもってお応えします。</p>
+        
+        <div class="cta-actions">
+          <a href="contact/index.html" class="cta-btn-main">Webフォームから相談する</a>
+          <a href="tel:0969221166" class="cta-btn-tel">
+            <span>📞 0969-22-1166</span>
+          </a>
+        </div>
+        <p style="margin-top: 16px; font-size: 0.85rem; color: #94a3b8;">受付時間：平日 9:00〜17:00（土日祝除く）</p>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="./index.html" class="site-logo" style="margin-bottom: 1rem;">
-            <img src="./assets/images/logo-athena-wing.svg" alt="寺沢恵子税理士事務所 ロゴ" class="site-logo-icon">
-            <span class="site-logo-main" style="color: #FFFFFF;">寺沢恵子税理士事務所</span>
-          </a>
-          <p>
-            数字を、経営の最強の武器に。<br>
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: 0969-22-1166 / FAX: 0969-22-1167
-          </p>
-        </div>
-        <div>
-          <h4 class="footer-title">サービス一覧</h4>
-          <ul class="footer-links">
-            <li><a href="./services.html#corporate">税務顧問</a></li>
-            <li><a href="./services.html#audit">税務調査対策・事前模擬調査</a></li>
-            <li><a href="./services.html#startup">会社設立・創業支援</a></li>
-            <li><a href="./services.html#cloud">クラウド会計導入（freee/MF）</a></li>
-            <li><a href="./services.html#inheritance">相続税申告・事業承継</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer-title">事務所案内</h4>
-          <ul class="footer-links">
-            <li><a href="#about">私たちについて</a></li>
-            <li><a href="#flow">ご契約までの流れ</a></li>
-            <li><a href="#message">代表挨拶</a></li>
-            <li><a href="#company">運営情報</a></li>
-            <li><a href="./contact.html">無料相談・お問い合わせ</a></li>
-          </ul>
-        </div>
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3 class="firm-name">寺沢恵子税理士事務所</h3>
+        <address class="footer-address">
+          〒863-0023 熊本県天草市南町5-22<br>
+          TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
+          南九州税理士会熊本県連 所属（第154978号）
+        </address>
       </div>
-      <div class="footer-bottom">
-        <div>&copy; 2026 寺沢恵子税理士事務所. All Rights Reserved.</div>
+
+      <div>
+        <h4 class="footer-title">サービス一覧</h4>
+        <ul class="footer-links">
+          <li><a href="#services">法人税務顧問</a></li>
+          <li><a href="#services">税務調査立会い</a></li>
+          <li><a href="#services">会社設立・創業融資</a></li>
+          <li><a href="#services">クラウド会計導入</a></li>
+          <li><a href="#price">明朗料金表</a></li>
+        </ul>
       </div>
+
+      <div>
+        <h4 class="footer-title">関連リンク・情報</h4>
+        <ul class="footer-links">
+          <li><a href="#about">代表プロフィール</a></li>
+          <li><a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer">ザワテラス社労士（提携）</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="privacy/index.html">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 寺沢恵子税理士事務所. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- アテナ風・右下常駐フローティングCTA -->
-  <aside class="floating-cta">
-    <a href="./contact.html" class="floating-cta-btn">
-      <span>✉ 無料相談</span>
-    </a>
-  </aside>
-
   <!-- スクリプト -->
-  <script src="./assets/js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

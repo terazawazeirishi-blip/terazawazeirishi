@@ -1,78 +1,82 @@
 /**
- * ミネルヴァ税理士法人 SPAルーター ＆ UIインタラクション
+ * js/main.js
+ * 寺沢恵子税理士事務所 - UIインタラクション（外部ライブラリ依存ゼロ仕様）
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. メガドロワー開閉制御
-  const megaMenuBtn = document.getElementById('megaMenuBtn');
-  const megaDrawer = document.getElementById('megaDrawer');
-
-  window.toggleDrawer = function() {
-    if (megaDrawer) {
-      megaDrawer.classList.toggle('active');
+  // 1. スクロールによるヘッダーの影付与
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
     }
-  };
+  }, { passive: true });
 
-  if (megaMenuBtn) {
-    megaMenuBtn.addEventListener('click', window.toggleDrawer);
-  }
+  // 2. モバイル用ハンバーガーメニュー
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.nav-menu');
 
-  // 2. SPAページルーター（全リンクの相互遷移制御）
-  window.navigateTo = function(viewKey, scrollToId = null) {
-    // 全てのビューを非表示
-    document.querySelectorAll('.page-view').forEach(view => {
-      view.classList.remove('active');
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
     });
 
-    // 目的のビューを表示
-    const targetView = document.getElementById(`view-${viewKey}`);
-    if (targetView) {
-      targetView.classList.add('active');
-      
-      if (scrollToId) {
-        setTimeout(() => {
-          const el = document.getElementById(scrollToId);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-  };
+    // リンククリック時にメニューを閉じる
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      });
+    });
+  }
 
-  // 3. URLハッシュ連動（ブラウザの「戻る・進む」に対応）
-  window.addEventListener('hashchange', () => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-      const viewMap = {
-        'home': 'home',
-        'about': 'about',
-        'services': 'home',
-        'service-tax': 'service-tax',
-        'service-startup': 'service-startup',
-        'service-finance': 'service-finance',
-        'service-subsidy': 'service-subsidy',
-        'service-bpo': 'service-bpo',
-        'service-dd': 'service-dd',
-        'service-global': 'service-global',
-        'company-overview': 'company-overview',
-        'company-message': 'company-message',
-        'company-faq': 'company-faq',
-        'price': 'price',
-        'recruit': 'recruit',
-        'column': 'column',
-        'contact': 'contact'
-      };
-      if (viewMap[hash]) {
-        window.navigateTo(viewMap[hash], hash === 'services' ? 'services' : null);
-      }
-    } else {
-      window.navigateTo('home');
+  // 3. FAQアコーディオン制御
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    if (question && answer) {
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // 他のアコーディオンを閉じる（単一オープン）
+        faqItems.forEach(otherItem => {
+          otherItem.classList.remove('active');
+          const otherAnswer = otherItem.querySelector('.faq-answer');
+          if (otherAnswer) otherAnswer.style.maxHeight = null;
+        });
+
+        if (!isActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
     }
   });
 
-  // 初回アクセス時のハッシュチェック
-  if (window.location.hash) {
-    window.dispatchEvent(new Event('hashchange'));
-  }
+  // 4. ページ内リンクのスムーススクロール（ヘッダー高さを考慮）
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        const headerHeight = header ? header.offsetHeight : 80;
+        const targetPos = targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+        window.scrollTo({
+          top: targetPos,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
 });
