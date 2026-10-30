@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: terazawazeirishi-blip/terazawazeirishi
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "assets/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "税務・経営コラム"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "公開日", name: "date", widget: "datetime" }
+      - { label: "カテゴリー", name: "category", widget: "select", options: ["税務調査対策", "法人税務・節税", "会社設立・創業融資", "クラウド会計・DX", "相続税・事業承継", "社労士連携・助成金"] }
+      - { label: "要約文", name: "description", widget: "string" }
+      - { label: "本文", name: "body", widget: "markdown" }
+
+  - name: "news"
+    label: "事務所からのお知らせ"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "公開日", name: "date", widget: "datetime" }
+      - { label: "本文", name: "body", widget: "markdown" }

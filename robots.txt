@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /content/
+
+Sitemap: https://terazawazeirishi-blip.github.io/terazawazeirishi/sitemap.xml
