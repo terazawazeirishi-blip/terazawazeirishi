@@ -3,38 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>よくあるご質問 (FAQ) | 寺澤景子税理士事務所</title>
-  <meta name="description" content="寺澤景子税理士事務所へのご依頼・ご相談に関するよくあるご質問と回答。顧問契約の流れ、クラウド会計対応、料金、対応地域など。">
-  <link rel="canonical" href="https://example.com/faq.html">
+  <title>よくあるご質問 (FAQ) | 寺沢恵子税理士事務所</title>
+  <meta name="description" content="寺沢恵子税理士事務所へのご依頼・ご相談に関するよくあるご質問と回答。顧問契約の流れ、税務調査対策、社労士連携、クラウド会計、料金など。">
+  <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/faq.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-container">
-      <a href="index.html" class="site-logo">
-        <span class="site-logo-main">寺澤景子税理士事務所</span>
-        <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
+      <a href="./index.html" class="site-logo">
+        <img src="./assets/images/logo-athena-wing.svg" alt="寺沢恵子税理士事務所 ロゴ" class="site-logo-icon">
+        <span class="site-logo-main">寺沢恵子税理士事務所</span>
       </a>
       <button class="mobile-menu-btn" aria-label="メニューを開く" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav class="main-nav">
         <ul class="nav-links">
-          <li><a href="index.html" class="nav-link">ホーム</a></li>
-          <li><a href="services.html" class="nav-link">サービス</a></li>
-          <li><a href="pricing.html" class="nav-link">料金案内</a></li>
-          <li><a href="profile.html" class="nav-link">代表紹介</a></li>
-          <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
-          <li><a href="blog/index.html" class="nav-link">コラム</a></li>
+          <li><a href="./index.html" class="nav-link">ホーム</a></li>
+          <li><a href="./services.html" class="nav-link">サービス</a></li>
+          <li><a href="./pricing.html" class="nav-link">料金案内</a></li>
+          <li><a href="./profile.html" class="nav-link">事務所概要</a></li>
+          <li><a href="./faq.html" class="nav-link active">よくあるご質問</a></li>
+          <li><a href="./blog/index.html" class="nav-link">お役立ちコラム</a></li>
         </ul>
         <div class="header-actions">
-          <a href="contact.html" class="btn btn-gold">無料相談・お問い合わせ</a>
+          <a href="./contact.html" class="btn-header-cta">✉ 無料相談</a>
         </div>
       </nav>
     </div>
@@ -43,92 +42,160 @@
   <div class="breadcrumb">
     <div class="container">
       <ul class="breadcrumb-list">
-        <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+        <li><a href="./index.html">ホーム</a></li>
         <li class="breadcrumb-separator">/</li>
-        <li class="breadcrumb-item">よくあるご質問</li>
+        <li>よくあるご質問</li>
       </ul>
     </div>
   </div>
+
   <main>
     <section class="section">
       <div class="container container-narrow">
-        <div class="section-title">
+        <div class="section-title" data-en="Q &amp; A">
           <span class="section-title-en">FREQUENTLY ASKED QUESTIONS</span>
           <h1 class="section-title-ja">よくあるご質問</h1>
-          <p style="color: var(--color-text-muted); margin-top: 1rem;">お客様から多く寄せられるご質問と回答を掲載しております。</p>
+          <p style="color: var(--color-text-muted); margin-top: 1rem; text-align: center;">
+            お客様から多く寄せられるご質問と回答をカテゴリー別に掲載しております。
+          </p>
         </div>
 
-        <h3 class="font-serif" style="margin-top: 2rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">ご契約・面談について</h3>
+        <h3 class="font-serif" style="margin-top: 2rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">税務調査・税務署対応について</h3>
         <div class="faq-list">
-          <div class="faq-item"><button class="faq-question">初回の相談には費用がかかりますか？ <span class="faq-toggle-icon">+</span></button><div class="faq-answer">初回の個別相談（約30〜60分）は完全無料で承っております。事業の状況や現在のお悩みを丁寧にお伺いし、最適なサポート方針とお見積もりをご案内します。</div></div>
-          <div class="faq-item"><button class="faq-question">遠方ですが、オンラインのみで契約・サポートは完結できますか？ <span class="faq-toggle-icon">+</span></button><div class="faq-answer">はい、可能です。ZoomやGoogle MeetによるWeb面談、クラウドストレージでのデータ共有、チャットツールでの連絡により、全国どこからでも対面と変わらない手厚いサポートを提供しております。</div></div>
-          <div class="faq-item"><button class="faq-question">現在の税理士からの変更（セカンドオピニオン含む）は可能ですか？ <span class="faq-toggle-icon">+</span></button><div class="faq-answer">もちろん可能です。現在の税理士事務所との関係に配慮しつつ、過去の申告書や総勘定元帳の引き継ぎ手続きをスムーズに進められるようアドバイスいたします。</div></div>
+          <div class="faq-item">
+            <button class="faq-question">税務調査の事前対策や立ち会いのみをお願いできますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              はい、もちろん可能です。税務署より調査通知が届いた段階での事前点検・想定問答の準備から、当日の立ち会い、調査官との意見調整まで、国税21年・統括官の知見を活かして全面的にバックアップいたします。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">税務調査に入られる確率を下げる方法はありますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              税理士法第33条の2に定められた「書面添付制度」を活用することで、調査着手前に税理士が税務署へ意見陳述を行い、実地調査が省略される可能性を大幅に高めることができます。当事務所では適正申告と書面添付の積極活用を推奨しています。
+            </div>
+          </div>
         </div>
 
-        <h3 class="font-serif" style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">会計ソフト・経理業務について</h3>
+        <h3 class="font-serif" style="margin-top: 3.5rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">社会保険労務士連携・助成金について</h3>
         <div class="faq-list">
-          <div class="faq-item"><button class="faq-question">マネーフォワードやfreeeなどのクラウド会計は必須ですか？ <span class="faq-toggle-icon">+</span></button><div class="faq-answer">必須ではありませんが、業務効率化とリアルタイムな経営管理の観点から強く推奨しております。弥生会計など従来のインストール型ソフトをお使いの場合のデータ移行も支援可能です。</div></div>
-          <div class="faq-item"><button class="faq-question">領収書の整理や記帳代行も丸投げできますか？ <span class="faq-toggle-icon">+</span></button><div class="faq-answer">はい、記帳代行オプションをご用意しております。領収書や請求書を郵送またはスマホ撮影でアップロードいただくだけで、当事務所にて帳簿作成を代行します。</div></div>
+          <div class="faq-item">
+            <button class="faq-question">社労士業務（社会保険や助成金）も一緒に相談できますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              はい、当事務所は提携の「ザワテラス社労士」と強固に連携しております。税務と労務の窓口を一本化し、雇用の助成金申請（キャリアアップ助成金等）や就業規則作成までスムーズにワンストップで対応可能です。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">税務顧問と社労士業務を別々の事務所に頼むのと何が違いますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              給与データや従業員情報のやり取りがスムーズになり、二重の説明や書類提出の手間が省けます。また、決算時の役員報酬設定と社会保険料のバランスを最適化できる大きなメリットがあります。
+            </div>
+          </div>
         </div>
 
-        <h3 class="font-serif" style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">料金・お支払いについて</h3>
+        <h3 class="font-serif" style="margin-top: 3.5rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">ご契約・ご面談について</h3>
         <div class="faq-list">
-          <div class="faq-item"><button class="faq-question">途中で追加費用が請求されることはありますか？ <span class="faq-toggle-icon">+</span></button><div class="faq-answer">事前の合意がないまま追加費用が発生することは一切ございません。年末調整の人数増加や税務調査立ち会いなど、契約外の業務が発生する場合は必ず事前にお見積もりと内容をご説明いたします。</div></div>
+          <div class="faq-item">
+            <button class="faq-question">初回の相談には費用がかかりますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              初回の個別相談（約30〜60分・オンラインまたはご来所）は完全無料で承っております。現在の事業状況やお悩みを丁寧にお伺いし、最適なサポート方針とお見積もりをご案内します。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">天草市外や熊本県外からでもオンラインのみで契約できますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              はい、可能です。ZoomやGoogle MeetによるWeb面談、クラウドストレージでのデータ共有、チャットツールでの連絡により、全国どこからでも対面と変わらない手厚いサポートを提供しております。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">現在の税理士からの変更（セカンドオピニオン含む）は可能ですか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              もちろん可能です。現在の税理士事務所との関係に配慮しつつ、過去の申告書や総勘定元帳の引き継ぎ手続きをスムーズに進められるようアドバイスいたします。
+            </div>
+          </div>
         </div>
 
-        <div style="margin-top: 4rem; text-align: center; background: var(--color-bg-subtle); padding: 3rem; border-radius: var(--radius-md);">
-          <h3 style="margin-bottom: 1rem;">解決しない疑問がございましたら</h3>
-          <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">些細な疑問や確認したい条件がございましたら、どうぞお気軽にお問い合わせください。</p>
-          <a href="contact.html" class="btn btn-gold">個別のお問い合わせはこちら</a>
+        <h3 class="font-serif" style="margin-top: 3.5rem; margin-bottom: 1.5rem; color: var(--color-primary-dark);">会計ソフト・経理業務について</h3>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">マネーフォワードやfreeeなどのクラウド会計の使い方がわかりません。<span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              ご安心ください。初期の銀行・クレジットカード連携から領収書のスキャナ取り込み、日々の自動仕訳ルール作成まで丁寧にレクチャーいたします。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">領収書の整理や記帳代行も丸投げできますか？ <span class="faq-toggle-icon">+</span></button>
+            <div class="faq-answer">
+              はい、記帳代行オプションをご用意しております。領収書や請求書を郵送またはスマホ撮影でアップロードいただくだけで、当事務所にて帳簿作成を代行します。
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+      <div class="container">
+        <h2>疑問や不安な点がございましたら</h2>
+        <p>どんな小さな悩みや初歩的な疑問も歓迎します。どうぞお気軽にお問い合わせください。</p>
+        <a href="./contact.html" class="btn-header-cta" style="padding: 1.1rem 2.6rem; font-size: 1.05rem;">無料相談・お問い合わせはこちら</a>
+      </div>
+    </section>
   </main>
+
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="site-logo">
-            <span class="site-logo-main" style="color: #FFFFFF;">寺澤景子税理士事務所</span>
-            <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
+          <a href="./index.html" class="site-logo" style="margin-bottom: 1.25rem;">
+            <img src="./assets/images/logo-athena-wing.svg" alt="寺沢恵子税理士事務所 ロゴ" class="site-logo-icon">
+            <span class="site-logo-main" style="color: #FFFFFF;">寺沢恵子税理士事務所</span>
           </a>
           <p>
-            知性と品格をもって、経営者の未来に確かな光を。<br>
-            クラウド会計導入から税務顧問、創業融資・会社設立・相続まで、女性税理士が丁寧に伴走いたします。
-          </p>
-          <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #94A3B8;">
-            ※事務所名称・所在地等の情報は開業準備中の【仮設定・要入力】表記です。
+            数字を、経営の最強の武器に。<br>
+            〒863-0023 熊本県天草市南町5-22<br>
+            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
+            代表税理士：寺沢 恵子（南九州税理士会所属 / 元国税統括官）
           </p>
         </div>
         <div>
           <h4 class="footer-title">サービス一覧</h4>
           <ul class="footer-links">
-            <li><a href="services.html#corporate">法人向け税務顧問</a></li>
-            <li><a href="services.html#individual">個人事業主・確定申告</a></li>
-            <li><a href="services.html#startup">会社設立・創業支援</a></li>
-            <li><a href="services.html#cloud">クラウド会計導入（freee/MF）</a></li>
-            <li><a href="services.html#inheritance">相続税申告・事前対策</a></li>
-            <li><a href="pricing.html">明確な料金体系</a></li>
+            <li><a href="./services.html#corporate">法人税務顧問</a></li>
+            <li><a href="./services.html#audit">税務調査対策・事前模擬調査</a></li>
+            <li><a href="./services.html#startup">会社設立・創業支援</a></li>
+            <li><a href="./services.html#finance">創業融資支援・公庫対策</a></li>
+            <li><a href="./services.html#cloud">クラウド会計導入（freee/MF）</a></li>
+            <li><a href="./services.html#inheritance">相続税申告・事業承継</a></li>
+            <li><a href="./services.html#labor">助成金・労務支援（ザワテラス社労士連携）</a></li>
+            <li><a href="./pricing.html">明確な料金体系</a></li>
           </ul>
         </div>
         <div>
           <h4 class="footer-title">事務所案内</h4>
           <ul class="footer-links">
-            <li><a href="profile.html">代表プロフィール・理念</a></li>
-            <li><a href="faq.html">よくあるご質問</a></li>
-            <li><a href="blog/index.html">税務・経営コラム</a></li>
-            <li><a href="contact.html">無料相談・お問い合わせ</a></li>
-            <li><a href="privacy.html">プライバシーポリシー・免責事項</a></li>
+            <li><a href="./profile.html">代表プロフィール・理念</a></li>
+            <li><a href="./index.html#flow">ご契約までの流れ</a></li>
+            <li><a href="./faq.html">よくあるご質問</a></li>
+            <li><a href="./blog/index.html">お役立ちコラム</a></li>
+            <li><a href="./contact.html">無料相談・お問い合わせ</a></li>
+            <li><a href="./privacy.html">プライバシーポリシー・免責事項</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; 2026 寺澤景子税理士事務所. All Rights Reserved.</div>
-        <div></div>
+        <div>&copy; 2026 寺沢恵子税理士事務所. All Rights Reserved.</div>
+        <div>Athena-Inspired Standalone Architecture</div>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <aside class="floating-cta">
+    <a href="./contact.html" class="floating-cta-btn">
+      <span>✉ 無料相談</span>
+    </a>
+  </aside>
+
+  <script src="./assets/js/main.js"></script>
 </body>
 </html>

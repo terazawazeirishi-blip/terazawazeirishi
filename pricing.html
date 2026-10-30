@@ -3,38 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>料金案内 | 寺澤景子税理士事務所</title>
-  <meta name="description" content="【仮設定・要入力】明瞭で安心な料金体系。法人税務顧問、個人事業主確定申告、会社設立、クラウド会計導入の報酬基準を公開。後から不明な追加請求は一切ありません。">
-  <link rel="canonical" href="https://example.com/pricing.html">
+  <title>料金案内 | 寺沢恵子税理士事務所</title>
+  <meta name="description" content="寺沢恵子税理士事務所の明瞭な料金体系。法人税務顧問、税務調査対策、個人事業主確定申告、会社設立、クラウド会計の報酬基準を公開。">
+  <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/pricing.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-container">
-      <a href="index.html" class="site-logo">
-        <span class="site-logo-main">寺澤景子税理士事務所</span>
-        <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
+      <a href="./index.html" class="site-logo">
+        <img src="./assets/images/logo-athena-wing.svg" alt="寺沢恵子税理士事務所 ロゴ" class="site-logo-icon">
+        <span class="site-logo-main">寺沢恵子税理士事務所</span>
       </a>
       <button class="mobile-menu-btn" aria-label="メニューを開く" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav class="main-nav">
         <ul class="nav-links">
-          <li><a href="index.html" class="nav-link">ホーム</a></li>
-          <li><a href="services.html" class="nav-link">サービス</a></li>
-          <li><a href="pricing.html" class="nav-link">料金案内</a></li>
-          <li><a href="profile.html" class="nav-link">代表紹介</a></li>
-          <li><a href="faq.html" class="nav-link">よくあるご質問</a></li>
-          <li><a href="blog/index.html" class="nav-link">コラム</a></li>
+          <li><a href="./index.html" class="nav-link">ホーム</a></li>
+          <li><a href="./services.html" class="nav-link">サービス</a></li>
+          <li><a href="./pricing.html" class="nav-link active">料金案内</a></li>
+          <li><a href="./profile.html" class="nav-link">事務所概要</a></li>
+          <li><a href="./faq.html" class="nav-link">よくあるご質問</a></li>
+          <li><a href="./blog/index.html" class="nav-link">お役立ちコラム</a></li>
         </ul>
         <div class="header-actions">
-          <a href="contact.html" class="btn btn-gold">無料相談・お問い合わせ</a>
+          <a href="./contact.html" class="btn-header-cta">✉ 無料相談</a>
         </div>
       </nav>
     </div>
@@ -43,181 +42,186 @@
   <div class="breadcrumb">
     <div class="container">
       <ul class="breadcrumb-list">
-        <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+        <li><a href="./index.html">ホーム</a></li>
         <li class="breadcrumb-separator">/</li>
-        <li class="breadcrumb-item">料金案内</li>
+        <li>料金案内</li>
       </ul>
     </div>
   </div>
+
   <main>
-    <section class="section" style="padding-bottom: 2rem;">
+    <section class="section">
       <div class="container">
-        <div class="section-title">
+        <div class="section-title" data-en="PRICING">
           <span class="section-title-en">PRICING</span>
           <h1 class="section-title-ja">明確で安心な料金体系</h1>
-          <p style="color: var(--color-text-muted); margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-            当事務所では、事前のお見積もりなしに追加料金が発生することはございません。<br>
-            ※記載料金は開業前の【仮設定・要入力】目安です。実際の年商や仕訳数に応じて正式なお見積もりを提示いたします。
+          <p style="color: var(--color-text-muted); max-width: 740px; margin: 1rem auto 0; font-size: 1.05rem; text-align: center;">
+            当事務所では、事前のお見積もりなしに追加料金が発生することは一切ございません。<br>
+            ※記載料金は標準的な目安です。実際の年商規模や仕訳数、面談頻度に応じて正式なお見積もりをご提示します。
           </p>
         </div>
-      </div>
-    </section>
 
-    <section class="section section-subtle">
-      <div class="container">
-        <h2 class="text-center font-serif" style="margin-bottom: 3rem;">法人向け 税務顧問プラン目安</h2>
-        <div class="grid-3">
-          <div class="pricing-card">
-            <span class="card-tag">LIGHT / STARTUP</span>
-            <h3>スタートアッププラン</h3>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted);">設立2期以内・年商1,000万円未満の企業様向け</p>
+        <!-- 法人顧問プラン 3カラム -->
+        <h2 class="text-center font-serif" style="margin-bottom: 2.5rem; font-size: 1.6rem;">法人向け 税務顧問プラン目安</h2>
+        <div class="pricing-grid">
+          <div class="pricing-box">
+            <span class="section-title-en">LIGHT / STARTUP</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--color-primary-dark);">スタートアッププラン</h3>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">設立2期以内・年商1,500万円未満の企業様向け</p>
             <div class="pricing-price">月額 22,000<span>円〜 (税込)</span></div>
-            <p style="font-size: 0.8rem; color: var(--color-text-muted);">決算申告料：132,000円〜</p>
-            <ul class="pricing-features">
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">決算申告料：132,000円〜</p>
+            <ul class="service-detail-list" style="flex-grow: 1;">
               <li>四半期ごとのオンライン面談</li>
-              <li>チャット・メールでの随時相談</li>
+              <li>メール・チャットでの随時税務相談</li>
               <li>クラウド会計初期連携サポート</li>
-              <li>法人税・地方税・消費税申告</li>
+              <li>法人税・地方税・消費税申告書作成</li>
             </ul>
-            <a href="contact.html" class="btn btn-outline" style="width: 100%;">このプランで相談する</a>
+            <a href="./contact.html" class="btn btn-outline" style="width: 100%;">このプランで相談する</a>
           </div>
 
-          <div class="pricing-card featured">
-            <div class="pricing-badge">人気No.1</div>
-            <span class="card-tag">STANDARD</span>
-            <h3>スタンダードプラン</h3>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted);">年商1,000万〜5,000万円前後の成長企業様向け</p>
+          <div class="pricing-box featured">
+            <div class="pricing-tag-featured">人気No.1</div>
+            <span class="section-title-en">STANDARD</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--color-primary-dark);">スタンダードプラン</h3>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">年商1,500万〜6,000万円前後の成長企業様向け</p>
             <div class="pricing-price">月額 38,500<span>円〜 (税込)</span></div>
-            <p style="font-size: 0.8rem; color: var(--color-text-muted);">決算申告料：198,000円〜</p>
-            <ul class="pricing-features">
-              <li>隔月または毎月の面談（オンライン/対面）</li>
-              <li>チャットツール優先対応</li>
-              <li>決算前タックスプランニング</li>
-              <li>役員報酬シミュレーション</li>
-              <li>クラウド会計の自動仕訳チューニング</li>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">決算申告料：198,000円〜</p>
+            <ul class="service-detail-list" style="flex-grow: 1;">
+              <li>隔月または毎月の定期面談（対面/オンライン）</li>
+              <li>チャット・電話による優先相談対応</li>
+              <li>決算前タックスプランニング・節税対策</li>
+              <li>役員報酬シミュレーション・資金繰り助言</li>
+              <li>元統括官による税務調査事前リスク診断</li>
             </ul>
-            <a href="contact.html" class="btn btn-gold" style="width: 100%;">このプランで相談する</a>
+            <a href="./contact.html" class="btn btn-gold" style="width: 100%;">このプランで相談する</a>
           </div>
 
-          <div class="pricing-card">
-            <span class="card-tag">PREMIUM</span>
-            <h3>プレミアム顧問プラン</h3>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted);">年商5,000万円以上・部門別管理を行いたい企業様向け</p>
+          <div class="pricing-box">
+            <span class="section-title-en">PREMIUM</span>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--color-primary-dark);">プレミアム顧問プラン</h3>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">年商6,000万円以上・税務調査完全防御を行いたい企業様向け</p>
             <div class="pricing-price">月額 66,000<span>円〜 (税込)</span></div>
-            <p style="font-size: 0.8rem; color: var(--color-text-muted);">決算申告料：264,000円〜</p>
-            <ul class="pricing-features">
-              <li>毎月の詳細経営レビュー面談</li>
-              <li>予実管理・KPIモニタリング伴走</li>
-              <li>書面添付制度の適用</li>
-              <li>税務調査完全立ち会いサポート</li>
-              <li>グループ会社・事業承継対策</li>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">決算申告料：264,000円〜</p>
+            <ul class="service-detail-list" style="flex-grow: 1;">
+              <li>毎月の詳細月次決算・KPIレビュー面談</li>
+              <li>書面添付制度の適用（税務調査率の激減）</li>
+              <li>税務調査時の立ち会い報酬割引対応</li>
+              <li>事業承継・役員退職金等の長期タックスプラン</li>
+              <li>社労士連携による労務・助成金総合サポート</li>
             </ul>
-            <a href="contact.html" class="btn btn-outline" style="width: 100%;">このプランで相談する</a>
+            <a href="./contact.html" class="btn btn-outline" style="width: 100%;">このプランで相談する</a>
           </div>
         </div>
+
+        <!-- スポット料金表 -->
+        <h2 class="text-center font-serif" style="margin-bottom: 2rem; font-size: 1.6rem;">スポット支援・その他業務料金</h2>
+        <table class="athena-table">
+          <thead>
+            <tr>
+              <th style="width: 35%;">業務内容</th>
+              <th style="width: 30%;">対象・条件</th>
+              <th style="width: 35%;">標準料金目安 (税込)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>税務調査 事前模擬点検・立ち会い</strong></td>
+              <td>調査通知が届いた企業様（スポット対応可）</td>
+              <td>事前点検 55,000円〜 / 当日立ち会い 44,000円〜 / 日</td>
+            </tr>
+            <tr>
+              <td><strong>会社設立支援パック</strong></td>
+              <td>顧問契約とセットの場合</td>
+              <td>実費手数料のみ（当事務所手数料 0円）</td>
+            </tr>
+            <tr>
+              <td><strong>創業融資支援（日本公庫等）</strong></td>
+              <td>事業計画書策定・面談対策伴走</td>
+              <td>着手金 33,000円 ＋ 成功報酬（融資額の3%〜5%）</td>
+            </tr>
+            <tr>
+              <td><strong>個人事業主 確定申告（年1回スポット）</strong></td>
+              <td>会計データ入力済みの方</td>
+              <td>88,000円〜 / 回</td>
+            </tr>
+            <tr>
+              <td><strong>クラウド会計 初期導入・自計化支援</strong></td>
+              <td>freee / マネーフォワード初期設定</td>
+              <td>55,000円〜 / 回</td>
+            </tr>
+            <tr>
+              <td><strong>相続税申告</strong></td>
+              <td>遺産総額5,000万円未満〜</td>
+              <td>遺産総額の0.5%〜0.8%程度（個別見積）</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container container-narrow">
-        <h2 class="text-center font-serif" style="margin-bottom: 2.5rem;">個人事業主・スポット支援</h2>
-        <div style="background: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
-            <thead>
-              <tr style="background-color: var(--color-bg-subtle); border-bottom: 2px solid var(--color-border);">
-                <th style="padding: 1.25rem; color: var(--color-primary-dark);">サービス内容</th>
-                <th style="padding: 1.25rem; color: var(--color-primary-dark);">対象目安</th>
-                <th style="padding: 1.25rem; color: var(--color-primary-dark);">料金目安 (税込)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: 1px solid var(--color-border);">
-                <td style="padding: 1.25rem;"><strong>個人事業主 顧問＋確定申告</strong></td>
-                <td style="padding: 1.25rem; color: var(--color-text-muted);">年商1,000万円未満</td>
-                <td style="padding: 1.25rem; font-weight: 600; color: var(--color-primary);">月額 16,500円〜 ＋ 確定申告 88,000円〜</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--color-border);">
-                <td style="padding: 1.25rem;"><strong>年1回 確定申告スポット</strong></td>
-                <td style="padding: 1.25rem; color: var(--color-text-muted);">クラウド会計入力済みの方</td>
-                <td style="padding: 1.25rem; font-weight: 600; color: var(--color-primary);">110,000円〜 / 年</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--color-border);">
-                <td style="padding: 1.25rem;"><strong>会社設立ワンストップ</strong></td>
-                <td style="padding: 1.25rem; color: var(--color-text-muted);">顧問契約とセットの場合</td>
-                <td style="padding: 1.25rem; font-weight: 600; color: var(--color-primary);">実費手数料のみ（手数料実質0円）</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--color-border);">
-                <td style="padding: 1.25rem;"><strong>クラウド会計 初期導入設定</strong></td>
-                <td style="padding: 1.25rem; color: var(--color-text-muted);">freee / マネーフォワード</td>
-                <td style="padding: 1.25rem; font-weight: 600; color: var(--color-primary);">55,000円〜 / 回</td>
-              </tr>
-              <tr>
-                <td style="padding: 1.25rem;"><strong>相続税申告</strong></td>
-                <td style="padding: 1.25rem; color: var(--color-text-muted);">遺産総額5,000万円未満〜</td>
-                <td style="padding: 1.25rem; font-weight: 600; color: var(--color-primary);">遺産総額の0.5%〜0.8%程度</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 1rem; line-height: 1.6;">
-          ※上記金額は全て税込表示です。仕訳数、事業所数、特殊な税務処理（海外取引・特殊不動産評価など）が必要な場合は個別にお見積もりをご案内します。
-        </p>
-      </div>
-    </section>
-
+    <!-- CTA -->
     <section class="cta-banner">
       <div class="container">
         <h2>自社に合った正確なお見積もりをお出しします</h2>
         <p>「現在の会計事務所の費用と比較したい」「開業時のコストを抑えたい」など、お気軽にご相談ください。</p>
-        <a href="contact.html" class="btn btn-gold btn-lg">無料でお見積もり・相談する</a>
+        <a href="./contact.html" class="btn-header-cta" style="padding: 1.1rem 2.6rem; font-size: 1.05rem;">無料でお見積もり・相談する</a>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="site-logo">
-            <span class="site-logo-main" style="color: #FFFFFF;">寺澤景子税理士事務所</span>
-            <span class="site-logo-sub">LUMIERE TAX &amp; CONSULTING</span>
+          <a href="./index.html" class="site-logo" style="margin-bottom: 1.25rem;">
+            <img src="./assets/images/logo-athena-wing.svg" alt="寺沢恵子税理士事務所 ロゴ" class="site-logo-icon">
+            <span class="site-logo-main" style="color: #FFFFFF;">寺沢恵子税理士事務所</span>
           </a>
           <p>
-            知性と品格をもって、経営者の未来に確かな光を。<br>
-            クラウド会計導入から税務顧問、創業融資・会社設立・相続まで、女性税理士が丁寧に伴走いたします。
-          </p>
-          <p style="font-size: 0.8rem; margin-top: 0.5rem; color: #94A3B8;">
-            ※事務所名称・所在地等の情報は開業準備中の【仮設定・要入力】表記です。
+            数字を、経営の最強の武器に。<br>
+            〒863-0023 熊本県天草市南町5-22<br>
+            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
+            代表税理士：寺沢 恵子（南九州税理士会所属 / 元国税統括官）
           </p>
         </div>
         <div>
           <h4 class="footer-title">サービス一覧</h4>
           <ul class="footer-links">
-            <li><a href="services.html#corporate">法人向け税務顧問</a></li>
-            <li><a href="services.html#individual">個人事業主・確定申告</a></li>
-            <li><a href="services.html#startup">会社設立・創業支援</a></li>
-            <li><a href="services.html#cloud">クラウド会計導入（freee/MF）</a></li>
-            <li><a href="services.html#inheritance">相続税申告・事前対策</a></li>
-            <li><a href="pricing.html">明確な料金体系</a></li>
+            <li><a href="./services.html#corporate">法人税務顧問</a></li>
+            <li><a href="./services.html#audit">税務調査対策・事前模擬調査</a></li>
+            <li><a href="./services.html#startup">会社設立・創業支援</a></li>
+            <li><a href="./services.html#finance">創業融資支援・公庫対策</a></li>
+            <li><a href="./services.html#cloud">クラウド会計導入（freee/MF）</a></li>
+            <li><a href="./services.html#inheritance">相続税申告・事業承継</a></li>
+            <li><a href="./services.html#labor">助成金・労務支援（ザワテラス社労士連携）</a></li>
+            <li><a href="./pricing.html">明確な料金体系</a></li>
           </ul>
         </div>
         <div>
           <h4 class="footer-title">事務所案内</h4>
           <ul class="footer-links">
-            <li><a href="profile.html">代表プロフィール・理念</a></li>
-            <li><a href="faq.html">よくあるご質問</a></li>
-            <li><a href="blog/index.html">税務・経営コラム</a></li>
-            <li><a href="contact.html">無料相談・お問い合わせ</a></li>
-            <li><a href="privacy.html">プライバシーポリシー・免責事項</a></li>
+            <li><a href="./profile.html">代表プロフィール・理念</a></li>
+            <li><a href="./index.html#flow">ご契約までの流れ</a></li>
+            <li><a href="./faq.html">よくあるご質問</a></li>
+            <li><a href="./blog/index.html">お役立ちコラム</a></li>
+            <li><a href="./contact.html">無料相談・お問い合わせ</a></li>
+            <li><a href="./privacy.html">プライバシーポリシー・免責事項</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; 2026 寺澤景子税理士事務所. All Rights Reserved.</div>
-        <div></div>
+        <div>&copy; 2026 寺沢恵子税理士事務所. All Rights Reserved.</div>
+        <div>Athena-Inspired Standalone Architecture</div>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <aside class="floating-cta">
+    <a href="./contact.html" class="floating-cta-btn">
+      <span>✉ 無料相談</span>
+    </a>
+  </aside>
+
+  <script src="./assets/js/main.js"></script>
 </body>
 </html>
