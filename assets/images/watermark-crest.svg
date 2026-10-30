@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="100%" height="100%">
-  <defs><linearGradient id="wmG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#C5A059" stop-opacity="0.35"/><stop offset="100%" stop-color="#1B2A4A" stop-opacity="0.15"/></linearGradient></defs>
-  <g fill="none" stroke="url(#wmG)" stroke-width="1.5">
-    <circle cx="450" cy="450" r="420" stroke-width="1.5" stroke-dasharray="8 8"/>
-    <circle cx="450" cy="450" r="380" stroke-width="2"/>
-    <polygon points="450,50 530,350 830,450 530,550 450,850 370,550 70,450 370,350" stroke-width="2"/>
-    <circle cx="450" cy="450" r="75" stroke-width="2.5"/><circle cx="450" cy="450" r="16" fill="url(#wmG)"/>
-  </g>
-</svg>
