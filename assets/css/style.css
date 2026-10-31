@@ -1,132 +1,99 @@
 
     
   
+/* ==========================================================================
+   寺沢景子税理士事務所 公式Webサイト 共通マスター統合スタイルシート
+   ファイルパス: assets/css/style.css
+   デザインコンセプト: Elegant × Premium × Trust × Modern (Athena Style)
+   仕様: API-Key-Free / Desktop解像度完全維持 / Mobileレイアウト完全最適化
+   ========================================================================== */
+
 /* --------------------------------------------------------------------------
-   スマホ用メニュー位置ズレ防止 ＆ 事務所概要・マップ完全最適化
+   1. デザイントークン定義 (:root)
    -------------------------------------------------------------------------- */
+:root {
+  /* ブランドカラー */
+  --color-primary: #1B2A4A;          /* Athena Deep Navy: 知性・厳格・最高格式 */
+  --color-primary-light: #2A3F6D;    /* 軽快なネイビー */
+  --color-primary-dark: #0F1829;     /* 引き締めの極濃紺 */
+  --color-accent: #A08C4A;           /* Athena Olive Gold: 上品・信頼のオリーブゴールド */
+  --color-accent-light: #C5B378;     /* ハイライトゴールド */
+  --color-accent-soft: #F4EEDC;      /* 淡いゴールドティント（バッジ・背景用） */
+  
+  /* ボタニカル・フラワー補助カラー */
+  --color-floral-leaf: #5B7065;      /* 落ち着いたセージグリーン（葉・知性） */
+  --color-floral-petal: #E8D8D8;     /* 柔らかなピオニーピンク（花弁・優しさ） */
+  --color-floral-bg: #FAF8F5;        /* 温かみのあるオフホワイト（花びらベース） */
 
-/* PC標準：左に表、右にマップの美しい横並び */
-.company-grid-layout {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 3.5rem;
-  align-items: start;
+  /* ニュートラルベース */
+  --color-bg-base: #FFFFFF;          /* 純白 */
+  --color-bg-subtle: #F9F9FA;        /* 微細なライトグレー（セクション背景） */
+  --color-bg-card: #FFFFFF;          /* カード背景 */
+  --color-text-main: #222222;        /* 本文メインテキスト（高可読性） */
+  --color-text-sub: #555555;         /* 補助テキスト */
+  --color-text-muted: #888888;       /* 注釈・日付 */
+  --color-border: #E8E8E8;           /* 境界線 */
+  --color-border-gold: rgba(160, 140, 74, 0.35); /* ゴールド境界線 */
+
+  /* タイポグラフィ */
+  --font-serif: "Cinzel", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* 余白・レイアウト（デスクトップ基準） */
+  --container-max: 1200px;
+  --container-narrow: 900px;
+  --header-height: 84px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* 陰影（品格のある微細な多層シャドウ） */
+  --shadow-sm: 0 2px 8px rgba(15, 24, 41, 0.04);
+  --shadow-md: 0 6px 24px rgba(15, 24, 41, 0.08);
+  --shadow-lg: 0 16px 48px rgba(15, 24, 41, 0.12);
+  --shadow-gold: 0 6px 20px rgba(160, 140, 74, 0.25);
+
+  /* トランジション */
+  --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: 0.15s ease-out;
 }
 
-.map-container-frame {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
-  height: 100%;
-  min-height: 380px;
-}
-
-/* スマホ表示 (768px以下) */
-@media (max-width: 768px) {
-  /* 1. 画面全体の横揺れ・はみ出しを徹底根絶 */
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    position: relative;
-  }
-
-  /* 2. モバイルメニューが絶対に画面外へズレない完全固定 */
-  .header-nav {
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-  }
-  .header-nav.is-open {
-    transform: translateX(0) !important;
-  }
-
-  /* 3. 事務所概要＆マップ：スマホでは見やすい縦1列に自動整流 */
-  .company-grid-layout {
-    grid-template-columns: 1fr !important;
-    gap: 2.2rem !important;
-  }
-
-  /* マップをスマホ全幅で見やすい高さに調整 */
-  .map-container-frame {
-    height: 280px !important;
-    min-height: 280px !important;
-  }
-  .map-container-frame iframe {
-    height: 280px !important;
-    min-height: 280px !important;
-  }
-}
 /* --------------------------------------------------------------------------
-   スマホ用3本線メニュー（ハンバーガーボタン）完全位置修復
+   2. リセット・ベーススタイル
    -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  /* ヘッダーコンテナ：左右の余白を確実に確保し、中身のはみ出しを防止 */
-  .header-container {
-    width: 100% !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-
-  /* 左側ロゴエリア：スマホ幅に合わせてスッキリ引き締め */
-  .brand-logo {
-    gap: 8px !important;
-    max-width: calc(100% - 50px) !important; /* ボタン用の幅50pxを絶対死守 */
-    overflow: hidden;
-  }
-  .brand-logo-img {
-    width: 32px !important;
-    height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-  .brand-text {
-    overflow: hidden;
-  }
-  .brand-name {
-    font-size: 0.95rem !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-  .brand-en {
-    font-size: 0.52rem !important;
-    letter-spacing: 0.08em !important;
-    white-space: nowrap !important;
-  }
-
-  /* 3本線ボタン：絶対に画面外へハミ出さず、上下中央にピタッと固定 */
-  .hamburger-btn {
-    display: flex !important;
-    width: 40px !important;
-    height: 40px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    flex-shrink: 0 !important; /* 押し出され防止 */
-    position: relative !important;
-    right: 0 !important;
-    top: 0 !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 5px !important;
-    border: none !important;
-    background: none !important;
-  }
-
-  .hamburger-line {
-    width: 22px !important;
-    height: 2px !important;
-    background-color: var(--color-primary) !important;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* 画面幅の非常に小さいスマホ (iPhone SE等: 360px以下) の追加安全策 */
-@media (max-width: 360px) {
-  .brand-name {
-    font-size: 0.88rem !important;
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-text-main);
+  background-color: var(--color-bg-base);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
 
