@@ -1245,3 +1245,61 @@ ul, ol {
     font-size: 0.95rem !important; /* スマホで文字が小さすぎないサイズ */
   }
 }
+/* --------------------------------------------------------------------------
+   スマホ用メニュー位置ズレ防止 ＆ 事務所概要・マップ完全最適化
+   -------------------------------------------------------------------------- */
+
+/* PC標準：左に表、右にマップの美しい横並び */
+.company-grid-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.map-container-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  height: 100%;
+  min-height: 380px;
+}
+
+/* スマホ表示 (768px以下) */
+@media (max-width: 768px) {
+  /* 1. 画面全体の横揺れ・はみ出しを徹底根絶 */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+  }
+
+  /* 2. モバイルメニューが絶対に画面外へズレない完全固定 */
+  .header-nav {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  .header-nav.is-open {
+    transform: translateX(0) !important;
+  }
+
+  /* 3. 事務所概要＆マップ：スマホでは見やすい縦1列に自動整流 */
+  .company-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 2.2rem !important;
+  }
+
+  /* マップをスマホ全幅で見やすい高さに調整 */
+  .map-container-frame {
+    height: 280px !important;
+    min-height: 280px !important;
+  }
+  .map-container-frame iframe {
+    height: 280px !important;
+    min-height: 280px !important;
+  }
+}
