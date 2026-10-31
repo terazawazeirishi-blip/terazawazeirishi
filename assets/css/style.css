@@ -348,15 +348,145 @@ ul, ol {
 /* --------------------------------------------------------------------------
    5. アテナ風ヒーローセクション (Hero Section)
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   5. アテナ風ヒーローセクション (背景回り込み＆下部グラデーション仕様)
+   -------------------------------------------------------------------------- */
 .athena-hero {
   position: relative;
   min-height: 94vh;
-  padding-top: calc(var(--header-height) + 3rem);
-  padding-bottom: 5rem;
+  padding-top: calc(var(--header-height) + 3.5rem);
+  padding-bottom: 6rem;
   background: linear-gradient(135deg, #FFFFFF 0%, var(--color-bg-subtle) 60%, var(--color-floral-bg) 100%);
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+
+/* 最背面：薄字英字ウォーターマーク (z-index: 1) */
+.athena-hero-bg-text {
+  position: absolute;
+  top: 48%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 15vw, 13rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: rgba(27, 42, 74, 0.035);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* 中間面：IMG-01 右側からテキスト背後に回り込む大型アートワーク (z-index: 2) */
+.hero-bg-artwork-wrap {
+  position: absolute;
+  top: 0;
+  right: -5%;
+  width: clamp(540px, 62vw, 920px);
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  /* ▼ 下に行くほど薄く透明になるグラデーションマスク (Athena仕様) ▼ */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.95) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.95) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.hero-bg-artwork-slot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 左側の文字部分と滑らかに馴染ませるための微細な透過 */
+  opacity: 0.88;
+  filter: drop-shadow(0 16px 36px rgba(15, 24, 41, 0.06));
+}
+
+.hero-bg-artwork-img {
+  width: 100%;
+  height: auto;
+  max-height: 92%;
+  object-fit: contain;
+  object-position: right center;
+}
+
+/* 最前面：テキスト・ボタンコンテナ (z-index: 3) */
+.hero-container-front {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-content-col {
+  max-width: 680px;
+  /* イラストと重なる部分でも文字を鮮明に読ませる微細な背景保護 */
+  background: radial-gradient(circle at left center, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 70%);
+  padding: 1.5rem 0;
+}
+
+.hero-sub-en {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.24em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.hero-main-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-primary);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.8rem;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.9);
+}
+
+.hero-lead-text {
+  font-size: 1.08rem;
+  line-height: 2;
+  color: var(--color-text-main);
+  margin-bottom: 2.4rem;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.8);
+}
+
+/* レスポンシブ対応（スマートフォン・タブレット） */
+@media (max-width: 992px) {
+  .hero-bg-artwork-wrap {
+    right: -10%;
+    width: 85vw;
+    opacity: 0.35; /* スマホでは文字の可読性を最優先し、イラストを淡く透かす */
+  }
+  .hero-content-col {
+    max-width: 100%;
+    text-align: center;
+  }
+  .hero-badges-row {
+    justify-content: center;
+  }
+  .hero-cta-group {
+    justify-content: center;
+  }
 }
 
 /* ヒーロー中央背後の薄字英字 */
