@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全画像自動連動版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（完全自動写真連動版）
  * ファイルパス: assets/js/main.js
- * 仕様: API-Key-Free / Pure Vanilla JS / Zero Dependency / 全17画像完全自動反映
+ * 仕様: API-Key-Free / キャッシュバスター完備 / 税理士写真自動判別100%連動
  * ==============================================================================
  */
 
@@ -16,16 +16,15 @@
     initMobileNav();
     initFaqAccordion();
     initSmoothScroll();
-    applyAllCmsImages(); // ★ サイト内の全画像を自動反映
+    applyAllCmsImages(); // ★ 全画像の完全自動反映
   }
 
   /**
-   * 1. ヘッダースクロール影制御
+   * 1. ヘッダースクロール影
    */
   function initHeaderScroll() {
     const header = document.getElementById('siteHeader');
     if (!header) return;
-
     const handleScroll = () => {
       if (window.scrollY > 20) {
         header.classList.add('is-scrolled');
@@ -33,25 +32,22 @@
         header.classList.remove('is-scrolled');
       }
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
   }
 
   /**
-   * 2. スマホメニュー開閉
+   * 2. スマホメニュー
    */
   function initMobileNav() {
     const btn = document.getElementById('hamburgerBtn');
     const nav = document.getElementById('headerNav');
     if (!btn || !nav) return;
-
     btn.addEventListener('click', function () {
       const isOpen = nav.classList.toggle('is-open');
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-
     const navLinks = nav.querySelectorAll('.nav-link, .header-cta-btn');
     navLinks.forEach((link) => {
       link.addEventListener('click', () => {
@@ -65,17 +61,15 @@
   }
 
   /**
-   * 3. FAQアコーディオン開閉
+   * 3. FAQアコーディオン
    */
   function initFaqAccordion() {
     const accordions = document.querySelectorAll('.faq-accordion-item');
     if (!accordions.length) return;
-
     accordions.forEach((item) => {
       const trigger = item.querySelector('.faq-question-btn');
       const content = item.querySelector('.faq-answer-pane');
       if (!trigger || !content) return;
-
       trigger.addEventListener('click', () => {
         const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
         trigger.setAttribute('aria-expanded', !isExpanded);
@@ -86,17 +80,15 @@
   }
 
   /**
-   * 4. ページ内アンカースムーススクロール
+   * 4. スムーススクロール
    */
   function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
     const headerHeight = 84;
-
     links.forEach((anchor) => {
       anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
         if (targetId === '#' || targetId === '') return;
-
         const targetEl = document.querySelector(targetId);
         if (targetEl) {
           e.preventDefault();
@@ -111,13 +103,16 @@
   }
 
   /**
-   * 5. 【完全版】Pages CMSで設定された全17箇所の一括自動反映
+   * 5. 【完全版】Pages CMS 全画像自動反映（税理士写真100%検知・キャッシュ無効化）
    */
   function applyAllCmsImages() {
     const isBlogSubdir = window.location.pathname.includes('/blog/');
-    const jsonPath = isBlogSubdir ? '../content/site_images.json' : './content/site_images.json';
+    const basePath = isBlogSubdir ? '../content/site_images.json' : './content/site_images.json';
+    
+    // キャッシュバスター（常に最新データを取得する）
+    const jsonUrl = basePath + '?t=' + Date.now();
 
-    fetch(jsonPath)
+    fetch(jsonUrl)
       .then((res) => {
         if (!res.ok) throw new Error('site_images.json not found');
         return res.json();
@@ -125,14 +120,43 @@
       .then((data) => {
         if (!data) return;
 
-        // 相対パス補正関数
+        // 相対パス正規化関数（サブディレクトリ404を完全に防ぐ）
         const toUrl = (p) => {
           if (!p) return '';
-          if (p.startsWith('http') || p.startsWith('./') || p.startsWith('../')) return p;
-          return isBlogSubdir ? '../' + p : './' + p;
+          if (p.startsWith('http://') || p.startsWith('https://')) return p;
+          // 先頭のスラッシュやドットを徹底除去
+          const clean = p.replace(/^(\.\/|\/)/, '');
+          return isBlogSubdir ? '../' + clean : './' + clean;
         };
 
-        // --- 1. ロゴ ---
+        // --- A. 税理士ポートレート写真（★ページ内の写真枠を上から順に自動特定） ---
+        const photoFrames = document.querySelectorAll('.representative-photo-frame');
+        
+        // 1番目の枠 ➜ 寺沢景子 代表税理士
+        if (photoFrames.length >= 1 && data.rep_keiko) {
+          photoFrames[0].innerHTML = `
+            <img src="${toUrl(data.rep_keiko)}" alt="寺沢景子 代表税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <span class="representative-overlay-text">Keiko Terazawa</span>
+          `;
+        }
+        
+        // 2番目の枠 ➜ ベテラン税理士［お名前仮入力］
+        if (photoFrames.length >= 2 && data.rep_senior) {
+          photoFrames[1].innerHTML = `
+            <img src="${toUrl(data.rep_senior)}" alt="ベテラン税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover; display:block;">
+            <span class="representative-overlay-text">Senior Tax Advisor</span>
+          `;
+        }
+
+        // --- B. ヒーローメイン背景イラスト (IMG-01) ---
+        if (data.hero_illustration) {
+          const heroSlot = document.querySelector('.hero-bg-artwork-slot');
+          if (heroSlot) {
+            heroSlot.innerHTML = `<img src="${toUrl(data.hero_illustration)}" alt="寺沢景子税理士事務所 象徴アート" class="hero-bg-artwork-img" loading="eager">`;
+          }
+        }
+
+        // --- C. ロゴ ---
         if (data.logo_img) {
           const logos = document.querySelectorAll('.brand-logo-img');
           logos.forEach((logo) => {
@@ -140,7 +164,7 @@
           });
         }
 
-        // --- 2. ヒーロー透かし (IMG-02) ---
+        // --- D. ヒーロー透かし (IMG-02) ---
         if (data.watermark_crest) {
           const hero = document.getElementById('hero');
           if (hero) {
@@ -151,31 +175,7 @@
           }
         }
 
-        // --- 3. ヒーローメイン背景イラスト (IMG-01) ---
-        if (data.hero_illustration) {
-          const heroSlot = document.querySelector('.hero-bg-artwork-slot');
-          if (heroSlot) {
-            heroSlot.innerHTML = `<img src="${toUrl(data.hero_illustration)}" alt="寺沢景子税理士事務所 象徴アート" class="hero-bg-artwork-img" loading="eager">`;
-          }
-        }
-
-        // --- 4. 寺沢景子 代表写真 (トップ＆プロフィール) ---
-        if (data.rep_keiko) {
-          const keikoSlots = document.querySelectorAll('.representative-photo-frame:first-of-type, [data-rep="keiko"]');
-          keikoSlots.forEach((slot) => {
-            slot.innerHTML = `<img src="${toUrl(data.rep_keiko)}" alt="寺沢景子 代表税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover;"><span class="representative-overlay-text">Keiko Terazawa</span>`;
-          });
-        }
-
-        // --- 5. ベテラン税理士 写真 (トップ＆プロフィール) ---
-        if (data.rep_senior) {
-          const seniorSlots = document.querySelectorAll('[data-rep="senior"], .message-grid > div:last-child .representative-photo-frame');
-          seniorSlots.forEach((slot) => {
-            slot.innerHTML = `<img src="${toUrl(data.rep_senior)}" alt="ベテラン税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover;"><span class="representative-overlay-text">Senior Tax Advisor</span>`;
-          });
-        }
-
-        // --- 6. About us 01〜05 ジグザグ写真 ---
+        // --- E. About us 01〜05 ジグザグ写真 ---
         const aboutKeys = ['about_01', 'about_02', 'about_03', 'about_04', 'about_05'];
         const zigzagSlots = document.querySelectorAll('.athena-zigzag-item .zigzag-visual-slot');
         zigzagSlots.forEach((slot, idx) => {
@@ -185,13 +185,8 @@
           }
         });
 
-        // --- 7. サービス写真 01〜07（トップページ＆services.html両方連動） ---
-        const serviceKeys = [
-          'service_01', 'service_02', 'service_03', 'service_04',
-          'service_05', 'service_06', 'service_07'
-        ];
-
-        // トップページのサービスカード
+        // --- F. サービス写真 01〜07（トップ＆詳細連動） ---
+        const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
         const topServiceSlots = document.querySelectorAll('.service-card-item .service-card-img-slot');
         topServiceSlots.forEach((slot, idx) => {
           const k = serviceKeys[idx];
@@ -200,7 +195,6 @@
           }
         });
 
-        // services.html の各個別サービス詳細枠
         const serviceDetailIds = ['#corporate', '#audit', '#startup', '#finance', '#cloud', '#inheritance', '#labor'];
         serviceDetailIds.forEach((id, idx) => {
           const k = serviceKeys[idx];
@@ -215,11 +209,10 @@
           }
         });
 
-        // --- 8. CTAバナー背景写真 ---
+        // --- G. CTAバナー背景写真 ---
         if (data.cta_banner_bg) {
           const ctaBanners = document.querySelectorAll('section[style*="linear-gradient"]');
           ctaBanners.forEach((banner) => {
-            // 背景に薄い画像を重ねる
             banner.style.backgroundImage = `linear-gradient(rgba(15, 24, 41, 0.88), rgba(27, 42, 74, 0.92)), url('${toUrl(data.cta_banner_bg)}')`;
             banner.style.backgroundSize = 'cover';
             banner.style.backgroundPosition = 'center';
@@ -227,8 +220,7 @@
         }
       })
       .catch((err) => {
-        // 未設定時はフォールバック（初期SVG）が自動維持されます
-        console.log('CMS All-Image Sync: running default assets.');
+        console.log('CMS images: using defaults.');
       });
   }
 })();
