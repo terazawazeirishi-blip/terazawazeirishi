@@ -6,14 +6,72 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <title>税務・経営コラム | 寺沢景子税理士事務所</title>
-  <meta name="description" content="国税21年在職・元法人課税部門統括官の寺沢景子税理士と税理士歴35年のベテラン税理士が発信する税務コラム。税務調査対策、合法的な節税策、会社設立の勘所をわかりやすく解説。">
+  <meta name="description" content="国税21年在職・元法人課税部門統括官の寺沢景子税理士と税理士歴35年のベテラン税理士が発信する税務コラム。">
   <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/blog/index.html">
   
-  <!-- 高級フォント（Cinzel & Noto Serif JP） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <style>
+    /* 記事カード・モーダル用追加スタイル */
+    .blog-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-normal);
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-border-gold);
+    }
+    /* 記事全文ポップアップモーダル */
+    .blog-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 24, 41, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .blog-modal.is-active {
+      display: flex;
+    }
+    .blog-modal-content {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 800px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .blog-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+    }
+  </style>
 </head>
 <body>
 
@@ -60,29 +118,23 @@
     </div>
   </section>
 
-  <!-- コラム一覧 -->
+  <!-- コラム一覧（JSONから自動生成） -->
   <main class="container" style="padding-top: 4rem; padding-bottom: 7rem;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
-      
-      <!-- 記事カード 01 -->
-      <article style="background: var(--color-bg-card); border-radius: var(--radius-lg); border: 1px solid var(--color-border); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
-        <div style="aspect-ratio: 16/9; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border);">
-          <span style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-accent); font-weight: 600; letter-spacing: 0.1em;">TAX AUDIT</span>
-        </div>
-        <div style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-          <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-accent); letter-spacing: 0.08em; margin-bottom: 0.4rem;">税務調査対策</span>
-          <h2 style="font-size: 1.2rem; color: var(--color-primary); margin: 0 0 1rem; line-height: 1.5;">
-            <a href="./sample-post.html" style="color: inherit;">元国税統括官が教える「税務調査で慌てないための3つの鉄則」</a>
-          </h2>
-          <p style="font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.7; margin-bottom: 1.2rem; flex-grow: 1;">
-            突然の税務署からの調査通知。慌てて書類を改ざんすることは絶対に厳禁です。元統括官が教える事前準備の鉄則とは。
-          </p>
-          <span style="font-size: 0.8rem; color: var(--color-text-muted);">2026.10.15</span>
-        </div>
-      </article>
-
+    <div id="blogGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
+      <p style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted);">記事を読み込み中...</p>
     </div>
   </main>
+
+  <!-- 記事本文ポップアップモーダル -->
+  <div class="blog-modal" id="blogModal" aria-hidden="true">
+    <div class="blog-modal-content">
+      <button class="blog-modal-close" id="blogModalClose" aria-label="閉じる">&times;</button>
+      <span id="modalCategory" style="font-size: 0.85rem; font-weight: 700; color: var(--color-accent); letter-spacing: 0.08em;"></span>
+      <h2 id="modalTitle" style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-primary); margin: 0.6rem 0 0.8rem; line-height: 1.4;"></h2>
+      <p id="modalDate" style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 2rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;"></p>
+      <div id="modalBody" style="font-size: 1rem; line-height: 2.1; color: var(--color-text-main); white-space: pre-wrap;"></div>
+    </div>
+  </div>
 
   <!-- 完全統一フッター（サイトマップ完備） -->
   <footer class="site-footer">
@@ -101,14 +153,6 @@
             TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
             南九州税理士会熊本県連 所属（第154978号）
           </address>
-          <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
-            <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65);">
-              提携士業：<a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">ザワテラス社労士</a>
-            </p>
-            <p style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); margin-top: 4px;">
-              税理士2人体制（寺沢景子 / ベテラン税理士）
-            </p>
-          </div>
         </div>
 
         <div>
@@ -150,6 +194,72 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js" defer></script>
+  <!-- コラム自動読み込み＆モーダル制御スクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('blogGrid');
+      const modal = document.getElementById('blogModal');
+      const closeBtn = document.getElementById('blogModalClose');
+
+      // JSONから記事一覧を取得して動的表示
+      fetch('../content/blog_posts.json')
+        .then(res => res.json())
+        .then(data => {
+          if (!data || !data.posts || data.posts.length === 0) {
+            grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">記事がまだありません。</p>';
+            return;
+          }
+
+          grid.innerHTML = '';
+          data.posts.forEach((post, index) => {
+            const card = document.createElement('article');
+            card.className = 'blog-card';
+            card.innerHTML = `
+              <div style="aspect-ratio: 16/9; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border);">
+                <span style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-accent); font-weight: 600; letter-spacing: 0.1em;">${escapeHtml(post.category || '税務コラム')}</span>
+              </div>
+              <div style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
+                <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-accent); letter-spacing: 0.08em; margin-bottom: 0.4rem;">${escapeHtml(post.category || '税務コラム')}</span>
+                <h2 style="font-size: 1.2rem; color: var(--color-primary); margin: 0 0 1rem; line-height: 1.5;">${escapeHtml(post.title)}</h2>
+                <p style="font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.7; margin-bottom: 1.2rem; flex-grow: 1;">${escapeHtml(post.description || '')}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.8rem; color: var(--color-text-muted);">${escapeHtml(post.date)}</span>
+                  <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-accent);">記事を読む &rarr;</span>
+                </div>
+              </div>
+            `;
+            // カードクリックで本文表示
+            card.addEventListener('click', () => {
+              document.getElementById('modalCategory').textContent = post.category || '税務コラム';
+              document.getElementById('modalTitle').textContent = post.title;
+              document.getElementById('modalDate').textContent = `公開日: ${post.date} | 執筆: 寺沢景子税理士事務所`;
+              document.getElementById('modalBody').textContent = post.body;
+              modal.classList.add('is-active');
+              document.body.style.overflow = 'hidden';
+            });
+            grid.appendChild(card);
+          });
+        })
+        .catch(err => {
+          grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: red;">記事データの読み込みに失敗しました。</p>';
+        });
+
+      // モーダルを閉じる
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('is-active');
+        document.body.style.overflow = '';
+      });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('is-active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+      }
+    });
+  </script>
 </body>
 </html>
