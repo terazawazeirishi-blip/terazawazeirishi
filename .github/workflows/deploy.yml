@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
@@ -6,8 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+# ブランチへの書き込み権限とPages権限を両方許可
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -16,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build_and_deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -24,7 +25,32 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 1. 全フォルダのMarkdownから blog/index.html と記事HTMLを完全生成
+      - name: Build Blog Pages
+        run: |
+          python scripts/build_blog.py
+
+      # 2. ★【最重要】生成されたHTMLを GitHub の main ブランチに自動保存（Push）
+      - name: Commit and push generated HTML files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/
+          # 差分がある場合のみコミットしてプッシュ
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-generate blog HTML pages [skip ci]"
+            git push origin main
+          fi
+
+      # 3. GitHub Pages へアップロード
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
@@ -33,6 +59,7 @@ jobs:
         with:
           path: '.'
 
+      # 4. 本番デプロイ
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
