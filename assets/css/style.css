@@ -1303,3 +1303,78 @@ ul, ol {
     min-height: 280px !important;
   }
 }
+/* --------------------------------------------------------------------------
+   スマホ用3本線メニュー（ハンバーガーボタン）完全位置修復
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* ヘッダーコンテナ：左右の余白を確実に確保し、中身のはみ出しを防止 */
+  .header-container {
+    width: 100% !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  /* 左側ロゴエリア：スマホ幅に合わせてスッキリ引き締め */
+  .brand-logo {
+    gap: 8px !important;
+    max-width: calc(100% - 50px) !important; /* ボタン用の幅50pxを絶対死守 */
+    overflow: hidden;
+  }
+  .brand-logo-img {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+  }
+  .brand-text {
+    overflow: hidden;
+  }
+  .brand-name {
+    font-size: 0.95rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .brand-en {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+  }
+
+  /* 3本線ボタン：絶対に画面外へハミ出さず、上下中央にピタッと固定 */
+  .hamburger-btn {
+    display: flex !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important; /* 押し出され防止 */
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    border: none !important;
+    background: none !important;
+  }
+
+  .hamburger-line {
+    width: 22px !important;
+    height: 2px !important;
+    background-color: var(--color-primary) !important;
+  }
+}
+
+/* 画面幅の非常に小さいスマホ (iPhone SE等: 360px以下) の追加安全策 */
+@media (max-width: 360px) {
+  .brand-name {
+    font-size: 0.88rem !important;
+  }
+  .brand-en {
+    display: none !important; /* 最小画面では英語を隠して日本語を綺麗に収める */
+  }
+}
