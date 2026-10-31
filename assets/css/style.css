@@ -1190,3 +1190,58 @@ ul, ol {
     font-size: 0.8rem;
   }
 }
+/* --------------------------------------------------------------------------
+   お知らせ＆フッターサイトマップ スマホ表示完全最適化
+   -------------------------------------------------------------------------- */
+
+/* お知らせセクション（PC標準） */
+.athena-news-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* フッターサイトマップ（PC標準：4列） */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+/* スマホ表示 (768px以下) での最適化 */
+@media (max-width: 768px) {
+  /* お知らせ：スマホでは美しい縦並びカードへ */
+  .athena-news-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .athena-news-section {
+    padding: 2.8rem 0 !important;
+  }
+  .news-item {
+    background: var(--color-bg-subtle);
+    padding: 1.2rem 1.4rem !important;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    margin-bottom: 0.8rem;
+  }
+  .news-item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* フッターサイトマップ：スマホでは1列にスッキリ並べ、タップしやすく改善 */
+  .footer-top {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+  .footer-nav-list {
+    gap: 0.9rem !important;
+  }
+  .footer-nav-link {
+    display: inline-block;
+    padding: 0.3rem 0;
+    font-size: 0.95rem !important; /* スマホで文字が小さすぎないサイズ */
+  }
+}
