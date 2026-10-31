@@ -1,91 +1,68 @@
-# ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（サイト全画像対応完全版）
-# ファイルパス: .pages.yml
-# 仕様: APIキー完全不使用 / サイト内全17箇所の画像完全管理
-# ==============================================================================
-
 media:
   input: assets/images/uploads
   output: assets/images/uploads
 
 content:
-  # ============================================================================
-  # ★ サイト内全画像の変更（一括管理）
-  # ============================================================================
   - name: site_images
     label: 📷 サイト全画像の変更
     type: file
     path: content/site_images.json
     fields:
-      # --- 【1. ロゴ・透かし装飾】 ---
       - name: logo_img
-        label: ［ロゴ］ヘッダー＆フッター 事務所ロゴエンブレム（推奨: 240×60px / 透過SVGまたはPNG）
+        label: ［ロゴ］ヘッダー＆フッター 事務所ロゴエンブレム
         type: image
       - name: watermark_crest
-        label: ［装飾］ファーストビュー中央背後の透かし花冠・幾何学（推奨: 1000×1000px / 線画SVG）
+        label: ［装飾］ファーストビュー中央背後の透かし花冠・幾何学
         type: image
-
-      # --- 【2. ファーストビュー】 ---
       - name: hero_illustration
-        label: ［ヒーロー］文字背後に広がる象徴イラスト（白百合・花など）（推奨: 1000×1100px / 透過WebPまたはPNG）
+        label: ［ヒーロー］文字背後に広がる象徴イラスト（白百合・花など）
         type: image
-
-      # --- 【3. 税理士ポートレート写真（正方形）】 ---
       - name: rep_keiko
-        label: ［税理士写真］寺沢 景子 代表税理士（推奨: 800×800px / 1:1 正方形）
+        label: ［税理士写真］寺沢 景子 代表税理士
         type: image
       - name: rep_senior
-        label: ［税理士写真］ベテラン税理士［お名前仮入力］（推奨: 800×800px / 1:1 正方形）
+        label: ［税理士写真］ベテラン税理士［お名前仮入力］
         type: image
-
-      # --- 【4. 選ばれる5つの理由（About us 01〜05）】 ---
       - name: about_01
-        label: ［About 01］2人体制ダブルチェックの写真・イラスト（推奨: 800×600px / 4:3）
+        label: ［About 01］2人体制ダブルチェックの写真・イラスト
         type: image
       - name: about_02
-        label: ［About 02］国税21年元統括官・税務調査の写真・イラスト（推奨: 800×600px / 4:3）
+        label: ［About 02］国税21年元統括官・税務調査の写真・イラスト
         type: image
       - name: about_03
-        label: ［About 03］税理士歴35年実績の写真・イラスト（推奨: 800×600px / 4:3）
+        label: ［About 03］税理士歴35年実績の写真・イラスト
         type: image
       - name: about_04
-        label: ［About 04］ザワテラス社労士連携ネットワーク図（推奨: 800×600px / 4:3）
+        label: ［About 04］ザワテラス社労士連携ネットワーク図
         type: image
       - name: about_05
-        label: ［About 05］サロン風相談風景の写真・イラスト（推奨: 800×600px / 4:3）
+        label: ［About 05］サロン風相談風景の写真・イラスト
         type: image
-
-      # --- 【5. 提供サービス写真（トップ＆サービス詳細ページ連動）】 ---
       - name: service_01
-        label: ［Service 01］法人税務顧問・決算申告（推奨: 700×460px / 3:2）
+        label: ［Service 01］法人税務顧問・決算申告
         type: image
       - name: service_02
-        label: ［Service 02］税務調査対策・事前模擬調査（推奨: 700×460px / 3:2）
+        label: ［Service 02］税務調査対策・事前模擬調査
         type: image
       - name: service_03
-        label: ［Service 03］会社設立・創業支援（推奨: 700×460px / 3:2）
+        label: ［Service 03］会社設立・創業支援
         type: image
       - name: service_04
-        label: ［Service 04］創業融資支援・公庫対策（推奨: 700×460px / 3:2）
+        label: ［Service 04］創業融資支援・公庫対策
         type: image
       - name: service_05
-        label: ［Service 05］クラウド会計導入・自計化DX（推奨: 700×460px / 3:2）
+        label: ［Service 05］クラウド会計導入・自計化DX
         type: image
       - name: service_06
-        label: ［Service 06］相続税申告・事業承継（推奨: 700×460px / 3:2）
+        label: ［Service 06］相続税申告・事業承継
         type: image
       - name: service_07
-        label: ［Service 07］助成金受給・労務管理（社労士連携）（推奨: 700×460px / 3:2）
+        label: ［Service 07］助成金受給・労務管理（社労士連携）
         type: image
-
-      # --- 【6. バナー背景】 ---
       - name: cta_banner_bg
-        label: ［バナー］ページ下部 無料相談CTAバナー背景写真（推奨: 1920×600px 横長）
+        label: ［バナー］ページ下部 無料相談CTAバナー背景写真
         type: image
 
-  # ============================================================================
-  # 税務・経営コラム (content/blog/)
-  # ============================================================================
   - name: blog
     label: 📝 税務・経営コラム
     type: collection
@@ -125,9 +102,6 @@ content:
         type: rich-text
         required: true
 
-  # ============================================================================
-  # 事務所からのお知らせ (content/news/)
-  # ============================================================================
   - name: news
     label: 📢 事務所からのお知らせ
     type: collection
