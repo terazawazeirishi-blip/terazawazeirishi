@@ -449,13 +449,19 @@
   </section>
 
   <!-- 事務所概要 ＆ Googleマップ -->
+<!-- ======================================================================
+       事務所概要 ＆ Googleマップ (レスポンシブ完全最適化仕様)
+       ====================================================================== -->
   <section class="athena-about-section" id="company">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title" data-en="COMPANY">事務所概要・アクセス</h2>
+        <p class="section-lead">熊本県天草市を拠点に、県内全域およびオンラインにて全国対応しております。</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: start;">
+      <!-- PCでは横並び、スマホでは縦積みに自動で切り替わるグリッド -->
+      <div class="company-grid-layout">
+        <!-- 事務所情報テーブル -->
         <div>
           <table class="office-table">
             <tbody>
@@ -465,7 +471,7 @@
               </tr>
               <tr>
                 <th>体制</th>
-                <td>税理士2名体制（寺沢景子 税理士 ／ 税理士）</td>
+                <td>税理士2名体制（寺沢景子 税理士 ／ 【お名前仮入力】税理士）</td>
               </tr>
               <tr>
                 <th>登録番号</th>
@@ -500,12 +506,13 @@
           </table>
         </div>
 
-        <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--color-border); height: 100%; min-height: 380px;">
+        <!-- Googleマップ埋め込み（スマホで横幅いっぱいに見やすく表示） -->
+        <div class="map-container-frame">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3361.328310344585!2d130.1873117!3d32.4517374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35401944517c5251%3A0x6b3074d6c6e1db0!2z44CSODYzLTAwMjMg54aK5pys55yM5aSp6I2J5biC5Y2X55S677yV4oiS77yS77yS!5e0!3m2!1sja!2sjp!4v1714500000000!5m2!1sja!2sjp" 
             width="100%" 
             height="100%" 
-            style="border:0; min-height: 380px;" 
+            style="border:0;" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"
