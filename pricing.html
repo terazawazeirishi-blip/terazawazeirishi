@@ -13,6 +13,115 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
+
+  <style>
+    /* 料金ページ専用レスポンシブスタイル（PCは完全維持、スマホを極限最適化） */
+    .pricing-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .pricing-card.is-highlight {
+      border: 2px solid var(--color-accent);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* スポット料金表（PC標準：3列テーブル） */
+    .spot-table-wrap {
+      max-width: 900px;
+      margin: 0 auto 5rem;
+      width: 100%;
+    }
+    .spot-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .spot-table th {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      padding: 1.1rem 1.4rem;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .spot-table td {
+      padding: 1.1rem 1.4rem;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.95rem;
+      background: #FFFFFF;
+    }
+
+    /* スマホ表示 (768px以下) */
+    @media (max-width: 768px) {
+      .pricing-card {
+        padding: 2.2rem 1.3rem !important; /* スマホ余白の適正化 */
+      }
+      .pricing-card h3 {
+        font-size: 1.35rem !important;
+      }
+      .pricing-card .price-amount {
+        font-size: 1.95rem !important; /* 改行崩れ防止 */
+      }
+      #plansContainer {
+        gap: 1.5rem !important;
+        margin-bottom: 4rem !important;
+      }
+
+      /* スポット料金表：スマホでは崩れた表を廃止し、見やすい明細カードへ自動変形 */
+      .spot-table,
+      .spot-table thead,
+      .spot-table tbody,
+      .spot-table th,
+      .spot-table td,
+      .spot-table tr {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .spot-table thead {
+        display: none !important; /* 見出し行を隠し、各カード内で表示 */
+      }
+      .spot-table tr {
+        background: #FFFFFF !important;
+        border: 1px solid var(--color-border) !important;
+        border-radius: var(--radius-md) !important;
+        margin-bottom: 1rem !important;
+        padding: 1.2rem 1.3rem !important;
+        box-shadow: var(--shadow-sm) !important;
+      }
+      .spot-table td {
+        padding: 0 !important;
+        border: none !important;
+      }
+      .spot-table td.col-service {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        color: var(--color-primary) !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .spot-table td.col-fee {
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        color: var(--color-accent) !important;
+        margin-bottom: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+        border-bottom: 1px dashed var(--color-border) !important;
+      }
+      .spot-table td.col-note {
+        font-size: 0.85rem !important;
+        color: var(--color-text-sub) !important;
+        line-height: 1.6 !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -31,6 +140,7 @@
         </div>
       </a>
 
+      <!-- スマホ用3本線メニューボタン -->
       <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開閉する" aria-expanded="false">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -64,7 +174,7 @@
     </div>
   </section>
 
-  <!-- メインコンテンツ（JSONから自動生成） -->
+  <!-- メインコンテンツ -->
   <main class="container" style="padding-top: 5rem; padding-bottom: 7rem;" id="plans">
     
     <!-- 顧問プラン一覧 -->
@@ -73,6 +183,7 @@
       <p class="section-lead">自社の成長フェーズに合わせて最適なプランをお選びいただけます。</p>
     </div>
 
+    <!-- 顧問プランカード一覧（JSONから自動描画） -->
     <div id="plansContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 6rem;">
       <p style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted);">プランデータを読み込み中...</p>
     </div>
@@ -83,13 +194,13 @@
       <p class="section-lead">顧問契約のないお客様でも、個別業務を承っております。</p>
     </div>
 
-    <div style="overflow-x: auto;">
-      <table class="office-table" style="max-width: 900px; margin: 0 auto 5rem; width: 100%;">
+    <div class="spot-table-wrap">
+      <table class="spot-table">
         <thead>
-          <tr style="background: var(--color-primary); color: #FFFFFF;">
-            <th style="width: 42%; text-align: left; padding: 1.1rem 1.4rem; color: #FFFFFF; background: none;">業務区分</th>
-            <th style="width: 32%; text-align: left; padding: 1.1rem 1.4rem; color: #FFFFFF; background: none;">標準報酬（税込）</th>
-            <th style="text-align: left; padding: 1.1rem 1.4rem; color: #FFFFFF; background: none;">備考</th>
+          <tr>
+            <th style="width: 42%;">業務区分</th>
+            <th style="width: 32%;">標準報酬（税込）</th>
+            <th>備考</th>
           </tr>
         </thead>
         <tbody id="spotTableBody">
@@ -103,7 +214,7 @@
   <!-- 完全統一フッター（サイトマップ完備） -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
+      <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
             寺沢景子税理士事務所
@@ -120,7 +231,7 @@
 
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <ul class="footer-nav-list">
             <li><a href="./services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
             <li><a href="./services.html#audit" class="footer-nav-link">・ 税務調査対策</a></li>
             <li><a href="./services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
@@ -131,10 +242,10 @@
 
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">事務所案内</h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <ul class="footer-nav-list">
             <li><a href="./index.html" class="footer-nav-link">・ ホーム</a></li>
             <li><a href="./profile.html" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
-            <li><a href="./pricing.html" class="footer-nav-link">・ 料金案内</a></li>
+            <li><a href="./pricing.html" class="footer-nav-link is-active">・ 料金案内</a></li>
             <li><a href="./faq.html" class="footer-nav-link">・ よくある質問</a></li>
             <li><a href="./blog/index.html" class="footer-nav-link">・ 税務・経営コラム</a></li>
             <li><a href="./contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 無料相談・お問い合わせ</a></li>
@@ -143,7 +254,7 @@
 
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サイトマップ・規約</h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <ul class="footer-nav-list">
             <li><a href="./sitemap.html" class="footer-nav-link">・ サイトマップ（全体一覧）</a></li>
             <li><a href="./privacy.html" class="footer-nav-link">・ 個人情報保護方針</a></li>
             <li><a href="./sitemap.xml" target="_blank" class="footer-nav-link" style="color: rgba(255,255,255,0.5);">・ XMLサイトマップ</a></li>
@@ -161,7 +272,7 @@
     <a href="./contact.html" class="floating-cta-btn"><span>無料相談はこちら</span></a>
   </aside>
 
-  <!-- 料金データ自動レンダリングスクリプト -->
+  <!-- 料金データ自動レンダリングスクリプト（スマホ完全最適化） -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const plansContainer = document.getElementById('plansContainer');
@@ -178,18 +289,8 @@
             data.plans.forEach(plan => {
               const isHighlight = !!plan.badge;
               const card = document.createElement('div');
-              card.style.cssText = `
-                background: var(--color-bg-card);
-                border-radius: var(--radius-lg);
-                padding: 3rem 2rem;
-                border: ${isHighlight ? '2px solid var(--color-accent)' : '1px solid var(--color-border)'};
-                box-shadow: ${isHighlight ? 'var(--shadow-gold)' : 'var(--shadow-sm)'};
-                display: flex;
-                flex-direction: column;
-                position: relative;
-              `;
+              card.className = `pricing-card ${isHighlight ? 'is-highlight' : ''}`;
 
-              // 特徴の改行をリスト化
               const featureLines = plan.features ? plan.features.split('\n').filter(l => l.trim()) : [];
               const featuresHtml = featureLines.map(f => `
                 <li style="display: flex; gap: 8px; font-size: 0.9rem; align-items: start;">
@@ -212,7 +313,7 @@
                 
                 <div style="margin-bottom: 2rem; padding: 1.2rem 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
                   <div style="font-size: 0.82rem; color: var(--color-text-muted);">月額顧問料（税込）</div>
-                  <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--color-primary);">
+                  <div class="price-amount" style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--color-primary); line-height: 1.2; margin: 4px 0;">
                     ¥${escapeHtml(plan.monthly_fee)}<span style="font-size: 1rem; font-weight: 400;"> / 月〜</span>
                   </div>
                   <div style="font-size: 0.85rem; color: var(--color-text-sub); margin-top: 4px;">決算申告料: ¥${escapeHtml(plan.settlement_fee)}〜</div>
@@ -230,15 +331,15 @@
             });
           }
 
-          // 2. スポット料金表の自動生成
+          // 2. スポット料金表の自動生成（スマホ最適化クラス付与）
           if (data.spot_fees && data.spot_fees.length > 0) {
             spotTableBody.innerHTML = '';
             data.spot_fees.forEach(spot => {
               const row = document.createElement('tr');
               row.innerHTML = `
-                <td style="padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--color-border); font-size: 0.95rem;"><strong>${escapeHtml(spot.service_name)}</strong></td>
-                <td style="padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--color-border); font-size: 0.95rem; font-weight: 600; color: var(--color-primary);">${escapeHtml(spot.fee)}</td>
-                <td style="padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--color-border); font-size: 0.88rem; color: var(--color-text-sub);">${escapeHtml(spot.note || '')}</td>
+                <td class="col-service"><strong>${escapeHtml(spot.service_name)}</strong></td>
+                <td class="col-fee">${escapeHtml(spot.fee)}</td>
+                <td class="col-note">${escapeHtml(spot.note || '')}</td>
               `;
               spotTableBody.appendChild(row);
             });
