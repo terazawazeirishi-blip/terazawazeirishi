@@ -1,6 +1,7 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（blog単一収束版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全コンテンツ管理対応完全版）
 # ファイルパス: .pages.yml
+# 仕様: API-Key-Free / HTML直接編集ゼロ / Zero-Fail
 # ==============================================================================
 
 media:
@@ -72,7 +73,107 @@ content:
         type: "image"
 
   # ============================================================================
-  # 2. 税務・経営コラム（★保存先を blog/ に完全一本化）
+  # 2. ★【新設】よくある質問（FAQ）の追加・編集・削除
+  # ============================================================================
+  - name: "faq_manager"
+    label: "❓ よくある質問（FAQ）の管理"
+    type: "file"
+    path: "content/faq.json"
+    fields:
+      - name: "faq_list"
+        label: "Q&Aリスト（＋で追加、ゴミ箱で削除、並び替え可能）"
+        type: "list"
+        fields:
+          - name: "question"
+            label: "質問（Q）"
+            type: "string"
+            required: true
+          - name: "answer"
+            label: "回答（A）"
+            type: "text"
+            required: true
+
+  # ============================================================================
+  # 3. ★【新設】料金案内・プランの編集
+  # ============================================================================
+  - name: "pricing_manager"
+    label: "💰 料金案内・プランの管理"
+    type: "file"
+    path: "content/pricing.json"
+    fields:
+      - name: "plans"
+        label: "法人税務顧問プラン一覧"
+        type: "list"
+        fields:
+          - name: "name"
+            label: "プラン名"
+            type: "string"
+            required: true
+          - name: "badge"
+            label: "おすすめバッジ（例: 一番選ばれています / 空欄可）"
+            type: "string"
+          - name: "target"
+            label: "対象（例: 年商5,000万円〜2億円未満の法人様）"
+            type: "string"
+          - name: "monthly_fee"
+            label: "月額顧問料（例: 38,500）"
+            type: "string"
+            required: true
+          - name: "settlement_fee"
+            label: "決算料（例: 198,000）"
+            type: "string"
+            required: true
+          - name: "features"
+            label: "サポート内容（改行で箇条書き）"
+            type: "text"
+            required: true
+      - name: "spot_fees"
+        label: "スポット業務料金表"
+        type: "list"
+        fields:
+          - name: "service_name"
+            label: "業務名"
+            type: "string"
+            required: true
+          - name: "fee"
+            label: "標準報酬（税込）"
+            type: "string"
+            required: true
+          - name: "note"
+            label: "備考"
+            type: "string"
+
+  # ============================================================================
+  # 4. ★【新設】提供サービス詳細の編集
+  # ============================================================================
+  - name: "services_manager"
+    label: "🛠️ 提供サービスの管理"
+    type: "file"
+    path: "content/services.json"
+    fields:
+      - name: "service_items"
+        label: "サービス一覧"
+        type: "list"
+        fields:
+          - name: "service_no"
+            label: "番号（例: SERVICE 01）"
+            type: "string"
+            required: true
+          - name: "title"
+            label: "サービス名"
+            type: "string"
+            required: true
+          - name: "lead"
+            label: "サービス説明文"
+            type: "text"
+            required: true
+          - name: "points"
+            label: "特徴・チェックポイント（改行で箇条書き）"
+            type: "text"
+            required: true
+
+  # ============================================================================
+  # 5. 税務・経営コラム（blog/ 直結）
   # ============================================================================
   - name: "blog"
     label: "📝 税務・経営コラム"
@@ -110,7 +211,7 @@ content:
         required: true
 
   # ============================================================================
-  # 3. 事務所からのお知らせ
+  # 6. 事務所からのお知らせ
   # ============================================================================
   - name: "news"
     label: "📢 事務所からのお知らせ"
