@@ -1,9 +1,3 @@
-# ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（完全統合版）
-# ファイルパス: .pages.yml
-# 項目: ① サイト全画像の変更 / ② 税務・経営コラム / ③ 事務所からのお知らせ
-# ==============================================================================
-
 media:
   input: assets/images/uploads
   output: assets/images/uploads
@@ -73,21 +67,12 @@ content:
         type: image
 
   # ============================================================================
-  # 2. 税務・経営コラム（★完全復活）
+  # 2. 税務・経営コラム（公式標準・安全版）
   # ============================================================================
   - name: blog
     label: 📝 税務・経営コラム
     type: collection
     path: content/blog
-    format: yaml-frontmatter
-    filename: "{year}-{month}-{day}-{primary}.md"
-    view:
-      primary: title
-      fields: [title, date, category]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
     fields:
       - name: title
         label: 記事タイトル
@@ -100,7 +85,6 @@ content:
       - name: category
         label: カテゴリー
         type: select
-        required: false
         options:
           values:
             - 税務調査対策
@@ -109,31 +93,24 @@ content:
             - クラウド会計・DX
             - 相続税・事業承継
             - 社労士連携・助成金
-      - name: description
-        label: 記事要約（一覧に表示される説明文）
-        type: string
-        required: false
       - name: thumbnail
         label: サムネイル画像
         type: image
-        required: false
+      - name: description
+        label: 記事要約（一覧に表示される説明文）
+        type: string
       - name: body
         label: 本文
         type: rich-text
         required: true
 
   # ============================================================================
-  # 3. 事務所からのお知らせ（★完全復活）
+  # 3. 事務所からのお知らせ
   # ============================================================================
   - name: news
     label: 📢 事務所からのお知らせ
     type: collection
     path: content/news
-    format: yaml-frontmatter
-    filename: "{year}-{month}-{day}-{primary}.md"
-    view:
-      primary: title
-      fields: [title, date]
     fields:
       - name: title
         label: お知らせタイトル
