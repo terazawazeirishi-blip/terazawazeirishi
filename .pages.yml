@@ -1,7 +1,6 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全コンテンツ管理対応完全版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（リスト構文完全修復版）
 # ファイルパス: .pages.yml
-# 仕様: API-Key-Free / HTML直接編集ゼロ / Zero-Fail
 # ==============================================================================
 
 media:
@@ -73,7 +72,7 @@ content:
         type: "image"
 
   # ============================================================================
-  # 2. ★【新設】よくある質問（FAQ）の追加・編集・削除
+  # 2. ★【完全修復】よくある質問（FAQ）の管理（type: object + list: true）
   # ============================================================================
   - name: "faq_manager"
     label: "❓ よくある質問（FAQ）の管理"
@@ -81,8 +80,11 @@ content:
     path: "content/faq.json"
     fields:
       - name: "faq_list"
-        label: "Q&Aリスト（＋で追加、ゴミ箱で削除、並び替え可能）"
-        type: "list"
+        label: "よくある質問一覧"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "Q. {question}"
         fields:
           - name: "question"
             label: "質問（Q）"
@@ -94,7 +96,7 @@ content:
             required: true
 
   # ============================================================================
-  # 3. ★【新設】料金案内・プランの編集
+  # 3. ★【完全修復】料金案内・プランの管理（type: object + list: true）
   # ============================================================================
   - name: "pricing_manager"
     label: "💰 料金案内・プランの管理"
@@ -103,14 +105,17 @@ content:
     fields:
       - name: "plans"
         label: "法人税務顧問プラン一覧"
-        type: "list"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "{name}"
         fields:
           - name: "name"
             label: "プラン名"
             type: "string"
             required: true
           - name: "badge"
-            label: "おすすめバッジ（例: 一番選ばれています / 空欄可）"
+            label: "おすすめバッジ（例: 一番選ばれています / 不要なら空欄）"
             type: "string"
           - name: "target"
             label: "対象（例: 年商5,000万円〜2億円未満の法人様）"
@@ -120,7 +125,7 @@ content:
             type: "string"
             required: true
           - name: "settlement_fee"
-            label: "決算料（例: 198,000）"
+            label: "決算申告料（例: 198,000）"
             type: "string"
             required: true
           - name: "features"
@@ -129,7 +134,10 @@ content:
             required: true
       - name: "spot_fees"
         label: "スポット業務料金表"
-        type: "list"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "{service_name}"
         fields:
           - name: "service_name"
             label: "業務名"
@@ -144,7 +152,7 @@ content:
             type: "string"
 
   # ============================================================================
-  # 4. ★【新設】提供サービス詳細の編集
+  # 4. ★【完全修復】提供サービスの管理（type: object + list: true）
   # ============================================================================
   - name: "services_manager"
     label: "🛠️ 提供サービスの管理"
@@ -153,7 +161,10 @@ content:
     fields:
       - name: "service_items"
         label: "サービス一覧"
-        type: "list"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "{service_no} {title}"
         fields:
           - name: "service_no"
             label: "番号（例: SERVICE 01）"
