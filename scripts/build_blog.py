@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト（サムネイル画像完全対応版）
+寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト（インデント完全修正版）
 ファイルパス: scripts/build_blog.py
 """
 
@@ -25,10 +25,8 @@ def format_image_path(raw_path):
     p = raw_path.strip().strip('"').strip("'")
     if not p:
         return ""
-    # 外部URLや既に相対指定されている場合はそのまま返す
     if p.startswith("http://") or p.startswith("https://") or p.startswith("../"):
         return p
-    # 先頭の / や ./ を除去して ../ を付与
     p = re.sub(r"^(\./|/)", "", p)
     return f"../{p}"
 
@@ -46,17 +44,16 @@ def parse_markdown(filepath):
                 key, val = line.split(":", 1)
                 metadata[key.strip()] = val.strip().strip('"').strip("'")
                 
-    # 本文内のMarkdown画像記法 ![alt](path) もHTMLの<img>に変換
     def replace_md_img(m):
         alt_text = html.escape(m.group(1))
         img_url = format_image_path(m.group(2))
         return f'<img src="{img_url}" alt="{alt_text}" style="max-width:100%; height:auto; border-radius:8px; margin: 1.2rem 0;">'
 
-     paragraphs = [p.strip() for p in body.strip().split("\n\n") if p.strip()]
+    # ★ 55行目のインデント（字下げ）を完全修復
+    paragraphs = [p.strip() for p in body.strip().split("\n\n") if p.strip()]
     html_paragraphs = []
     for p in paragraphs:
         escaped_p = html.escape(p)
-        # Markdown画像リンクの復元と変換
         escaped_p = re.sub(r"!\[(.*?)\]\((.*?)\)", replace_md_img, escaped_p)
         escaped_p = escaped_p.replace("\n", "<br>")
         html_paragraphs.append(f"<p>{escaped_p}</p>")
@@ -74,7 +71,7 @@ def parse_markdown(filepath):
     }
 
 def build():
-    print("=== コラム自動変換処理（サムネイル対応版）開始 ===")
+    print("=== コラム自動変換処理（インデント修復版）開始 ===")
     
     md_files = []
     for d in POSSIBLE_DIRS:
@@ -173,7 +170,6 @@ def build():
   <script src="../assets/js/main.js" defer></script>
 """
 
-    # 1. 個別記事ページの生成（サムネイル画像があればタイトル下に大きく表示）
     for art in articles:
         detail_thumb_html = ""
         if art["thumbnail"]:
@@ -218,7 +214,6 @@ def build():
 """
         (BLOG_OUTPUT_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
 
-    # 2. 一覧ページ blog/index.html の生成（サムネイル画像があればカード上部に表示）
     cards_html = ""
     for art in articles:
         if art["thumbnail"]:
@@ -282,7 +277,7 @@ def build():
 </html>
 """
     (BLOG_OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ サムネイル対応のコラム生成が完了しました！")
+    print("  ✅ コラム生成・インデント修復ビルドが完了しました！")
 
 if __name__ == "__main__":
     build()
