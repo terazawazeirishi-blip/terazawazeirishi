@@ -78,6 +78,7 @@ content:
     label: 📝 税務・経営コラム
     type: collection
     path: content/blog
+     filename: '{year}-{month}-{day}-{hour}{minute}.md'  # ★この1行を追加（自動で日付時刻のファイル名にして保存）
     format: frontmatter
     view:
       fields: [title, date, category]
