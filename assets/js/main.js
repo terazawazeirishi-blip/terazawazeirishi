@@ -1,8 +1,9 @@
 /**
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト
+ * ==============================================================================
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全画像自動連動版）
  * ファイルパス: assets/js/main.js
- * 機能: ヘッダー制御 / メニュー開閉 / スムーススクロール / 【NEW】CMS画像自動反映
- * 仕様: API-Key-Free / Pure Vanilla JS / Zero Dependency
+ * 仕様: API-Key-Free / Pure Vanilla JS / Zero Dependency / 全17画像完全自動反映
+ * ==============================================================================
  */
 
 (function () {
@@ -15,11 +16,11 @@
     initMobileNav();
     initFaqAccordion();
     initSmoothScroll();
-    applyCmsImages(); // ★ CMSで設定された画像を自動反映
+    applyAllCmsImages(); // ★ サイト内の全画像を自動反映
   }
 
   /**
-   * 1. スクロール検知によるヘッダーのシャドウ付与
+   * 1. ヘッダースクロール影制御
    */
   function initHeaderScroll() {
     const header = document.getElementById('siteHeader');
@@ -38,7 +39,7 @@
   }
 
   /**
-   * 2. スマホ用ハンバーガーメニューの開閉制御
+   * 2. スマホメニュー開閉
    */
   function initMobileNav() {
     const btn = document.getElementById('hamburgerBtn');
@@ -64,7 +65,7 @@
   }
 
   /**
-   * 3. FAQアコーディオン開閉制御
+   * 3. FAQアコーディオン開閉
    */
   function initFaqAccordion() {
     const accordions = document.querySelectorAll('.faq-accordion-item');
@@ -110,13 +111,11 @@
   }
 
   /**
-   * 5. 【NEW】Pages CMSの画像設定（content/site_images.json）を自動反映
+   * 5. 【完全版】Pages CMSで設定された全17箇所の一括自動反映
    */
-  function applyCmsImages() {
-    // サブディレクトリや下層ページからの相対パスを調整
-    const jsonPath = window.location.pathname.includes('/blog/') 
-      ? '../content/site_images.json' 
-      : './content/site_images.json';
+  function applyAllCmsImages() {
+    const isBlogSubdir = window.location.pathname.includes('/blog/');
+    const jsonPath = isBlogSubdir ? '../content/site_images.json' : './content/site_images.json';
 
     fetch(jsonPath)
       .then((res) => {
@@ -126,53 +125,110 @@
       .then((data) => {
         if (!data) return;
 
-        // パス補正（CMSが assets/... で保存したパスを相対パス化）
-        const formatPath = (p) => {
+        // 相対パス補正関数
+        const toUrl = (p) => {
           if (!p) return '';
           if (p.startsWith('http') || p.startsWith('./') || p.startsWith('../')) return p;
-          return window.location.pathname.includes('/blog/') ? '../' + p : './' + p;
+          return isBlogSubdir ? '../' + p : './' + p;
         };
 
-        // ① ヒーロー背景イラスト
+        // --- 1. ロゴ ---
+        if (data.logo_img) {
+          const logos = document.querySelectorAll('.brand-logo-img');
+          logos.forEach((logo) => {
+            logo.outerHTML = `<img src="${toUrl(data.logo_img)}" alt="寺沢景子税理士事務所 ロゴ" class="brand-logo-img" style="width:44px; height:44px; object-fit:contain;">`;
+          });
+        }
+
+        // --- 2. ヒーロー透かし (IMG-02) ---
+        if (data.watermark_crest) {
+          const hero = document.getElementById('hero');
+          if (hero) {
+            hero.style.backgroundImage = `url('${toUrl(data.watermark_crest)}'), linear-gradient(135deg, #FFFFFF 0%, var(--color-bg-subtle) 60%, var(--color-floral-bg) 100%)`;
+            hero.style.backgroundRepeat = 'no-repeat';
+            hero.style.backgroundPosition = 'center center';
+            hero.style.backgroundSize = '700px auto, cover';
+          }
+        }
+
+        // --- 3. ヒーローメイン背景イラスト (IMG-01) ---
         if (data.hero_illustration) {
           const heroSlot = document.querySelector('.hero-bg-artwork-slot');
           if (heroSlot) {
-            heroSlot.innerHTML = `<img src="${formatPath(data.hero_illustration)}" alt="寺沢景子税理士事務所 メインイラスト" class="hero-bg-artwork-img" loading="eager">`;
+            heroSlot.innerHTML = `<img src="${toUrl(data.hero_illustration)}" alt="寺沢景子税理士事務所 象徴アート" class="hero-bg-artwork-img" loading="eager">`;
           }
         }
 
-        // ② 寺沢景子 代表写真（トップおよびプロフィールページ）
+        // --- 4. 寺沢景子 代表写真 (トップ＆プロフィール) ---
         if (data.rep_keiko) {
-          const repKeikoFrames = document.querySelectorAll('.representative-photo-frame:first-of-type, [data-rep="keiko"]');
-          repKeikoFrames.forEach((frame) => {
-            const existingImg = frame.querySelector('.representative-photo-img');
-            if (existingImg) {
-              frame.innerHTML = `<img src="${formatPath(data.rep_keiko)}" alt="寺沢景子 代表税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover;"><span class="representative-overlay-text">Keiko Terazawa</span>`;
-            }
+          const keikoSlots = document.querySelectorAll('.representative-photo-frame:first-of-type, [data-rep="keiko"]');
+          keikoSlots.forEach((slot) => {
+            slot.innerHTML = `<img src="${toUrl(data.rep_keiko)}" alt="寺沢景子 代表税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover;"><span class="representative-overlay-text">Keiko Terazawa</span>`;
           });
         }
 
-        // ③ ベテラン税理士 写真
+        // --- 5. ベテラン税理士 写真 (トップ＆プロフィール) ---
         if (data.rep_senior) {
-          const repSeniorFrames = document.querySelectorAll('[data-rep="senior"]');
-          repSeniorFrames.forEach((frame) => {
-            frame.innerHTML = `<img src="${formatPath(data.rep_senior)}" alt="ベテラン税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover;"><span class="representative-overlay-text">Senior Tax Advisor</span>`;
+          const seniorSlots = document.querySelectorAll('[data-rep="senior"], .message-grid > div:last-child .representative-photo-frame');
+          seniorSlots.forEach((slot) => {
+            slot.innerHTML = `<img src="${toUrl(data.rep_senior)}" alt="ベテラン税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover;"><span class="representative-overlay-text">Senior Tax Advisor</span>`;
           });
         }
 
-        // ④〜⑧ About us 01〜05 ジグザグ写真
+        // --- 6. About us 01〜05 ジグザグ写真 ---
         const aboutKeys = ['about_01', 'about_02', 'about_03', 'about_04', 'about_05'];
         const zigzagSlots = document.querySelectorAll('.athena-zigzag-item .zigzag-visual-slot');
-        zigzagSlots.forEach((slot, index) => {
-          const key = aboutKeys[index];
-          if (data[key]) {
-            slot.innerHTML = `<img src="${formatPath(data[key])}" alt="About ${index + 1}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover;">`;
+        zigzagSlots.forEach((slot, idx) => {
+          const k = aboutKeys[idx];
+          if (data[k]) {
+            slot.innerHTML = `<img src="${toUrl(data[k])}" alt="About理由 ${idx + 1}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover;">`;
           }
         });
+
+        // --- 7. サービス写真 01〜07（トップページ＆services.html両方連動） ---
+        const serviceKeys = [
+          'service_01', 'service_02', 'service_03', 'service_04',
+          'service_05', 'service_06', 'service_07'
+        ];
+
+        // トップページのサービスカード
+        const topServiceSlots = document.querySelectorAll('.service-card-item .service-card-img-slot');
+        topServiceSlots.forEach((slot, idx) => {
+          const k = serviceKeys[idx];
+          if (data[k]) {
+            slot.innerHTML = `<img src="${toUrl(data[k])}" alt="サービス写真 ${idx + 1}" class="service-card-img" style="width:100%; height:100%; object-fit:cover;">`;
+          }
+        });
+
+        // services.html の各個別サービス詳細枠
+        const serviceDetailIds = ['#corporate', '#audit', '#startup', '#finance', '#cloud', '#inheritance', '#labor'];
+        serviceDetailIds.forEach((id, idx) => {
+          const k = serviceKeys[idx];
+          if (data[k]) {
+            const article = document.querySelector(id);
+            if (article) {
+              const imgSlot = article.querySelector('.zigzag-visual-slot');
+              if (imgSlot) {
+                imgSlot.innerHTML = `<img src="${toUrl(data[k])}" alt="サービス詳細 ${idx + 1}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover;">`;
+              }
+            }
+          }
+        });
+
+        // --- 8. CTAバナー背景写真 ---
+        if (data.cta_banner_bg) {
+          const ctaBanners = document.querySelectorAll('section[style*="linear-gradient"]');
+          ctaBanners.forEach((banner) => {
+            // 背景に薄い画像を重ねる
+            banner.style.backgroundImage = `linear-gradient(rgba(15, 24, 41, 0.88), rgba(27, 42, 74, 0.92)), url('${toUrl(data.cta_banner_bg)}')`;
+            banner.style.backgroundSize = 'cover';
+            banner.style.backgroundPosition = 'center';
+          });
+        }
       })
       .catch((err) => {
-        // JSONが未作成または読み込み失敗時は、HTML初期埋め込みのSVGがそのまま表示されます
-        console.log('CMS images: using defaults.');
+        // 未設定時はフォールバック（初期SVG）が自動維持されます
+        console.log('CMS All-Image Sync: running default assets.');
       });
   }
 })();
