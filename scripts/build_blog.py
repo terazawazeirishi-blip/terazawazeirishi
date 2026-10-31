@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト（blog/ 完全集約版）
+寺沢景子税理士事務所 コラム自動生成ビルドスクリプト（完全恒久版）
 ファイルパス: scripts/build_blog.py
-仕様: blog/ フォルダ内のMarkdownを直接検知し、blog/index.html へ即時陳列
+仕様: リポジトリ内の全フォルダからMarkdown記事を100%検知し、blog/index.html を生成
 """
 
 import os
@@ -12,10 +12,10 @@ import html
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-BLOG_DIR = ROOT_DIR / "blog"
+BLOG_OUTPUT_DIR = ROOT_DIR / "blog"
 
 def format_image_path(raw_path):
-    """画像パスを blog/ からの正しい相対パスに変換"""
+    """画像パスを blog/ 階層からの正しい相対パスに変換"""
     if not raw_path:
         return ""
     p = raw_path.strip().strip('"').strip("'")
@@ -27,6 +27,7 @@ def format_image_path(raw_path):
     return f"../{p}"
 
 def parse_markdown(filepath):
+    """Markdownから記事情報を抽出"""
     content = filepath.read_text(encoding="utf-8")
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     metadata = {}
@@ -54,6 +55,11 @@ def parse_markdown(filepath):
         
     html_body = "".join(html_paragraphs)
     
+    # ファイル名から拡張子を除いた安全なスラッグ
+    safe_slug = re.sub(r"[^\w\-]", "-", filepath.stem).strip("-")
+    if not safe_slug:
+        safe_slug = "article"
+    
     return {
         "title": metadata.get("title", filepath.stem),
         "date": metadata.get("date", "2026-10-31"),
@@ -61,27 +67,41 @@ def parse_markdown(filepath):
         "description": metadata.get("description", ""),
         "thumbnail": format_image_path(metadata.get("thumbnail", "")),
         "body_html": html_body,
-        "filename": filepath.stem + ".html"
+        "filename": safe_slug + ".html"
     }
 
 def build():
-    print("=== blog/ 単一集約コラム自動生成開始 ===")
-    
-    if not BLOG_DIR.exists():
-        print("blog ディレクトリが見つかりません。")
-        return
+    print("=== 全階層コラム自動検知・生成処理開始 ===")
+    BLOG_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # blog/ フォルダ内の .md ファイルを直接取得
-    md_files = list(BLOG_DIR.glob("*.md"))
-    print(f"blog/ 内で検知した記事: {len(md_files)} 件")
-            
+    # リポジトリ内のすべての場所から .md ファイルを網羅探索（見落としゼロ）
+    md_files = []
+    for path in ROOT_DIR.rglob("*.md"):
+        # 設定ファイルやREADME、テンプレートは除外
+        if ".github" in path.parts or path.name.lower() in ["readme.md", "license.md"]:
+            continue
+        # blog, content, contest のいずれかに属する記事を確実に収集
+        parts_str = "/".join(path.parts).lower()
+        if "blog" in parts_str or "content" in parts_str or "contest" in parts_str:
+            md_files.append(path)
+
+    print(f"検知した記事数: {len(md_files)} 件")
+    for f in md_files:
+        print(f"  - 記事検知: {f.relative_to(ROOT_DIR)}")
+
     if not md_files:
-        print("Markdown記事（.md）が見つかりません。")
+        print("警告: 記事ファイル（.md）が1件も見つかりませんでした。")
         return
 
     articles = [parse_markdown(f) for f in md_files]
+    # 重複タイトルを除去し、日付の新しい順にソート
+    unique_articles = {}
+    for a in articles:
+        unique_articles[a["title"]] = a
+    articles = list(unique_articles.values())
     articles.sort(key=lambda x: str(x["date"]), reverse=True)
 
+    # 共通ヘッダー
     header_html = """
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
@@ -111,6 +131,7 @@ def build():
   </header>
 """
 
+    # 共通フッター
     footer_html = """
   <footer class="site-footer">
     <div class="container">
@@ -166,6 +187,7 @@ def build():
   <script src="../assets/js/main.js" defer></script>
 """
 
+    # 1. 各記事の詳細HTML生成
     for art in articles:
         detail_thumb_html = ""
         if art["thumbnail"]:
@@ -208,8 +230,10 @@ def build():
 </body>
 </html>
 """
-        (BLOG_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
+        (BLOG_OUTPUT_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
+        print(f"  ✅ 記事生成: blog/{art['filename']}")
 
+    # 2. 一覧ページ blog/index.html 生成
     cards_html = ""
     for art in articles:
         if art["thumbnail"]:
@@ -272,8 +296,8 @@ def build():
 </body>
 </html>
 """
-    (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ blog/index.html への直接出力が完了しました！")
+    (BLOG_OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
+    print("  ✅ blog/index.html を完全に最新化しました！")
 
 if __name__ == "__main__":
     build()
