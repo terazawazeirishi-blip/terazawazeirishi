@@ -1,7 +1,20 @@
 {
+  "logo_img": "",
+  "watermark_crest": "",
+  "hero_illustration": "",
+  "rep_keiko": "",
+  "rep_senior": "",
   "about_01": "assets/images/uploads/dobule.png",
   "about_02": "assets/images/uploads/21.png",
   "about_03": "assets/images/uploads/bete.png",
   "about_04": "assets/images/uploads/zawa.png",
-  "about_05": "assets/images/uploads/soudan.png"
+  "about_05": "assets/images/uploads/soudan.png",
+  "service_01": "",
+  "service_02": "",
+  "service_03": "",
+  "service_04": "",
+  "service_05": "",
+  "service_06": "",
+  "service_07": "",
+  "cta_banner_bg": ""
 }
