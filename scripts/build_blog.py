@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動生成ビルドスクリプト（デザイン完全統一版）
+寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト
 ファイルパス: scripts/build_blog.py
-仕様: Google Fonts / ロゴエンブレム / 完全フッターサイトマップ 100%統一
+仕様: content/blog または contest/blog の記事を検知し、blog/index.html へ自動陳列
 """
 
 import os
@@ -12,11 +12,16 @@ import html
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-BLOG_CONTENT_DIR = ROOT_DIR / "content" / "blog"
 BLOG_OUTPUT_DIR = ROOT_DIR / "blog"
 
+# content/blog と contest/blog の両方を探す（どちらにあっても確実に拾う）
+POSSIBLE_DIRS = [
+    ROOT_DIR / "content" / "blog",
+    ROOT_DIR / "contest" / "blog"
+]
+
 def parse_markdown(filepath):
-    """MarkdownファイルのFrontmatterと本文を解析"""
+    """Markdownから記事情報を抽出"""
     content = filepath.read_text(encoding="utf-8")
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     metadata = {}
@@ -41,19 +46,25 @@ def parse_markdown(filepath):
         "filename": filepath.stem + ".html"
     }
 
-def build_blog():
-    print("=== コラム自動生成ビルド開始（デザイン完全統一版） ===")
+def build():
+    print("=== コラム自動運搬・陳列処理開始 ===")
     
-    if not BLOG_CONTENT_DIR.exists():
-        print(f"ディレクトリが見つかりません: {BLOG_CONTENT_DIR}")
+    md_files = []
+    for d in POSSIBLE_DIRS:
+        if d.exists():
+            found = list(d.glob("*.md"))
+            print(f"フォルダ検知 [{d.name}]: {len(found)} 件の記事を発見")
+            md_files.extend(found)
+            
+    if not md_files:
+        print("記事ファイル（.md）が見つかりませんでした。")
         return
 
-    md_files = list(BLOG_CONTENT_DIR.glob("*.md"))
     articles = [parse_markdown(f) for f in md_files]
     articles.sort(key=lambda x: str(x["date"]), reverse=True)
-    
-    # 共通ヘッダー（ロゴ・英語・完全ナビゲーション）
-    common_header = """
+
+    # 共通ヘッダー
+    header_html = """
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="../index.html" class="brand-logo" aria-label="寺沢景子税理士事務所 ホーム">
@@ -67,11 +78,6 @@ def build_blog():
           <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
         </div>
       </a>
-
-      <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開閉する" aria-expanded="false">
-        <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
-      </button>
-
       <nav class="header-nav" id="headerNav">
         <ul class="nav-list">
           <li><a href="../index.html" class="nav-link">ホーム</a></li>
@@ -87,8 +93,8 @@ def build_blog():
   </header>
 """
 
-    # 共通フッターサイトマップ
-    common_footer = """
+    # 共通フッター
+    footer_html = """
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
@@ -104,24 +110,17 @@ def build_blog():
             TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
             南九州税理士会熊本県連 所属（第154978号）
           </address>
-          <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
-            <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65);">
-              提携士業：<a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">ザワテラス社労士</a>
-            </p>
-          </div>
         </div>
-
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
           <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
             <li><a href="../services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
-            <li><a href="../services.html#audit" class="footer-nav-link">・ 税務調査対策・事前模擬調査</a></li>
+            <li><a href="../services.html#audit" class="footer-nav-link">・ 税務調査対策</a></li>
             <li><a href="../services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
             <li><a href="../services.html#cloud" class="footer-nav-link">・ クラウド会計導入DX</a></li>
             <li><a href="../services.html#inheritance" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
           </ul>
         </div>
-
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">事務所案内</h4>
           <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
@@ -133,9 +132,8 @@ def build_blog():
             <li><a href="../contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 無料相談・お問い合わせ</a></li>
           </ul>
         </div>
-
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サイトマップ・規約</h4>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サイトマップ</h4>
           <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
             <li><a href="../sitemap.html" class="footer-nav-link">・ サイトマップ（全体一覧）</a></li>
             <li><a href="../privacy.html" class="footer-nav-link">・ 個人情報保護方針</a></li>
@@ -143,7 +141,6 @@ def build_blog():
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
         <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
@@ -152,55 +149,48 @@ def build_blog():
   <script src="../assets/js/main.js" defer></script>
 """
 
-    # --- 1. 個別記事HTMLの生成 ---
+    # 1. 各記事の詳細ページHTMLを blog/ フォルダへ書き出し
     for art in articles:
-        article_html = f"""<!DOCTYPE html>
+        detail_html = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(art['title'])} | 寺沢景子税理士事務所</title>
-  <meta name="description" content="{html.escape(art['description'])}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  {common_header}
-
+  {header_html}
   <main class="container-narrow" style="padding-top: calc(var(--header-height) + 3.5rem); padding-bottom: 7rem;">
     <article>
       <div style="margin-bottom: 2rem;">
         <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-accent);">{html.escape(art['category'])}</span>
-        <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary); margin: 0.8rem 0 1rem; line-height: 1.4;">
-          {html.escape(art['title'])}
-        </h1>
+        <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary); margin: 0.8rem 0 1rem; line-height: 1.4;">{html.escape(art['title'])}</h1>
         <p style="font-size: 0.85rem; color: var(--color-text-muted);">公開日: {html.escape(str(art['date']))} | 執筆: 寺沢景子税理士事務所</p>
       </div>
-
       <div style="font-size: 1rem; line-height: 2.1; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.5rem;">
         {art['body_html']}
       </div>
-
       <div style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--color-border); padding-top: 2rem;">
         <a href="./index.html" class="header-cta-btn" style="background: var(--color-primary);">コラム一覧に戻る</a>
       </div>
     </article>
   </main>
-
-  {common_footer}
+  {footer_html}
 </body>
 </html>
 """
-        out_path = BLOG_OUTPUT_DIR / art["filename"]
-        out_path.write_text(article_html, encoding="utf-8")
+        (BLOG_OUTPUT_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
+        print(f"  ✅ 記事生成: blog/{art['filename']}")
 
-    # --- 2. 一覧ページ (blog/index.html) の生成 ---
+    # 2. 一覧ページ blog/index.html へ全記事カードを陳列
     cards_html = ""
     for art in articles:
         cards_html += f"""
-      <article style="background: var(--color-bg-card); border-radius: var(--radius-lg); border: 1px solid var(--color-border); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: var(--transition-normal);">
+      <article style="background: var(--color-bg-card); border-radius: var(--radius-lg); border: 1px solid var(--color-border); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
         <div style="aspect-ratio: 16/9; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border);">
           <span style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-accent); font-weight: 600; letter-spacing: 0.1em;">{html.escape(art['category'])}</span>
         </div>
@@ -212,7 +202,10 @@ def build_blog():
           <p style="font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.7; margin-bottom: 1.2rem; flex-grow: 1;">
             {html.escape(art['description'][:95] + '...' if len(art['description']) > 95 else art['description'])}
           </p>
-          <span style="font-size: 0.8rem; color: var(--color-text-muted);">{html.escape(str(art['date']))}</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);">{html.escape(str(art['date']))}</span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-accent);">読む &rarr;</span>
+          </div>
         </div>
       </article>
 """
@@ -223,16 +216,13 @@ def build_blog():
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>税務・経営コラム | 寺沢景子税理士事務所</title>
-  <meta name="description" content="国税21年在職・元法人課税部門統括官の寺沢景子とベテラン税理士が発信する税務コラム。">
-  <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/blog/index.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  {common_header}
-
+  {header_html}
   <section class="athena-hero" style="min-height: 44vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">COLUMN</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
@@ -241,19 +231,17 @@ def build_blog():
       <p class="hero-lead-text">実務の現場と税務署の視点から、経営に直結する生きた税務情報をお届けします。</p>
     </div>
   </section>
-
   <main class="container" style="padding-top: 4rem; padding-bottom: 7rem;">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
       {cards_html}
     </div>
   </main>
-
-  {common_footer}
+  {footer_html}
 </body>
 </html>
 """
     (BLOG_OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ コラム一覧HTML (blog/index.html) を完全統一デザインで出力完了")
+    print("  ✅ blog/index.html への陳列が完了しました！")
 
 if __name__ == "__main__":
-    build_blog()
+    build()
