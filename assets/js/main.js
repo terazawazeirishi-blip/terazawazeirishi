@@ -140,7 +140,7 @@
           `;
         }
         
-        // 2番目の枠 ➜ ベテラン税理士［お名前仮入力］
+        // 2番目の枠 ➜ ベテラン税理士
         if (photoFrames.length >= 2 && data.rep_senior) {
           photoFrames[1].innerHTML = `
             <img src="${toUrl(data.rep_senior)}" alt="ベテラン税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover; display:block;">
