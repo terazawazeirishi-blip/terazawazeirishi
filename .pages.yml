@@ -1,15 +1,10 @@
-# ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル
-# ファイルパス: .pages.yml
-# ==============================================================================
-
 media:
   input: assets/images/uploads
   output: assets/images/uploads
 
 content:
   # ============================================================================
-  # 1. サイト全画像の変更（一括管理）
+  # 1. サイト全画像の変更（一括管理）※大成功している設定を維持
   # ============================================================================
   - name: site_images
     label: 📷 サイト全画像の変更
@@ -72,57 +67,46 @@ content:
         type: image
 
   # ============================================================================
-  # 2. 税務・経営コラム (content/blog/) ★フォーマットとviewを公式仕様に修正
+  # 2. 税務・経営コラム（★画像と同じJSON直結方式へ一本化）
   # ============================================================================
-  - name: blog
-    label: 📝 税務・経営コラム
-    type: collection
-    path: content/blog
-    format: yaml-frontmatter
-    filename: "{year}-{month}-{day}-{primary}.md"
-    view:
-      primary: title
-      fields: [title, date, category]
-      sort: [date]
-      default:
-        sort: date
-        order: desc
+  - name: blog_posts
+    label: 📝 税務・経営コラムの投稿・管理
+    type: file
+    path: content/blog_posts.json
     fields:
-      - name: title
-        label: 記事タイトル
-        type: string
-        required: true
-      - name: date
-        label: 公開日
-        type: date
-        required: true
-      - name: category
-        label: カテゴリー
-        type: select
-        required: false
-        options:
-          values:
-            - 税務調査対策
-            - 法人税務・節税
-            - 会社設立・創業融資
-            - クラウド会計・DX
-            - 相続税・事業承継
-            - 社労士連携・助成金
-      - name: description
-        label: 記事要約
-        type: string
-        required: false
-      - name: thumbnail
-        label: サムネイル画像
-        type: image
-        required: false
-      - name: body
-        label: 本文
-        type: rich-text
-        required: true
+      - name: posts
+        label: コラム記事一覧
+        type: list
+        fields:
+          - name: title
+            label: 記事タイトル
+            type: string
+            required: true
+          - name: date
+            label: 公開日（例: 2026-10-31）
+            type: string
+            required: true
+          - name: category
+            label: カテゴリー
+            type: select
+            options:
+              values:
+                - 税務調査対策
+                - 法人税務・節税
+                - 会社設立・創業融資
+                - クラウド会計・DX
+                - 相続税・事業承継
+                - 社労士連携・助成金
+          - name: description
+            label: 記事の要約（一覧に表示される説明文）
+            type: string
+          - name: body
+            label: 記事本文
+            type: text
+            required: true
 
   # ============================================================================
-  # 3. 事務所からのお知らせ (content/news/)
+  # 3. 事務所からのお知らせ
   # ============================================================================
   - name: news
     label: 📢 事務所からのお知らせ
