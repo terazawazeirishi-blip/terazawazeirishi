@@ -795,8 +795,8 @@ ul, ol {
 }
 
 .site-footer {
-  background-color: var(--color-primary);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #E8CFC8 0%, #D9B8A7 50%, #CFA18E 100%);
+  color: #222222;
   padding: 5rem 0 2.5rem;
   font-size: 0.92rem;
 }
