@@ -809,6 +809,7 @@ ul, ol {
 }
 
 .footer-brand-name {
+  color: #111111;
   font-family: var(--font-serif);
   font-size: 1.3rem;
   letter-spacing: 0.08em;
@@ -816,6 +817,7 @@ ul, ol {
 }
 
 .footer-address {
+  color: #555555;
   font-style: normal;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.75);
@@ -824,7 +826,7 @@ ul, ol {
 .footer-nav-title {
   font-family: var(--font-serif);
   font-size: 1.05rem;
-  color: var(--color-accent-light);
+  color: #333333; var(--color-accent-light);
   margin-bottom: 1.2rem;
 }
 
@@ -835,18 +837,18 @@ ul, ol {
 }
 
 .footer-nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: #555555; rgba(255, 255, 255, 0.8);
 }
 
 .footer-nav-link:hover {
-  color: var(--color-accent-light);
+  color: #111111; var(--color-accent-light);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.5);
+  color: #666666; rgba(255, 255, 255, 0.5);
   font-size: 0.82rem;
 }
 
