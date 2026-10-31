@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト（インデント完全修正版）
+寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト（blog/ 完全集約版）
 ファイルパス: scripts/build_blog.py
+仕様: blog/ フォルダ内のMarkdownを直接検知し、blog/index.html へ即時陳列
 """
 
 import os
@@ -11,15 +12,10 @@ import html
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-BLOG_OUTPUT_DIR = ROOT_DIR / "blog"
-
-POSSIBLE_DIRS = [
-    ROOT_DIR / "content" / "blog",
-    ROOT_DIR / "contest" / "blog"
-]
+BLOG_DIR = ROOT_DIR / "blog"
 
 def format_image_path(raw_path):
-    """Pages CMSの画像パスを blog/ 階層からの正しい相対パスに変換"""
+    """画像パスを blog/ からの正しい相対パスに変換"""
     if not raw_path:
         return ""
     p = raw_path.strip().strip('"').strip("'")
@@ -31,7 +27,6 @@ def format_image_path(raw_path):
     return f"../{p}"
 
 def parse_markdown(filepath):
-    """Markdownから記事情報とサムネイル画像パスを抽出"""
     content = filepath.read_text(encoding="utf-8")
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     metadata = {}
@@ -49,7 +44,6 @@ def parse_markdown(filepath):
         img_url = format_image_path(m.group(2))
         return f'<img src="{img_url}" alt="{alt_text}" style="max-width:100%; height:auto; border-radius:8px; margin: 1.2rem 0;">'
 
-    # ★ 55行目のインデント（字下げ）を完全修復
     paragraphs = [p.strip() for p in body.strip().split("\n\n") if p.strip()]
     html_paragraphs = []
     for p in paragraphs:
@@ -71,16 +65,18 @@ def parse_markdown(filepath):
     }
 
 def build():
-    print("=== コラム自動変換処理（インデント修復版）開始 ===")
+    print("=== blog/ 単一集約コラム自動生成開始 ===")
     
-    md_files = []
-    for d in POSSIBLE_DIRS:
-        if d.exists():
-            found = list(d.glob("*.md"))
-            md_files.extend(found)
+    if not BLOG_DIR.exists():
+        print("blog ディレクトリが見つかりません。")
+        return
+
+    # blog/ フォルダ内の .md ファイルを直接取得
+    md_files = list(BLOG_DIR.glob("*.md"))
+    print(f"blog/ 内で検知した記事: {len(md_files)} 件")
             
     if not md_files:
-        print("記事ファイルが見つかりませんでした。")
+        print("Markdown記事（.md）が見つかりません。")
         return
 
     articles = [parse_markdown(f) for f in md_files]
@@ -212,7 +208,7 @@ def build():
 </body>
 </html>
 """
-        (BLOG_OUTPUT_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
+        (BLOG_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
 
     cards_html = ""
     for art in articles:
@@ -276,8 +272,8 @@ def build():
 </body>
 </html>
 """
-    (BLOG_OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ コラム生成・インデント修復ビルドが完了しました！")
+    (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
+    print("  ✅ blog/index.html への直接出力が完了しました！")
 
 if __name__ == "__main__":
     build()
