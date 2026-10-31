@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム＆お知らせ自動生成ビルドスクリプト
+寺沢景子税理士事務所 コラム自動生成ビルドスクリプト（モバイルメニュー完全対応版）
 ファイルパス: scripts/build_blog.py
-仕様: blog/（コラム）と content/news/（お知らせ）を自動検知してWebサイトへ直接陳列
+仕様: コラムヘッダーにハンバーガーボタンを完全装備
 """
 
 import os
@@ -71,7 +71,7 @@ def parse_markdown(filepath):
     }
 
 def build_blog():
-    print("=== コラム自動生成処理開始 ===")
+    print("=== コラム自動生成処理（ハンバーガーボタン完備）開始 ===")
     if not BLOG_DIR.exists():
         return
     md_files = list(BLOG_DIR.glob("*.md"))
@@ -80,6 +80,7 @@ def build_blog():
     articles = [parse_markdown(f) for f in md_files]
     articles.sort(key=lambda x: str(x["date"]), reverse=True)
 
+    # ★ ハンバーガーボタン（hamburger-btn）を確実に配備
     header_html = """
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
@@ -94,6 +95,14 @@ def build_blog():
           <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
         </div>
       </a>
+
+      <!-- ★ スマホ用3本線ハンバーガーボタン完全配備 -->
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開閉する" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
       <nav class="header-nav" id="headerNav">
         <ul class="nav-list">
           <li><a href="../index.html" class="nav-link">ホーム</a></li>
@@ -108,10 +117,11 @@ def build_blog():
     </div>
   </header>
 """
+
     footer_html = """
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
+      <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
             寺沢景子税理士事務所
@@ -127,7 +137,7 @@ def build_blog():
         </div>
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <ul class="footer-nav-list">
             <li><a href="../services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
             <li><a href="../services.html#audit" class="footer-nav-link">・ 税務調査対策</a></li>
             <li><a href="../services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
@@ -137,7 +147,7 @@ def build_blog():
         </div>
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">事務所案内</h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <ul class="footer-nav-list">
             <li><a href="../index.html" class="footer-nav-link">・ ホーム</a></li>
             <li><a href="../profile.html" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
             <li><a href="../pricing.html" class="footer-nav-link">・ 料金案内</a></li>
@@ -148,7 +158,7 @@ def build_blog():
         </div>
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サイトマップ</h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <ul class="footer-nav-list">
             <li><a href="../sitemap.html" class="footer-nav-link">・ サイトマップ（全体一覧）</a></li>
             <li><a href="../privacy.html" class="footer-nav-link">・ 個人情報保護方針</a></li>
             <li><a href="../sitemap.xml" target="_blank" class="footer-nav-link" style="color: rgba(255,255,255,0.5);">・ XMLサイトマップ</a></li>
@@ -269,55 +279,46 @@ def build_blog():
 </html>
 """
     (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ blog/index.html への直接出力完了")
+    print("  ✅ blog/index.html (ハンバーガーボタン完備) 出力完了")
 
 def build_news():
-    """★【新設】content/news/*.md を読み込んで index.html のお知らせ枠を自動更新"""
-    print("=== お知らせ自動更新処理開始 ===")
     if not NEWS_DIR.exists() or not INDEX_HTML_PATH.exists():
         return
-
     md_files = list(NEWS_DIR.glob("*.md"))
     if not md_files:
-        print("お知らせ記事がありません。")
         return
-
     news_items = [parse_markdown(f) for f in md_files]
     news_items.sort(key=lambda x: str(x["date"]), reverse=True)
-    # 最新3件を取得
     latest_news = news_items[:3]
 
     news_list_html = ""
     for idx, item in enumerate(latest_news):
         news_list_html += f"""
-        <div class="news-item" style="border-bottom: 1px solid var(--color-border); padding: 1.1rem 0;">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.4rem; flex-wrap: wrap;">
-            <span style="font-size: 0.82rem; color: var(--color-text-muted);">{html.escape(str(item['date']))}</span>
-            <span style="font-size: 0.72rem; font-weight: 700; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: var(--radius-sm);">お知らせ</span>
-          </div>
-          <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-primary); line-height: 1.6;">
-            {html.escape(item['title'])}
-          </div>
-          <div style="font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.7; margin-top: 0.4rem;">
-            {item['body_html']}
-          </div>
-        </div>
+            <div class="news-item">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.82rem; color: var(--color-text-muted);">{html.escape(str(item['date']))}</span>
+                <span style="font-size: 0.72rem; font-weight: 700; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: var(--radius-sm);">お知らせ</span>
+              </div>
+              <div style="font-size: 1rem; font-weight: 600; color: var(--color-primary); line-height: 1.5; margin-bottom: 0.4rem;">
+                {html.escape(item['title'])}
+              </div>
+              <div style="font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.7;">
+                {item['body_html']}
+              </div>
+            </div>
 """
-
     replacement = f"""<!-- NEWS_START -->
-        <div class="news-items-wrapper">
-          {news_list_html}
-        </div>
-        <!-- NEWS_END -->"""
+          <div class="news-items-wrapper">
+            {news_list_html}
+          </div>
+          <!-- NEWS_END -->"""
 
     index_content = INDEX_HTML_PATH.read_text(encoding="utf-8")
     pattern = r"<!-- NEWS_START -->.*?<!-- NEWS_END -->"
     if re.search(pattern, index_content, re.DOTALL):
         updated_index = re.sub(pattern, replacement, index_content, flags=re.DOTALL)
         INDEX_HTML_PATH.write_text(updated_index, encoding="utf-8")
-        print("  ✅ index.html のお知らせ枠を最新データで自動更新しました！")
-    else:
-        print("  ⚠️ index.html に <!-- NEWS_START --> の目印がありません。")
+        print("  ✅ index.html のお知らせ枠を自動更新しました")
 
 if __name__ == "__main__":
     build_blog()
