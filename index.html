@@ -352,6 +352,9 @@
   </section>
 
   <!-- 2人の税理士紹介ブロック -->
+<!-- ======================================================================
+       税理士紹介（2人体制・左右対称シンメトリー仕様）
+       ====================================================================== -->
   <section class="message-section" style="background-color: var(--color-bg-base);" id="team">
     <div class="container">
       <div class="section-header">
@@ -359,42 +362,48 @@
         <p class="section-lead">異なる専門性を備えた2名の税理士が、多角的な視野で貴社を支えます。</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 960px; margin: 0 auto;">
         
-        <!-- 税理士 1: 寺沢景子 -->
-        <div style="background: var(--color-bg-subtle); border-radius: var(--radius-lg); padding: 2.5rem; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
-<div class="representative-photo-frame" style="max-width: 260px; margin: 0 auto 1.8rem;">
-  <!-- アップロードされた寺沢代表の写真ファイルを指定 -->
-  <img src="./assets/images/uploads/jin.png" alt="寺沢 景子 代表税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-  <span class="representative-overlay-text">Keiko Terazawa</span>
-</div>
+        <!-- 税理士 1: 寺沢景子 代表税理士 -->
+        <div style="background: var(--color-bg-subtle); border-radius: var(--radius-lg); padding: 2.5rem 2rem; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; text-align: center;">
+          <div class="representative-photo-frame">
+            <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="800" height="800" fill="#1B2A4A"/>
+              <circle cx="400" cy="360" r="160" fill="#FAF8F5" opacity="0.9"/>
+              <path d="M220 720C220 580 300 520 400 520C500 520 580 580 580 720" fill="#FAF8F5" opacity="0.9"/>
+              <text x="400" y="760" font-family="'Cinzel', serif" font-size="24" fill="#FFFFFF" text-anchor="middle">Keiko Terazawa</text>
+            </svg>
+            <span class="representative-overlay-text">Keiko Terazawa</span>
           </div>
           <span class="zigzag-tag">REPRESENTATIVE TAX ACCOUNTANT</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--color-primary); margin-bottom: 0.4rem;">寺沢 景子（てらざわ けいこ）</h3>
-          <p style="font-size: 0.88rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.2rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.4rem;">寺沢 景子（てらざわ けいこ）</h3>
+          <p style="font-size: 0.85rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.2rem; line-height: 1.6;">
             国税・税務署21年在職 / 元法人課税部門統括官<br>
             南九州税理士会熊本県連 所属（第154978号）
           </p>
-          <p style="font-size: 0.92rem; line-height: 1.85; color: var(--color-text-sub);">
+          <p style="font-size: 0.9rem; line-height: 1.85; color: var(--color-text-sub); text-align: left;">
             税務調査の最前線で培った知見を活かし、税務署目線での事前リスク抽出と法令に則った適正申告を徹底。温かな対話を通じて経営者様の不安を解消します。
           </p>
         </div>
 
-        <!-- 税理士 2: ベテラン税理士 -->
-        <div style="background: var(--color-bg-subtle); border-radius: var(--radius-lg); padding: 2.5rem; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
-<div class="representative-photo-frame" style="max-width: 260px; margin: 0 auto 1.8rem;">
-  <!-- アップロードされたベテラン税理士の写真ファイルを指定 -->
-  <img src="./assets/images/uploads/-bete.png" alt="ベテラン税理士" class="representative-photo-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-  <span class="representative-overlay-text">Senior Tax Advisor</span>
-</div>
+        <!-- 税理士 2: ベテラン税理士［お名前仮入力］ -->
+        <div style="background: var(--color-bg-subtle); border-radius: var(--radius-lg); padding: 2.5rem 2rem; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; text-align: center;">
+          <div class="representative-photo-frame">
+            <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="800" height="800" fill="#5B7065"/>
+              <circle cx="400" cy="360" r="160" fill="#FAF8F5" opacity="0.9"/>
+              <path d="M220 720C220 580 300 520 400 520C500 520 580 580 580 720" fill="#FAF8F5" opacity="0.9"/>
+              <text x="400" y="760" font-family="'Cinzel', serif" font-size="24" fill="#FFFFFF" text-anchor="middle">Senior Tax Advisor</text>
+            </svg>
+            <span class="representative-overlay-text">Senior Tax Advisor</span>
           </div>
           <span class="zigzag-tag">SENIOR TAX ACCOUNTANT</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--color-primary); margin-bottom: 0.4rem;"></h3>
-          <p style="font-size: 0.88rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.2rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.4rem;">【お名前仮入力】</h3>
+          <p style="font-size: 0.85rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.2rem; line-height: 1.6;">
             税理士実務歴35年 / ベテラン税理士<br>
             多様な業種・財務コンサルティング実績
           </p>
-          <p style="font-size: 0.92rem; line-height: 1.85; color: var(--color-text-sub);">
+          <p style="font-size: 0.9rem; line-height: 1.85; color: var(--color-text-sub); text-align: left;">
             35年に及ぶ豊富な実務経験に基づき、難易度の高い税務判断や事業承継、複雑な資産税申告にも万全に対応。経験に裏打ちされた盤石の安心感をお約束します。
           </p>
         </div>
