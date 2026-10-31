@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全データ自動連動完全版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（非同期干渉完全排除版）
  * ファイルパス: assets/js/main.js
- * 仕様: 画像・コラム・FAQ・料金・サービス・事務所情報・メッセージ完全自動同期
+ * 仕様: 競合状態（Race Condition）の完全根絶 / 安定同期
  * ==============================================================================
  */
 
@@ -16,11 +16,10 @@
     initMobileNav();
     initFaqAccordion();
     initSmoothScroll();
-    syncCmsImages();     // 画像自動同期
-    syncOfficeInfo();    // ★ 事務所情報・メッセージ自動同期
+    syncCmsImages();
+    syncOfficeInfo();
   }
 
-  /* 1. スクロール影 */
   function initHeaderScroll() {
     const header = document.getElementById('siteHeader');
     if (!header) return;
@@ -35,7 +34,6 @@
     handleScroll();
   }
 
-  /* 2. モバイルナビ */
   function initMobileNav() {
     const btn = document.getElementById('hamburgerBtn');
     const nav = document.getElementById('headerNav');
@@ -57,7 +55,6 @@
     });
   }
 
-  /* 3. FAQアコーディオン（静的・動的両対応） */
   function initFaqAccordion() {
     const accordions = document.querySelectorAll('.faq-accordion-item');
     accordions.forEach((item) => {
@@ -73,7 +70,6 @@
     });
   }
 
-  /* 4. スムーススクロール */
   function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
     const headerHeight = 84;
@@ -94,7 +90,6 @@
     });
   }
 
-  /* リポジトリベースパス取得ヘルパー */
   function getRepoBase() {
     const pathParts = window.location.pathname.split('/');
     let repoBase = '/';
@@ -105,7 +100,6 @@
     return repoBase;
   }
 
-  /* 5. Pages CMS 画像自動同期エンジン */
   function syncCmsImages() {
     const repoBase = getRepoBase();
     const jsonUrl = repoBase + 'content/site_images.json?v=' + Date.now();
@@ -130,6 +124,7 @@
           return repoBase + clean;
         };
 
+        // 税理士写真
         const photoFrames = document.querySelectorAll('.representative-photo-frame');
         if (photoFrames.length >= 1 && data.rep_keiko) {
           const keikoUrl = resolveImgUrl(data.rep_keiko);
@@ -150,6 +145,7 @@
           }
         }
 
+        // ヒーローアート
         if (data.hero_illustration) {
           const heroUrl = resolveImgUrl(data.hero_illustration);
           const heroSlot = document.querySelector('.hero-bg-artwork-slot');
@@ -158,6 +154,7 @@
           }
         }
 
+        // ロゴ
         if (data.logo_img) {
           const logoUrl = resolveImgUrl(data.logo_img);
           if (logoUrl) {
@@ -167,6 +164,7 @@
           }
         }
 
+        // 透かし
         if (data.watermark_crest) {
           const crestUrl = resolveImgUrl(data.watermark_crest);
           const hero = document.getElementById('hero');
@@ -178,8 +176,9 @@
           }
         }
 
+        // About us ジグザグ写真（トップページ）
         const aboutKeys = ['about_01', 'about_02', 'about_03', 'about_04', 'about_05'];
-        document.querySelectorAll('.athena-zigzag-item .zigzag-visual-slot').forEach((slot, idx) => {
+        document.querySelectorAll('.athena-about-section .athena-zigzag-item .zigzag-visual-slot').forEach((slot, idx) => {
           const k = aboutKeys[idx];
           if (data[k]) {
             const u = resolveImgUrl(data[k]);
@@ -189,6 +188,7 @@
           }
         });
 
+        // トップページのサービスカード
         const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
         document.querySelectorAll('.service-card-item .service-card-img-slot').forEach((slot, idx) => {
           const k = serviceKeys[idx];
@@ -200,23 +200,7 @@
           }
         });
 
-        const serviceDetailIds = ['#corporate', '#audit', '#startup', '#finance', '#cloud', '#inheritance', '#labor'];
-        serviceDetailIds.forEach((id, idx) => {
-          const k = serviceKeys[idx];
-          if (data[k]) {
-            const imgUrl = resolveImgUrl(data[k]);
-            if (imgUrl) {
-              const article = document.querySelector(id);
-              if (article) {
-                const imgSlot = article.querySelector('.zigzag-visual-slot');
-                if (imgSlot) {
-                  imgSlot.innerHTML = `<img src="${imgUrl}" alt="サービス詳細 ${idx + 1}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">`;
-                }
-              }
-            }
-          }
-        });
-
+        // CTAバナー
         if (data.cta_banner_bg) {
           const ctaUrl = resolveImgUrl(data.cta_banner_bg);
           if (ctaUrl) {
@@ -233,7 +217,6 @@
       });
   }
 
-  /* 6. ★【新設】事務所情報・概要・メッセージ自動同期エンジン */
   function syncOfficeInfo() {
     const repoBase = getRepoBase();
     const jsonUrl = repoBase + 'content/office_info.json?v=' + Date.now();
@@ -246,7 +229,6 @@
       .then((data) => {
         if (!data) return;
 
-        // 電話番号の更新（リンクとテキスト）
         if (data.tel) {
           document.querySelectorAll('a[href^="tel:"]').forEach((a) => {
             a.setAttribute('href', 'tel:' + data.tel.replace(/-/g, ''));
@@ -259,7 +241,6 @@
           });
         }
 
-        // 概要テーブル（所在地、営業時間、対応エリア等）の更新
         document.querySelectorAll('.office-table tr').forEach((tr) => {
           const th = tr.querySelector('th');
           const td = tr.querySelector('td');
@@ -277,7 +258,6 @@
           }
         });
 
-        // 税理士紹介メッセージの更新（トップ ＆ プロフィール）
         const teamCards = document.querySelectorAll('#team .representative-photo-frame, .message-grid');
         if (teamCards.length >= 1 && data.rep_message) {
           const repTextEl = document.querySelector('#team > div > div > div:first-child p:last-child');
