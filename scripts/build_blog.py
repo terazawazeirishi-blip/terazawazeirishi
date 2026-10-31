@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動生成ビルドスクリプト（完全恒久版）
+寺沢景子税理士事務所 コラム＆お知らせ自動生成ビルドスクリプト
 ファイルパス: scripts/build_blog.py
-仕様: リポジトリ内の全フォルダからMarkdown記事を100%検知し、blog/index.html を生成
+仕様: blog/（コラム）と content/news/（お知らせ）を自動検知してWebサイトへ直接陳列
 """
 
 import os
@@ -12,10 +12,11 @@ import html
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-BLOG_OUTPUT_DIR = ROOT_DIR / "blog"
+BLOG_DIR = ROOT_DIR / "blog"
+NEWS_DIR = ROOT_DIR / "content" / "news"
+INDEX_HTML_PATH = ROOT_DIR / "index.html"
 
 def format_image_path(raw_path):
-    """画像パスを blog/ 階層からの正しい相対パスに変換"""
     if not raw_path:
         return ""
     p = raw_path.strip().strip('"').strip("'")
@@ -27,7 +28,6 @@ def format_image_path(raw_path):
     return f"../{p}"
 
 def parse_markdown(filepath):
-    """Markdownから記事情報を抽出"""
     content = filepath.read_text(encoding="utf-8")
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     metadata = {}
@@ -55,7 +55,6 @@ def parse_markdown(filepath):
         
     html_body = "".join(html_paragraphs)
     
-    # ファイル名から拡張子を除いた安全なスラッグ
     safe_slug = re.sub(r"[^\w\-]", "-", filepath.stem).strip("-")
     if not safe_slug:
         safe_slug = "article"
@@ -67,41 +66,20 @@ def parse_markdown(filepath):
         "description": metadata.get("description", ""),
         "thumbnail": format_image_path(metadata.get("thumbnail", "")),
         "body_html": html_body,
+        "raw_body": body.strip(),
         "filename": safe_slug + ".html"
     }
 
-def build():
-    print("=== 全階層コラム自動検知・生成処理開始 ===")
-    BLOG_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-    # リポジトリ内のすべての場所から .md ファイルを網羅探索（見落としゼロ）
-    md_files = []
-    for path in ROOT_DIR.rglob("*.md"):
-        # 設定ファイルやREADME、テンプレートは除外
-        if ".github" in path.parts or path.name.lower() in ["readme.md", "license.md"]:
-            continue
-        # blog, content, contest のいずれかに属する記事を確実に収集
-        parts_str = "/".join(path.parts).lower()
-        if "blog" in parts_str or "content" in parts_str or "contest" in parts_str:
-            md_files.append(path)
-
-    print(f"検知した記事数: {len(md_files)} 件")
-    for f in md_files:
-        print(f"  - 記事検知: {f.relative_to(ROOT_DIR)}")
-
-    if not md_files:
-        print("警告: 記事ファイル（.md）が1件も見つかりませんでした。")
+def build_blog():
+    print("=== コラム自動生成処理開始 ===")
+    if not BLOG_DIR.exists():
         return
-
+    md_files = list(BLOG_DIR.glob("*.md"))
+    if not md_files:
+        return
     articles = [parse_markdown(f) for f in md_files]
-    # 重複タイトルを除去し、日付の新しい順にソート
-    unique_articles = {}
-    for a in articles:
-        unique_articles[a["title"]] = a
-    articles = list(unique_articles.values())
     articles.sort(key=lambda x: str(x["date"]), reverse=True)
 
-    # 共通ヘッダー
     header_html = """
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
@@ -130,8 +108,6 @@ def build():
     </div>
   </header>
 """
-
-    # 共通フッター
     footer_html = """
   <footer class="site-footer">
     <div class="container">
@@ -187,7 +163,6 @@ def build():
   <script src="../assets/js/main.js" defer></script>
 """
 
-    # 1. 各記事の詳細HTML生成
     for art in articles:
         detail_thumb_html = ""
         if art["thumbnail"]:
@@ -196,7 +171,6 @@ def build():
         <img src="{art['thumbnail']}" alt="{html.escape(art['title'])}" style="width: 100%; max-height: 460px; object-fit: cover; display: block;">
       </div>
 """
-
         detail_html = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -230,10 +204,8 @@ def build():
 </body>
 </html>
 """
-        (BLOG_OUTPUT_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
-        print(f"  ✅ 記事生成: blog/{art['filename']}")
+        (BLOG_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
 
-    # 2. 一覧ページ blog/index.html 生成
     cards_html = ""
     for art in articles:
         if art["thumbnail"]:
@@ -296,8 +268,57 @@ def build():
 </body>
 </html>
 """
-    (BLOG_OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ blog/index.html を完全に最新化しました！")
+    (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
+    print("  ✅ blog/index.html への直接出力完了")
+
+def build_news():
+    """★【新設】content/news/*.md を読み込んで index.html のお知らせ枠を自動更新"""
+    print("=== お知らせ自動更新処理開始 ===")
+    if not NEWS_DIR.exists() or not INDEX_HTML_PATH.exists():
+        return
+
+    md_files = list(NEWS_DIR.glob("*.md"))
+    if not md_files:
+        print("お知らせ記事がありません。")
+        return
+
+    news_items = [parse_markdown(f) for f in md_files]
+    news_items.sort(key=lambda x: str(x["date"]), reverse=True)
+    # 最新3件を取得
+    latest_news = news_items[:3]
+
+    news_list_html = ""
+    for idx, item in enumerate(latest_news):
+        news_list_html += f"""
+        <div class="news-item" style="border-bottom: 1px solid var(--color-border); padding: 1.1rem 0;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.4rem; flex-wrap: wrap;">
+            <span style="font-size: 0.82rem; color: var(--color-text-muted);">{html.escape(str(item['date']))}</span>
+            <span style="font-size: 0.72rem; font-weight: 700; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: var(--radius-sm);">お知らせ</span>
+          </div>
+          <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-primary); line-height: 1.6;">
+            {html.escape(item['title'])}
+          </div>
+          <div style="font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.7; margin-top: 0.4rem;">
+            {item['body_html']}
+          </div>
+        </div>
+"""
+
+    replacement = f"""<!-- NEWS_START -->
+        <div class="news-items-wrapper">
+          {news_list_html}
+        </div>
+        <!-- NEWS_END -->"""
+
+    index_content = INDEX_HTML_PATH.read_text(encoding="utf-8")
+    pattern = r"<!-- NEWS_START -->.*?<!-- NEWS_END -->"
+    if re.search(pattern, index_content, re.DOTALL):
+        updated_index = re.sub(pattern, replacement, index_content, flags=re.DOTALL)
+        INDEX_HTML_PATH.write_text(updated_index, encoding="utf-8")
+        print("  ✅ index.html のお知らせ枠を最新データで自動更新しました！")
+    else:
+        print("  ⚠️ index.html に <!-- NEWS_START --> の目印がありません。")
 
 if __name__ == "__main__":
-    build()
+    build_blog()
+    build_news()
