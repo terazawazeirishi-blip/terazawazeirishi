@@ -1,0 +1,109 @@
+# ==============================================================================
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（画像かんたん管理対応版）
+# ファイルパス: .pages.yml
+# ==============================================================================
+
+media:
+  input: assets/images/uploads
+  output: assets/images/uploads
+
+content:
+  # ----------------------------------------------------------------------------
+  # ★ 新設：トップページ・主要画像の管理画面
+  # ----------------------------------------------------------------------------
+  - name: site_images
+    label: 📷 サイト画像の変更
+    type: file
+    path: content/site_images.json
+    fields:
+      - name: hero_illustration
+        label: ① トップ：メイン背景イラスト（白百合・花など）
+        type: image
+      - name: rep_keiko
+        label: ② 寺沢景子 代表税理士の写真
+        type: image
+      - name: rep_senior
+        label: ③ ベテラン税理士［お名前仮入力］の写真
+        type: image
+      - name: about_01
+        label: ④ About 01（2人体制ダブルチェック）の写真
+        type: image
+      - name: about_02
+        label: ⑤ About 02（国税21年元統括官）の写真
+        type: image
+      - name: about_03
+        label: ⑥ About 03（税理士歴35年実績）の写真
+        type: image
+      - name: about_04
+        label: ⑦ About 04（ザワテラス社労士連携）の写真
+        type: image
+      - name: about_05
+        label: ⑧ About 05（相談サロン風景）の写真
+        type: image
+
+  # ----------------------------------------------------------------------------
+  # 税務・経営コラム (content/blog/)
+  # ----------------------------------------------------------------------------
+  - name: blog
+    label: 📝 税務・経営コラム
+    type: collection
+    path: content/blog
+    format: frontmatter
+    view:
+      fields: [title, date, category]
+      primary: title
+    fields:
+      - name: title
+        label: 記事タイトル
+        type: string
+        required: true
+      - name: date
+        label: 公開日
+        type: date
+        required: true
+      - name: category
+        label: カテゴリー
+        type: select
+        options:
+          - 税務調査対策
+          - 法人税務・節税
+          - 会社設立・創業融資
+          - クラウド会計・DX
+          - 相続税・事業承継
+          - 社労士連携・助成金
+        required: true
+      - name: description
+        label: 記事要約
+        type: string
+      - name: thumbnail
+        label: サムネイル画像
+        type: image
+      - name: body
+        label: 本文
+        type: rich-text
+        required: true
+
+  # ----------------------------------------------------------------------------
+  # 事務所からのお知らせ (content/news/)
+  # ----------------------------------------------------------------------------
+  - name: news
+    label: 📢 事務所からのお知らせ
+    type: collection
+    path: content/news
+    format: frontmatter
+    view:
+      fields: [title, date]
+      primary: title
+    fields:
+      - name: title
+        label: お知らせタイトル
+        type: string
+        required: true
+      - name: date
+        label: 告知日
+        type: date
+        required: true
+      - name: body
+        label: お知らせ本文
+        type: rich-text
+        required: true
