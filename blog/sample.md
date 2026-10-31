@@ -2,7 +2,7 @@
 title: 元国税統括官が教える「税務調査で慌てないための3つの鉄則」
 date: 2026-10-31
 category: 税務調査対策
-thumbnail: assets/images/uploads/awa (1).png
+thumbnail: assets/images/uploads/zeimu.png
 description: 突然の税務署からの調査通知。慌てて書類を改ざんすることは絶対に厳禁です。元統括官が教える事前準備の鉄則とは。
 ---
 税務署からの調査通知があっても、決して慌てる必要はありません。
