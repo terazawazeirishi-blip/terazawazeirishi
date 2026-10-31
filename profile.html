@@ -13,16 +13,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
+
+  <style>
+    /* プロフィール専用レスポンシブスタイル（PCは維持、スマホで完璧に整流） */
+    .profile-member-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+      margin-bottom: 5.5rem;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 4.5rem;
+    }
+    @media (max-width: 768px) {
+      .profile-member-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+        margin-bottom: 4rem !important;
+        padding-bottom: 3.5rem !important;
+      }
+      .profile-photo-col {
+        text-align: center;
+      }
+      .profile-photo-col .representative-photo-frame {
+        max-width: 200px !important;
+        margin: 0 auto 1.2rem auto !important;
+      }
+      .profile-info-badge {
+        max-width: 280px;
+        margin: 0 auto;
+        text-align: left;
+      }
+      .profile-desc-col h2 {
+        font-size: 1.5rem !important;
+        text-align: center;
+      }
+      .profile-desc-col .profile-sub-title {
+        text-align: center;
+        margin-bottom: 1.2rem !important;
+      }
+      .profile-career-box {
+        padding: 1.4rem 1.2rem !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ヘッダー -->
+  <!-- 完全統一ヘッダー -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="./index.html" class="brand-logo" aria-label="寺沢景子税理士事務所 ホーム">
         <svg class="brand-logo-img" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="22" cy="22" r="21" stroke="#A08C4A" stroke-width="1.5" stroke-dasharray="3 3"/>
           <path d="M22 6C14 14 12 24 22 36C32 24 30 14 22 6Z" fill="#1B2A4A" opacity="0.9"/>
+          <path d="M16 20C18 26 22 30 22 36C22 30 26 26 28 20" stroke="#A08C4A" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
         <div class="brand-text">
           <span class="brand-name">寺沢景子税理士事務所</span>
@@ -30,8 +75,11 @@
         </div>
       </a>
 
+      <!-- スマホ用3本線メニューボタン -->
       <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開閉する" aria-expanded="false">
-        <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
       </button>
 
       <nav class="header-nav" id="headerNav">
@@ -61,39 +109,40 @@
     </div>
   </section>
 
-  <!-- 2人の税理士詳細メッセージ -->
+  <!-- メインコンテンツ -->
   <main class="container" style="padding-top: 5rem; padding-bottom: 7rem;">
     
-    <!-- 税理士 1: 寺沢景子 -->
-    <section style="display: grid; grid-template-columns: 340px 1fr; gap: 4rem; align-items: start; margin-bottom: 6rem; border-bottom: 1px solid var(--color-border); padding-bottom: 5rem;">
-      <div>
-        <div class="representative-photo-frame" style="margin-bottom: 1.5rem;">
-          <!-- 【画像スロット IMG-07A】寺沢景子税理士 ポートレート (800×800px) -->
+    <!-- 税理士 1: 寺沢景子 代表税理士 -->
+    <section class="profile-member-grid">
+      <div class="profile-photo-col">
+        <div class="representative-photo-frame">
           <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="800" height="800" fill="#1B2A4A"/>
             <circle cx="400" cy="360" r="160" fill="#FAF8F5" opacity="0.9"/>
             <path d="M220 720C220 580 300 520 400 520C500 520 580 580 580 720" fill="#FAF8F5" opacity="0.9"/>
-            <text x="400" y="760" font-family="'Cinzel', serif" font-size="24" fill="#FFFFFF" text-anchor="middle">Keiko TERAZAwa</text>
+            <text x="400" y="760" font-family="'Cinzel', serif" font-size="24" fill="#FFFFFF" text-anchor="middle">Keiko Terazawa</text>
           </svg>
-          <span class="representative-overlay-text">Keiko TERAZAwa</span>
+          <span class="representative-overlay-text">Keiko Terazawa</span>
         </div>
-        <div style="background: var(--color-bg-subtle); padding: 1.2rem; border-radius: var(--radius-md); font-size: 0.88rem; line-height: 1.7;">
+        <div class="profile-info-badge" style="background: var(--color-bg-subtle); padding: 1.1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.7; border: 1px solid var(--color-border);">
           <p><strong>南九州税理士会 熊本県連 所属</strong></p>
           <p>税理士登録番号：第154978号</p>
-          <p>元国税局・税務署 法人課税部門統括官</p>
+          <p>元国税局・税務署 法人統括官</p>
         </div>
       </div>
 
-      <div>
-        <span class="zigzag-tag">REPRESENTATIVE TAX ACCOUNTANT</span>
-        <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary); margin-bottom: 0.6rem;">
-          代表税理士　寺沢 景子（てらざわ けいこ）
-        </h2>
-        <p style="font-size: 1rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
-          国税・税務署21年在職・税務調査のプロフェッショナル
-        </p>
+      <div class="profile-desc-col">
+        <div style="text-align: left;">
+          <span class="zigzag-tag">REPRESENTATIVE TAX ACCOUNTANT</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--color-primary); margin-bottom: 0.4rem;">
+            代表税理士　寺沢 景子（てらざわ けいこ）
+          </h2>
+          <p class="profile-sub-title" style="font-size: 0.95rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
+            国税・税務署21年在職・税務調査のプロフェッショナル
+          </p>
+        </div>
 
-        <div style="font-size: 0.98rem; line-height: 2; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.2rem;">
+        <div style="font-size: 0.95rem; line-height: 1.95; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.1rem; text-align: left;">
           <p>
             私は国税局・税務署に21年間在職し、最終役職として法人課税部門の統括官を務めてまいりました。数千社に及ぶ企業の税務調査と申告指導を担当する中で、「税務当局がどこを注視し、どのような会計処理に疑義を持つのか」という現場の肌感覚を徹底的に培いました。
           </p>
@@ -106,9 +155,9 @@
         </div>
 
         <!-- 経歴年表 -->
-        <div style="margin-top: 2rem; background: var(--color-bg-subtle); padding: 1.8rem; border-radius: var(--radius-md);">
-          <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 1rem; font-weight: 600;">【主な経歴】</h4>
-          <ul style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--color-text-sub);">
+        <div class="profile-career-box" style="margin-top: 1.8rem; background: var(--color-bg-subtle); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
+          <h4 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.8rem; font-weight: 600;">【主な経歴】</h4>
+          <ul style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--color-text-sub);">
             <li>・国税局・税務署に21年間在職。法人税・消費税・源泉所得税調査に従事。</li>
             <li>・法人課税部門 統括官として、調査指揮および適正申告指導を統括。</li>
             <li>・寺沢景子税理士事務所を開業（登録番号：第154978号）。</li>
@@ -118,10 +167,9 @@
     </section>
 
     <!-- 税理士 2: ベテラン税理士［お名前仮入力］ -->
-    <section style="display: grid; grid-template-columns: 340px 1fr; gap: 4rem; align-items: start; margin-bottom: 6rem; border-bottom: 1px solid var(--color-border); padding-bottom: 5rem;">
-      <div>
-        <div class="representative-photo-frame" style="margin-bottom: 1.5rem;">
-          <!-- 【画像スロット IMG-07B】ベテラン税理士 ポートレート (800×800px) -->
+    <section class="profile-member-grid">
+      <div class="profile-photo-col">
+        <div class="representative-photo-frame">
           <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="800" height="800" fill="#5B7065"/>
             <circle cx="400" cy="360" r="160" fill="#FAF8F5" opacity="0.9"/>
@@ -130,23 +178,25 @@
           </svg>
           <span class="representative-overlay-text">Senior Tax Advisor</span>
         </div>
-        <div style="background: var(--color-bg-subtle); padding: 1.2rem; border-radius: var(--radius-md); font-size: 0.88rem; line-height: 1.7;">
+        <div class="profile-info-badge" style="background: var(--color-bg-subtle); padding: 1.1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.7; border: 1px solid var(--color-border);">
           <p><strong>税理士実務歴35年</strong></p>
-          <p>税務・会計・事業承継コンサルタント</p>
-          <p>多業種にわたる財務アドバイザリー実績</p>
+          <p>税務・会計・事業承継コンサル</p>
+          <p>多業種財務アドバイザリー実績</p>
         </div>
       </div>
 
-      <div>
-        <span class="zigzag-tag">SENIOR TAX ACCOUNTANT</span>
-        <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary); margin-bottom: 0.6rem;">
-          税理士　
-        </h2>
-        <p style="font-size: 1rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
-          税理士経験35年・あらゆる税務実務に精通したベテラン税理士
-        </p>
+      <div class="profile-desc-col">
+        <div style="text-align: left;">
+          <span class="zigzag-tag">SENIOR TAX ACCOUNTANT</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--color-primary); margin-bottom: 0.4rem;">
+            税理士　【お名前仮入力】
+          </h2>
+          <p class="profile-sub-title" style="font-size: 0.95rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
+            税理士経験35年・あらゆる税務実務に精通したベテラン税理士
+          </p>
+        </div>
 
-        <div style="font-size: 0.98rem; line-height: 2; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.2rem;">
+        <div style="font-size: 0.95rem; line-height: 1.95; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.1rem; text-align: left;">
           <p>
             税理士として実務の最前線に立って35年。好況期・不況期を問わず、中小企業が直面する資金繰り、組織再編、事業承継、複雑な資産税申告を数多く手掛けてまいりました。
           </p>
@@ -155,9 +205,9 @@
           </p>
         </div>
 
-        <div style="margin-top: 2rem; background: var(--color-bg-subtle); padding: 1.8rem; border-radius: var(--radius-md);">
-          <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 1rem; font-weight: 600;">【主な経歴・専門分野】</h4>
-          <ul style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--color-text-sub);">
+        <div class="profile-career-box" style="margin-top: 1.8rem; background: var(--color-bg-subtle); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
+          <h4 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.8rem; font-weight: 600;">【主な経歴・専門分野】</h4>
+          <ul style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--color-text-sub);">
             <li>・税理士登録後、35年にわたり多種多様な法人の税務顧問・決算申告を統括。</li>
             <li>・製造業、建設業、医療法人、小売業など幅広い業界の実務に精通。</li>
             <li>・寺沢景子税理士事務所にて、重要案件のクロスチェックおよび高度税務相談を担当。</li>
@@ -166,12 +216,13 @@
       </div>
     </section>
 
-    <!-- 事務所概要テーブル ＆ マップ -->
+    <!-- 事務所概要 ＆ Googleマップ（レスポンシブ完全対応） -->
     <div class="section-header">
-      <h2 class="section-title" data-en="OFFICE">事務所概要</h2>
+      <h2 class="section-title" data-en="OFFICE">事務所概要・所在地</h2>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: start;">
+    <!-- PCでは横並び、スマホでは縦積みに自動で切り替わるグリッド -->
+    <div class="company-grid-layout">
       <div>
         <table class="office-table">
           <tbody>
@@ -181,7 +232,7 @@
             </tr>
             <tr>
               <th>体制</th>
-              <td>税理士2名体制（寺沢景子 税理士 ／ 税理士）</td>
+              <td>税理士2名体制（寺沢景子 税理士 ／ 【お名前仮入力】税理士）</td>
             </tr>
             <tr>
               <th>所属団体</th>
@@ -204,6 +255,10 @@
               <td>平日 9:30〜17:30（土日祝面談は事前予約対応）</td>
             </tr>
             <tr>
+              <th>対応エリア</th>
+              <td>熊本県全域（天草市・熊本市等）および全国オンライン対応</td>
+            </tr>
+            <tr>
               <th>提携士業</th>
               <td>
                 <strong>ザワテラス社労士</strong>（社会保険労務士と強力連携）<br>
@@ -216,12 +271,13 @@
         </table>
       </div>
 
-      <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--color-border); height: 100%; min-height: 400px;">
+      <!-- Googleマップ（スマホ全幅・見やすい高さ） -->
+      <div class="map-container-frame">
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3361.328310344585!2d130.1873117!3d32.4517374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35401944517c5251%3A0x6b3074d6c6e1db0!2z44CSODYzLTAwMjMg54aK5pys55yM5aSp6I2J5biC5Y2X55S677yV4oiS77yS77yS!5e0!3m2!1sja!2sjp!4v1714500000000!5m2!1sja!2sjp" 
           width="100%" 
           height="100%" 
-          style="border:0; min-height: 400px;" 
+          style="border:0;" 
           allowfullscreen="" 
           loading="lazy" 
           referrerpolicy="no-referrer-when-downgrade"
@@ -232,14 +288,10 @@
 
   </main>
 
-<!-- ======================================================================
-       フッター ＆ サイトマップ (Site Footer & Sitemap Navigation)
-       ====================================================================== -->
+  <!-- 完全統一フッター（サイトマップ完備） -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
-        
-        <!-- カラム 1：事務所基本情報 -->
+      <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
             寺沢景子税理士事務所
@@ -248,73 +300,45 @@
             TERAZAWA TAX &amp; CONSULTING
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023<br>
-            熊本県天草市南町5-22<br>
-            TEL: <a href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;">0969-22-1166</a><br>
-            FAX: 0969-22-1167<br>
+            〒863-0023 熊本県天草市南町5-22<br>
+            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
             南九州税理士会熊本県連 所属（第154978号）
           </address>
-          <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
-            <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65);">
-              提携士業：<a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">ザワテラス社労士</a>
-            </p>
-            <p style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); margin-top: 4px;">
-              税理士2人体制（元統括官 寺沢景子 / 税理士歴35年ベテラン税理士）
-            </p>
-          </div>
         </div>
 
-        <!-- カラム 2：提供サービス一覧（サイトマップ） -->
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
-            サービス案内
-          </h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
+          <ul class="footer-nav-list">
             <li><a href="./services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
-            <li><a href="./services.html#audit" class="footer-nav-link">・ 税務調査対策・事前模擬調査</a></li>
+            <li><a href="./services.html#audit" class="footer-nav-link">・ 税務調査対策</a></li>
             <li><a href="./services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
-            <li><a href="./services.html#finance" class="footer-nav-link">・ 創業融資支援・公庫対策</a></li>
             <li><a href="./services.html#cloud" class="footer-nav-link">・ クラウド会計導入DX</a></li>
             <li><a href="./services.html#inheritance" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
-            <li><a href="./services.html#labor" class="footer-nav-link">・ 助成金・労務支援（社労士連携）</a></li>
           </ul>
         </div>
 
-        <!-- カラム 3：事務所・コンテンツ案内（サイトマップ） -->
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
-            事務所案内
-          </h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
-            <li><a href="./index.html" class="footer-nav-link">・ ホーム（トップ）</a></li>
-            <li><a href="./profile.html" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
-            <li><a href="./pricing.html" class="footer-nav-link">・ 料金案内（顧問料・スポット）</a></li>
-            <li><a href="./faq.html" class="footer-nav-link">・ よくある質問（FAQ）</a></li>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">事務所案内</h4>
+          <ul class="footer-nav-list">
+            <li><a href="./index.html" class="footer-nav-link">・ ホーム</a></li>
+            <li><a href="./profile.html" class="footer-nav-link is-active">・ 税理士紹介・事務所概要</a></li>
+            <li><a href="./pricing.html" class="footer-nav-link">・ 料金案内</a></li>
+            <li><a href="./faq.html" class="footer-nav-link">・ よくある質問</a></li>
             <li><a href="./blog/index.html" class="footer-nav-link">・ 税務・経営コラム</a></li>
-            <li><a href="./contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 初回無料相談・お問い合わせ</a></li>
+            <li><a href="./contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 無料相談・お問い合わせ</a></li>
           </ul>
         </div>
 
-        <!-- カラム 4：サイトマップ ＆ 規約 -->
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
-            サイトマップ・規約
-          </h4>
-          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
-            <li><a href="./sitemap.html" class="footer-nav-link" style="font-weight: 600; color: #FFFFFF;">・ サイトマップ（全体一覧）</a></li>
-            <li><a href="./privacy.html" class="footer-nav-link">・ 個人情報保護方針（免責事項）</a></li>
-            <li><a href="./sitemap.xml" target="_blank" rel="noopener noreferrer" class="footer-nav-link" style="color: rgba(255,255,255,0.5); font-size: 0.82rem;">・ XMLサイトマップ（Google用）</a></li>
-            <li style="margin-top: 0.8rem;">
-              <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" class="header-cta-btn" style="padding: 0.45rem 1rem; font-size: 0.78rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);">
-                ザワテラス社労士 HP &rarr;
-              </a>
-            </li>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サイトマップ・規約</h4>
+          <ul class="footer-nav-list">
+            <li><a href="./sitemap.html" class="footer-nav-link">・ サイトマップ（全体一覧）</a></li>
+            <li><a href="./privacy.html" class="footer-nav-link">・ 個人情報保護方針</a></li>
+            <li><a href="./sitemap.xml" target="_blank" class="footer-nav-link" style="color: rgba(255,255,255,0.5);">・ XMLサイトマップ</a></li>
           </ul>
         </div>
-
       </div>
 
-      <!-- コピーライト -->
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
         <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
