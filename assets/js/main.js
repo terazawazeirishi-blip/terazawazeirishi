@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（Pages CMS画像完全連動版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（完全修復安定版）
  * ファイルパス: assets/js/main.js
- * 仕様: API-Key-Free / サブディレクトリ自動解決 / 画像パス全形式対応
+ * 仕様: API-Key-Free / services.html サービス画像01〜07完全連動修復
  * ==============================================================================
  */
 
@@ -16,7 +16,7 @@
     initMobileNav();
     initFaqAccordion();
     initSmoothScroll();
-    syncCmsImages(); // ★ Pages CMS の画像を確実に反映
+    syncCmsImages(); // ★ 画像自動同期
   }
 
   /* 1. スクロール影 */
@@ -96,7 +96,6 @@
 
   /* 5. 【完全修復版】Pages CMS 画像自動同期エンジン */
   function syncCmsImages() {
-    // サイトのルートパス（/terazawazeirishi/）を現在地から高精度に特定
     const pathParts = window.location.pathname.split('/');
     let repoBase = '/';
     const repoIndex = pathParts.indexOf('terazawazeirishi');
@@ -114,14 +113,12 @@
       .then((data) => {
         if (!data) return;
 
-        // Pages CMS が保存したパスをどんな形式でも完璧なURLに解決する関数
+        // パス解決ヘルパー
         const resolveImgUrl = (rawPath) => {
           if (!rawPath || typeof rawPath !== 'string') return '';
           const trimmed = rawPath.trim();
           if (!trimmed) return '';
           if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
-          
-          // 先頭のスラッシュやドット、重複するリポジトリ名を除去
           let clean = trimmed.replace(/^(\.\/|\/)/, '');
           if (clean.startsWith('terazawazeirishi/')) {
             clean = clean.replace('terazawazeirishi/', '');
@@ -129,10 +126,8 @@
           return repoBase + clean;
         };
 
-        // --- A. 税理士ポートレート写真（寺沢代表 ＆ ベテラン税理士） ---
+        // --- A. 税理士写真（寺沢代表 ＆ ベテラン税理士） ---
         const photoFrames = document.querySelectorAll('.representative-photo-frame');
-        
-        // 1番目の枠 ➜ 寺沢景子 代表税理士
         if (photoFrames.length >= 1 && data.rep_keiko) {
           const keikoUrl = resolveImgUrl(data.rep_keiko);
           if (keikoUrl) {
@@ -142,8 +137,6 @@
             `;
           }
         }
-
-        // 2番目の枠 ➜ ベテラン税理士
         if (photoFrames.length >= 2 && data.rep_senior) {
           const seniorUrl = resolveImgUrl(data.rep_senior);
           if (seniorUrl) {
@@ -173,7 +166,7 @@
           }
         }
 
-        // --- D. ヒーロー背景透かし (IMG-02) ---
+        // --- D. ヒーロー透かし (IMG-02) ---
         if (data.watermark_crest) {
           const crestUrl = resolveImgUrl(data.watermark_crest);
           const hero = document.getElementById('hero');
@@ -197,14 +190,34 @@
           }
         });
 
-        // --- F. サービス写真 01〜07 ---
+        // --- F. 【完全修復】サービス写真 01〜07（トップページ ＆ services.html 両対応） ---
         const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
+
+        // トップページのサービスカード
         document.querySelectorAll('.service-card-item .service-card-img-slot').forEach((slot, idx) => {
           const k = serviceKeys[idx];
           if (data[k]) {
-            const u = resolveImgUrl(data[k]);
-            if (u) {
-              slot.innerHTML = `<img src="${u}" alt="サービス写真 ${idx + 1}" class="service-card-img" style="width:100%; height:100%; object-fit:cover;">`;
+            const imgUrl = resolveImgUrl(data[k]);
+            if (imgUrl) {
+              slot.innerHTML = `<img src="${imgUrl}" alt="サービス写真 ${idx + 1}" class="service-card-img" style="width:100%; height:100%; object-fit:cover;">`;
+            }
+          }
+        });
+
+        // services.html の各個別サービス詳細枠（★バグ完全除去）
+        const serviceDetailIds = ['#corporate', '#audit', '#startup', '#finance', '#cloud', '#inheritance', '#labor'];
+        serviceDetailIds.forEach((id, idx) => {
+          const k = serviceKeys[idx];
+          if (data[k]) {
+            const imgUrl = resolveImgUrl(data[k]); // ★確実にURLを定義
+            if (imgUrl) {
+              const article = document.querySelector(id);
+              if (article) {
+                const imgSlot = article.querySelector('.zigzag-visual-slot');
+                if (imgSlot) {
+                  imgSlot.innerHTML = `<img src="${imgUrl}" alt="サービス詳細 ${idx + 1}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+                }
+              }
             }
           }
         });
