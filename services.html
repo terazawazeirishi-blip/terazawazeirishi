@@ -51,7 +51,7 @@
     </div>
   </header>
 
-  <!-- ページヒーロー -->
+  <!-- ヒーロー -->
   <section class="athena-hero" style="min-height: 48vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 3rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SERVICES</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
@@ -64,14 +64,12 @@
     </div>
   </section>
 
-  <!-- メインコンテンツ（JSONから自動生成） -->
+  <!-- メインコンテンツ -->
   <main class="container" style="padding-top: 5rem; padding-bottom: 7rem;">
-    
     <!-- サービス一覧コンテナ -->
     <div id="servicesContainer" style="display: flex; flex-direction: column; gap: 6rem;">
       <p style="text-align: center; color: var(--color-text-muted);">サービスデータを読み込み中...</p>
     </div>
-
   </main>
 
   <!-- 完全統一フッター（サイトマップ完備） -->
@@ -135,59 +133,97 @@
     <a href="./contact.html" class="floating-cta-btn"><span>無料相談はこちら</span></a>
   </aside>
 
-  <!-- サービス自動レンダリングスクリプト -->
+  <!-- ★【完全修復】文章と画像を同時に待って最初から画像付きで一発描画するスクリプト -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const container = document.getElementById('servicesContainer');
       const serviceTargetIds = ['corporate', 'audit', 'startup', 'finance', 'cloud', 'inheritance', 'labor'];
+      const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
 
-      fetch('./content/services.json?v=' + Date.now())
-        .then(res => res.json())
-        .then(data => {
-          if (!data || !data.service_items || data.service_items.length === 0) return;
+      // サブディレクトリ対応パスヘルパー
+      const pathParts = window.location.pathname.split('/');
+      let repoBase = './';
+      const repoIndex = pathParts.indexOf('terazawazeirishi');
+      if (repoIndex !== -1) {
+        repoBase = pathParts.slice(0, repoIndex + 1).join('/') + '/';
+      }
 
-          container.innerHTML = '';
-          data.service_items.forEach((item, index) => {
-            const isReverse = (index % 2 === 1);
-            const targetId = serviceTargetIds[index] || `service-${index + 1}`;
-            const article = document.createElement('article');
-            article.id = targetId;
-            article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
-            article.style.cssText = 'border-bottom: 1px solid var(--color-border); padding-bottom: 5rem;';
+      const resolveImgUrl = (rawPath) => {
+        if (!rawPath || typeof rawPath !== 'string') return '';
+        const trimmed = rawPath.trim();
+        if (!trimmed) return '';
+        if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
+        let clean = trimmed.replace(/^(\.\/|\/)/, '');
+        if (clean.startsWith('terazawazeirishi/')) {
+          clean = clean.replace('terazawazeirishi/', '');
+        }
+        return repoBase + clean;
+      };
 
-            // チェックポイントの改行を箇条書き化
-            const pointLines = item.points ? item.points.split('\n').filter(l => l.trim()) : [];
-            const pointsHtml = pointLines.map(p => `
-              <li style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--color-primary);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A08C4A" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>${escapeHtml(p)}</span>
-              </li>
-            `).join('');
+      // ★ 文章データと画像データの両方が揃うのを完全に待つ（競合の完全根絶）
+      Promise.all([
+        fetch('./content/services.json?v=' + Date.now()).then(r => r.ok ? r.json() : null),
+        fetch('./content/site_images.json?v=' + Date.now()).then(r => r.ok ? r.json() : null)
+      ])
+      .then(([servicesData, imagesData]) => {
+        if (!servicesData || !servicesData.service_items || servicesData.service_items.length === 0) return;
 
-            article.innerHTML = `
-              <div class="zigzag-visual-slot">
-                <svg class="zigzag-visual-img" viewBox="0 0 700 460" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="700" height="460" fill="#FAF8F5"/>
-                  <circle cx="350" cy="230" r="140" fill="#F4EEDC" opacity="0.6"/>
-                  <text x="350" y="235" font-family="'Cinzel', serif" font-size="22" fill="#1B2A4A" text-anchor="middle" font-weight="600">${escapeHtml(item.service_no)}</text>
-                </svg>
-              </div>
-              <div class="zigzag-content">
-                <span class="zigzag-tag">${escapeHtml(item.service_no)}</span>
-                <h2 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-primary); margin-bottom: 1rem;">${escapeHtml(item.title)}</h2>
-                <p style="color: var(--color-text-sub); line-height: 1.9; margin-bottom: 1.5rem;">${escapeHtml(item.lead)}</p>
-                <ul style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 2rem;">
-                  ${pointsHtml}
-                </ul>
-                <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
-              </div>
+        container.innerHTML = '';
+        servicesData.service_items.forEach((item, index) => {
+          const isReverse = (index % 2 === 1);
+          const targetId = serviceTargetIds[index] || `service-${index + 1}`;
+          const key = serviceKeys[index];
+          const article = document.createElement('article');
+          article.id = targetId;
+          article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
+          article.style.cssText = 'border-bottom: 1px solid var(--color-border); padding-bottom: 5rem;';
+
+          // 画像の完全特定
+          let visualHtml = '';
+          const imgPath = imagesData && imagesData[key] ? resolveImgUrl(imagesData[key]) : '';
+
+          if (imgPath) {
+            // 画像が登録されている場合は、最初から <img> を挿入して描画（消える心配ゼロ）
+            visualHtml = `<img src="${imgPath}" alt="${escapeHtml(item.title)}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+          } else {
+            // 未設定時はフォールバックSVG
+            visualHtml = `
+              <svg class="zigzag-visual-img" viewBox="0 0 700 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="700" height="460" fill="#FAF8F5"/>
+                <circle cx="350" cy="230" r="140" fill="#F4EEDC" opacity="0.6"/>
+                <text x="350" y="235" font-family="'Cinzel', serif" font-size="22" fill="#1B2A4A" text-anchor="middle" font-weight="600">${escapeHtml(item.service_no)}</text>
+              </svg>
             `;
-            container.appendChild(article);
-          });
-        })
-        .catch(err => {
-          console.warn('Services JSON load error:', err);
+          }
+
+          const pointLines = item.points ? item.points.split('\n').filter(l => l.trim()) : [];
+          const pointsHtml = pointLines.map(p => `
+            <li style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: var(--color-primary);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A08C4A" stroke-width="2.5" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>${escapeHtml(p)}</span>
+            </li>
+          `).join('');
+
+          article.innerHTML = `
+            <div class="zigzag-visual-slot">
+              ${visualHtml}
+            </div>
+            <div class="zigzag-content">
+              <span class="zigzag-tag">${escapeHtml(item.service_no)}</span>
+              <h2 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-primary); margin-bottom: 1rem;">${escapeHtml(item.title)}</h2>
+              <p style="color: var(--color-text-sub); line-height: 1.9; margin-bottom: 1.5rem;">${escapeHtml(item.lead)}</p>
+              <ul style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 2rem;">
+                ${pointsHtml}
+              </ul>
+              <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+            </div>
+          `;
+          container.appendChild(article);
         });
+      })
+      .catch(err => {
+        console.warn('Services render error:', err);
+      });
 
       function escapeHtml(str) {
         return String(str).replace(/[&<>'"]/g, t => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t] || t));
