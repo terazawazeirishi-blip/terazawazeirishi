@@ -1,6 +1,858 @@
+/* ==========================================================================
+   寺沢景子税理士事務所 公式Webサイト 共通マスター統合スタイルシート
+   ファイルパス: assets/css/style.css
+   デザインコンセプト: Elegant × Premium × Trust × Modern (Athena Style)
+   仕様: API-Key-Free / Desktop解像度完全維持 / Mobileレイアウト完全最適化
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. デザイントークン定義 (:root)
+   -------------------------------------------------------------------------- */
+:root {
+  /* ブランドカラー */
+  --color-primary: #1B2A4A;          /* Athena Deep Navy: 知性・厳格・最高格式 */
+  --color-primary-light: #2A3F6D;    /* 軽快なネイビー */
+  --color-primary-dark: #0F1829;     /* 引き締めの極濃紺 */
+  --color-accent: #A08C4A;           /* Athena Olive Gold: 上品・信頼のオリーブゴールド */
+  --color-accent-light: #C5B378;     /* ハイライトゴールド */
+  --color-accent-soft: #F4EEDC;      /* 淡いゴールドティント（バッジ・背景用） */
+  
+  /* ボタニカル・フラワー補助カラー */
+  --color-floral-leaf: #5B7065;      /* 落ち着いたセージグリーン（葉・知性） */
+  --color-floral-petal: #E8D8D8;     /* 柔らかなピオニーピンク（花弁・優しさ） */
+  --color-floral-bg: #FAF8F5;        /* 温かみのあるオフホワイト（花びらベース） */
+
+  /* ニュートラルベース */
+  --color-bg-base: #FFFFFF;          /* 純白 */
+  --color-bg-subtle: #F9F9FA;        /* 微細なライトグレー（セクション背景） */
+  --color-bg-card: #FFFFFF;          /* カード背景 */
+  --color-text-main: #222222;        /* 本文メインテキスト（高可読性） */
+  --color-text-sub: #555555;         /* 補助テキスト */
+  --color-text-muted: #888888;       /* 注釈・日付 */
+  --color-border: #E8E8E8;           /* 境界線 */
+  --color-border-gold: rgba(160, 140, 74, 0.35); /* ゴールド境界線 */
+
+  /* タイポグラフィ */
+  --font-serif: "Cinzel", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* 余白・レイアウト（デスクトップ基準） */
+  --container-max: 1200px;
+  --container-narrow: 900px;
+  --header-height: 84px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* 陰影（品格のある微細な多層シャドウ） */
+  --shadow-sm: 0 2px 8px rgba(15, 24, 41, 0.04);
+  --shadow-md: 0 6px 24px rgba(15, 24, 41, 0.08);
+  --shadow-lg: 0 16px 48px rgba(15, 24, 41, 0.12);
+  --shadow-gold: 0 6px 20px rgba(160, 140, 74, 0.25);
+
+  /* トランジション */
+  --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: 0.15s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. リセット・ベーススタイル
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-text-main);
+  background-color: var(--color-bg-base);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   3. アテナ風タイポグラフィ ＆ 見出し（巨大英字ウォーターマーク付き）
+   -------------------------------------------------------------------------- */
+.section-header {
+  text-align: center;
+  position: relative;
+  margin-bottom: 4.5rem;
+}
+
+.section-header.text-left {
+  text-align: left;
+}
+
+/* 巨大薄字英字ウォーターマーク */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  padding-bottom: 1.2rem;
+  z-index: 2;
+}
+
+.section-title::before {
+  content: attr(data-en);
+  position: absolute;
+  top: -2.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: rgba(27, 42, 74, 0.045);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.section-header.text-left .section-title::before {
+  left: 0;
+  transform: none;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54px;
+  height: 2px;
+  background-color: var(--color-accent);
+}
+
+.section-header.text-left .section-title::after {
+  left: 0;
+  transform: none;
+}
+
+.section-lead {
+  margin-top: 1.2rem;
+  font-size: 1.05rem;
+  color: var(--color-text-sub);
+  letter-spacing: 0.04em;
+}
+
+.section-flower-divider {
+  width: 100%;
+  max-width: 480px;
+  height: 24px;
+  margin: 2rem auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.65;
+}
+
+/* --------------------------------------------------------------------------
+   4. ヘッダーナビゲーション (Site Header)
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: var(--transition-normal);
+}
+
+.site-header.is-scrolled {
+  box-shadow: var(--shadow-sm);
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.header-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.brand-en {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--color-accent);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.nav-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  position: relative;
+  padding: 0.4rem 0;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: var(--transition-normal);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-accent);
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 14px rgba(160, 140, 74, 0.28);
+  transition: var(--transition-normal);
+}
+
+.header-cta-btn:hover {
+  background-color: #8C783C;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(160, 140, 74, 0.38);
+}
+
+.hamburger-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: var(--transition-normal);
+}
+
+/* --------------------------------------------------------------------------
+   5. アテナ風ヒーローセクション (背景回り込み＆下部グラデーション仕様)
+   -------------------------------------------------------------------------- */
+.athena-hero {
+  position: relative;
+  min-height: 94vh;
+  padding-top: calc(var(--header-height) + 3.5rem);
+  padding-bottom: 6rem;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--color-bg-subtle) 60%, var(--color-floral-bg) 100%);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 最背面：薄字英字ウォーターマーク (z-index: 1) */
+.athena-hero-bg-text {
+  position: absolute;
+  top: 48%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 15vw, 13rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: rgba(27, 42, 74, 0.035);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* 中間面：IMG-01 右側からテキスト背後に回り込む大型アートワーク (z-index: 2) */
+.hero-bg-artwork-wrap {
+  position: absolute;
+  top: 0;
+  right: -5%;
+  width: clamp(540px, 62vw, 920px);
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  /* 下に行くほど薄く透明になるグラデーションマスク (Athena仕様) */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.95) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.95) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.hero-bg-artwork-slot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.88;
+  filter: drop-shadow(0 16px 36px rgba(15, 24, 41, 0.06));
+}
+
+.hero-bg-artwork-img {
+  width: 100%;
+  height: auto;
+  max-height: 92%;
+  object-fit: contain;
+  object-position: right center;
+}
+
+/* 最前面：テキスト・ボタンコンテナ (z-index: 3) */
+.hero-container-front {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-content-col {
+  max-width: 680px;
+  background: radial-gradient(circle at left center, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 70%);
+  padding: 1.5rem 0;
+}
+
+.hero-sub-en {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.24em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.hero-main-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-primary);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.8rem;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.9);
+}
+
+.hero-lead-text {
+  font-size: 1.08rem;
+  line-height: 2;
+  color: var(--color-text-main);
+  margin-bottom: 2.4rem;
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.8);
+}
+
+.hero-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 2.8rem;
+}
+
+.hero-badge-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-gold);
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-badge-icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-accent);
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   6. 01〜05 ジグザグ写真レイアウト (About Section)
+   -------------------------------------------------------------------------- */
+.athena-about-section {
+  padding: 7rem 0;
+  background-color: var(--color-bg-base);
+  position: relative;
+}
+
+.athena-zigzag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5.5rem;
+}
+
+.athena-zigzag-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4.5rem;
+  position: relative;
+}
+
+.athena-zigzag-item.is-reverse {
+  direction: rtl;
+}
+
+.athena-zigzag-item.is-reverse > * {
+  direction: ltr;
+}
+
+.zigzag-visual-slot {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-bg-subtle);
+  aspect-ratio: 4 / 3;
+}
+
+.zigzag-visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zigzag-visual-slot:hover .zigzag-visual-img {
+  transform: scale(1.03);
+}
+
+.zigzag-content {
+  position: relative;
+}
+
+.athena-num-bg {
+  position: absolute;
+  top: -2.8rem;
+  right: 0;
+  font-family: var(--font-serif);
+  font-size: 7.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(15, 24, 41, 0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.zigzag-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.zigzag-heading {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.45;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.zigzag-text {
+  font-size: 0.98rem;
+  line-height: 1.9;
+  color: var(--color-text-sub);
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   7. 左固定・右スクロール サービス (Sticky Service Section)
+   -------------------------------------------------------------------------- */
+.athena-service-section {
+  padding: 7rem 0;
+  background-color: var(--color-bg-subtle);
+  position: relative;
+}
+
+.athena-service-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.athena-service-sticky {
+  position: sticky;
+  top: calc(var(--header-height) + 30px);
+}
+
+.service-sticky-text {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--color-text-sub);
+  line-height: 1.85;
+}
+
+.service-list-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.service-card-item {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: var(--transition-normal);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.service-card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-gold);
+}
+
+.service-card-img-slot {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-bg-subtle);
+}
+
+.service-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+}
+
+.service-card-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.service-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.service-card-link:hover {
+  color: #8C783C;
+}
+
+/* --------------------------------------------------------------------------
+   8. 代表メッセージ・税理士写真・事務所概要
+   -------------------------------------------------------------------------- */
+.message-section {
+  padding: 7rem 0;
+  background-color: var(--color-bg-base);
+}
+
+.message-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* 税理士ポートレート写真枠（サイズ暴走完全防止・固定仕様） */
+.representative-photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.8rem;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 4px solid #FFFFFF;
+  background-color: var(--color-bg-subtle);
+}
+
+.representative-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.representative-overlay-text {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: #FFFFFF;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.office-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.office-table th,
+.office-table td {
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+
+.office-table th {
+  width: 28%;
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: rgba(249, 249, 250, 0.7);
+  white-space: nowrap;
+}
+
+.office-table td {
+  color: var(--color-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   9. 常駐フローティングCTA ＆ フッター
+   -------------------------------------------------------------------------- */
+.floating-cta {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  z-index: 990;
+}
+
+.floating-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-accent);
+  color: #FFFFFF !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.9rem 1.7rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(15, 24, 41, 0.3);
+  transition: var(--transition-normal);
+}
+
+.floating-cta-btn:hover {
+  background-color: #8C783C;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(15, 24, 41, 0.4);
+}
+
+.site-footer {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: 5rem 0 2.5rem;
+  font-size: 0.92rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3.5rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.footer-address {
+  font-style: normal;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.footer-nav-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--color-accent-light);
+  margin-bottom: 1.2rem;
+}
+
+.footer-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-nav-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-nav-link:hover {
+  color: var(--color-accent-light);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.82rem;
+}
+
 /* --------------------------------------------------------------------------
    10. レスポンシブ対応 (Mobile / Tablet 最適化完全版)
-   ※ デスクトップ表示（PC）のレイアウト・解像度は一切変更していません
+   ※ デスクトップ表示（PC）の解像度・レイアウトは一切変更していません
    -------------------------------------------------------------------------- */
 
 /* --- タブレット表示 (幅992px以下) --- */
@@ -143,7 +995,7 @@
     right: -20%;
     top: 5%;
     width: 95vw;
-    opacity: 0.18; /* スマホでは文字の視認性を最優先に淡く設定 */
+    opacity: 0.18; /* スマホでの文字可読性を最優先 */
   }
   .hero-sub-en {
     font-size: 0.8rem;
@@ -163,7 +1015,7 @@
     text-align: left; /* スマホでは左揃えが最も読みやすい */
   }
 
-  /* 月桂樹バッジのスマホ最適化（タップしやすいピル型） */
+  /* 月桂樹バッジのスマホ最適化 */
   .hero-badges-row {
     flex-direction: column;
     gap: 8px;
@@ -190,7 +1042,7 @@
     font-size: 0.95rem;
   }
 
-  /* 4. 見出し（英字ウォーターマークのスマホ縮小） */
+  /* 4. 見出し */
   .section-header {
     margin-bottom: 3rem;
   }
@@ -208,7 +1060,7 @@
     margin-top: 0.8rem;
   }
 
-  /* 5. About us（01〜05 ジグザグ写真レイアウトのスマホ最適化） */
+  /* 5. About us（01〜05 ジグザグ写真レイアウト最適化） */
   .athena-about-section {
     padding: 4.5rem 0;
   }
@@ -219,7 +1071,7 @@
     gap: 1.5rem;
   }
   .zigzag-visual-slot {
-    aspect-ratio: 16 / 10; /* スマホで縦長になりすぎないスリム比率 */
+    aspect-ratio: 16 / 10;
     border-radius: var(--radius-md);
   }
   .athena-num-bg {
@@ -236,7 +1088,7 @@
     line-height: 1.8;
   }
 
-  /* 6. サービスセクション（スマホカードスリム化） */
+  /* 6. サービスセクション（カードスリム化） */
   .athena-service-section {
     padding: 4.5rem 0;
   }
@@ -264,9 +1116,9 @@
     font-size: 0.9rem;
   }
 
-  /* 7. 税理士紹介（2人体制）のスマホ最適化（写真巨大化防止） */
+  /* 7. 税理士紹介（写真巨大化防止） */
   .representative-photo-frame {
-    max-width: 190px !important; /* スマホ画面で美しく引き締まるサイズ */
+    max-width: 190px !important;
     margin: 0 auto 1.2rem auto !important;
   }
 
