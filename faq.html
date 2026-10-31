@@ -16,32 +16,42 @@
 </head>
 <body>
 
-  <!-- ヘッダー -->
+  <!-- 完全統一ヘッダー -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="./index.html" class="brand-logo" aria-label="寺沢景子税理士事務所 ホーム">
         <svg class="brand-logo-img" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="22" cy="22" r="21" stroke="#A08C4A" stroke-width="1.5" stroke-dasharray="3 3"/>
           <path d="M22 6C14 14 12 24 22 36C32 24 30 14 22 6Z" fill="#1B2A4A" opacity="0.9"/>
+          <path d="M16 20C18 26 22 30 22 36C22 30 26 26 28 20" stroke="#A08C4A" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
         <div class="brand-text">
           <span class="brand-name">寺沢景子税理士事務所</span>
           <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
         </div>
       </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開閉する" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
       <nav class="header-nav" id="headerNav">
         <ul class="nav-list">
           <li><a href="./index.html" class="nav-link">ホーム</a></li>
           <li><a href="./services.html" class="nav-link">サービス案内</a></li>
           <li><a href="./pricing.html" class="nav-link">料金案内</a></li>
-          <li><a href="./profile.html" class="nav-link">事務所概要・代表</a></li>
+          <li><a href="./profile.html" class="nav-link">税理士紹介・概要</a></li>
           <li><a href="./faq.html" class="nav-link is-active">よくある質問</a></li>
+          <li><a href="./blog/index.html" class="nav-link">税務コラム</a></li>
         </ul>
         <a href="./contact.html" class="header-cta-btn">無料相談を予約</a>
       </nav>
     </div>
   </header>
 
+  <!-- ヒーロー -->
   <section class="athena-hero" style="min-height: 44vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">FAQ</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
@@ -51,64 +61,17 @@
     </div>
   </section>
 
+  <!-- FAQ本体（JSONから自動生成） -->
   <main class="container-narrow" style="padding-top: 4rem; padding-bottom: 7rem;">
-    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-      
-      <!-- FAQ 01 -->
-      <div class="faq-accordion-item" style="background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px solid var(--color-border); overflow: hidden;">
-        <button class="faq-question-btn" aria-expanded="false" style="width: 100%; text-align: left; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--color-primary); font-size: 1.05rem;">
-          <span>Q. 初回の面談相談は本当に無料ですか？</span>
-          <span style="font-size: 1.5rem; color: var(--color-accent);">&plus;</span>
-        </button>
-        <div class="faq-answer-pane" hidden style="padding: 0 1.5rem 1.5rem; font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.8;">
-          はい、初回の面談（30〜60分程度）は完全無料です。天草の事務所にお越しいただく対面面談はもちろん、Zoomなどを利用したオンライン面談にも対応しております。無理な勧誘等は一切ございませんのでご安心ください。
-        </div>
-      </div>
-
-      <!-- FAQ 02 -->
-      <div class="faq-accordion-item" style="background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px solid var(--color-border); overflow: hidden;">
-        <button class="faq-question-btn" aria-expanded="false" style="width: 100%; text-align: left; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--color-primary); font-size: 1.05rem;">
-          <span>Q. 税務署から税務調査の連絡が来ました。今すぐ対応してもらえますか？</span>
-          <span style="font-size: 1.5rem; color: var(--color-accent);">&plus;</span>
-        </button>
-        <div class="faq-answer-pane" hidden style="padding: 0 1.5rem 1.5rem; font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.8;">
-          はい、緊急の税務調査にも迅速に対応いたします。元法人課税部門統括官の寺沢景子が直接お話を伺い、調査官との日程調整から当日の立ち会い、意見陳述まで責任を持って担当します。まずは今すぐお電話（0969-22-1166）ください。
-        </div>
-      </div>
-
-      <!-- FAQ 03 -->
-      <div class="faq-accordion-item" style="background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px solid var(--color-border); overflow: hidden;">
-        <button class="faq-question-btn" aria-expanded="false" style="width: 100%; text-align: left; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--color-primary); font-size: 1.05rem;">
-          <span>Q. 社会保険労務士との連携（ザワテラス社労士）とは具体的にどのようなものですか？</span>
-          <span style="font-size: 1.5rem; color: var(--color-accent);">&plus;</span>
-        </button>
-        <div class="faq-answer-pane" hidden style="padding: 0 1.5rem 1.5rem; font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.8;">
-          雇用関係助成金の申請や従業員の就業規則整備、社会保険・労働保険の手続きが必要な際、当事務所から提携先である「ザワテラス社労士」へスムーズに情報連携を行い、ワンストップで解決いたします。お客様があちこちへ同じ説明をする負担を大幅に削減できます。
-        </div>
-      </div>
-
-      <!-- FAQ 04 -->
-      <div class="faq-accordion-item" style="background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px solid var(--color-border); overflow: hidden;">
-        <button class="faq-question-btn" aria-expanded="false" style="width: 100%; text-align: left; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--color-primary); font-size: 1.05rem;">
-          <span>Q. 天草市外や熊本県外の遠方でも対応してもらえますか？</span>
-          <span style="font-size: 1.5rem; color: var(--color-accent);">&plus;</span>
-        </button>
-        <div class="faq-answer-pane" hidden style="padding: 0 1.5rem 1.5rem; font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.8;">
-          もちろん可能です。ZoomなどのWeb会議システムやクラウド会計（freee・マネーフォワード）を活用し、全国どこからでも対面と変わらない手厚いサポートを提供しております。
-        </div>
-      </div>
-
+    <div id="faqContainer" style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <p style="text-align: center; color: var(--color-text-muted);">Q&Aデータを読み込み中...</p>
     </div>
   </main>
 
-<!-- ======================================================================
-       フッター ＆ サイトマップ (Site Footer & Sitemap Navigation)
-       ====================================================================== -->
+  <!-- 完全統一フッター（サイトマップ完備） -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
-        
-        <!-- カラム 1：事務所基本情報 -->
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
             寺沢景子税理士事務所
@@ -117,79 +80,103 @@
             TERAZAWA TAX &amp; CONSULTING
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023<br>
-            熊本県天草市南町5-22<br>
-            TEL: <a href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;">0969-22-1166</a><br>
-            FAX: 0969-22-1167<br>
+            〒863-0023 熊本県天草市南町5-22<br>
+            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
             南九州税理士会熊本県連 所属（第154978号）
           </address>
-          <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
-            <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65);">
-              提携士業：<a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">ザワテラス社労士</a>
-            </p>
-            <p style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); margin-top: 4px;">
-              税理士2人体制（元統括官 寺沢景子 / 税理士歴35年ベテラン税理士）
-            </p>
-          </div>
         </div>
 
-        <!-- カラム 2：提供サービス一覧（サイトマップ） -->
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
-            サービス案内
-          </h4>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
           <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
             <li><a href="./services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
-            <li><a href="./services.html#audit" class="footer-nav-link">・ 税務調査対策・事前模擬調査</a></li>
+            <li><a href="./services.html#audit" class="footer-nav-link">・ 税務調査対策</a></li>
             <li><a href="./services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
-            <li><a href="./services.html#finance" class="footer-nav-link">・ 創業融資支援・公庫対策</a></li>
             <li><a href="./services.html#cloud" class="footer-nav-link">・ クラウド会計導入DX</a></li>
             <li><a href="./services.html#inheritance" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
-            <li><a href="./services.html#labor" class="footer-nav-link">・ 助成金・労務支援（社労士連携）</a></li>
           </ul>
         </div>
 
-        <!-- カラム 3：事務所・コンテンツ案内（サイトマップ） -->
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
-            事務所案内
-          </h4>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">事務所案内</h4>
           <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
-            <li><a href="./index.html" class="footer-nav-link">・ ホーム（トップ）</a></li>
+            <li><a href="./index.html" class="footer-nav-link">・ ホーム</a></li>
             <li><a href="./profile.html" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
-            <li><a href="./pricing.html" class="footer-nav-link">・ 料金案内（顧問料・スポット）</a></li>
-            <li><a href="./faq.html" class="footer-nav-link">・ よくある質問（FAQ）</a></li>
+            <li><a href="./pricing.html" class="footer-nav-link">・ 料金案内</a></li>
+            <li><a href="./faq.html" class="footer-nav-link">・ よくある質問</a></li>
             <li><a href="./blog/index.html" class="footer-nav-link">・ 税務・経営コラム</a></li>
-            <li><a href="./contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 初回無料相談・お問い合わせ</a></li>
+            <li><a href="./contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 無料相談・お問い合わせ</a></li>
           </ul>
         </div>
 
-        <!-- カラム 4：サイトマップ ＆ 規約 -->
         <div>
-          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
-            サイトマップ・規約
-          </h4>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サイトマップ・規約</h4>
           <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
-            <li><a href="./sitemap.html" class="footer-nav-link" style="font-weight: 600; color: #FFFFFF;">・ サイトマップ（全体一覧）</a></li>
-            <li><a href="./privacy.html" class="footer-nav-link">・ 個人情報保護方針（免責事項）</a></li>
-            <li><a href="./sitemap.xml" target="_blank" rel="noopener noreferrer" class="footer-nav-link" style="color: rgba(255,255,255,0.5); font-size: 0.82rem;">・ XMLサイトマップ（Google用）</a></li>
-            <li style="margin-top: 0.8rem;">
-              <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" class="header-cta-btn" style="padding: 0.45rem 1rem; font-size: 0.78rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);">
-                ザワテラス社労士 HP &rarr;
-              </a>
-            </li>
+            <li><a href="./sitemap.html" class="footer-nav-link">・ サイトマップ（全体一覧）</a></li>
+            <li><a href="./privacy.html" class="footer-nav-link">・ 個人情報保護方針</a></li>
+            <li><a href="./sitemap.xml" target="_blank" class="footer-nav-link" style="color: rgba(255,255,255,0.5);">・ XMLサイトマップ</a></li>
           </ul>
         </div>
-
       </div>
 
-      <!-- コピーライト -->
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
         <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script src="./assets/js/main.js" defer></script>
+  <!-- FAQ自動レンダリング＆アコーディオン開閉スクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('faqContainer');
+
+      fetch('./content/faq.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (!data || !data.faq_list || data.faq_list.length === 0) {
+            container.innerHTML = '<p style="text-align:center;">Q&Aが登録されていません。</p>';
+            return;
+          }
+
+          container.innerHTML = '';
+          data.faq_list.forEach((item, index) => {
+            const accordion = document.createElement('div');
+            accordion.className = 'faq-accordion-item';
+            accordion.style.cssText = 'background: var(--color-bg-card); border-radius: var(--radius-md); border: 1px solid var(--color-border); overflow: hidden;';
+            
+            accordion.innerHTML = `
+              <button class="faq-question-btn" aria-expanded="false" style="width: 100%; text-align: left; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--color-primary); font-size: 1.05rem;">
+                <span>Q. ${escapeHtml(item.question)}</span>
+                <span class="faq-icon" style="font-size: 1.5rem; color: var(--color-accent); transition: transform 0.25s ease;">&plus;</span>
+              </button>
+              <div class="faq-answer-pane" hidden style="padding: 0 1.5rem 1.5rem; font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.8; white-space: pre-wrap;">
+                ${escapeHtml(item.answer)}
+              </div>
+            `;
+
+            const trigger = accordion.querySelector('.faq-question-btn');
+            const pane = accordion.querySelector('.faq-answer-pane');
+            const icon = accordion.querySelector('.faq-icon');
+
+            trigger.addEventListener('click', () => {
+              const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+              trigger.setAttribute('aria-expanded', !isExpanded);
+              pane.hidden = isExpanded;
+              icon.innerHTML = isExpanded ? '&plus;' : '&minus;';
+              accordion.style.borderColor = isExpanded ? 'var(--color-border)' : 'var(--color-accent)';
+            });
+
+            container.appendChild(accordion);
+          });
+        })
+        .catch(err => {
+          container.innerHTML = '<p style="text-align:center; color:red;">データの読み込みに失敗しました。</p>';
+        });
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+      }
+    });
+  </script>
 </body>
 </html>
