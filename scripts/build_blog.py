@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト
+寺沢景子税理士事務所 コラム自動運搬・変換ビルドスクリプト（サムネイル画像完全対応版）
 ファイルパス: scripts/build_blog.py
-仕様: content/blog または contest/blog の記事を検知し、blog/index.html へ自動陳列
 """
 
 import os
@@ -14,14 +13,27 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 BLOG_OUTPUT_DIR = ROOT_DIR / "blog"
 
-# content/blog と contest/blog の両方を探す（どちらにあっても確実に拾う）
 POSSIBLE_DIRS = [
     ROOT_DIR / "content" / "blog",
     ROOT_DIR / "contest" / "blog"
 ]
 
+def format_image_path(raw_path):
+    """Pages CMSの画像パスを blog/ 階層からの正しい相対パスに変換"""
+    if not raw_path:
+        return ""
+    p = raw_path.strip().strip('"').strip("'")
+    if not p:
+        return ""
+    # 外部URLや既に相対指定されている場合はそのまま返す
+    if p.startswith("http://") or p.startswith("https://") or p.startswith("../"):
+        return p
+    # 先頭の / や ./ を除去して ../ を付与
+    p = re.sub(r"^(\./|/)", "", p)
+    return f"../{p}"
+
 def parse_markdown(filepath):
-    """Markdownから記事情報を抽出"""
+    """Markdownから記事情報とサムネイル画像パスを抽出"""
     content = filepath.read_text(encoding="utf-8")
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     metadata = {}
@@ -34,36 +46,49 @@ def parse_markdown(filepath):
                 key, val = line.split(":", 1)
                 metadata[key.strip()] = val.strip().strip('"').strip("'")
                 
-    paragraphs = [p.strip() for p in body.strip().split("\n\n") if p.strip()]
-    html_body = "".join(f"<p>{html.escape(p).replace(chr(10), '<br>')}</p>" for p in paragraphs)
+    # 本文内のMarkdown画像記法 ![alt](path) もHTMLの<img>に変換
+    def replace_md_img(m):
+        alt_text = html.escape(m.group(1))
+        img_url = format_image_path(m.group(2))
+        return f'<img src="{img_url}" alt="{alt_text}" style="max-width:100%; height:auto; border-radius:8px; margin: 1.2rem 0;">'
+
+     paragraphs = [p.strip() for p in body.strip().split("\n\n") if p.strip()]
+    html_paragraphs = []
+    for p in paragraphs:
+        escaped_p = html.escape(p)
+        # Markdown画像リンクの復元と変換
+        escaped_p = re.sub(r"!\[(.*?)\]\((.*?)\)", replace_md_img, escaped_p)
+        escaped_p = escaped_p.replace("\n", "<br>")
+        html_paragraphs.append(f"<p>{escaped_p}</p>")
+        
+    html_body = "".join(html_paragraphs)
     
     return {
         "title": metadata.get("title", filepath.stem),
         "date": metadata.get("date", "2026-10-31"),
         "category": metadata.get("category", "税務コラム"),
         "description": metadata.get("description", ""),
+        "thumbnail": format_image_path(metadata.get("thumbnail", "")),
         "body_html": html_body,
         "filename": filepath.stem + ".html"
     }
 
 def build():
-    print("=== コラム自動運搬・陳列処理開始 ===")
+    print("=== コラム自動変換処理（サムネイル対応版）開始 ===")
     
     md_files = []
     for d in POSSIBLE_DIRS:
         if d.exists():
             found = list(d.glob("*.md"))
-            print(f"フォルダ検知 [{d.name}]: {len(found)} 件の記事を発見")
             md_files.extend(found)
             
     if not md_files:
-        print("記事ファイル（.md）が見つかりませんでした。")
+        print("記事ファイルが見つかりませんでした。")
         return
 
     articles = [parse_markdown(f) for f in md_files]
     articles.sort(key=lambda x: str(x["date"]), reverse=True)
 
-    # 共通ヘッダー
     header_html = """
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
@@ -93,7 +118,6 @@ def build():
   </header>
 """
 
-    # 共通フッター
     footer_html = """
   <footer class="site-footer">
     <div class="container">
@@ -149,8 +173,16 @@ def build():
   <script src="../assets/js/main.js" defer></script>
 """
 
-    # 1. 各記事の詳細ページHTMLを blog/ フォルダへ書き出し
+    # 1. 個別記事ページの生成（サムネイル画像があればタイトル下に大きく表示）
     for art in articles:
+        detail_thumb_html = ""
+        if art["thumbnail"]:
+            detail_thumb_html = f"""
+      <div style="margin-bottom: 2.5rem; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+        <img src="{art['thumbnail']}" alt="{html.escape(art['title'])}" style="width: 100%; max-height: 460px; object-fit: cover; display: block;">
+      </div>
+"""
+
         detail_html = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -171,6 +203,7 @@ def build():
         <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary); margin: 0.8rem 0 1rem; line-height: 1.4;">{html.escape(art['title'])}</h1>
         <p style="font-size: 0.85rem; color: var(--color-text-muted);">公開日: {html.escape(str(art['date']))} | 執筆: 寺沢景子税理士事務所</p>
       </div>
+      {detail_thumb_html}
       <div style="font-size: 1rem; line-height: 2.1; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.5rem;">
         {art['body_html']}
       </div>
@@ -184,16 +217,24 @@ def build():
 </html>
 """
         (BLOG_OUTPUT_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
-        print(f"  ✅ 記事生成: blog/{art['filename']}")
 
-    # 2. 一覧ページ blog/index.html へ全記事カードを陳列
+    # 2. 一覧ページ blog/index.html の生成（サムネイル画像があればカード上部に表示）
     cards_html = ""
     for art in articles:
+        if art["thumbnail"]:
+            thumb_box = f"""
+        <a href="./{art['filename']}" style="aspect-ratio: 16/9; overflow: hidden; display: block; border-bottom: 1px solid var(--color-border); background: var(--color-bg-subtle);">
+          <img src="{art['thumbnail']}" alt="{html.escape(art['title'])}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+        </a>"""
+        else:
+            thumb_box = f"""
+        <a href="./{art['filename']}" style="aspect-ratio: 16/9; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border);">
+          <span style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-accent); font-weight: 600; letter-spacing: 0.1em;">{html.escape(art['category'])}</span>
+        </a>"""
+
         cards_html += f"""
       <article style="background: var(--color-bg-card); border-radius: var(--radius-lg); border: 1px solid var(--color-border); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
-        <div style="aspect-ratio: 16/9; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border);">
-          <span style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-accent); font-weight: 600; letter-spacing: 0.1em;">{html.escape(art['category'])}</span>
-        </div>
+        {thumb_box}
         <div style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
           <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-accent); letter-spacing: 0.08em; margin-bottom: 0.4rem;">{html.escape(art['category'])}</span>
           <h2 style="font-size: 1.2rem; color: var(--color-primary); margin: 0 0 1rem; line-height: 1.5;">
@@ -204,7 +245,7 @@ def build():
           </p>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
             <span style="font-size: 0.8rem; color: var(--color-text-muted);">{html.escape(str(art['date']))}</span>
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-accent);">読む &rarr;</span>
+            <a href="./{art['filename']}" style="font-size: 0.85rem; font-weight: 600; color: var(--color-accent);">読む &rarr;</a>
           </div>
         </div>
       </article>
@@ -241,7 +282,7 @@ def build():
 </html>
 """
     (BLOG_OUTPUT_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ blog/index.html への陳列が完了しました！")
+    print("  ✅ サムネイル対応のコラム生成が完了しました！")
 
 if __name__ == "__main__":
     build()
