@@ -106,39 +106,10 @@
   </header>
 
   <!-- ヒーローセクション (Athena Style) -->
-<!-- ======================================================================
-       ヒーローセクション (Athena Style / 背景回り込み＆下部グラデーション仕様)
-       ====================================================================== -->
   <section class="athena-hero" id="hero">
-    <!-- 1. 最背面：巨大英字ウォーターマーク (z-index: 1) -->
     <div class="athena-hero-bg-text" aria-hidden="true">TERASAWA</div>
 
-    <!-- 2. 中間面：IMG-01 文字背後へ広がる象徴イラスト＆下部グラデーション (z-index: 2) -->
-    <div class="hero-bg-artwork-wrap" aria-hidden="true">
-      <!-- 
-        【画像スロット IMG-01】
-        推奨解像度: 1000 × 1100px (または 1200 × 1200px)
-        推奨形式: WebP または 高解像度PNG (背景透過)
-        ※画像を差し替える際は、下の <svg>...</svg> を以下の <img> に置き換えてください：
-        <img src="./assets/images/hero-flower-illustration.svg" alt="" class="hero-bg-artwork-img" width="1000" height="1100">
-      -->
-      <div class="hero-bg-artwork-slot">
-        <!-- 初期表示用の白百合・月桂樹・オリーブゴールドのインラインベクター -->
-        <svg class="hero-bg-artwork-img" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="380" cy="320" r="260" fill="#FAF8F5" stroke="#E8D8D8" stroke-width="2"/>
-          <circle cx="380" cy="320" r="230" stroke="#A08C4A" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.6"/>
-          <!-- 白百合の花弁と葉の広がり -->
-          <path d="M380 80C340 200 240 260 180 320C250 320 320 270 380 200C440 270 510 320 580 320C520 260 420 200 380 80Z" fill="#1B2A4A" opacity="0.88"/>
-          <path d="M380 200C370 280 330 360 270 430C330 410 365 370 380 330C395 370 430 410 490 430C430 360 390 280 380 200Z" fill="#A08C4A" opacity="0.82"/>
-          <path d="M380 330V560" stroke="#5B7065" stroke-width="4" stroke-linecap="round"/>
-          <path d="M380 400C330 380 270 390 230 430C270 450 320 440 380 420" fill="#5B7065" opacity="0.6"/>
-          <path d="M380 450C430 430 490 440 530 480C490 500 440 490 380 470" fill="#5B7065" opacity="0.6"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- 3. 最前面：テキスト・バッジ・CTAボタン (z-index: 3) -->
-    <div class="container hero-container-front">
+    <div class="container hero-grid">
       <div class="hero-content-col">
         <p class="hero-sub-en">TERASAWA TAX &amp; CONSULTING</p>
         <h1 class="hero-main-title">数字を、経営の<br>最強の武器に。</h1>
@@ -149,7 +120,7 @@
           企業の挑戦と安定成長を誠実に支え抜きます。
         </p>
 
-        <!-- 3連月桂樹バッジ -->
+        <!-- 3連月桂樹バッジ（2人体制版） -->
         <div class="hero-badges-row">
           <div class="hero-badge-item">
             <svg class="hero-badge-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"/></svg>
@@ -166,13 +137,28 @@
         </div>
 
         <div class="hero-cta-group">
-          <a href="./contact.html" class="floating-cta-btn" style="position: static; padding: 1.1rem 2.4rem; font-size: 1.05rem;">
+          <a href="./contact.html" class="floating-cta-btn" style="position: static; padding: 1rem 2.2rem; font-size: 1rem;">
             <span>初回無料相談に申し込む（来所 / オンライン）</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a href="./services.html" class="nav-link" style="font-weight: 600; padding: 0.8rem 1.4rem;">
+          <a href="./services.html" class="nav-link" style="font-weight: 600; padding: 0.8rem 1.2rem;">
             サービス一覧を見る &rarr;
           </a>
+        </div>
+      </div>
+
+      <div class="hero-visual-col">
+        <!-- 【画像スロット IMG-01】白百合・月桂樹象徴アート (800×900px / SVGまたはWebP) -->
+        <div class="hero-illustration-slot">
+          <svg class="hero-illustration-img" viewBox="0 0 480 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="寺沢景子税理士事務所 白百合と月桂樹の象徴ボタニカルアート">
+            <circle cx="240" cy="260" r="210" fill="#FAF8F5" stroke="#E8D8D8" stroke-width="1.5"/>
+            <circle cx="240" cy="260" r="185" stroke="#A08C4A" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+            <path d="M240 100C220 180 160 220 130 260C170 260 210 230 240 190C270 230 310 260 350 260C320 220 260 180 240 100Z" fill="#1B2A4A" opacity="0.9"/>
+            <path d="M240 190C235 240 215 290 180 340C215 330 235 300 240 270C245 300 265 330 300 340C265 290 245 240 240 190Z" fill="#A08C4A" opacity="0.85"/>
+            <path d="M240 270V410" stroke="#5B7065" stroke-width="3" stroke-linecap="round"/>
+            <path d="M240 330C210 320 180 330 160 350C180 365 210 360 240 345" fill="#5B7065" opacity="0.7"/>
+            <path d="M240 360C270 350 300 360 320 380C300 395 270 390 240 375" fill="#5B7065" opacity="0.7"/>
+          </svg>
         </div>
       </div>
     </div>
