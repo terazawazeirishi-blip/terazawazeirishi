@@ -1,5 +1,5 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（カテゴリー構文完全修正版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル
 # ファイルパス: .pages.yml
 # ==============================================================================
 
@@ -72,17 +72,21 @@ content:
         type: image
 
   # ============================================================================
-  # 2. 税務・経営コラム (content/blog/) ★カテゴリー構文を修正
+  # 2. 税務・経営コラム (content/blog/) ★フォーマットとviewを公式仕様に修正
   # ============================================================================
   - name: blog
     label: 📝 税務・経営コラム
     type: collection
     path: content/blog
-     filename: '{year}-{month}-{day}-{hour}{minute}.md'  # ★この1行を追加（自動で日付時刻のファイル名にして保存）
-    format: frontmatter
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
     view:
-      fields: [title, date, category]
       primary: title
+      fields: [title, date, category]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
     fields:
       - name: title
         label: 記事タイトル
@@ -96,7 +100,6 @@ content:
         label: カテゴリー
         type: select
         required: false
-        default: "税務調査対策"
         options:
           values:
             - 税務調査対策
@@ -125,10 +128,11 @@ content:
     label: 📢 事務所からのお知らせ
     type: collection
     path: content/news
-    format: frontmatter
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
     view:
-      fields: [title, date]
       primary: title
+      fields: [title, date]
     fields:
       - name: title
         label: お知らせタイトル
