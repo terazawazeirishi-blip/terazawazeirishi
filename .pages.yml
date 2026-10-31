@@ -1,126 +1,131 @@
+# ==============================================================================
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（構文エラー完全修復版）
+# ファイルパス: .pages.yml
+# ==============================================================================
+
 media:
-  input: assets/images/uploads
-  output: assets/images/uploads
+  input: "assets/images/uploads"
+  output: "assets/images/uploads"
 
 content:
   # ============================================================================
   # 1. サイト全画像の変更（一括管理）
   # ============================================================================
-  - name: site_images
-    label: 📷 サイト全画像の変更
-    type: file
-    path: content/site_images.json
+  - name: "site_images"
+    label: "📷 サイト全画像の変更"
+    type: "file"
+    path: "content/site_images.json"
     fields:
-      - name: logo_img
-        label: ［ロゴ］ヘッダー＆フッター 事務所ロゴエンブレム
-        type: image
-      - name: watermark_crest
-        label: ［装飾］ファーストビュー中央背後の透かし花冠・幾何学
-        type: image
-      - name: hero_illustration
-        label: ［ヒーロー］文字背後に広がる象徴イラスト（白百合・花など）
-        type: image
-      - name: rep_keiko
-        label: ［税理士写真］寺沢 景子 代表税理士
-        type: image
-      - name: rep_senior
-        label: ［税理士写真］ベテラン税理士［お名前仮入力］
-        type: image
-      - name: about_01
-        label: ［About 01］2人体制ダブルチェックの写真・イラスト
-        type: image
-      - name: about_02
-        label: ［About 02］国税21年元統括官・税務調査の写真・イラスト
-        type: image
-      - name: about_03
-        label: ［About 03］税理士歴35年実績の写真・イラスト
-        type: image
-      - name: about_04
-        label: ［About 04］ザワテラス社労士連携ネットワーク図
-        type: image
-      - name: about_05
-        label: ［About 05］サロン風相談風景の写真・イラスト
-        type: image
-      - name: service_01
-        label: ［Service 01］法人税務顧問・決算申告
-        type: image
-      - name: service_02
-        label: ［Service 02］税務調査対策・事前模擬調査
-        type: image
-      - name: service_03
-        label: ［Service 03］会社設立・創業支援
-        type: image
-      - name: service_04
-        label: ［Service 04］創業融資支援・公庫対策
-        type: image
-      - name: service_05
-        label: ［Service 05］クラウド会計導入・自計化DX
-        type: image
-      - name: service_06
-        label: ［Service 06］相続税申告・事業承継
-        type: image
-      - name: service_07
-        label: ［Service 07］助成金受給・労務管理（社労士連携）
-        type: image
-      - name: cta_banner_bg
-        label: ［バナー］ページ下部 無料相談CTAバナー背景写真
-        type: image
+      - name: "logo_img"
+        label: "ロゴ画像（ヘッダー・フッター共通）"
+        type: "image"
+      - name: "watermark_crest"
+        label: "背景透かし画像（花冠・幾何学模様）"
+        type: "image"
+      - name: "hero_illustration"
+        label: "ヒーロー象徴イラスト（白百合・花など）"
+        type: "image"
+      - name: "rep_keiko"
+        label: "代表税理士 寺沢景子の写真"
+        type: "image"
+      - name: "rep_senior"
+        label: "ベテラン税理士の写真"
+        type: "image"
+      - name: "about_01"
+        label: "About 01（2人体制ダブルチェック）の写真"
+        type: "image"
+      - name: "about_02"
+        label: "About 02（国税21年元統括官）の写真"
+        type: "image"
+      - name: "about_03"
+        label: "About 03（税理士歴35年実績）の写真"
+        type: "image"
+      - name: "about_04"
+        label: "About 04（ザワテラス社労士連携）の写真"
+        type: "image"
+      - name: "about_05"
+        label: "About 05（相談サロン風景）の写真"
+        type: "image"
+      - name: "service_01"
+        label: "Service 01 法人税務顧問の写真"
+        type: "image"
+      - name: "service_02"
+        label: "Service 02 税務調査対策の写真"
+        type: "image"
+      - name: "service_03"
+        label: "Service 03 会社設立支援の写真"
+        type: "image"
+      - name: "service_04"
+        label: "Service 04 創業融資支援の写真"
+        type: "image"
+      - name: "service_05"
+        label: "Service 05 クラウド会計の写真"
+        type: "image"
+      - name: "service_06"
+        label: "Service 06 相続税申告の写真"
+        type: "image"
+      - name: "service_07"
+        label: "Service 07 助成金・労務支援の写真"
+        type: "image"
+      - name: "cta_banner_bg"
+        label: "ページ下部 CTAバナー背景写真"
+        type: "image"
 
   # ============================================================================
-  # 2. 税務・経営コラム（公式標準・安全版）
+  # 2. 税務・経営コラム（★エラー完全修復）
   # ============================================================================
-  - name: blog
-    label: 📝 税務・経営コラム
-    type: collection
-    path: content/blog
+  - name: "blog"
+    label: "📝 税務・経営コラム"
+    type: "collection"
+    path: "content/blog"
     fields:
-      - name: title
-        label: 記事タイトル
-        type: string
+      - name: "title"
+        label: "記事タイトル"
+        type: "string"
         required: true
-      - name: date
-        label: 公開日（例: 2026-10-31）
-        type: date
+      - name: "date"
+        label: "公開日"
+        type: "date"
         required: true
-      - name: category
-        label: カテゴリー
-        type: select
+      - name: "category"
+        label: "カテゴリー"
+        type: "select"
         options:
           values:
-            - 税務調査対策
-            - 法人税務・節税
-            - 会社設立・創業融資
-            - クラウド会計・DX
-            - 相続税・事業承継
-            - 社労士連携・助成金
-      - name: thumbnail
-        label: サムネイル画像
-        type: image
-      - name: description
-        label: 記事要約（一覧に表示される説明文）
-        type: string
-      - name: body
-        label: 本文
-        type: rich-text
+            - "税務調査対策"
+            - "法人税務・節税"
+            - "会社設立・創業融資"
+            - "クラウド会計・DX"
+            - "相続税・事業承継"
+            - "社労士連携・助成金"
+      - name: "thumbnail"
+        label: "サムネイル画像"
+        type: "image"
+      - name: "description"
+        label: "記事要約"
+        type: "string"
+      - name: "body"
+        label: "本文"
+        type: "rich-text"
         required: true
 
   # ============================================================================
   # 3. 事務所からのお知らせ
   # ============================================================================
-  - name: news
-    label: 📢 事務所からのお知らせ
-    type: collection
-    path: content/news
+  - name: "news"
+    label: "📢 事務所からのお知らせ"
+    type: "collection"
+    path: "content/news"
     fields:
-      - name: title
-        label: お知らせタイトル
-        type: string
+      - name: "title"
+        label: "お知らせタイトル"
+        type: "string"
         required: true
-      - name: date
-        label: 告知日
-        type: date
+      - name: "date"
+        label: "告知日"
+        type: "date"
         required: true
-      - name: body
-        label: お知らせ本文
-        type: rich-text
+      - name: "body"
+        label: "お知らせ本文"
+        type: "rich-text"
         required: true
