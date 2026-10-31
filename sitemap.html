@@ -114,9 +114,90 @@
   </main>
 
   <!-- フッター -->
+<!-- ======================================================================
+       フッター ＆ サイトマップ (Site Footer & Sitemap Navigation)
+       ====================================================================== -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-bottom">
+      <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
+        
+        <!-- カラム 1：事務所基本情報 -->
+        <div>
+          <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
+            寺沢景子税理士事務所
+          </div>
+          <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
+            TERAZAWA TAX &amp; CONSULTING
+          </p>
+          <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
+            〒863-0023<br>
+            熊本県天草市南町5-22<br>
+            TEL: <a href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;">0969-22-1166</a><br>
+            FAX: 0969-22-1167<br>
+            南九州税理士会熊本県連 所属（第154978号）
+          </address>
+          <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
+            <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65);">
+              提携士業：<a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">ザワテラス社労士</a>
+            </p>
+            <p style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); margin-top: 4px;">
+              税理士2人体制（元統括官 寺沢景子 / 税理士歴35年ベテラン税理士）
+            </p>
+          </div>
+        </div>
+
+        <!-- カラム 2：提供サービス一覧（サイトマップ） -->
+        <div>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
+            サービス案内
+          </h4>
+          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+            <li><a href="./services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
+            <li><a href="./services.html#audit" class="footer-nav-link">・ 税務調査対策・事前模擬調査</a></li>
+            <li><a href="./services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
+            <li><a href="./services.html#finance" class="footer-nav-link">・ 創業融資支援・公庫対策</a></li>
+            <li><a href="./services.html#cloud" class="footer-nav-link">・ クラウド会計導入DX</a></li>
+            <li><a href="./services.html#inheritance" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
+            <li><a href="./services.html#labor" class="footer-nav-link">・ 助成金・労務支援（社労士連携）</a></li>
+          </ul>
+        </div>
+
+        <!-- カラム 3：事務所・コンテンツ案内（サイトマップ） -->
+        <div>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
+            事務所案内
+          </h4>
+          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+            <li><a href="./index.html" class="footer-nav-link">・ ホーム（トップ）</a></li>
+            <li><a href="./profile.html" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
+            <li><a href="./pricing.html" class="footer-nav-link">・ 料金案内（顧問料・スポット）</a></li>
+            <li><a href="./faq.html" class="footer-nav-link">・ よくある質問（FAQ）</a></li>
+            <li><a href="./blog/index.html" class="footer-nav-link">・ 税務・経営コラム</a></li>
+            <li><a href="./contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 初回無料相談・お問い合わせ</a></li>
+          </ul>
+        </div>
+
+        <!-- カラム 4：サイトマップ ＆ 規約 -->
+        <div>
+          <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem; letter-spacing: 0.06em;">
+            サイトマップ・規約
+          </h4>
+          <ul class="footer-nav-list" style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.88rem;">
+            <li><a href="./sitemap.html" class="footer-nav-link" style="font-weight: 600; color: #FFFFFF;">・ サイトマップ（全体一覧）</a></li>
+            <li><a href="./privacy.html" class="footer-nav-link">・ 個人情報保護方針（免責事項）</a></li>
+            <li><a href="./sitemap.xml" target="_blank" rel="noopener noreferrer" class="footer-nav-link" style="color: rgba(255,255,255,0.5); font-size: 0.82rem;">・ XMLサイトマップ（Google用）</a></li>
+            <li style="margin-top: 0.8rem;">
+              <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" class="header-cta-btn" style="padding: 0.45rem 1rem; font-size: 0.78rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);">
+                ザワテラス社労士 HP &rarr;
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- コピーライト -->
+      <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
         <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
     </div>
