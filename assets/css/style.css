@@ -794,9 +794,15 @@ ul, ol {
   box-shadow: 0 10px 30px rgba(15, 24, 41, 0.4);
 }
 
+/* ==========================================================================
+   フッター各役割別・高視認性カラーパレット完全仕様（Athena Pink Gold仕様）
+   背景色 #EEDCD5 に対して全要素コントラスト比 8.8:1〜14:1 を確保
+   ========================================================================== */
+
+/* 1. フッター全体ベース背景と基本文字 */
 .site-footer {
-  background-color: #EEDCD5; /* Athena Pink Gold: 上品なピンクゴールド背景 */
-  color: #2B201D;            /* 基本テキスト：視認性の高い極深ブラウンチャコール */
+  background-color: #EEDCD5 !important; /* Athena Pink Gold: 上品なピンクゴールド背景 */
+  color: #2E221F !important;            /* 基本テキスト：高コントラスト・ダークチャコール */
   padding: 5rem 0 2.5rem;
   font-size: 0.92rem;
 }
@@ -808,25 +814,47 @@ ul, ol {
   margin-bottom: 4rem;
 }
 
-.footer-brand-name {
+/* 2. 事務所名・ブランド名（日本語）: 漆黒チャコールで最高峰の引き締め */
+.site-footer .footer-brand-name,
+.site-footer .footer-brand-name a,
+.site-footer .brand-name {
   font-family: var(--font-serif);
   font-size: 1.3rem;
   letter-spacing: 0.08em;
   margin-bottom: 0.8rem;
-  color: #18110E;            /* ブランド名：最高コントラスト(14:1)で際立つ漆黒チャコール */
+  color: #18110E !important; /* コントラスト比 14.07 : 1 */
+  font-weight: 600;
 }
 
-.footer-address {
+/* 3. ブランド英字 (TERAZAWA TAX & CONSULTING): 知性と信頼の Athena ディープネイビー */
+.site-footer .brand-en,
+.site-footer .footer-brand-en,
+.site-footer .footer-brand-name small,
+.site-footer .footer-brand-name span {
+  color: #1B2A4A !important; /* コントラスト比 10.72 : 1 */
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+/* 4. 所在地・連絡先: 細かい文字でもかすれない極深エスプレッソ */
+.site-footer .footer-address,
+.site-footer .footer-address *,
+.site-footer address {
   font-style: normal;
   line-height: 1.8;
-  color: #2D211E;            /* 所在地テキスト：細い文字でも背景に埋もれない深色エスプレッソ */
+  color: #241A17 !important; /* コントラスト比 12.82 : 1 */
+  background-color: transparent !important;
 }
 
-.footer-nav-title {
+/* 5. カラム見出し (サービス案内 / 事務所案内 / サイトマップ・規約): 重厚なディープマホガニーブロンズ */
+.site-footer .footer-nav-title,
+.site-footer h3,
+.site-footer h4 {
   font-family: var(--font-serif);
   font-size: 1.05rem;
-  color: #3D2612;            /* ナビ見出し：背景に同化しない高濃度の重厚アンティークブロンズ */
+  color: #422618 !important; /* コントラスト比 10.40 : 1（背景と同化しない濃密な見出し色） */
   margin-bottom: 1.2rem;
+  font-weight: 600;
 }
 
 .footer-nav-list {
@@ -835,19 +863,69 @@ ul, ol {
   gap: 0.75rem;
 }
 
-.footer-nav-link {
-  color: #3A2E2B;            /* ナビリンク通常色：ご指定の配色を完全維持 */
+/* 6. 通常ナビゲーションリンク: 視認性に優れたダークチャコール */
+.site-footer .footer-nav-link,
+.site-footer .footer-nav-list a,
+.site-footer a {
+  color: #2E221F !important; /* コントラスト比 11.60 : 1 */
+  text-decoration: none;
+  transition: var(--transition-normal);
 }
 
-.footer-nav-link:hover {
-  color: #7A5E28;            /* ナビリンクhover時：ご指定の配色を完全維持 */
+.site-footer .footer-nav-link:hover,
+.site-footer .footer-nav-list a:hover,
+.site-footer a:hover {
+  color: #7A5E28 !important; /* ホバー時：上品に色づくディープゴールド */
 }
 
-.footer-bottom {
+/* 7. サブリンク (XMLサイトマップ・規約など): 落ち着いたスレートウォームチャコール */
+.site-footer a[href*="sitemap"],
+.site-footer a[href*="xml"],
+.site-footer a[href*="privacy"],
+.site-footer a[href*="terms"],
+.site-footer .footer-sub-link {
+  color: #443530 !important; /* コントラスト比 8.81 : 1 */
+}
+
+/* 8. 提携先リンク (提携：ザワテラス社労士 HP →): 信頼・連携を象徴するディープフォレストティール */
+.site-footer a[href*="terrace"],
+.site-footer a[href*="sharoushi"],
+.site-footer a[href*="partner"],
+.site-footer .footer-partner-link {
+  color: #1C3D32 !important; /* コントラスト比 8.98 : 1（知的な深緑） */
+  font-weight: 600;
+}
+.site-footer a[href*="terrace"]:hover,
+.site-footer a[href*="sharoushi"]:hover,
+.site-footer a[href*="partner"]:hover,
+.site-footer .footer-partner-link:hover {
+  color: #2A5A4A !important;
+}
+
+/* 9. 重要CTAリンク (無料相談・お問い合わせ): 行動を促す格調高いディープボルドーワイン */
+.site-footer a[href*="contact"],
+.site-footer a[href*="inquiry"],
+.site-footer .footer-cta-link,
+.site-footer .footer-contact-link {
+  color: #621823 !important; /* コントラスト比 9.46 : 1（視線を引きつける特別深色） */
+  font-weight: 600;
+}
+.site-footer a[href*="contact"]:hover,
+.site-footer a[href*="inquiry"]:hover,
+.site-footer .footer-cta-link:hover,
+.site-footer .footer-contact-link:hover {
+  color: #8C2534 !important;
+}
+
+/* 10. 最下部コピーライト: 確実に読めるダークチャコール */
+.site-footer .footer-bottom,
+.site-footer .footer-bottom p,
+.site-footer .copyright,
+.site-footer small {
   text-align: center;
   padding-top: 2rem;
-  border-top: 1px solid rgba(43, 32, 29, 0.32); /* ぼやけず確実に仕切る高コントラスト境界線 */
-  color: #443632;                                /* コピーライト：小さな文字でもくっきり読める濃色 */
+  border-top: 1px solid rgba(36, 26, 23, 0.28) !important; /* 明瞭な区切り線 */
+  color: #382C28 !important;                                 /* コントラスト比 10.16 : 1 */
   font-size: 0.82rem;
 }
 
@@ -1378,17 +1456,4 @@ ul, ol {
   .brand-en {
     display: none !important; /* 最小画面では英語を隠して日本語を綺麗に収める */
   }
-}
-/* 事務所名・ブランド名（リンクで囲まれていても強制的に極濃チャコールにする） */
-.site-footer .footer-brand-name,
-.site-footer .footer-brand-name a {
-  color: #18110E !important;
-}
-
-/* 所在地・連絡先（リンクや下位タグも含めて強制的に深色エスプレッソにする） */
-.site-footer .footer-address,
-.site-footer .footer-address *,
-.site-footer address {
-  color: #2D211E !important;
-  background-color: transparent !important; /* 万一、白地（背景白）が付いていても透明化 */
 }
