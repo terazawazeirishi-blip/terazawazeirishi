@@ -796,7 +796,7 @@ ul, ol {
 
 .site-footer {
   background-color: #EEDCD5; /* Athena Pink Gold: 上品なピンクゴールド背景 */
-  color: #3A2E2B;            /* 暗めの基本テキストカラー */
+  color: #2B201D;            /* 基本テキスト：視認性の高い極深ブラウンチャコール */
   padding: 5rem 0 2.5rem;
   font-size: 0.92rem;
 }
@@ -813,19 +813,19 @@ ul, ol {
   font-size: 1.3rem;
   letter-spacing: 0.08em;
   margin-bottom: 0.8rem;
-  color: var(--color-primary); /* ブランド名：格式あるディープネイビーで明確に識別 */
+  color: #18110E;            /* ブランド名：最高コントラスト(14:1)で際立つ漆黒チャコール */
 }
 
 .footer-address {
   font-style: normal;
   line-height: 1.8;
-  color: #5A4B46;              /* 所在地等：可読性の高いダークウォームグレー */
+  color: #2D211E;            /* 所在地テキスト：細い文字でも背景に埋もれない深色エスプレッソ */
 }
 
 .footer-nav-title {
   font-family: var(--font-serif);
   font-size: 1.05rem;
-  color: #634C25;              /* ナビ見出し：重厚感のあるブロンズゴールド */
+  color: #3D2612;            /* ナビ見出し：背景に同化しない高濃度の重厚アンティークブロンズ */
   margin-bottom: 1.2rem;
 }
 
@@ -836,18 +836,18 @@ ul, ol {
 }
 
 .footer-nav-link {
-  color: #3A2E2B;              /* ナビリンク：視認性の高い暗めカラー */
+  color: #3A2E2B;            /* ナビリンク通常色：ご指定の配色を完全維持 */
 }
 
 .footer-nav-link:hover {
-  color: #7A5E28;              /* ホバー時：上品な深みのあるゴールドへ変化 */
+  color: #7A5E28;            /* ナビリンクhover時：ご指定の配色を完全維持 */
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
-  border-top: 1px solid rgba(58, 46, 43, 0.15); /* ピンクゴールドに調和する区切り線 */
-  color: #756560;                                /* コピーライト：落ち着いたダークトーン */
+  border-top: 1px solid rgba(43, 32, 29, 0.32); /* ぼやけず確実に仕切る高コントラスト境界線 */
+  color: #443632;                                /* コピーライト：小さな文字でもくっきり読める濃色 */
   font-size: 0.82rem;
 }
 
