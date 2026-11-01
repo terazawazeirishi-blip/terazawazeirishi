@@ -1457,3 +1457,81 @@ ul, ol {
     display: none !important; /* 最小画面では英語を隠して日本語を綺麗に収める */
   }
 }
+/* ==========================================================================
+   フッター：肉眼でハッキリ識別できる新・高視認性カラーパレット完全版
+   ========================================================================== */
+
+/* 1. 事務所名（日本語）：一番濃いブラック */
+.site-footer .footer-brand-name,
+.site-footer .footer-brand-name a,
+.site-footer .brand-name {
+  color: #111111 !important;
+  font-weight: 700 !important;
+}
+
+/* 2. 英字ブランド (TERAZAWA TAX & CONSULTING)：高貴なロイヤルネイビー（青系） */
+.site-footer [class*="en"],
+.site-footer .brand-en,
+.site-footer .footer-brand-en,
+.site-footer .footer-brand-name small,
+.site-footer .footer-brand-name span,
+.site-footer .brand-text span {
+  color: #1A365D !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  display: inline-block;
+}
+
+/* 3. 各カラム見出し (サービス案内 / 事務所案内 / サイトマップ・規約)：ワインボルドー（濃赤系） */
+.site-footer .footer-nav-title,
+.site-footer h3,
+.site-footer h4 {
+  color: #7A1C2E !important;
+  font-weight: 700 !important;
+}
+
+/* 4. 通常リンク一覧 (法人税務顧問、ホームなど)：シャープなダークグレー */
+.site-footer .footer-nav-link,
+.site-footer .footer-nav-list a,
+.site-footer a {
+  color: #333333 !important;
+}
+.site-footer .footer-nav-link:hover,
+.site-footer .footer-nav-list a:hover,
+.site-footer a:hover {
+  color: #B8860B !important; /* ホバー時は華やかなゴールド */
+}
+
+/* 5. 提携先リンク (提携：ザワテラス社労士 HP →)：深みのあるエメラルドグリーン（緑系） */
+.site-footer a[href*="sharoushi"],
+.site-footer a[href*="terrace"],
+.site-footer a[href*="partner"],
+.site-footer .footer-nav-list li:last-child a,
+.site-footer a:has(span) {
+  color: #0E5A3C !important;
+  font-weight: 700 !important;
+}
+
+/* 6. 最重要CTA (無料相談・お問い合わせ)：鮮やかなルビークリムゾン（深紅＋太字） */
+.site-footer a[href*="contact"],
+.site-footer a[href*="inquiry"],
+.site-footer .footer-cta-link {
+  color: #A31D24 !important;
+  font-weight: 700 !important;
+}
+
+/* 7. 所在地・連絡先情報：くっきり濃色 */
+.site-footer .footer-address,
+.site-footer .footer-address *,
+.site-footer address {
+  color: #222222 !important;
+  background-color: transparent !important;
+}
+
+/* 8. 最下部コピーライト：スレートグレー */
+.site-footer .footer-bottom,
+.site-footer .footer-bottom *,
+.site-footer small {
+  border-top: 1px solid rgba(50, 40, 40, 0.25) !important;
+  color: #4A4A5A !important;
+}
