@@ -2,7 +2,7 @@
    寺沢景子税理士事務所 公式Webサイト 共通マスター統合スタイルシート
    ファイルパス: assets/css/style.css
    デザインコンセプト: Elegant × Premium × Trust × Modern (Athena Style)
-   仕様: API-Key-Free / Desktop解像度完全維持 / Mobile破綻完全解消クリーン版
+   仕様: API-Key-Free / Desktop解像度完全維持 / Mobileレイアウト完全最適化
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -45,7 +45,7 @@
   --radius-lg: 16px;
   --radius-full: 9999px;
 
-  /* 陰影 */
+  /* 陰影（品格のある微細な多層シャドウ） */
   --shadow-sm: 0 2px 8px rgba(15, 24, 41, 0.04);
   --shadow-md: 0 6px 24px rgba(15, 24, 41, 0.08);
   --shadow-lg: 0 16px 48px rgba(15, 24, 41, 0.12);
@@ -136,6 +136,7 @@ ul, ol {
   text-align: left;
 }
 
+/* 巨大薄字英字ウォーターマーク */
 .section-title {
   position: relative;
   display: inline-block;
@@ -205,7 +206,7 @@ ul, ol {
 }
 
 /* --------------------------------------------------------------------------
-   4. ヘッダーナビゲーション (PC標準：完全整流)
+   4. ヘッダーナビゲーション (Site Header)
    -------------------------------------------------------------------------- */
 .site-header {
   position: fixed;
@@ -237,7 +238,6 @@ ul, ol {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex-shrink: 0;
 }
 
 .brand-logo-img {
@@ -269,7 +269,6 @@ ul, ol {
   text-transform: uppercase;
 }
 
-/* PCナビゲーション */
 .header-nav {
   display: flex;
   align-items: center;
@@ -288,7 +287,6 @@ ul, ol {
   color: var(--color-primary);
   position: relative;
   padding: 0.4rem 0;
-  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -319,8 +317,6 @@ ul, ol {
   border-radius: var(--radius-full);
   box-shadow: 0 4px 14px rgba(160, 140, 74, 0.28);
   transition: var(--transition-normal);
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .header-cta-btn:hover {
@@ -329,9 +325,8 @@ ul, ol {
   box-shadow: 0 6px 18px rgba(160, 140, 74, 0.38);
 }
 
-/* PCではハンバーガーボタンを100%非表示（絶対に真ん中に出現させない） */
 .hamburger-btn {
-  display: none !important;
+  display: none;
   width: 44px;
   height: 44px;
   flex-direction: column;
@@ -362,6 +357,7 @@ ul, ol {
   overflow: hidden;
 }
 
+/* 最背面：薄字英字ウォーターマーク (z-index: 1) */
 .athena-hero-bg-text {
   position: absolute;
   top: 48%;
@@ -378,6 +374,7 @@ ul, ol {
   white-space: nowrap;
 }
 
+/* 中間面：IMG-01 右側からテキスト背後に回り込む大型アートワーク (z-index: 2) */
 .hero-bg-artwork-wrap {
   position: absolute;
   top: 0;
@@ -389,8 +386,21 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 45%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0) 100%);
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.95) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.95) 45%,
+    rgba(0, 0, 0, 0.5) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .hero-bg-artwork-slot {
@@ -411,6 +421,7 @@ ul, ol {
   object-position: right center;
 }
 
+/* 最前面：テキスト・ボタンコンテナ (z-index: 3) */
 .hero-container-front {
   position: relative;
   z-index: 3;
@@ -694,7 +705,6 @@ ul, ol {
   align-items: center;
 }
 
-/* 税理士写真枠（サイズ暴走完全防止・PC基準） */
 .representative-photo-frame {
   position: relative;
   width: 100%;
@@ -753,7 +763,7 @@ ul, ol {
 }
 
 /* --------------------------------------------------------------------------
-   9. 常駐フローティングCTA ＆ フッター（高視認性仕様）
+   9. 常駐フローティングCTA ＆ フッター（高視認性カラーパレット）
    -------------------------------------------------------------------------- */
 .floating-cta {
   position: fixed;
@@ -796,17 +806,19 @@ ul, ol {
   margin-bottom: 4rem;
 }
 
+/* 事務所名（日本語） */
 .site-footer .footer-brand-name,
 .site-footer .footer-brand-name a,
 .site-footer .brand-name {
-  color: #111111 !important;
-  font-weight: 700 !important;
   font-family: var(--font-serif);
   font-size: 1.3rem;
   letter-spacing: 0.08em;
   margin-bottom: 0.8rem;
+  color: #111111 !important;
+  font-weight: 700 !important;
 }
 
+/* ブランド英字 (TERAZAWA TAX & CONSULTING) */
 .site-footer [class*="en"],
 .site-footer .brand-en,
 .site-footer .footer-brand-en,
@@ -819,23 +831,25 @@ ul, ol {
   display: inline-block;
 }
 
+/* 所在地・連絡先 */
 .site-footer .footer-address,
 .site-footer .footer-address *,
 .site-footer address {
-  color: #222222 !important;
   font-style: normal;
   line-height: 1.8;
+  color: #222222 !important;
   background-color: transparent !important;
 }
 
+/* カラム見出し (サービス案内 / 事務所案内 / サイトマップ・規約) */
 .site-footer .footer-nav-title,
 .site-footer h3,
 .site-footer h4 {
-  color: #7A1C2E !important;
   font-family: var(--font-serif);
   font-size: 1.05rem;
-  margin-bottom: 1.2rem;
+  color: #7A1C2E !important;
   font-weight: 700 !important;
+  margin-bottom: 1.2rem;
 }
 
 .footer-nav-list {
@@ -844,6 +858,7 @@ ul, ol {
   gap: 0.75rem;
 }
 
+/* 通常リンク一覧 */
 .site-footer .footer-nav-link,
 .site-footer .footer-nav-list a,
 .site-footer a {
@@ -858,6 +873,7 @@ ul, ol {
   color: #B8860B !important;
 }
 
+/* 提携先リンク (提携：ザワテラス社労士 HP →) */
 .site-footer a[href*="sharoushi"],
 .site-footer a[href*="terrace"],
 .site-footer a[href*="partner"],
@@ -867,6 +883,7 @@ ul, ol {
   font-weight: 700 !important;
 }
 
+/* 最重要CTA (無料相談・お問い合わせ) */
 .site-footer a[href*="contact"],
 .site-footer a[href*="inquiry"],
 .site-footer .footer-cta-link {
@@ -874,6 +891,7 @@ ul, ol {
   font-weight: 700 !important;
 }
 
+/* 最下部コピーライト */
 .site-footer .footer-bottom,
 .site-footer .footer-bottom *,
 .site-footer small {
@@ -884,35 +902,11 @@ ul, ol {
   font-size: 0.82rem;
 }
 
-/* PC標準共通クラス */
-.athena-news-grid {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 3.5rem;
-  align-items: start;
-}
-
-.company-grid-layout {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 3.5rem;
-  align-items: start;
-}
-
-.map-container-frame {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
-  height: 100%;
-  min-height: 380px;
-}
-
 /* --------------------------------------------------------------------------
-   10. レスポンシブ対応 (完全整理・競合ゼロ版)
+   10. レスポンシブ対応 (Mobile / Tablet 最適化完全版)
    -------------------------------------------------------------------------- */
 
-/* --- タブレット・ノートPC表示 (幅992px以下) --- */
+/* --- タブレット表示 (幅992px以下) --- */
 @media (max-width: 992px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -969,136 +963,19 @@ ul, ol {
   }
 }
 
-/* --- スマートフォン通常表示 (幅768px以下：モバイル完全最適化) --- */
+/* --- スマートフォン表示 (幅768px以下：スマホ最適化の核心) --- */
 @media (max-width: 768px) {
   :root {
-    --header-height: 64px;
-  }
-
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    position: relative;
+    --header-height: 68px;
   }
 
   .container,
   .container-narrow {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
-  /* 1. ヘッダー：左にロゴ、右に3本線ボタンの「2要素だけ」を完璧に両端配置 */
-  .header-container {
-    width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-
-  .brand-logo {
-    gap: 8px !important;
-    max-width: calc(100% - 54px) !important;
-    overflow: hidden;
-  }
-  .brand-logo-img {
-    width: 32px !important;
-    height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-  .brand-name {
-    font-size: 0.95rem !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-  .brand-en {
-    font-size: 0.52rem !important;
-    letter-spacing: 0.08em !important;
-    white-space: nowrap !important;
-  }
-
-  /* ★ スマホのヘッダー右上から重複ボタンを完全削除（右下ボタンに一本化） */
-  .site-header .header-cta-btn {
-    display: none !important;
-  }
-
-  /* ★ 3本線ボタン：右端にピタッと収め、絶対に真ん中へ出さない */
-  .hamburger-btn {
-    display: flex !important;
-    width: 40px !important;
-    height: 40px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    flex-shrink: 0 !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 5px !important;
-    border: none !important;
-    background: none !important;
-  }
-  .hamburger-line {
-    width: 22px !important;
-    height: 2px !important;
-    background-color: var(--color-primary) !important;
-  }
-
-  /* ★ モバイルメニューパネル：普段は完全に画面外に格納し、ボタンを押した時だけスライド表示 */
-  .header-nav {
-    position: fixed !important;
-    top: var(--header-height) !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: calc(100vh - var(--header-height)) !important;
-    height: calc(100dvh - var(--header-height)) !important;
-    background-color: rgba(255, 255, 255, 0.98) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    padding: 2.5rem 1.5rem 4rem !important;
-    gap: 2rem !important;
-    transform: translateX(100%) !important;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    overflow-y: auto !important;
-    box-shadow: var(--shadow-lg) !important;
-    box-sizing: border-box !important;
-    z-index: 999 !important;
-  }
-  .header-nav.is-open {
-    transform: translateX(0) !important;
-  }
-
-  /* メニュー内のリンク一覧：縦並びでゆったり全項目表示（見切れゼロ） */
-  .nav-list {
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 1.2rem !important;
-    text-align: center !important;
-  }
-  .nav-link {
-    font-size: 1.05rem !important;
-    display: block !important;
-    padding: 0.5rem 1rem !important;
-    white-space: normal !important;
-  }
-
-  /* メニューパネルを開いた時だけ、最下部に無料相談ボタンを綺麗に表示 */
-  .header-nav.is-open .header-cta-btn {
-    display: inline-flex !important;
-    width: 100% !important;
-    max-width: 280px !important;
-    justify-content: center !important;
-    padding: 0.85rem !important;
-    font-size: 0.95rem !important;
-  }
-
-  /* 2. ヒーロー最適化 */
+  /* ヒーローセクション */
   .athena-hero {
     min-height: auto;
     padding-top: calc(var(--header-height) + 2rem);
@@ -1133,6 +1010,7 @@ ul, ol {
     margin-bottom: 1.8rem;
     text-align: left;
   }
+
   .hero-badges-row {
     flex-direction: column;
     gap: 8px;
@@ -1144,6 +1022,7 @@ ul, ol {
     padding: 0.6rem 1rem;
     font-size: 0.82rem;
   }
+
   .hero-cta-group {
     flex-direction: column;
     gap: 1rem;
@@ -1157,7 +1036,6 @@ ul, ol {
     font-size: 0.95rem;
   }
 
-  /* 3. 見出し */
   .section-header {
     margin-bottom: 3rem;
   }
@@ -1175,7 +1053,6 @@ ul, ol {
     margin-top: 0.8rem;
   }
 
-  /* 4. About us ジグザグ */
   .athena-about-section {
     padding: 4.5rem 0;
   }
@@ -1203,7 +1080,6 @@ ul, ol {
     line-height: 1.8;
   }
 
-  /* 5. サービスカード */
   .athena-service-section {
     padding: 4.5rem 0;
   }
@@ -1231,13 +1107,11 @@ ul, ol {
     font-size: 0.9rem;
   }
 
-  /* 6. 税理士紹介写真枠 */
   .representative-photo-frame {
     max-width: 190px !important;
     margin: 0 auto 1.2rem auto !important;
   }
 
-  /* 7. 事務所概要テーブル＆マップ */
   .office-table {
     display: block;
     width: 100%;
@@ -1268,20 +1142,53 @@ ul, ol {
     font-size: 0.92rem;
   }
 
-  .company-grid-layout {
-    grid-template-columns: 1fr !important;
-    gap: 2.2rem !important;
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
   }
-  .map-container-frame {
-    height: 280px !important;
-    min-height: 280px !important;
-  }
-  .map-container-frame iframe {
-    height: 280px !important;
-    min-height: 280px !important;
+  .footer-bottom {
+    padding-top: 1.5rem;
   }
 
-  /* 8. お知らせ＆フッター */
+  .floating-cta {
+    bottom: 16px;
+    right: 16px;
+  }
+  .floating-cta-btn {
+    padding: 0.75rem 1.3rem;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 16px rgba(15, 24, 41, 0.35);
+  }
+}
+
+/* --- 小型スマートフォン向け微調整 (幅400px以下: iPhone SE等) --- */
+@media (max-width: 400px) {
+  .hero-main-title {
+    font-size: 1.85rem;
+  }
+  .section-title {
+    font-size: 1.4rem;
+  }
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .floating-cta-btn {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   お知らせ＆フッターサイトマップ スマホ表示最適化
+   -------------------------------------------------------------------------- */
+.athena-news-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
   .athena-news-grid {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
@@ -1299,7 +1206,6 @@ ul, ol {
   .news-item:last-child {
     margin-bottom: 0;
   }
-
   .footer-top {
     grid-template-columns: 1fr !important;
     gap: 2.5rem !important;
@@ -1312,19 +1218,107 @@ ul, ol {
     padding: 0.3rem 0;
     font-size: 0.95rem !important;
   }
+}
 
-  .floating-cta {
-    bottom: 16px;
-    right: 16px;
+/* --------------------------------------------------------------------------
+   スマホ用メニュー位置ズレ防止 ＆ 事務所概要・マップ最適化
+   -------------------------------------------------------------------------- */
+.company-grid-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.map-container-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  height: 100%;
+  min-height: 380px;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
   }
-  .floating-cta-btn {
-    padding: 0.75rem 1.3rem;
-    font-size: 0.85rem;
-    box-shadow: 0 4px 16px rgba(15, 24, 41, 0.35);
+  .company-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 2.2rem !important;
+  }
+  .map-container-frame {
+    height: 280px !important;
+    min-height: 280px !important;
+  }
+  .map-container-frame iframe {
+    height: 280px !important;
+    min-height: 280px !important;
   }
 }
 
-/* 最小幅スマホ (360px以下) */
+/* --------------------------------------------------------------------------
+   スマホ縦向き用ハンバーガーボタン
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .header-container {
+    width: 100% !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .brand-logo {
+    gap: 8px !important;
+    max-width: calc(100% - 50px) !important;
+    overflow: hidden;
+  }
+  .brand-logo-img {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+  }
+  .brand-text {
+    overflow: hidden;
+  }
+  .brand-name {
+    font-size: 0.95rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .brand-en {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+  }
+  .hamburger-btn {
+    display: flex !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    border: none !important;
+    background: none !important;
+  }
+  .hamburger-line {
+    width: 22px !important;
+    height: 2px !important;
+    background-color: var(--color-primary) !important;
+  }
+}
+
 @media (max-width: 360px) {
   .brand-name {
     font-size: 0.88rem !important;
@@ -1334,52 +1328,107 @@ ul, ol {
   }
 }
 
-/* --- スマホ横向き（Landscape）専用スマートUI --- */
-@media screen and (max-height: 520px) and (max-width: 1024px) {
+/* ==========================================================================
+   スマートフォン横向き（Landscape）＆ タブレット幅（992px以下）
+   メニューレイアウト完全最適化仕様
+   ========================================================================== */
+
+/* 1. 幅992px以下、またはスマホ横向き全機種でハンバーガーメニューを確実に有効化 */
+@media (max-width: 992px), (orientation: landscape) and (max-height: 500px) {
+  .hamburger-btn {
+    display: flex !important;
+  }
+
+  .header-nav {
+    position: fixed !important;
+    top: var(--header-height) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: calc(100vh - var(--header-height)) !important;
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    transform: translateX(100%) !important;
+    transition: var(--transition-normal) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-shadow: var(--shadow-lg) !important;
+    z-index: 999 !important;
+  }
+
+  .header-nav.is-open {
+    transform: translateX(0) !important;
+  }
+}
+
+/* 2. スマートフォン横向き専用（極小縦幅：高さ500px以下）のコンパクト整流 */
+@media (orientation: landscape) and (max-height: 500px) {
   :root {
     --header-height: 52px !important;
   }
+
   .site-header {
-    height: var(--header-height) !important;
+    height: 52px !important;
   }
+
   .brand-logo-img {
     width: 28px !important;
     height: 28px !important;
   }
+
   .brand-name {
     font-size: 0.9rem !important;
   }
+
   .brand-en {
     display: none !important;
   }
+
   .hamburger-btn {
-    display: flex !important;
     width: 36px !important;
     height: 36px !important;
   }
+
   .hamburger-line {
     width: 20px !important;
     height: 2px !important;
   }
+
   .header-nav {
-    top: var(--header-height) !important;
-    height: calc(100vh - var(--header-height)) !important;
-    height: calc(100dvh - var(--header-height)) !important;
-    padding: 1rem 2rem 1.2rem !important;
-    gap: 0.8rem !important;
+    padding: 0.8rem 1.5rem 1rem !important;
+    gap: 0.75rem !important;
+    justify-content: center !important;
   }
+
   .nav-list {
     display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0.45rem 1.8rem !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.35rem 1.5rem !important;
     width: 100% !important;
-    max-width: 540px !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
+
   .nav-link {
     font-size: 0.88rem !important;
-    padding: 0.35rem 0.6rem !important;
-    background: rgba(27, 42, 74, 0.035) !important;
-    border-radius: var(--radius-sm) !important;
+    padding: 0.25rem 0.5rem !important;
+    text-align: center !important;
     white-space: nowrap !important;
+    display: block !important;
+  }
+
+  .header-cta-btn {
+    width: auto !important;
+    min-width: 260px !important;
+    max-width: 320px !important;
+    padding: 0.55rem 1.2rem !important;
+    font-size: 0.86rem !important;
+    margin: 0 auto !important;
   }
 }
