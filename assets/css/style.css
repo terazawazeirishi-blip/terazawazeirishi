@@ -1379,3 +1379,16 @@ ul, ol {
     display: none !important; /* 最小画面では英語を隠して日本語を綺麗に収める */
   }
 }
+/* 事務所名・ブランド名（リンクで囲まれていても強制的に極濃チャコールにする） */
+.site-footer .footer-brand-name,
+.site-footer .footer-brand-name a {
+  color: #18110E !important;
+}
+
+/* 所在地・連絡先（リンクや下位タグも含めて強制的に深色エスプレッソにする） */
+.site-footer .footer-address,
+.site-footer .footer-address *,
+.site-footer address {
+  color: #2D211E !important;
+  background-color: transparent !important; /* 万一、白地（背景白）が付いていても透明化 */
+}
