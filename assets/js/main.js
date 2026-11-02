@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全データ自動連動完全版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全データ完全同期版）
  * ファイルパス: assets/js/main.js
- * 仕様: 画像・コラム・FAQ・料金・サービス・事務所情報・全ページ文章完全自動同期
+ * 仕様: トップページの税理士紹介枠（#team）への完全自動連動修復
  * ==============================================================================
  */
 
@@ -19,8 +19,8 @@
     syncCmsImages();
     syncOfficeInfo();
     syncHomeTexts();
-    syncProfileTexts(); // ★ 税理士紹介文章自動同期
-    syncLegalTexts();   // ★ お問い合わせ・規約文章自動同期
+    syncProfileTexts(); // ★ トップ＆プロフィールの税理士紹介を完全自動同期
+    syncLegalTexts();
   }
 
   function initHeaderScroll() {
@@ -339,9 +339,12 @@
       });
   }
 
-  /* ★【新設】税理士紹介・代表挨拶文章自動同期エンジン */
+  /* ★【完全修復】税理士紹介・代表挨拶文章自動同期（index.html ＆ profile.html 両対応） */
   function syncProfileTexts() {
-    if (!window.location.pathname.includes('profile.html')) return;
+    const isProfile = window.location.pathname.includes('profile.html');
+    const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/terazawazeirishi/');
+
+    if (!isProfile && !isHome) return;
 
     const repoBase = getRepoBase();
     const jsonUrl = repoBase + 'content/profile_texts.json?v=' + Date.now();
@@ -354,62 +357,109 @@
       .then((data) => {
         if (!data) return;
 
-        if (data.page_lead) {
-          const leadEl = document.querySelector('.hero-lead-text');
-          if (leadEl) leadEl.innerHTML = data.page_lead.replace(/\n/g, '<br>');
+        // --- A. トップページ (index.html の #team セクション) への完全自動反映 ---
+        if (isHome) {
+          const teamSection = document.getElementById('team');
+          if (teamSection) {
+            const memberCards = teamSection.querySelectorAll('.representative-photo-frame');
+            
+            // 寺沢代表カード
+            if (memberCards.length >= 1) {
+              const card1 = memberCards[0].closest('div');
+              if (card1) {
+                if (data.rep_keiko_name) {
+                  const nameEl = card1.querySelector('h3');
+                  if (nameEl) nameEl.textContent = data.rep_keiko_name;
+                }
+                if (data.rep_keiko_sub) {
+                  const subEl = card1.querySelector('p:nth-of-type(1)');
+                  if (subEl) subEl.innerHTML = data.rep_keiko_sub.replace(/\n/g, '<br>');
+                }
+                if (data.rep_keiko_desc) {
+                  const descEl = card1.querySelector('p:nth-of-type(2)');
+                  if (descEl) descEl.innerHTML = data.rep_keiko_desc.replace(/\n/g, '<br>');
+                }
+              }
+            }
+
+            // ベテラン税理士カード
+            if (memberCards.length >= 2) {
+              const card2 = memberCards[1].closest('div');
+              if (card2) {
+                if (data.rep_senior_name) {
+                  const nameEl = card2.querySelector('h3');
+                  if (nameEl) nameEl.textContent = data.rep_senior_name;
+                }
+                if (data.rep_senior_sub) {
+                  const subEl = card2.querySelector('p:nth-of-type(1)');
+                  if (subEl) subEl.innerHTML = data.rep_senior_sub.replace(/\n/g, '<br>');
+                }
+                if (data.rep_senior_desc) {
+                  const descEl = card2.querySelector('p:nth-of-type(2)');
+                  if (descEl) descEl.innerHTML = data.rep_senior_desc.replace(/\n/g, '<br>');
+                }
+              }
+            }
+          }
         }
 
-        const members = document.querySelectorAll('.profile-member-grid');
-        // 1人目: 寺沢景子代表
-        if (members.length >= 1) {
-          const m1 = members[0];
-          if (data.rep_keiko_name) {
-            const h2 = m1.querySelector('h2');
-            if (h2) h2.textContent = data.rep_keiko_name;
+        // --- B. プロフィールページ (profile.html) への反映 ---
+        if (isProfile) {
+          if (data.page_lead) {
+            const leadEl = document.querySelector('.hero-lead-text');
+            if (leadEl) leadEl.innerHTML = data.page_lead.replace(/\n/g, '<br>');
           }
-          if (data.rep_keiko_sub) {
-            const sub = m1.querySelector('.profile-sub-title');
-            if (sub) sub.textContent = data.rep_keiko_sub;
-          }
-          if (data.rep_keiko_desc) {
-            const descContainer = m1.querySelector('.profile-desc-col > div:nth-of-type(2)');
-            if (descContainer) {
-              const paras = data.rep_keiko_desc.split('\n\n').filter(p => p.trim());
-              descContainer.innerHTML = paras.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
-            }
-          }
-          if (data.rep_keiko_careers) {
-            const ul = m1.querySelector('.profile-career-box ul');
-            if (ul) {
-              const lines = data.rep_keiko_careers.split('\n').filter(l => l.trim());
-              ul.innerHTML = lines.map(l => `<li>${l}</li>`).join('');
-            }
-          }
-        }
 
-        // 2人目: ベテラン税理士
-        if (members.length >= 2) {
-          const m2 = members[1];
-          if (data.rep_senior_name) {
-            const h2 = m2.querySelector('h2');
-            if (h2) h2.textContent = data.rep_senior_name;
-          }
-          if (data.rep_senior_sub) {
-            const sub = m2.querySelector('.profile-sub-title');
-            if (sub) sub.textContent = data.rep_senior_sub;
-          }
-          if (data.rep_senior_desc) {
-            const descContainer = m2.querySelector('.profile-desc-col > div:nth-of-type(2)');
-            if (descContainer) {
-              const paras = data.rep_senior_desc.split('\n\n').filter(p => p.trim());
-              descContainer.innerHTML = paras.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+          const members = document.querySelectorAll('.profile-member-grid');
+          if (members.length >= 1) {
+            const m1 = members[0];
+            if (data.rep_keiko_name) {
+              const h2 = m1.querySelector('h2');
+              if (h2) h2.textContent = data.rep_keiko_name;
+            }
+            if (data.rep_keiko_sub) {
+              const sub = m1.querySelector('.profile-sub-title');
+              if (sub) sub.textContent = data.rep_keiko_sub;
+            }
+            if (data.rep_keiko_desc) {
+              const descContainer = m1.querySelector('.profile-desc-col > div:nth-of-type(2)');
+              if (descContainer) {
+                const paras = data.rep_keiko_desc.split('\n\n').filter(p => p.trim());
+                descContainer.innerHTML = paras.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+              }
+            }
+            if (data.rep_keiko_careers) {
+              const ul = m1.querySelector('.profile-career-box ul');
+              if (ul) {
+                const lines = data.rep_keiko_careers.split('\n').filter(l => l.trim());
+                ul.innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+              }
             }
           }
-          if (data.rep_senior_careers) {
-            const ul = m2.querySelector('.profile-career-box ul');
-            if (ul) {
-              const lines = data.rep_senior_careers.split('\n').filter(l => l.trim());
-              ul.innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+
+          if (members.length >= 2) {
+            const m2 = members[1];
+            if (data.rep_senior_name) {
+              const h2 = m2.querySelector('h2');
+              if (h2) h2.textContent = data.rep_senior_name;
+            }
+            if (data.rep_senior_sub) {
+              const sub = m2.querySelector('.profile-sub-title');
+              if (sub) sub.textContent = data.rep_senior_sub;
+            }
+            if (data.rep_senior_desc) {
+              const descContainer = m2.querySelector('.profile-desc-col > div:nth-of-type(2)');
+              if (descContainer) {
+                const paras = data.rep_senior_desc.split('\n\n').filter(p => p.trim());
+                descContainer.innerHTML = paras.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+              }
+            }
+            if (data.rep_senior_careers) {
+              const ul = m2.querySelector('.profile-career-box ul');
+              if (ul) {
+                const lines = data.rep_senior_careers.split('\n').filter(l => l.trim());
+                ul.innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+              }
             }
           }
         }
@@ -419,7 +469,6 @@
       });
   }
 
-  /* ★【新設】お問い合わせ・規約文章自動同期エンジン */
   function syncLegalTexts() {
     const isContact = window.location.pathname.includes('contact.html');
     const isPrivacy = window.location.pathname.includes('privacy.html');
@@ -436,7 +485,6 @@
       .then((data) => {
         if (!data) return;
 
-        // contact.html
         if (isContact) {
           if (data.contact_lead) {
             const lead = document.querySelector('.hero-lead-text');
@@ -448,7 +496,6 @@
           }
         }
 
-        // privacy.html
         if (isPrivacy) {
           const sections = document.querySelectorAll('main section');
           if (sections.length >= 4) {
