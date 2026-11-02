@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全テキストノーコード完全版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全データ自動連動完全版）
  * ファイルパス: assets/js/main.js
- * 仕様: 画像・コラム・FAQ・料金・サービス・事務所情報・トップ全文章完全自動同期
+ * 仕様: 画像・コラム・FAQ・料金・サービス・事務所情報・全ページ文章完全自動同期
  * ==============================================================================
  */
 
@@ -18,7 +18,9 @@
     initSmoothScroll();
     syncCmsImages();
     syncOfficeInfo();
-    syncHomeTexts(); // ★ トップページ全文章自動同期
+    syncHomeTexts();
+    syncProfileTexts(); // ★ 税理士紹介文章自動同期
+    syncLegalTexts();   // ★ お問い合わせ・規約文章自動同期
   }
 
   function initHeaderScroll() {
@@ -251,26 +253,15 @@
             td.textContent = data.fax;
           }
         });
-
-        const teamCards = document.querySelectorAll('#team .representative-photo-frame, .message-grid');
-        if (teamCards.length >= 1 && data.rep_message) {
-          const repTextEl = document.querySelector('#team > div > div > div:first-child p:last-child');
-          if (repTextEl) repTextEl.textContent = data.rep_message;
-        }
-        if (teamCards.length >= 2 && data.senior_message) {
-          const seniorTextEl = document.querySelector('#team > div > div > div:last-child p:last-child');
-          if (seniorTextEl) seniorTextEl.textContent = data.senior_message;
-        }
       })
       .catch((err) => {
         console.warn('Office Info Sync status:', err.message);
       });
   }
 
-  /* ★【新設】トップページ全文章自動同期エンジン */
   function syncHomeTexts() {
     if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && !window.location.pathname.endsWith('/terazawazeirishi/')) {
-      return; // トップページ以外の時はスキップ
+      return;
     }
 
     const repoBase = getRepoBase();
@@ -284,7 +275,6 @@
       .then((data) => {
         if (!data) return;
 
-        // 1. ヒーローテキスト
         if (data.hero_title) {
           const titleEl = document.querySelector('.hero-main-title');
           if (titleEl) titleEl.innerHTML = data.hero_title.replace(/\n/g, '<br>');
@@ -294,7 +284,6 @@
           if (leadEl) leadEl.innerHTML = data.hero_lead.replace(/\n/g, '<br>');
         }
 
-        // 月桂樹バッジ
         const badgeEls = document.querySelectorAll('.hero-badge-item span');
         if (badgeEls.length >= 3) {
           if (data.badge_1) badgeEls[0].textContent = data.badge_1;
@@ -302,41 +291,33 @@
           if (data.badge_3) badgeEls[2].textContent = data.badge_3;
         }
 
-        // ヒーローボタン
         if (data.hero_cta_btn) {
           const btnSpan = document.querySelector('.hero-cta-group .floating-cta-btn span');
           if (btnSpan) btnSpan.textContent = data.hero_cta_btn;
         }
 
-        // 2. About us 01〜05（見出しと本文）
         const zigzagItems = document.querySelectorAll('.athena-zigzag-item');
         zigzagItems.forEach((item, idx) => {
           const num = idx + 1;
           const titleKey = `about_0${num}_title`;
           const descKey = `about_0${num}_desc`;
-
           const headingEl = item.querySelector('.zigzag-heading');
           const textEl = item.querySelector('.zigzag-text');
-
           if (headingEl && data[titleKey]) headingEl.innerHTML = data[titleKey].replace(/\n/g, '<br>');
           if (textEl && data[descKey]) textEl.innerHTML = data[descKey].replace(/\n/g, '<br>');
         });
 
-        // 3. 相談の流れ（FLOW STEP 01〜04）
         const flowSteps = document.querySelectorAll('#flow > div > div:last-child > div');
         flowSteps.forEach((step, idx) => {
           const num = idx + 1;
           const titleKey = `flow_0${num}_title`;
           const descKey = `flow_0${num}_desc`;
-
           const titleEl = step.querySelector('h4');
           const descEl = step.querySelector('p');
-
           if (titleEl && data[titleKey]) titleEl.textContent = data[titleKey];
           if (descEl && data[descKey]) descEl.textContent = data[descKey];
         });
 
-        // 4. 下部CTAバナー
         const bannerSection = document.querySelector('section[style*="linear-gradient(135deg"]');
         if (bannerSection) {
           if (data.cta_banner_title) {
@@ -355,6 +336,143 @@
       })
       .catch((err) => {
         console.warn('Home Texts Sync status:', err.message);
+      });
+  }
+
+  /* ★【新設】税理士紹介・代表挨拶文章自動同期エンジン */
+  function syncProfileTexts() {
+    if (!window.location.pathname.includes('profile.html')) return;
+
+    const repoBase = getRepoBase();
+    const jsonUrl = repoBase + 'content/profile_texts.json?v=' + Date.now();
+
+    fetch(jsonUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error('profile_texts.json HTTP ' + res.status);
+        return res.json();
+      })
+      .then((data) => {
+        if (!data) return;
+
+        if (data.page_lead) {
+          const leadEl = document.querySelector('.hero-lead-text');
+          if (leadEl) leadEl.innerHTML = data.page_lead.replace(/\n/g, '<br>');
+        }
+
+        const members = document.querySelectorAll('.profile-member-grid');
+        // 1人目: 寺沢景子代表
+        if (members.length >= 1) {
+          const m1 = members[0];
+          if (data.rep_keiko_name) {
+            const h2 = m1.querySelector('h2');
+            if (h2) h2.textContent = data.rep_keiko_name;
+          }
+          if (data.rep_keiko_sub) {
+            const sub = m1.querySelector('.profile-sub-title');
+            if (sub) sub.textContent = data.rep_keiko_sub;
+          }
+          if (data.rep_keiko_desc) {
+            const descContainer = m1.querySelector('.profile-desc-col > div:nth-of-type(2)');
+            if (descContainer) {
+              const paras = data.rep_keiko_desc.split('\n\n').filter(p => p.trim());
+              descContainer.innerHTML = paras.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+            }
+          }
+          if (data.rep_keiko_careers) {
+            const ul = m1.querySelector('.profile-career-box ul');
+            if (ul) {
+              const lines = data.rep_keiko_careers.split('\n').filter(l => l.trim());
+              ul.innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+            }
+          }
+        }
+
+        // 2人目: ベテラン税理士
+        if (members.length >= 2) {
+          const m2 = members[1];
+          if (data.rep_senior_name) {
+            const h2 = m2.querySelector('h2');
+            if (h2) h2.textContent = data.rep_senior_name;
+          }
+          if (data.rep_senior_sub) {
+            const sub = m2.querySelector('.profile-sub-title');
+            if (sub) sub.textContent = data.rep_senior_sub;
+          }
+          if (data.rep_senior_desc) {
+            const descContainer = m2.querySelector('.profile-desc-col > div:nth-of-type(2)');
+            if (descContainer) {
+              const paras = data.rep_senior_desc.split('\n\n').filter(p => p.trim());
+              descContainer.innerHTML = paras.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+            }
+          }
+          if (data.rep_senior_careers) {
+            const ul = m2.querySelector('.profile-career-box ul');
+            if (ul) {
+              const lines = data.rep_senior_careers.split('\n').filter(l => l.trim());
+              ul.innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn('Profile Texts Sync status:', err.message);
+      });
+  }
+
+  /* ★【新設】お問い合わせ・規約文章自動同期エンジン */
+  function syncLegalTexts() {
+    const isContact = window.location.pathname.includes('contact.html');
+    const isPrivacy = window.location.pathname.includes('privacy.html');
+    if (!isContact && !isPrivacy) return;
+
+    const repoBase = getRepoBase();
+    const jsonUrl = repoBase + 'content/legal_texts.json?v=' + Date.now();
+
+    fetch(jsonUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error('legal_texts.json HTTP ' + res.status);
+        return res.json();
+      })
+      .then((data) => {
+        if (!data) return;
+
+        // contact.html
+        if (isContact) {
+          if (data.contact_lead) {
+            const lead = document.querySelector('.hero-lead-text');
+            if (lead) lead.innerHTML = data.contact_lead.replace(/\n/g, '<br>');
+          }
+          if (data.contact_notice) {
+            const noticeP = document.querySelector('div[style*="background: #FFF8E7"] p, div[style*="background:#FFF8E7"] p');
+            if (noticeP) noticeP.innerHTML = data.contact_notice.replace(/\n/g, '<br>');
+          }
+        }
+
+        // privacy.html
+        if (isPrivacy) {
+          const sections = document.querySelectorAll('main section');
+          if (sections.length >= 4) {
+            if (data.privacy_sec1) {
+              const p = sections[0].querySelector('p');
+              if (p) p.innerHTML = data.privacy_sec1.replace(/\n/g, '<br>');
+            }
+            if (data.privacy_sec2) {
+              const p = sections[1].querySelector('p');
+              if (p) p.innerHTML = data.privacy_sec2.replace(/\n/g, '<br>');
+            }
+            if (data.privacy_sec3) {
+              const p = sections[2].querySelector('p');
+              if (p) p.innerHTML = data.privacy_sec3.replace(/\n/g, '<br>');
+            }
+            if (data.privacy_sec4) {
+              const p = sections[3].querySelector('p');
+              if (p) p.innerHTML = data.privacy_sec4.replace(/\n/g, '<br>');
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn('Legal Texts Sync status:', err.message);
       });
   }
 })();
