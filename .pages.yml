@@ -1,5 +1,5 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（事務所情報連動完全版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全テキスト・ノーコード完全版）
 # ファイルパス: .pages.yml
 # ==============================================================================
 
@@ -9,7 +9,7 @@ media:
 
 content:
   # ============================================================================
-  # 1. サイト全画像の変更（一括管理）
+  # 1. サイト全画像の変更
   # ============================================================================
   - name: "site_images"
     label: "📷 サイト全画像の変更"
@@ -72,7 +72,106 @@ content:
         type: "image"
 
   # ============================================================================
-  # 2. ★【新設】事務所情報・概要・メッセージの管理
+  # 2. ★【新設】トップページ全文章の編集（index.html）
+  # ============================================================================
+  - name: "home_texts"
+    label: "🏠 トップページ全文章の編集"
+    type: "file"
+    path: "content/home_texts.json"
+    fields:
+      # --- ファーストビュー ---
+      - name: "hero_title"
+        label: "メインキャッチコピー（改行可）"
+        type: "text"
+        required: true
+      - name: "hero_lead"
+        label: "ヒーロー説明文"
+        type: "text"
+        required: true
+      - name: "badge_1"
+        label: "月桂樹バッジ 1"
+        type: "string"
+      - name: "badge_2"
+        label: "月桂樹バッジ 2"
+        type: "string"
+      - name: "badge_3"
+        label: "月桂樹バッジ 3"
+        type: "string"
+      - name: "hero_cta_btn"
+        label: "ファーストビュー無料相談ボタンの文字"
+        type: "string"
+
+      # --- 選ばれる5つの理由（About us 01〜05） ---
+      - name: "about_01_title"
+        label: "About 01 見出し"
+        type: "string"
+      - name: "about_01_desc"
+        label: "About 01 説明本文"
+        type: "text"
+      - name: "about_02_title"
+        label: "About 02 見出し"
+        type: "string"
+      - name: "about_02_desc"
+        label: "About 02 説明本文"
+        type: "text"
+      - name: "about_03_title"
+        label: "About 03 見出し"
+        type: "string"
+      - name: "about_03_desc"
+        label: "About 03 説明本文"
+        type: "text"
+      - name: "about_04_title"
+        label: "About 04 見出し"
+        type: "string"
+      - name: "about_04_desc"
+        label: "About 04 説明本文"
+        type: "text"
+      - name: "about_05_title"
+        label: "About 05 見出し"
+        type: "string"
+      - name: "about_05_desc"
+        label: "About 05 説明本文"
+        type: "text"
+
+      # --- ご相談の流れ（STEP 01〜04） ---
+      - name: "flow_01_title"
+        label: "STEP 01 タイトル"
+        type: "string"
+      - name: "flow_01_desc"
+        label: "STEP 01 説明文"
+        type: "text"
+      - name: "flow_02_title"
+        label: "STEP 02 タイトル"
+        type: "string"
+      - name: "flow_02_desc"
+        label: "STEP 02 説明文"
+        type: "text"
+      - name: "flow_03_title"
+        label: "STEP 03 タイトル"
+        type: "string"
+      - name: "flow_03_desc"
+        label: "STEP 03 説明文"
+        type: "text"
+      - name: "flow_04_title"
+        label: "STEP 04 タイトル"
+        type: "string"
+      - name: "flow_04_desc"
+        label: "STEP 04 説明文"
+        type: "text"
+
+      # --- 下部無料相談バナー ---
+      - name: "cta_banner_title"
+        label: "下部バナー大見出し"
+        type: "string"
+      - name: "cta_banner_desc"
+        label: "下部バナー説明文"
+        type: "text"
+      - name: "cta_banner_btn"
+        label: "下部バナー予約ボタンの文字"
+        type: "string"
+
+  # ============================================================================
+  # 3. 事務所情報・概要・メッセージの管理
   # ============================================================================
   - name: "office_info_manager"
     label: "🏢 事務所情報・概要・メッセージの管理"
@@ -80,38 +179,32 @@ content:
     path: "content/office_info.json"
     fields:
       - name: "tel"
-        label: "電話番号（例: 0969-22-1166）"
+        label: "電話番号"
         type: "string"
-        required: true
       - name: "fax"
-        label: "FAX番号（例: 0969-22-1167）"
+        label: "FAX番号"
         type: "string"
       - name: "address"
-        label: "所在地住所（例: 熊本県天草市南町5-22）"
+        label: "所在地住所"
         type: "string"
-        required: true
       - name: "postal_code"
-        label: "郵便番号（例: 863-0023）"
+        label: "郵便番号"
         type: "string"
       - name: "opening_hours"
-        label: "営業時間（例: 平日 9:30〜17:30（土日祝面談は事前予約対応））"
+        label: "営業時間"
         type: "string"
-        required: true
       - name: "areas"
-        label: "対応エリア（例: 熊本県全域（天草市・熊本市等）および全国オンライン対応）"
+        label: "対応エリア"
         type: "string"
-        required: true
       - name: "rep_message"
         label: "寺沢景子 代表メッセージ本文"
         type: "text"
-        required: true
       - name: "senior_message"
         label: "ベテラン税理士 メッセージ本文"
         type: "text"
-        required: true
 
   # ============================================================================
-  # 3. よくある質問（FAQ）の管理
+  # 4. よくある質問（FAQ）の管理
   # ============================================================================
   - name: "faq_manager"
     label: "❓ よくある質問（FAQ）の管理"
@@ -135,7 +228,7 @@ content:
             required: true
 
   # ============================================================================
-  # 4. 料金案内・プランの管理
+  # 5. 料金案内・プランの管理
   # ============================================================================
   - name: "pricing_manager"
     label: "💰 料金案内・プランの管理"
@@ -154,17 +247,17 @@ content:
             type: "string"
             required: true
           - name: "badge"
-            label: "おすすめバッジ（例: 一番選ばれています / 不要なら空欄）"
+            label: "おすすめバッジ"
             type: "string"
           - name: "target"
             label: "対象"
             type: "string"
           - name: "monthly_fee"
-            label: "月額顧問料（例: 38,500）"
+            label: "月額顧問料"
             type: "string"
             required: true
           - name: "settlement_fee"
-            label: "決算申告料（例: 198,000）"
+            label: "決算申告料"
             type: "string"
             required: true
           - name: "features"
@@ -191,7 +284,7 @@ content:
             type: "string"
 
   # ============================================================================
-  # 5. 提供サービスの管理
+  # 6. 提供サービスの管理
   # ============================================================================
   - name: "services_manager"
     label: "🛠️ 提供サービスの管理"
@@ -206,7 +299,7 @@ content:
           summary: "{service_no} {title}"
         fields:
           - name: "service_no"
-            label: "番号（例: SERVICE 01）"
+            label: "番号"
             type: "string"
             required: true
           - name: "title"
@@ -223,7 +316,7 @@ content:
             required: true
 
   # ============================================================================
-  # 6. 税務・経営コラム（blog/ 直結）
+  # 7. 税務・経営コラム（blog/ 直結）
   # ============================================================================
   - name: "blog"
     label: "📝 税務・経営コラム"
@@ -261,7 +354,7 @@ content:
         required: true
 
   # ============================================================================
-  # 7. 事務所からのお知らせ
+  # 8. 事務所からのお知らせ
   # ============================================================================
   - name: "news"
     label: "📢 事務所からのお知らせ"
