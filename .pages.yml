@@ -1,7 +1,7 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（サイト全コンテンツ完全ノーコード版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全文字・完全網羅版）
 # ファイルパス: .pages.yml
-# 仕様: API-Key-Free / HTML直接編集ゼロ / Zero-Fail
+# 仕様: サイト内全テキスト・全見出し・全英語タグ完全ノーコード対応
 # ==============================================================================
 
 media:
@@ -80,6 +80,9 @@ content:
     type: "file"
     path: "content/home_texts.json"
     fields:
+      - name: "hero_sub_en"
+        label: "ファーストビュー上部 英語サブタイトル"
+        type: "string"
       - name: "hero_title"
         label: "メインキャッチコピー（改行可）"
         type: "text"
@@ -100,35 +103,83 @@ content:
       - name: "hero_cta_btn"
         label: "ファーストビュー無料相談ボタンの文字"
         type: "string"
+      - name: "hero_service_link"
+        label: "ファーストビュー サービス一覧リンク文字"
+        type: "string"
+
+      # --- 選ばれる理由（About Us） ---
+      - name: "about_sec_title"
+        label: "選ばれる理由 大見出し"
+        type: "string"
+      - name: "about_sec_lead"
+        label: "選ばれる理由 案内文（リード文）"
+        type: "text"
+      - name: "about_01_tag"
+        label: "About 01 英語タグ"
+        type: "string"
       - name: "about_01_title"
         label: "About 01 見出し"
         type: "string"
       - name: "about_01_desc"
         label: "About 01 説明本文"
         type: "text"
+      - name: "about_02_tag"
+        label: "About 02 英語タグ"
+        type: "string"
       - name: "about_02_title"
         label: "About 02 見出し"
         type: "string"
       - name: "about_02_desc"
         label: "About 02 説明本文"
         type: "text"
+      - name: "about_03_tag"
+        label: "About 03 英語タグ"
+        type: "string"
       - name: "about_03_title"
         label: "About 03 見出し"
         type: "string"
       - name: "about_03_desc"
         label: "About 03 説明本文"
         type: "text"
+      - name: "about_04_tag"
+        label: "About 04 英語タグ"
+        type: "string"
       - name: "about_04_title"
         label: "About 04 見出し"
         type: "string"
       - name: "about_04_desc"
         label: "About 04 説明本文"
         type: "text"
+      - name: "about_04_btn"
+        label: "About 04 社労士リンクボタン文字"
+        type: "string"
+      - name: "about_05_tag"
+        label: "About 05 英語タグ"
+        type: "string"
       - name: "about_05_title"
         label: "About 05 見出し"
         type: "string"
       - name: "about_05_desc"
         label: "About 05 説明本文"
+        type: "text"
+
+      # --- 提供サービス（SERVICES） ---
+      - name: "services_sec_title"
+        label: "提供サービス 大見出し"
+        type: "string"
+      - name: "services_sec_lead"
+        label: "提供サービス 案内文（リード文）"
+        type: "text"
+      - name: "services_sec_btn"
+        label: "全サービス詳細ボタン文字"
+        type: "string"
+
+      # --- ご相談の流れ（FLOW） ---
+      - name: "flow_sec_title"
+        label: "ご相談の流れ 大見出し"
+        type: "string"
+      - name: "flow_sec_lead"
+        label: "ご相談の流れ 案内文（リード文）"
         type: "text"
       - name: "flow_01_title"
         label: "STEP 01 タイトル"
@@ -154,6 +205,22 @@ content:
       - name: "flow_04_desc"
         label: "STEP 04 説明文"
         type: "text"
+
+      # --- 税理士紹介 ＆ 事務所概要 見出し ---
+      - name: "team_sec_title"
+        label: "税理士紹介 大見出し"
+        type: "string"
+      - name: "team_sec_lead"
+        label: "税理士紹介 案内文（リード文）"
+        type: "text"
+      - name: "company_sec_title"
+        label: "事務所概要 大見出し"
+        type: "string"
+      - name: "company_sec_lead"
+        label: "事務所概要 案内文（リード文）"
+        type: "text"
+
+      # --- 下部無料相談バナー ---
       - name: "cta_banner_title"
         label: "下部バナー大見出し"
         type: "string"
@@ -161,82 +228,23 @@ content:
         label: "下部バナー説明文"
         type: "text"
       - name: "cta_banner_btn"
-        label: "下部バナー予約ボタンの文字"
+        label: "下部バナー予約ボタン文字"
         type: "string"
 
   # ============================================================================
-  # 3. ★【新設】税理士紹介・代表挨拶の全文章（profile.html）
-  # ============================================================================
-  - name: "profile_texts"
-    label: "👤 税理士紹介・代表挨拶の編集"
-    type: "file"
-    path: "content/profile_texts.json"
-    fields:
-      - name: "page_lead"
-        label: "ページ上部の導入リード文"
-        type: "text"
-      - name: "rep_keiko_name"
-        label: "代表税理士 お名前"
-        type: "string"
-      - name: "rep_keiko_sub"
-        label: "代表税理士 肩書き・専門"
-        type: "string"
-      - name: "rep_keiko_desc"
-        label: "代表税理士 メッセージ本文（改行可）"
-        type: "text"
-        required: true
-      - name: "rep_keiko_careers"
-        label: "代表税理士 主な経歴（改行で箇条書き）"
-        type: "text"
-      - name: "rep_senior_name"
-        label: "ベテラン税理士 お名前"
-        type: "string"
-      - name: "rep_senior_sub"
-        label: "ベテラン税理士 肩書き・専門"
-        type: "string"
-      - name: "rep_senior_desc"
-        label: "ベテラン税理士 メッセージ本文（改行可）"
-        type: "text"
-        required: true
-      - name: "rep_senior_careers"
-        label: "ベテラン税理士 主な経歴（改行で箇条書き）"
-        type: "text"
-
-  # ============================================================================
-  # 4. ★【新設】お問い合わせ・規約の全文章（contact.html / privacy.html）
-  # ============================================================================
-  - name: "legal_texts"
-    label: "✉️ お問い合わせ・規約の編集"
-    type: "file"
-    path: "content/legal_texts.json"
-    fields:
-      - name: "contact_lead"
-        label: "お問い合わせページ 案内文"
-        type: "text"
-      - name: "contact_notice"
-        label: "お問い合わせページ 注意喚起文"
-        type: "text"
-      - name: "privacy_sec1"
-        label: "プライバシーポリシー 1. 基本方針および守秘義務"
-        type: "text"
-      - name: "privacy_sec2"
-        label: "プライバシーポリシー 2. 個人情報の利用目的"
-        type: "text"
-      - name: "privacy_sec3"
-        label: "プライバシーポリシー 3. 提携士業との共同利用"
-        type: "text"
-      - name: "privacy_sec4"
-        label: "プライバシーポリシー 4. 免責事項"
-        type: "text"
-
-  # ============================================================================
-  # 5. 事務所情報・概要・連絡先
+  # 3. 事務所基本情報・連絡先・フッター設定
   # ============================================================================
   - name: "office_info_manager"
-    label: "🏢 事務所情報・概要の管理"
+    label: "🏢 事務所情報・連絡先・フッターの管理"
     type: "file"
     path: "content/office_info.json"
     fields:
+      - name: "office_name"
+        label: "正式事務所名"
+        type: "string"
+      - name: "office_en"
+        label: "英語表記ブランド名"
+        type: "string"
       - name: "tel"
         label: "電話番号"
         type: "string"
@@ -255,39 +263,116 @@ content:
       - name: "areas"
         label: "対応エリア"
         type: "string"
+      - name: "registration_info"
+        label: "税理士登録情報"
+        type: "string"
+      - name: "alliance_desc"
+        label: "提携士業の案内文（ザワテラス社労士）"
+        type: "string"
+      - name: "alliance_url"
+        label: "提携士業公式URL"
+        type: "string"
+      - name: "copyright_year"
+        label: "コピーライト表記（例: © 2026 TERAZAWA TAX & CONSULTING. All Rights Reserved.）"
+        type: "string"
 
   # ============================================================================
-  # 6. よくある質問（FAQ）の管理
+  # 4. 税理士紹介・代表挨拶の全文章（profile.html）
   # ============================================================================
-  - name: "faq_manager"
-    label: "❓ よくある質問（FAQ）の管理"
+  - name: "profile_texts"
+    label: "👤 税理士紹介・代表挨拶の編集"
     type: "file"
-    path: "content/faq.json"
+    path: "content/profile_texts.json"
     fields:
-      - name: "faq_list"
-        label: "よくある質問一覧"
+      - name: "page_title"
+        label: "ページ大見出し（例: 税理士紹介・事務所概要）"
+        type: "string"
+      - name: "page_lead"
+        label: "ページ上部の導入リード文"
+        type: "text"
+      - name: "rep_keiko_name"
+        label: "代表税理士 お名前"
+        type: "string"
+      - name: "rep_keiko_sub"
+        label: "代表税理士 肩書き・専門"
+        type: "string"
+      - name: "rep_keiko_desc"
+        label: "代表税理士 メッセージ本文（改行可）"
+        type: "text"
+      - name: "rep_keiko_careers"
+        label: "代表税理士 主な経歴（改行で箇条書き）"
+        type: "text"
+      - name: "rep_senior_name"
+        label: "ベテラン税理士 お名前"
+        type: "string"
+      - name: "rep_senior_sub"
+        label: "ベテラン税理士 肩書き・専門"
+        type: "string"
+      - name: "rep_senior_desc"
+        label: "ベテラン税理士 メッセージ本文（改行可）"
+        type: "text"
+      - name: "rep_senior_careers"
+        label: "ベテラン税理士 主な経歴（改行で箇条書き）"
+        type: "text"
+
+  # ============================================================================
+  # 5. 提供サービスの管理（services.html ＆ トップページ自動連動）
+  # ============================================================================
+  - name: "services_manager"
+    label: "🛠️ 提供サービスの管理"
+    type: "file"
+    path: "content/services.json"
+    fields:
+      - name: "page_title"
+        label: "サービスページ大見出し"
+        type: "string"
+      - name: "page_lead"
+        label: "サービスページ導入リード文"
+        type: "text"
+      - name: "service_items"
+        label: "サービス一覧"
         type: "object"
         list:
           collapsible: true
-          summary: "Q. {question}"
+          summary: "{service_no} {title}"
         fields:
-          - name: "question"
-            label: "質問（Q）"
+          - name: "service_no"
+            label: "番号"
             type: "string"
             required: true
-          - name: "answer"
-            label: "回答（A）"
+          - name: "title"
+            label: "サービス名（★トップと詳細の両方に自動反映）"
+            type: "string"
+            required: true
+          - name: "lead"
+            label: "サービス説明文（★トップと詳細の両方に自動反映）"
+            type: "text"
+            required: true
+          - name: "points"
+            label: "特徴・チェックポイント（改行で箇条書き）"
             type: "text"
             required: true
 
   # ============================================================================
-  # 7. 料金案内・プランの管理
+  # 6. 料金案内・プランの管理（pricing.html）
   # ============================================================================
   - name: "pricing_manager"
     label: "💰 料金案内・プランの管理"
     type: "file"
     path: "content/pricing.json"
     fields:
+      - name: "page_title"
+        label: "料金ページ大見出し"
+        type: "string"
+      - name: "page_lead"
+        label: "料金ページ導入リード文"
+        type: "text"
+      - name: "plans_sec_title"
+        label: "顧問プラン見出し"
+        type: "string"
+      - name: "plans_sec_lead"
+        label: "顧問プラン案内文"
+        type: "string"
       - name: "plans"
         label: "法人税務顧問プラン一覧"
         type: "object"
@@ -317,6 +402,12 @@ content:
             label: "サポート内容（改行で箇条書き）"
             type: "text"
             required: true
+      - name: "spot_sec_title"
+        label: "スポット業務見出し"
+        type: "string"
+      - name: "spot_sec_lead"
+        label: "スポット業務案内文"
+        type: "string"
       - name: "spot_fees"
         label: "スポット業務料金表"
         type: "object"
@@ -337,36 +428,70 @@ content:
             type: "string"
 
   # ============================================================================
-  # 8. 提供サービスの管理
+  # 7. よくある質問（FAQ）の管理（faq.html）
   # ============================================================================
-  - name: "services_manager"
-    label: "🛠️ 提供サービスの管理"
+  - name: "faq_manager"
+    label: "❓ よくある質問（FAQ）の管理"
     type: "file"
-    path: "content/services.json"
+    path: "content/faq.json"
     fields:
-      - name: "service_items"
-        label: "サービス一覧"
+      - name: "page_title"
+        label: "FAQページ大見出し"
+        type: "string"
+      - name: "page_lead"
+        label: "FAQページ導入リード文"
+        type: "text"
+      - name: "faq_list"
+        label: "よくある質問一覧"
         type: "object"
         list:
           collapsible: true
-          summary: "{service_no} {title}"
+          summary: "Q. {question}"
         fields:
-          - name: "service_no"
-            label: "番号"
+          - name: "question"
+            label: "質問（Q）"
             type: "string"
             required: true
-          - name: "title"
-            label: "サービス名"
-            type: "string"
-            required: true
-          - name: "lead"
-            label: "サービス説明文"
+          - name: "answer"
+            label: "回答（A）"
             type: "text"
             required: true
-          - name: "points"
-            label: "特徴・チェックポイント（改行で箇条書き）"
-            type: "text"
-            required: true
+
+  # ============================================================================
+  # 8. お問い合わせ・規約の全文章（contact.html / privacy.html）
+  # ============================================================================
+  - name: "legal_texts"
+    label: "✉️ お問い合わせ・規約の編集"
+    type: "file"
+    path: "content/legal_texts.json"
+    fields:
+      - name: "contact_lead"
+        label: "お問い合わせページ 案内文"
+        type: "text"
+      - name: "contact_phone_note"
+        label: "電話バナー上部テキスト"
+        type: "string"
+      - name: "contact_hours_note"
+        label: "電話受付時間テキスト"
+        type: "string"
+      - name: "contact_notice"
+        label: "機密情報注意喚起文"
+        type: "text"
+      - name: "contact_form_lead"
+        label: "フォーム案内説明文"
+        type: "text"
+      - name: "privacy_sec1"
+        label: "プライバシーポリシー 1. 基本方針および守秘義務"
+        type: "text"
+      - name: "privacy_sec2"
+        label: "プライバシーポリシー 2. 個人情報の利用目的"
+        type: "text"
+      - name: "privacy_sec3"
+        label: "プライバシーポリシー 3. 提携士業との共同利用"
+        type: "text"
+      - name: "privacy_sec4"
+        label: "プライバシーポリシー 4. 免責事項"
+        type: "text"
 
   # ============================================================================
   # 9. 税務・経営コラム（blog/ 直結）
