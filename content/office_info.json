@@ -1,10 +1,14 @@
 {
+  "office_name": "寺沢景子税理士事務所",
+  "office_en": "TERAZAWA TAX & CONSULTING",
   "tel": "0969-22-1166",
   "fax": "0969-22-1167",
   "postal_code": "863-0023",
   "address": "熊本県天草市南町5-22",
   "opening_hours": "平日 9:30〜17:30（土日祝面談は事前予約対応）",
   "areas": "熊本県全域（天草市・熊本市等）および全国オンライン対応",
-  "rep_message": "税務調査の最前線で培った知見を活かし、税務署目線での事前リスク抽出と法令に則った適正申告を徹底。温かな対話を通じて経営者様の不安を解消します。",
-  "senior_message": "35年に及ぶ豊富な実務経験に基づき、難易度の高い税務判断や事業承継、複雑な資産税申告にも万全に対応。経験に裏打ちされた盤石の安心感をお約束します。"
+  "registration_info": "南九州税理士会熊本県連 所属（第154978号）",
+  "alliance_desc": "ザワテラス社労士（社会保険労務士と強力連携）",
+  "alliance_url": "https://terazawa-sr.jbcsite.com/",
+  "copyright_year": "© 2026 TERAZAWA TAX & CONSULTING. All Rights Reserved."
 }
