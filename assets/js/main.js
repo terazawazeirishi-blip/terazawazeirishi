@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（非同期干渉完全排除版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（全テキストノーコード完全版）
  * ファイルパス: assets/js/main.js
- * 仕様: 競合状態（Race Condition）の完全根絶 / 安定同期
+ * 仕様: 画像・コラム・FAQ・料金・サービス・事務所情報・トップ全文章完全自動同期
  * ==============================================================================
  */
 
@@ -18,6 +18,7 @@
     initSmoothScroll();
     syncCmsImages();
     syncOfficeInfo();
+    syncHomeTexts(); // ★ トップページ全文章自動同期
   }
 
   function initHeaderScroll() {
@@ -124,7 +125,6 @@
           return repoBase + clean;
         };
 
-        // 税理士写真
         const photoFrames = document.querySelectorAll('.representative-photo-frame');
         if (photoFrames.length >= 1 && data.rep_keiko) {
           const keikoUrl = resolveImgUrl(data.rep_keiko);
@@ -145,7 +145,6 @@
           }
         }
 
-        // ヒーローアート
         if (data.hero_illustration) {
           const heroUrl = resolveImgUrl(data.hero_illustration);
           const heroSlot = document.querySelector('.hero-bg-artwork-slot');
@@ -154,7 +153,6 @@
           }
         }
 
-        // ロゴ
         if (data.logo_img) {
           const logoUrl = resolveImgUrl(data.logo_img);
           if (logoUrl) {
@@ -164,7 +162,6 @@
           }
         }
 
-        // 透かし
         if (data.watermark_crest) {
           const crestUrl = resolveImgUrl(data.watermark_crest);
           const hero = document.getElementById('hero');
@@ -176,7 +173,6 @@
           }
         }
 
-        // About us ジグザグ写真（トップページ）
         const aboutKeys = ['about_01', 'about_02', 'about_03', 'about_04', 'about_05'];
         document.querySelectorAll('.athena-about-section .athena-zigzag-item .zigzag-visual-slot').forEach((slot, idx) => {
           const k = aboutKeys[idx];
@@ -188,7 +184,6 @@
           }
         });
 
-        // トップページのサービスカード
         const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
         document.querySelectorAll('.service-card-item .service-card-img-slot').forEach((slot, idx) => {
           const k = serviceKeys[idx];
@@ -200,7 +195,6 @@
           }
         });
 
-        // CTAバナー
         if (data.cta_banner_bg) {
           const ctaUrl = resolveImgUrl(data.cta_banner_bg);
           if (ctaUrl) {
@@ -270,6 +264,97 @@
       })
       .catch((err) => {
         console.warn('Office Info Sync status:', err.message);
+      });
+  }
+
+  /* ★【新設】トップページ全文章自動同期エンジン */
+  function syncHomeTexts() {
+    if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && !window.location.pathname.endsWith('/terazawazeirishi/')) {
+      return; // トップページ以外の時はスキップ
+    }
+
+    const repoBase = getRepoBase();
+    const jsonUrl = repoBase + 'content/home_texts.json?v=' + Date.now();
+
+    fetch(jsonUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error('home_texts.json HTTP ' + res.status);
+        return res.json();
+      })
+      .then((data) => {
+        if (!data) return;
+
+        // 1. ヒーローテキスト
+        if (data.hero_title) {
+          const titleEl = document.querySelector('.hero-main-title');
+          if (titleEl) titleEl.innerHTML = data.hero_title.replace(/\n/g, '<br>');
+        }
+        if (data.hero_lead) {
+          const leadEl = document.querySelector('.hero-lead-text');
+          if (leadEl) leadEl.innerHTML = data.hero_lead.replace(/\n/g, '<br>');
+        }
+
+        // 月桂樹バッジ
+        const badgeEls = document.querySelectorAll('.hero-badge-item span');
+        if (badgeEls.length >= 3) {
+          if (data.badge_1) badgeEls[0].textContent = data.badge_1;
+          if (data.badge_2) badgeEls[1].textContent = data.badge_2;
+          if (data.badge_3) badgeEls[2].textContent = data.badge_3;
+        }
+
+        // ヒーローボタン
+        if (data.hero_cta_btn) {
+          const btnSpan = document.querySelector('.hero-cta-group .floating-cta-btn span');
+          if (btnSpan) btnSpan.textContent = data.hero_cta_btn;
+        }
+
+        // 2. About us 01〜05（見出しと本文）
+        const zigzagItems = document.querySelectorAll('.athena-zigzag-item');
+        zigzagItems.forEach((item, idx) => {
+          const num = idx + 1;
+          const titleKey = `about_0${num}_title`;
+          const descKey = `about_0${num}_desc`;
+
+          const headingEl = item.querySelector('.zigzag-heading');
+          const textEl = item.querySelector('.zigzag-text');
+
+          if (headingEl && data[titleKey]) headingEl.innerHTML = data[titleKey].replace(/\n/g, '<br>');
+          if (textEl && data[descKey]) textEl.innerHTML = data[descKey].replace(/\n/g, '<br>');
+        });
+
+        // 3. 相談の流れ（FLOW STEP 01〜04）
+        const flowSteps = document.querySelectorAll('#flow > div > div:last-child > div');
+        flowSteps.forEach((step, idx) => {
+          const num = idx + 1;
+          const titleKey = `flow_0${num}_title`;
+          const descKey = `flow_0${num}_desc`;
+
+          const titleEl = step.querySelector('h4');
+          const descEl = step.querySelector('p');
+
+          if (titleEl && data[titleKey]) titleEl.textContent = data[titleKey];
+          if (descEl && data[descKey]) descEl.textContent = data[descKey];
+        });
+
+        // 4. 下部CTAバナー
+        const bannerSection = document.querySelector('section[style*="linear-gradient(135deg"]');
+        if (bannerSection) {
+          if (data.cta_banner_title) {
+            const h2 = bannerSection.querySelector('h2');
+            if (h2) h2.textContent = data.cta_banner_title;
+          }
+          if (data.cta_banner_desc) {
+            const p = bannerSection.querySelector('p:nth-of-type(2)');
+            if (p) p.innerHTML = data.cta_banner_desc.replace(/\n/g, '<br>');
+          }
+          if (data.cta_banner_btn) {
+            const btnSpan = bannerSection.querySelector('.floating-cta-btn span');
+            if (btnSpan) btnSpan.textContent = data.cta_banner_btn;
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn('Home Texts Sync status:', err.message);
       });
   }
 })();
