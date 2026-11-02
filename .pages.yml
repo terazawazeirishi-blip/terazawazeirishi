@@ -1,7 +1,6 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全文字・完全網羅版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（バッジ増減・文字消去完全対応版）
 # ファイルパス: .pages.yml
-# 仕様: サイト内全テキスト・全見出し・全英語タグ完全ノーコード対応
 # ==============================================================================
 
 media:
@@ -10,7 +9,7 @@ media:
 
 content:
   # ============================================================================
-  # 1. サイト全画像の変更（全17箇所）
+  # 1. サイト全画像の変更
   # ============================================================================
   - name: "site_images"
     label: "📷 サイト全画像の変更"
@@ -73,7 +72,7 @@ content:
         type: "image"
 
   # ============================================================================
-  # 2. トップページ全文章の編集（index.html）
+  # 2. トップページ全文章の編集（★バッジ追加・削除リスト化）
   # ============================================================================
   - name: "home_texts"
     label: "🏠 トップページ全文章の編集"
@@ -86,20 +85,23 @@ content:
       - name: "hero_title"
         label: "メインキャッチコピー（改行可）"
         type: "text"
-        required: true
       - name: "hero_lead"
         label: "ヒーロー説明文"
         type: "text"
-        required: true
-      - name: "badge_1"
-        label: "月桂樹バッジ 1"
-        type: "string"
-      - name: "badge_2"
-        label: "月桂樹バッジ 2"
-        type: "string"
-      - name: "badge_3"
-        label: "月桂樹バッジ 3"
-        type: "string"
+
+      # ★【新設】月桂樹バッジの自由追加・削除リスト
+      - name: "hero_badges"
+        label: "月桂樹バッジ一覧（＋で追加、ゴミ箱で削除、並び替え可能）"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "{text}"
+        fields:
+          - name: "text"
+            label: "バッジの文言（例: 国税21年在職（元法人統括官））"
+            type: "string"
+            required: true
+
       - name: "hero_cta_btn"
         label: "ファーストビュー無料相談ボタンの文字"
         type: "string"
@@ -273,7 +275,7 @@ content:
         label: "提携士業公式URL"
         type: "string"
       - name: "copyright_year"
-        label: "コピーライト表記（例: © 2026 TERAZAWA TAX & CONSULTING. All Rights Reserved.）"
+        label: "コピーライト表記"
         type: "string"
 
   # ============================================================================
@@ -285,7 +287,7 @@ content:
     path: "content/profile_texts.json"
     fields:
       - name: "page_title"
-        label: "ページ大見出し（例: 税理士紹介・事務所概要）"
+        label: "ページ大見出し"
         type: "string"
       - name: "page_lead"
         label: "ページ上部の導入リード文"
@@ -316,7 +318,7 @@ content:
         type: "text"
 
   # ============================================================================
-  # 5. 提供サービスの管理（services.html ＆ トップページ自動連動）
+  # 5. 提供サービスの管理（services.html ＆ トップ連動）
   # ============================================================================
   - name: "services_manager"
     label: "🛠️ 提供サービスの管理"
@@ -341,11 +343,11 @@ content:
             type: "string"
             required: true
           - name: "title"
-            label: "サービス名（★トップと詳細の両方に自動反映）"
+            label: "サービス名"
             type: "string"
             required: true
           - name: "lead"
-            label: "サービス説明文（★トップと詳細の両方に自動反映）"
+            label: "サービス説明文"
             type: "text"
             required: true
           - name: "points"
