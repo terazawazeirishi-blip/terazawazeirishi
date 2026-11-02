@@ -1,5 +1,5 @@
 # ==============================================================================
-# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（バッジ増減・文字消去完全対応版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全要素スマート非表示・増減完全版）
 # ファイルパス: .pages.yml
 # ==============================================================================
 
@@ -9,7 +9,7 @@ media:
 
 content:
   # ============================================================================
-  # 1. サイト全画像の変更
+  # 1. サイト全画像の変更（空欄なら非表示）
   # ============================================================================
   - name: "site_images"
     label: "📷 サイト全画像の変更"
@@ -72,7 +72,7 @@ content:
         type: "image"
 
   # ============================================================================
-  # 2. トップページ全文章の編集（★バッジ追加・削除リスト化）
+  # 2. トップページ全文章の編集（★空欄自動非表示 ＆ 項目自由増減）
   # ============================================================================
   - name: "home_texts"
     label: "🏠 トップページ全文章の編集"
@@ -80,157 +80,129 @@ content:
     path: "content/home_texts.json"
     fields:
       - name: "hero_sub_en"
-        label: "ファーストビュー上部 英語サブタイトル"
+        label: "ファーストビュー上部 英語サブタイトル（空欄で非表示）"
         type: "string"
       - name: "hero_title"
-        label: "メインキャッチコピー（改行可）"
+        label: "メインキャッチコピー（改行可・空欄で非表示）"
         type: "text"
       - name: "hero_lead"
-        label: "ヒーロー説明文"
+        label: "ヒーロー説明文（改行可・空欄で非表示）"
         type: "text"
 
-      # ★【新設】月桂樹バッジの自由追加・削除リスト
+      # 月桂樹バッジリスト（追加・削除・並び替え）
       - name: "hero_badges"
-        label: "月桂樹バッジ一覧（＋で追加、ゴミ箱で削除、並び替え可能）"
+        label: "月桂樹バッジ一覧（＋で追加、ゴミ箱で削除、全消去で非表示）"
         type: "object"
         list:
           collapsible: true
           summary: "{text}"
         fields:
           - name: "text"
-            label: "バッジの文言（例: 国税21年在職（元法人統括官））"
+            label: "バッジの文言"
             type: "string"
-            required: true
 
       - name: "hero_cta_btn"
-        label: "ファーストビュー無料相談ボタンの文字"
+        label: "ファーストビュー無料相談ボタンの文字（空欄でボタンごと非表示）"
         type: "string"
       - name: "hero_service_link"
-        label: "ファーストビュー サービス一覧リンク文字"
+        label: "サービス一覧リンク文字（空欄で非表示）"
         type: "string"
 
-      # --- 選ばれる理由（About Us） ---
+      # 選ばれる理由（About Us）
       - name: "about_sec_title"
-        label: "選ばれる理由 大見出し"
+        label: "選ばれる理由 大見出し（空欄で非表示）"
         type: "string"
       - name: "about_sec_lead"
-        label: "選ばれる理由 案内文（リード文）"
-        type: "text"
-      - name: "about_01_tag"
-        label: "About 01 英語タグ"
-        type: "string"
-      - name: "about_01_title"
-        label: "About 01 見出し"
-        type: "string"
-      - name: "about_01_desc"
-        label: "About 01 説明本文"
-        type: "text"
-      - name: "about_02_tag"
-        label: "About 02 英語タグ"
-        type: "string"
-      - name: "about_02_title"
-        label: "About 02 見出し"
-        type: "string"
-      - name: "about_02_desc"
-        label: "About 02 説明本文"
-        type: "text"
-      - name: "about_03_tag"
-        label: "About 03 英語タグ"
-        type: "string"
-      - name: "about_03_title"
-        label: "About 03 見出し"
-        type: "string"
-      - name: "about_03_desc"
-        label: "About 03 説明本文"
-        type: "text"
-      - name: "about_04_tag"
-        label: "About 04 英語タグ"
-        type: "string"
-      - name: "about_04_title"
-        label: "About 04 見出し"
-        type: "string"
-      - name: "about_04_desc"
-        label: "About 04 説明本文"
-        type: "text"
-      - name: "about_04_btn"
-        label: "About 04 社労士リンクボタン文字"
-        type: "string"
-      - name: "about_05_tag"
-        label: "About 05 英語タグ"
-        type: "string"
-      - name: "about_05_title"
-        label: "About 05 見出し"
-        type: "string"
-      - name: "about_05_desc"
-        label: "About 05 説明本文"
+        label: "選ばれる理由 案内文（空欄で非表示）"
         type: "text"
 
-      # --- 提供サービス（SERVICES） ---
+      # 選ばれる理由 リスト（＋で追加、ゴミ箱で削除可能！）
+      - name: "about_items"
+        label: "選ばれる理由 項目一覧（＋で追加、ゴミ箱で削除）"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "{num} {title}"
+        fields:
+          - name: "num"
+            label: "番号（例: 01）"
+            type: "string"
+          - name: "tag"
+            label: "英語タグ（空欄でタグのみ非表示）"
+            type: "string"
+          - name: "title"
+            label: "見出し"
+            type: "string"
+          - name: "desc"
+            label: "説明本文"
+            type: "text"
+          - name: "btn_text"
+            label: "リンクボタン文字（社労士リンク等 / 不要なら空欄でボタン非表示）"
+            type: "string"
+          - name: "btn_url"
+            label: "リンク先URL（空欄なら非表示）"
+            type: "string"
+
+      # 提供サービス見出し
       - name: "services_sec_title"
-        label: "提供サービス 大見出し"
+        label: "提供サービス 大見出し（空欄で非表示）"
         type: "string"
       - name: "services_sec_lead"
-        label: "提供サービス 案内文（リード文）"
+        label: "提供サービス 案内文（空欄で非表示）"
         type: "text"
       - name: "services_sec_btn"
-        label: "全サービス詳細ボタン文字"
+        label: "全サービス詳細ボタン文字（空欄でボタン非表示）"
         type: "string"
 
-      # --- ご相談の流れ（FLOW） ---
+      # ご相談の流れ（FLOW）
       - name: "flow_sec_title"
-        label: "ご相談の流れ 大見出し"
+        label: "ご相談の流れ 大見出し（空欄で非表示）"
         type: "string"
       - name: "flow_sec_lead"
-        label: "ご相談の流れ 案内文（リード文）"
-        type: "text"
-      - name: "flow_01_title"
-        label: "STEP 01 タイトル"
-        type: "string"
-      - name: "flow_01_desc"
-        label: "STEP 01 説明文"
-        type: "text"
-      - name: "flow_02_title"
-        label: "STEP 02 タイトル"
-        type: "string"
-      - name: "flow_02_desc"
-        label: "STEP 02 説明文"
-        type: "text"
-      - name: "flow_03_title"
-        label: "STEP 03 タイトル"
-        type: "string"
-      - name: "flow_03_desc"
-        label: "STEP 03 説明文"
-        type: "text"
-      - name: "flow_04_title"
-        label: "STEP 04 タイトル"
-        type: "string"
-      - name: "flow_04_desc"
-        label: "STEP 04 説明文"
+        label: "ご相談の流れ 案内文（空欄で非表示）"
         type: "text"
 
-      # --- 税理士紹介 ＆ 事務所概要 見出し ---
+      # 相談の流れ STEPリスト（＋で追加、ゴミ箱で削除可能！）
+      - name: "flow_steps"
+        label: "ご相談の流れ STEP一覧（＋で追加、ゴミ箱で削除）"
+        type: "object"
+        list:
+          collapsible: true
+          summary: "{step_label} {title}"
+        fields:
+          - name: "step_label"
+            label: "STEP番号（例: STEP 01）"
+            type: "string"
+          - name: "title"
+            label: "タイトル"
+            type: "string"
+          - name: "desc"
+            label: "説明文"
+            type: "text"
+
+      # 税理士紹介＆概要 見出し
       - name: "team_sec_title"
-        label: "税理士紹介 大見出し"
+        label: "税理士紹介 大見出し（空欄で非表示）"
         type: "string"
       - name: "team_sec_lead"
-        label: "税理士紹介 案内文（リード文）"
+        label: "税理士紹介 案内文（空欄で非表示）"
         type: "text"
       - name: "company_sec_title"
-        label: "事務所概要 大見出し"
+        label: "事務所概要 大見出し（空欄で非表示）"
         type: "string"
       - name: "company_sec_lead"
-        label: "事務所概要 案内文（リード文）"
+        label: "事務所概要 案内文（空欄で非表示）"
         type: "text"
 
-      # --- 下部無料相談バナー ---
+      # 下部無料相談バナー
       - name: "cta_banner_title"
-        label: "下部バナー大見出し"
+        label: "下部バナー大見出し（空欄で非表示）"
         type: "string"
       - name: "cta_banner_desc"
-        label: "下部バナー説明文"
+        label: "下部バナー説明文（空欄で非表示）"
         type: "text"
       - name: "cta_banner_btn"
-        label: "下部バナー予約ボタン文字"
+        label: "下部バナー予約ボタン文字（空欄でボタン非表示）"
         type: "string"
 
   # ============================================================================
@@ -251,7 +223,7 @@ content:
         label: "電話番号"
         type: "string"
       - name: "fax"
-        label: "FAX番号"
+        label: "FAX番号（空欄なら表の行ごと非表示）"
         type: "string"
       - name: "address"
         label: "所在地住所"
@@ -269,7 +241,7 @@ content:
         label: "税理士登録情報"
         type: "string"
       - name: "alliance_desc"
-        label: "提携士業の案内文（ザワテラス社労士）"
+        label: "提携士業の案内文（ザワテラス社労士 / 空欄で非表示）"
         type: "string"
       - name: "alliance_url"
         label: "提携士業公式URL"
@@ -290,31 +262,31 @@ content:
         label: "ページ大見出し"
         type: "string"
       - name: "page_lead"
-        label: "ページ上部の導入リード文"
+        label: "ページ上部の導入リード文（空欄で非表示）"
         type: "text"
       - name: "rep_keiko_name"
         label: "代表税理士 お名前"
         type: "string"
       - name: "rep_keiko_sub"
-        label: "代表税理士 肩書き・専門"
+        label: "代表税理士 肩書き・専門（空欄で非表示）"
         type: "string"
       - name: "rep_keiko_desc"
-        label: "代表税理士 メッセージ本文（改行可）"
+        label: "代表税理士 メッセージ本文"
         type: "text"
       - name: "rep_keiko_careers"
-        label: "代表税理士 主な経歴（改行で箇条書き）"
+        label: "代表税理士 主な経歴（空欄で経歴枠ごと非表示）"
         type: "text"
       - name: "rep_senior_name"
         label: "ベテラン税理士 お名前"
         type: "string"
       - name: "rep_senior_sub"
-        label: "ベテラン税理士 肩書き・専門"
+        label: "ベテラン税理士 肩書き・専門（空欄で非表示）"
         type: "string"
       - name: "rep_senior_desc"
-        label: "ベテラン税理士 メッセージ本文（改行可）"
+        label: "ベテラン税理士 メッセージ本文"
         type: "text"
       - name: "rep_senior_careers"
-        label: "ベテラン税理士 主な経歴（改行で箇条書き）"
+        label: "ベテラン税理士 主な経歴（空欄で経歴枠ごと非表示）"
         type: "text"
 
   # ============================================================================
@@ -329,10 +301,10 @@ content:
         label: "サービスページ大見出し"
         type: "string"
       - name: "page_lead"
-        label: "サービスページ導入リード文"
+        label: "サービスページ導入リード文（空欄で非表示）"
         type: "text"
       - name: "service_items"
-        label: "サービス一覧"
+        label: "サービス一覧（＋で追加、ゴミ箱で削除）"
         type: "object"
         list:
           collapsible: true
@@ -351,9 +323,8 @@ content:
             type: "text"
             required: true
           - name: "points"
-            label: "特徴・チェックポイント（改行で箇条書き）"
+            label: "特徴・チェックポイント（空欄でリスト枠非表示）"
             type: "text"
-            required: true
 
   # ============================================================================
   # 6. 料金案内・プランの管理（pricing.html）
@@ -367,16 +338,16 @@ content:
         label: "料金ページ大見出し"
         type: "string"
       - name: "page_lead"
-        label: "料金ページ導入リード文"
+        label: "料金ページ導入リード文（空欄で非表示）"
         type: "text"
       - name: "plans_sec_title"
-        label: "顧問プラン見出し"
+        label: "顧問プラン見出し（空欄で非表示）"
         type: "string"
       - name: "plans_sec_lead"
-        label: "顧問プラン案内文"
+        label: "顧問プラン案内文（空欄で非表示）"
         type: "string"
       - name: "plans"
-        label: "法人税務顧問プラン一覧"
+        label: "法人税務顧問プラン一覧（＋で追加、ゴミ箱で削除）"
         type: "object"
         list:
           collapsible: true
@@ -387,7 +358,7 @@ content:
             type: "string"
             required: true
           - name: "badge"
-            label: "おすすめバッジ"
+            label: "おすすめバッジ（空欄でバッジ非表示）"
             type: "string"
           - name: "target"
             label: "対象"
@@ -401,17 +372,16 @@ content:
             type: "string"
             required: true
           - name: "features"
-            label: "サポート内容（改行で箇条書き）"
+            label: "サポート内容（空欄でリスト非表示）"
             type: "text"
-            required: true
       - name: "spot_sec_title"
-        label: "スポット業務見出し"
+        label: "スポット業務見出し（空欄で非表示）"
         type: "string"
       - name: "spot_sec_lead"
-        label: "スポット業務案内文"
+        label: "スポット業務案内文（空欄で非表示）"
         type: "string"
       - name: "spot_fees"
-        label: "スポット業務料金表"
+        label: "スポット業務料金表（＋で追加、ゴミ箱で削除）"
         type: "object"
         list:
           collapsible: true
@@ -426,7 +396,7 @@ content:
             type: "string"
             required: true
           - name: "note"
-            label: "備考"
+            label: "備考（空欄可）"
             type: "string"
 
   # ============================================================================
@@ -441,10 +411,10 @@ content:
         label: "FAQページ大見出し"
         type: "string"
       - name: "page_lead"
-        label: "FAQページ導入リード文"
+        label: "FAQページ導入リード文（空欄で非表示）"
         type: "text"
       - name: "faq_list"
-        label: "よくある質問一覧"
+        label: "よくある質問一覧（＋で追加、ゴミ箱で削除）"
         type: "object"
         list:
           collapsible: true
@@ -468,7 +438,7 @@ content:
     path: "content/legal_texts.json"
     fields:
       - name: "contact_lead"
-        label: "お問い合わせページ 案内文"
+        label: "お問い合わせページ 案内文（空欄で非表示）"
         type: "text"
       - name: "contact_phone_note"
         label: "電話バナー上部テキスト"
@@ -477,7 +447,7 @@ content:
         label: "電話受付時間テキスト"
         type: "string"
       - name: "contact_notice"
-        label: "機密情報注意喚起文"
+        label: "機密情報注意喚起文（空欄で警告枠ごと非表示）"
         type: "text"
       - name: "contact_form_lead"
         label: "フォーム案内説明文"
@@ -489,7 +459,7 @@ content:
         label: "プライバシーポリシー 2. 個人情報の利用目的"
         type: "text"
       - name: "privacy_sec3"
-        label: "プライバシーポリシー 3. 提携士業との共同利用"
+        label: "プライバシーポリシー 3. 提携士業との共同利用（空欄で非表示）"
         type: "text"
       - name: "privacy_sec4"
         label: "プライバシーポリシー 4. 免責事項"
