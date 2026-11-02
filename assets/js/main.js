@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
- * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（文字消去＆バッジ増減完全版）
+ * 寺沢景子税理士事務所 公式Webサイト クライアントスクリプト（スマート非表示完全版）
  * ファイルパス: assets/js/main.js
- * 仕様: 空文字消去完全反映 / バッジ動的増減 / 全データ完全同期
+ * 仕様: 空欄時の枠ごと完全自動非表示 / 項目自由増減 / 全データ完全同期
  * ==============================================================================
  */
 
@@ -18,12 +18,27 @@
     initSmoothScroll();
     syncCmsImages();
     syncOfficeInfo();
-    syncHomeTexts();    // ★ バッジ自由増減 ＆ 空文字消去完全対応
+    syncHomeTexts();
     syncProfileTexts();
     syncServicesTexts();
     syncPricingTexts();
     syncFaqTexts();
     syncLegalTexts();
+  }
+
+  /* ★【共通ヘルパー】空欄なら要素ごと完全非表示、文字があれば表示するスマート関数 */
+  function setOrHide(el, val, isHtml) {
+    if (!el) return;
+    if (val === undefined || val === null || (typeof val === 'string' && val.trim() === '')) {
+      el.style.display = 'none';
+    } else {
+      el.style.display = '';
+      if (isHtml) {
+        el.innerHTML = typeof val === 'string' ? val.replace(/\n/g, '<br>') : val;
+      } else {
+        el.textContent = val;
+      }
+    }
   }
 
   function initHeaderScroll() {
@@ -187,14 +202,14 @@
       .then((data) => {
         if (!data) return;
 
-        if (typeof data.office_name !== 'undefined') {
-          document.querySelectorAll('.brand-name, .footer-brand-name').forEach((el) => { el.textContent = data.office_name; });
+        if (data.office_name) {
+          document.querySelectorAll('.brand-name, .footer-brand-name').forEach((el) => { setOrHide(el, data.office_name); });
         }
-        if (typeof data.office_en !== 'undefined') {
-          document.querySelectorAll('.brand-en, .footer-brand-en').forEach((el) => { el.textContent = data.office_en; });
+        if (data.office_en) {
+          document.querySelectorAll('.brand-en, .footer-brand-en').forEach((el) => { setOrHide(el, data.office_en); });
         }
 
-        if (typeof data.tel !== 'undefined') {
+        if (data.tel) {
           document.querySelectorAll('a[href^="tel:"]').forEach((a) => {
             a.setAttribute('href', 'tel:' + data.tel.replace(/-/g, ''));
             const span = a.querySelector('span');
@@ -212,29 +227,35 @@
           if (!th || !td) return;
           const thText = th.textContent.trim();
 
-          if (thText.includes('所在地') && typeof data.address !== 'undefined') {
-            td.textContent = (data.postal_code ? '〒' + data.postal_code + ' ' : '') + data.address;
-          } else if (thText.includes('営業時間') && typeof data.opening_hours !== 'undefined') {
-            td.textContent = data.opening_hours;
-          } else if (thText.includes('対応エリア') && typeof data.areas !== 'undefined') {
-            td.textContent = data.areas;
-          } else if (thText.includes('FAX') && typeof data.fax !== 'undefined') {
-            td.textContent = data.fax;
+          if (thText.includes('所在地')) {
+            const addr = (data.postal_code ? '〒' + data.postal_code + ' ' : '') + (data.address || '');
+            setOrHide(tr, addr ? true : false);
+            td.textContent = addr;
+          } else if (thText.includes('営業時間')) {
+            setOrHide(tr, data.opening_hours);
+            td.textContent = data.opening_hours || '';
+          } else if (thText.includes('対応エリア')) {
+            setOrHide(tr, data.areas);
+            td.textContent = data.areas || '';
+          } else if (thText.includes('FAX')) {
+            setOrHide(tr, data.fax);
+            td.textContent = data.fax || '';
           } else if (thText.includes('提携士業')) {
-            if (typeof data.alliance_desc !== 'undefined' || typeof data.alliance_url !== 'undefined') {
+            setOrHide(tr, (data.alliance_desc || data.alliance_url));
+            if (data.alliance_desc || data.alliance_url) {
               td.innerHTML = `<strong>${data.alliance_desc || 'ザワテラス社労士'}</strong><br><a href="${data.alliance_url || 'https://terazawa-sr.jbcsite.com/'}" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); font-size: 0.88rem;">${data.alliance_url || 'https://terazawa-sr.jbcsite.com/'} &rarr;</a>`;
             }
           }
         });
 
-        if (typeof data.copyright_year !== 'undefined') {
-          document.querySelectorAll('.footer-bottom p').forEach((p) => { p.textContent = data.copyright_year; });
+        if (data.copyright_year) {
+          document.querySelectorAll('.footer-bottom p').forEach((p) => { setOrHide(p, data.copyright_year); });
         }
       })
       .catch(() => {});
   }
 
-  /* ★【完全修復】バッジ自由増減 ＆ 空文字消去対応 */
+  /* ★【完全版】トップページ全要素スマート非表示 ＆ リスト完全動的増減 */
   function syncHomeTexts() {
     if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && !window.location.pathname.endsWith('/terazawazeirishi/')) {
       return;
@@ -245,27 +266,20 @@
       .then((data) => {
         if (!data) return;
 
-        // ヒーローテキスト（消去対応）
-        if (typeof data.hero_sub_en !== 'undefined') {
-          const el = document.querySelector('.hero-sub-en');
-          if (el) el.textContent = data.hero_sub_en;
-        }
-        if (typeof data.hero_title !== 'undefined') {
-          const el = document.querySelector('.hero-main-title');
-          if (el) el.innerHTML = data.hero_title.replace(/\n/g, '<br>');
-        }
-        if (typeof data.hero_lead !== 'undefined') {
-          const el = document.querySelector('.hero-lead-text');
-          if (el) el.innerHTML = data.hero_lead.replace(/\n/g, '<br>');
-        }
+        // ヒーロー
+        setOrHide(document.querySelector('.hero-sub-en'), data.hero_sub_en);
+        setOrHide(document.querySelector('.hero-main-title'), data.hero_title, true);
+        setOrHide(document.querySelector('.hero-lead-text'), data.hero_lead, true);
 
-        // ★【核心】月桂樹バッジの自由増減（0個なら完全消去、増えたら自動生成）
+        // ★ 月桂樹バッジ（0個ならコンテナごと完全消去、増減自由）
         const badgesContainer = document.querySelector('.hero-badges-row');
         if (badgesContainer) {
-          if (Array.isArray(data.hero_badges)) {
-            badgesContainer.innerHTML = ''; // 一旦全クリア
+          if (Array.isArray(data.hero_badges) && data.hero_badges.length > 0) {
+            badgesContainer.innerHTML = '';
+            let validCount = 0;
             data.hero_badges.forEach((b) => {
               if (b && b.text && b.text.trim()) {
+                validCount++;
                 const item = document.createElement('div');
                 item.className = 'hero-badge-item';
                 item.innerHTML = `
@@ -275,127 +289,108 @@
                 badgesContainer.appendChild(item);
               }
             });
-            // もし全消去されて0個になった場合、マージンを消して余白を詰める
-            badgesContainer.style.display = badgesContainer.children.length === 0 ? 'none' : 'flex';
+            badgesContainer.style.display = validCount > 0 ? '' : 'none';
+          } else {
+            badgesContainer.style.display = 'none';
           }
         }
 
-        if (typeof data.hero_cta_btn !== 'undefined') {
-          const el = document.querySelector('.hero-cta-group .floating-cta-btn span');
-          if (el) el.textContent = data.hero_cta_btn;
-        }
-        if (typeof data.hero_service_link !== 'undefined') {
-          const el = document.querySelector('.hero-cta-group a:nth-of-type(2)');
-          if (el) el.textContent = data.hero_service_link;
-        }
+        // ヒーローボタン（空欄でボタンごと非表示）
+        const heroCtaBtn = document.querySelector('.hero-cta-group .floating-cta-btn');
+        if (heroCtaBtn) setOrHide(heroCtaBtn, data.hero_cta_btn);
+        const heroServiceLink = document.querySelector('.hero-cta-group a:nth-of-type(2)');
+        if (heroServiceLink) setOrHide(heroServiceLink, data.hero_service_link);
 
-        // About Us
+        // About Us 大見出し＆案内文（空欄で非表示）
         const aboutSec = document.getElementById('about');
         if (aboutSec) {
-          if (typeof data.about_sec_title !== 'undefined') {
-            const h2 = aboutSec.querySelector('.section-title');
-            if (h2) h2.textContent = data.about_sec_title;
-          }
-          if (typeof data.about_sec_lead !== 'undefined') {
-            const lead = aboutSec.querySelector('.section-lead');
-            if (lead) lead.innerHTML = data.about_sec_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(aboutSec.querySelector('.section-title'), data.about_sec_title);
+          setOrHide(aboutSec.querySelector('.section-lead'), data.about_sec_lead, true);
         }
-        const zigzagItems = document.querySelectorAll('.athena-zigzag-item');
-        zigzagItems.forEach((item, idx) => {
-          const num = idx + 1;
-          const tagKey = `about_0${num}_tag`;
-          const titleKey = `about_0${num}_title`;
-          const descKey = `about_0${num}_desc`;
-          const tagEl = item.querySelector('.zigzag-tag');
-          const headingEl = item.querySelector('.zigzag-heading');
-          const textEl = item.querySelector('.zigzag-text');
-          if (tagEl && typeof data[tagKey] !== 'undefined') tagEl.textContent = data[tagKey];
-          if (headingEl && typeof data[titleKey] !== 'undefined') headingEl.innerHTML = data[titleKey].replace(/\n/g, '<br>');
-          if (textEl && typeof data[descKey] !== 'undefined') textEl.innerHTML = data[descKey].replace(/\n/g, '<br>');
-          if (num === 4 && typeof data.about_04_btn !== 'undefined') {
-            const btn = item.querySelector('.service-card-link span');
-            if (btn) btn.textContent = data.about_04_btn;
-          }
-        });
 
-        // サービス見出し
+        // ★ About Us 項目一覧（空欄でカードごと非表示 ＆ リスト増減に対応！）
+        const zigzagList = document.querySelector('.athena-zigzag-list');
+        if (zigzagList && Array.isArray(data.about_items) && data.about_items.length > 0) {
+          const items = zigzagList.querySelectorAll('.athena-zigzag-item');
+          items.forEach((itemEl, idx) => {
+            const itemData = data.about_items[idx];
+            if (!itemData || (!itemData.title && !itemData.desc)) {
+              itemEl.style.display = 'none'; // ★ データがない、またはタイトルも本文も空ならカード枠ごと完全非表示！
+            } else {
+              itemEl.style.display = '';
+              const numEl = itemEl.querySelector('.athena-num-bg');
+              if (numEl) numEl.textContent = itemData.num || `0${idx + 1}`;
+              setOrHide(itemEl.querySelector('.zigzag-tag'), itemData.tag);
+              setOrHide(itemEl.querySelector('.zigzag-heading'), itemData.title, true);
+              setOrHide(itemEl.querySelector('.zigzag-text'), itemData.desc, true);
+
+              // リンクボタン
+              const btnContainer = itemEl.querySelector('.zigzag-content > div:last-child');
+              const btn = itemEl.querySelector('.service-card-link');
+              if (btn && btnContainer) {
+                if (itemData.btn_text && itemData.btn_text.trim()) {
+                  btnContainer.style.display = '';
+                  btn.setAttribute('href', itemData.btn_url || '#');
+                  const span = btn.querySelector('span');
+                  if (span) span.textContent = itemData.btn_text;
+                } else {
+                  btnContainer.style.display = 'none';
+                }
+              }
+            }
+          });
+        }
+
+        // サービス大見出し＆ボタン
         const servicesSec = document.getElementById('services');
         if (servicesSec) {
-          if (typeof data.services_sec_title !== 'undefined') {
-            const h2 = servicesSec.querySelector('.section-title');
-            if (h2) h2.textContent = data.services_sec_title;
-          }
-          if (typeof data.services_sec_lead !== 'undefined') {
-            const lead = servicesSec.querySelector('.service-sticky-text');
-            if (lead) lead.innerHTML = data.services_sec_lead.replace(/\n/g, '<br>');
-          }
-          if (typeof data.services_sec_btn !== 'undefined') {
-            const btn = servicesSec.querySelector('.header-cta-btn span');
-            if (btn) btn.textContent = data.services_sec_btn;
-          }
+          setOrHide(servicesSec.querySelector('.section-title'), data.services_sec_title);
+          setOrHide(servicesSec.querySelector('.service-sticky-text'), data.services_sec_lead, true);
+          setOrHide(servicesSec.querySelector('.header-cta-btn'), data.services_sec_btn);
         }
 
-        // FLOW
+        // ご相談の流れ 大見出し
         const flowSec = document.getElementById('flow');
         if (flowSec) {
-          if (typeof data.flow_sec_title !== 'undefined') {
-            const h2 = flowSec.querySelector('.section-title');
-            if (h2) h2.textContent = data.flow_sec_title;
-          }
-          if (typeof data.flow_sec_lead !== 'undefined') {
-            const lead = flowSec.querySelector('.section-lead');
-            if (lead) lead.innerHTML = data.flow_sec_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(flowSec.querySelector('.section-title'), data.flow_sec_title);
+          setOrHide(flowSec.querySelector('.section-lead'), data.flow_sec_lead, true);
         }
-        const flowSteps = document.querySelectorAll('#flow > div > div:last-child > div');
-        flowSteps.forEach((step, idx) => {
-          const num = idx + 1;
-          const titleEl = step.querySelector('h4');
-          const descEl = step.querySelector('p');
-          if (titleEl && typeof data[`flow_0${num}_title`] !== 'undefined') titleEl.textContent = data[`flow_0${num}_title`];
-          if (descEl && typeof data[`flow_0${num}_desc`] !== 'undefined') descEl.textContent = data[`flow_0${num}_desc`];
-        });
 
-        // TEAM & COMPANY 見出し
+        // ★ 相談の流れ STEP（空欄でボックスごと非表示 ＆ 増減に対応！）
+        const flowSteps = document.querySelectorAll('#flow > div > div:last-child > div');
+        if (flowSteps.length > 0 && Array.isArray(data.flow_steps)) {
+          flowSteps.forEach((stepEl, idx) => {
+            const stepData = data.flow_steps[idx];
+            if (!stepData || (!stepData.title && !stepData.desc)) {
+              stepEl.style.display = 'none'; // ★ 空欄ならSTEPボックスごと完全非表示！
+            } else {
+              stepEl.style.display = '';
+              const stepLabelEl = stepEl.querySelector('span:first-child');
+              if (stepLabelEl) stepLabelEl.textContent = stepData.step_label || `STEP 0${idx + 1}`;
+              setOrHide(stepEl.querySelector('h4'), stepData.title);
+              setOrHide(stepEl.querySelector('p'), stepData.desc, true);
+            }
+          });
+        }
+
+        // 税理士紹介 ＆ 会社概要 大見出し
         const teamSec = document.getElementById('team');
         if (teamSec) {
-          if (typeof data.team_sec_title !== 'undefined') {
-            const h2 = teamSec.querySelector('.section-title');
-            if (h2) h2.textContent = data.team_sec_title;
-          }
-          if (typeof data.team_sec_lead !== 'undefined') {
-            const lead = teamSec.querySelector('.section-lead');
-            if (lead) lead.innerHTML = data.team_sec_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(teamSec.querySelector('.section-title'), data.team_sec_title);
+          setOrHide(teamSec.querySelector('.section-lead'), data.team_sec_lead, true);
         }
         const companySec = document.getElementById('company');
         if (companySec) {
-          if (typeof data.company_sec_title !== 'undefined') {
-            const h2 = companySec.querySelector('.section-title');
-            if (h2) h2.textContent = data.company_sec_title;
-          }
-          if (typeof data.company_sec_lead !== 'undefined') {
-            const lead = companySec.querySelector('.section-lead');
-            if (lead) lead.innerHTML = data.company_sec_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(companySec.querySelector('.section-title'), data.company_sec_title);
+          setOrHide(companySec.querySelector('.section-lead'), data.company_sec_lead, true);
         }
 
-        // CTAバナー
+        // 下部CTAバナー
         const banner = document.querySelector('section[style*="linear-gradient(135deg"]');
         if (banner) {
-          if (typeof data.cta_banner_title !== 'undefined') {
-            const h2 = banner.querySelector('h2');
-            if (h2) h2.textContent = data.cta_banner_title;
-          }
-          if (typeof data.cta_banner_desc !== 'undefined') {
-            const p = banner.querySelector('p:nth-of-type(2)');
-            if (p) p.innerHTML = data.cta_banner_desc.replace(/\n/g, '<br>');
-          }
-          if (typeof data.cta_banner_btn !== 'undefined') {
-            const span = banner.querySelector('.floating-cta-btn span');
-            if (span) span.textContent = data.cta_banner_btn;
-          }
+          setOrHide(banner.querySelector('h2'), data.cta_banner_title);
+          setOrHide(banner.querySelector('p:nth-of-type(2)'), data.cta_banner_desc, true);
+          setOrHide(banner.querySelector('.floating-cta-btn'), data.cta_banner_btn);
         }
       })
       .catch(() => {});
@@ -409,25 +404,20 @@
         if (!data) return;
 
         if (window.location.pathname.includes('services.html')) {
-          if (typeof data.page_title !== 'undefined') {
-            const h1 = document.querySelector('.hero-main-title');
-            if (h1) h1.textContent = data.page_title;
-          }
-          if (typeof data.page_lead !== 'undefined') {
-            const lead = document.querySelector('.hero-lead-text');
-            if (lead) lead.innerHTML = data.page_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(document.querySelector('.hero-main-title'), data.page_title);
+          setOrHide(document.querySelector('.hero-lead-text'), data.page_lead, true);
         }
 
         if (data.service_items && data.service_items.length > 0) {
           const topCards = document.querySelectorAll('.service-card-item');
           topCards.forEach((card, idx) => {
             const item = data.service_items[idx];
-            if (item) {
-              const titleEl = card.querySelector('.service-card-title');
-              const descEl = card.querySelector('.service-card-desc');
-              if (titleEl && typeof item.title !== 'undefined') titleEl.textContent = item.title;
-              if (descEl && typeof item.lead !== 'undefined') descEl.textContent = item.lead;
+            if (!item || (!item.title && !item.lead)) {
+              card.style.display = 'none'; // ★ サービスが空ならカードごと非表示
+            } else {
+              card.style.display = '';
+              setOrHide(card.querySelector('.service-card-title'), item.title);
+              setOrHide(card.querySelector('.service-card-desc'), item.lead, true);
             }
           });
         }
@@ -442,30 +432,12 @@
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (!data) return;
-        if (typeof data.page_title !== 'undefined') {
-          const h1 = document.querySelector('.hero-main-title');
-          if (h1) h1.textContent = data.page_title;
-        }
-        if (typeof data.page_lead !== 'undefined') {
-          const lead = document.querySelector('.hero-lead-text');
-          if (lead) lead.innerHTML = data.page_lead.replace(/\n/g, '<br>');
-        }
-        if (typeof data.plans_sec_title !== 'undefined') {
-          const h2 = document.querySelector('#plans .section-header:first-of-type .section-title');
-          if (h2) h2.textContent = data.plans_sec_title;
-        }
-        if (typeof data.plans_sec_lead !== 'undefined') {
-          const lead = document.querySelector('#plans .section-header:first-of-type .section-lead');
-          if (lead) lead.textContent = data.plans_sec_lead;
-        }
-        if (typeof data.spot_sec_title !== 'undefined') {
-          const h2 = document.querySelector('#plans .section-header:last-of-type .section-title');
-          if (h2) h2.textContent = data.spot_sec_title;
-        }
-        if (typeof data.spot_sec_lead !== 'undefined') {
-          const lead = document.querySelector('#plans .section-header:last-of-type .section-lead');
-          if (lead) lead.textContent = data.spot_sec_lead;
-        }
+        setOrHide(document.querySelector('.hero-main-title'), data.page_title);
+        setOrHide(document.querySelector('.hero-lead-text'), data.page_lead, true);
+        setOrHide(document.querySelector('#plans .section-header:first-of-type .section-title'), data.plans_sec_title);
+        setOrHide(document.querySelector('#plans .section-header:first-of-type .section-lead'), data.plans_sec_lead);
+        setOrHide(document.querySelector('#plans .section-header:last-of-type .section-title'), data.spot_sec_title);
+        setOrHide(document.querySelector('#plans .section-header:last-of-type .section-lead'), data.spot_sec_lead);
       })
       .catch(() => {});
   }
@@ -477,14 +449,8 @@
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (!data) return;
-        if (typeof data.page_title !== 'undefined') {
-          const h1 = document.querySelector('.hero-main-title');
-          if (h1) h1.textContent = data.page_title;
-        }
-        if (typeof data.page_lead !== 'undefined') {
-          const lead = document.querySelector('.hero-lead-text');
-          if (lead) lead.innerHTML = data.page_lead.replace(/\n/g, '<br>');
-        }
+        setOrHide(document.querySelector('.hero-main-title'), data.page_title);
+        setOrHide(document.querySelector('.hero-lead-text'), data.page_lead, true);
       })
       .catch(() => {});
   }
@@ -507,57 +473,74 @@
             if (memberCards.length >= 1) {
               const card1 = memberCards[0].closest('div');
               if (card1) {
-                if (typeof data.rep_keiko_name !== 'undefined') { const el = card1.querySelector('h3'); if (el) el.textContent = data.rep_keiko_name; }
-                if (typeof data.rep_keiko_sub !== 'undefined') { const el = card1.querySelector('p:nth-of-type(1)'); if (el) el.innerHTML = data.rep_keiko_sub.replace(/\n/g, '<br>'); }
-                if (typeof data.rep_keiko_desc !== 'undefined') { const el = card1.querySelector('p:nth-of-type(2)'); if (el) el.innerHTML = data.rep_keiko_desc.replace(/\n/g, '<br>'); }
+                setOrHide(card1.querySelector('h3'), data.rep_keiko_name);
+                setOrHide(card1.querySelector('p:nth-of-type(1)'), data.rep_keiko_sub, true);
+                setOrHide(card1.querySelector('p:nth-of-type(2)'), data.rep_keiko_desc, true);
               }
             }
             if (memberCards.length >= 2) {
               const card2 = memberCards[1].closest('div');
               if (card2) {
-                if (typeof data.rep_senior_name !== 'undefined') { const el = card2.querySelector('h3'); if (el) el.textContent = data.rep_senior_name; }
-                if (typeof data.rep_senior_sub !== 'undefined') { const el = card2.querySelector('p:nth-of-type(1)'); if (el) el.innerHTML = data.rep_senior_sub.replace(/\n/g, '<br>'); }
-                if (typeof data.rep_senior_desc !== 'undefined') { const el = card2.querySelector('p:nth-of-type(2)'); if (el) el.innerHTML = data.rep_senior_desc.replace(/\n/g, '<br>'); }
+                setOrHide(card2.querySelector('h3'), data.rep_senior_name);
+                setOrHide(card2.querySelector('p:nth-of-type(1)'), data.rep_senior_sub, true);
+                setOrHide(card2.querySelector('p:nth-of-type(2)'), data.rep_senior_desc, true);
               }
             }
           }
         }
 
         if (isProfile) {
-          if (typeof data.page_title !== 'undefined') {
-            const h1 = document.querySelector('.hero-main-title');
-            if (h1) h1.textContent = data.page_title;
-          }
-          if (typeof data.page_lead !== 'undefined') {
-            const leadEl = document.querySelector('.hero-lead-text');
-            if (leadEl) leadEl.innerHTML = data.page_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(document.querySelector('.hero-main-title'), data.page_title);
+          setOrHide(document.querySelector('.hero-lead-text'), data.page_lead, true);
 
           const members = document.querySelectorAll('.profile-member-grid');
           if (members.length >= 1) {
             const m1 = members[0];
-            if (typeof data.rep_keiko_name !== 'undefined') { const h2 = m1.querySelector('h2'); if (h2) h2.textContent = data.rep_keiko_name; }
-            if (typeof data.rep_keiko_sub !== 'undefined') { const sub = m1.querySelector('.profile-sub-title'); if (sub) sub.textContent = data.rep_keiko_sub; }
-            if (typeof data.rep_keiko_desc !== 'undefined') {
-              const desc = m1.querySelector('.profile-desc-col > div:nth-of-type(2)');
-              if (desc) desc.innerHTML = data.rep_keiko_desc.split('\n\n').filter(p => p.trim()).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+            setOrHide(m1.querySelector('h2'), data.rep_keiko_name);
+            setOrHide(m1.querySelector('.profile-sub-title'), data.rep_keiko_sub);
+            const desc = m1.querySelector('.profile-desc-col > div:nth-of-type(2)');
+            if (desc) {
+              if (data.rep_keiko_desc && data.rep_keiko_desc.trim()) {
+                desc.style.display = '';
+                desc.innerHTML = data.rep_keiko_desc.split('\n\n').filter(p => p.trim()).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+              } else {
+                desc.style.display = 'none';
+              }
             }
-            if (typeof data.rep_keiko_careers !== 'undefined') {
-              const ul = m1.querySelector('.profile-career-box ul');
-              if (ul) ul.innerHTML = data.rep_keiko_careers.split('\n').filter(l => l.trim()).map(l => `<li>${l}</li>`).join('');
+            const careerBox = m1.querySelector('.profile-career-box');
+            if (careerBox) {
+              if (data.rep_keiko_careers && data.rep_keiko_careers.trim()) {
+                careerBox.style.display = '';
+                const ul = careerBox.querySelector('ul');
+                if (ul) ul.innerHTML = data.rep_keiko_careers.split('\n').filter(l => l.trim()).map(l => `<li>${l}</li>`).join('');
+              } else {
+                careerBox.style.display = 'none'; // ★ 経歴が空なら枠ごと非表示
+              }
             }
           }
+
           if (members.length >= 2) {
             const m2 = members[1];
-            if (typeof data.rep_senior_name !== 'undefined') { const h2 = m2.querySelector('h2'); if (h2) h2.textContent = data.rep_senior_name; }
-            if (typeof data.rep_senior_sub !== 'undefined') { const sub = m2.querySelector('.profile-sub-title'); if (sub) sub.textContent = data.rep_senior_sub; }
-            if (typeof data.rep_senior_desc !== 'undefined') {
-              const desc = m2.querySelector('.profile-desc-col > div:nth-of-type(2)');
-              if (desc) desc.innerHTML = data.rep_senior_desc.split('\n\n').filter(p => p.trim()).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+            setOrHide(m2.querySelector('h2'), data.rep_senior_name);
+            setOrHide(m2.querySelector('.profile-sub-title'), data.rep_senior_sub);
+            const desc = m2.querySelector('.profile-desc-col > div:nth-of-type(2)');
+            if (desc) {
+              if (data.rep_senior_desc && data.rep_senior_desc.trim()) {
+                desc.style.display = '';
+                desc.innerHTML = data.rep_senior_desc.split('\n\n').filter(p => p.trim()).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+              } else {
+                desc.style.display = 'none';
+              }
             }
-            if (typeof data.rep_senior_careers !== 'undefined') {
-              const ul = m2.querySelector('.profile-career-box ul');
-              if (ul) ul.innerHTML = data.rep_senior_careers.split('\n').filter(l => l.trim()).map(l => `<li>${l}</li>`).join('');
+            const careerBox = m2.querySelector('.profile-career-box');
+            if (careerBox) {
+              if (data.rep_senior_careers && data.rep_senior_careers.trim()) {
+                careerBox.style.display = '';
+                const ul = careerBox.querySelector('ul');
+                if (ul) ul.innerHTML = data.rep_senior_careers.split('\n').filter(l => l.trim()).map(l => `<li>${l}</li>`).join('');
+              } else {
+                careerBox.style.display = 'none'; // ★ 経歴が空なら枠ごと非表示
+              }
             }
           }
         }
@@ -577,35 +560,26 @@
         if (!data) return;
 
         if (isContact) {
-          if (typeof data.contact_lead !== 'undefined') {
-            const lead = document.querySelector('.hero-lead-text');
-            if (lead) lead.innerHTML = data.contact_lead.replace(/\n/g, '<br>');
-          }
-          if (typeof data.contact_phone_note !== 'undefined') {
-            const p = document.querySelector('div[style*="border-radius: var(--radius-lg)"] p:first-child');
-            if (p) p.textContent = data.contact_phone_note;
-          }
-          if (typeof data.contact_hours_note !== 'undefined') {
-            const p = document.querySelector('div[style*="border-radius: var(--radius-lg)"] p:last-child');
-            if (p) p.textContent = data.contact_hours_note;
-          }
-          if (typeof data.contact_notice !== 'undefined') {
-            const noticeP = document.querySelector('div[style*="background: #FFF8E7"] p, div[style*="background:#FFF8E7"] p');
-            if (noticeP) noticeP.innerHTML = data.contact_notice.replace(/\n/g, '<br>');
-          }
-          if (typeof data.contact_form_lead !== 'undefined') {
-            const p = document.querySelector('main div[style*="padding: 3rem 2.5rem"] p:first-of-type');
-            if (p) p.innerHTML = data.contact_form_lead.replace(/\n/g, '<br>');
-          }
+          setOrHide(document.querySelector('.hero-lead-text'), data.contact_lead, true);
+          const p1 = document.querySelector('div[style*="border-radius: var(--radius-lg)"] p:first-child');
+          if (p1) setOrHide(p1, data.contact_phone_note);
+          const p2 = document.querySelector('div[style*="border-radius: var(--radius-lg)"] p:last-child');
+          if (p2) setOrHide(p2, data.contact_hours_note);
+
+          const noticeBox = document.querySelector('div[style*="background: #FFF8E7"], div[style*="background:#FFF8E7"]');
+          if (noticeBox) setOrHide(noticeBox, data.contact_notice, true); // ★ 警告文が空なら枠ごと非表示
+
+          const formLead = document.querySelector('main div[style*="padding: 3rem 2.5rem"] p:first-of-type');
+          if (formLead) setOrHide(formLead, data.contact_form_lead, true);
         }
 
         if (isPrivacy) {
           const sections = document.querySelectorAll('main section');
           if (sections.length >= 4) {
-            if (typeof data.privacy_sec1 !== 'undefined') { const p = sections[0].querySelector('p'); if (p) p.innerHTML = data.privacy_sec1.replace(/\n/g, '<br>'); }
-            if (typeof data.privacy_sec2 !== 'undefined') { const p = sections[1].querySelector('p'); if (p) p.innerHTML = data.privacy_sec2.replace(/\n/g, '<br>'); }
-            if (typeof data.privacy_sec3 !== 'undefined') { const p = sections[2].querySelector('p'); if (p) p.innerHTML = data.privacy_sec3.replace(/\n/g, '<br>'); }
-            if (typeof data.privacy_sec4 !== 'undefined') { const p = sections[3].querySelector('p'); if (p) p.innerHTML = data.privacy_sec4.replace(/\n/g, '<br>'); }
+            setOrHide(sections[0], data.privacy_sec1, true);
+            setOrHide(sections[1], data.privacy_sec2, true);
+            setOrHide(sections[2], data.privacy_sec3, true);
+            setOrHide(sections[3], data.privacy_sec4, true);
           }
         }
       })
