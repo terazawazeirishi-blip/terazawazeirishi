@@ -1,5 +1,5 @@
 # ==============================================================================
-# 寺澤景子税理士事務所 Pages CMS 設定定義ファイル（全要素スマート非表示・増減完全版）
+# 寺沢景子税理士事務所 Pages CMS 設定定義ファイル（全要素スマート非表示・増減完全版）
 # ファイルパス: .pages.yml
 # ==============================================================================
 
@@ -7,6 +7,7 @@ media:
   input: "assets/images/uploads"
   output: "assets/images/uploads"
 
+content:
   # ============================================================================
   # 1. サイト全画像の変更（空欄なら非表示）
   # ============================================================================
@@ -25,16 +26,16 @@ media:
         label: "ヒーロー象徴イラスト（白百合・花など）"
         type: "image"
       - name: "rep_keiko"
-        label: "代表税理士 寺澤景子の写真"
+        label: "代表税理士 寺沢景子の写真"
         type: "image"
       - name: "rep_senior"
         label: "ベテラン税理士の写真"
         type: "image"
       - name: "about_01"
-        label: "About 01（税理士２人体制によるダブルチェック）の写真"
+        label: "About 01（2人体制ダブルチェック）の写真"
         type: "image"
       - name: "about_02"
-        label: "About 02（国税出身の２名の税理士で対応する税務調査）の写真"
+        label: "About 02（国税21年元統括官）の写真"
         type: "image"
       - name: "about_03"
         label: "About 03（税理士歴35年実績）の写真"
@@ -62,6 +63,9 @@ media:
         type: "image"
       - name: "service_06"
         label: "Service 06 相続税申告の写真"
+        type: "image"
+      - name: "service_07"
+        label: "Service 07 助成金・労務支援の写真"
         type: "image"
       - name: "cta_banner_bg"
         label: "ページ下部 CTAバナー背景写真"
