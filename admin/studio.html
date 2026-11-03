@@ -46,7 +46,7 @@
     /* メインワークスペース */
     .studio-workspace { display: flex; flex: 1; overflow: hidden; position: relative; }
 
-    /* 左側サイドバー（ページ・セクション階層） */
+    /* 左側サイドバー */
     .studio-sidebar { width: var(--studio-sidebar-w); background: var(--studio-panel-bg); border-right: 1px solid var(--studio-border); display: flex; flex-direction: column; flex-shrink: 0; }
     .sidebar-tabs { display: flex; border-bottom: 1px solid var(--studio-border); background: #fafafa; }
     .sidebar-tab-btn { flex: 1; padding: 12px; font-size: 12px; font-weight: 700; border: none; background: transparent; cursor: pointer; color: #909399; }
@@ -60,7 +60,7 @@
     .layer-controls { display: flex; gap: 4px; }
     .layer-btn { border: 1px solid var(--studio-border); background: #fff; width: 22px; height: 22px; border-radius: 4px; font-size: 10px; cursor: pointer; }
 
-    /* 中央キャンバスコンテナ */
+    /* 中央キャンバス */
     .studio-canvas-container { flex: 1; background: #dfe4ea; display: flex; justify-content: center; align-items: flex-start; padding: 24px; overflow: auto; }
     .studio-canvas-viewport { background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.12); border-radius: 8px; overflow: hidden; width: 100%; max-width: 1200px; min-height: 800px; transition: max-width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); position: relative; }
     .studio-canvas-iframe { width: 100%; height: 100%; min-height: 800px; border: none; display: block; }
@@ -87,7 +87,7 @@
   <header class="studio-topbar">
     <div class="studio-brand-group">
       <div class="studio-brand-title">TERAZAWA STUDIO</div>
-      <div class="studio-brand-badge">PRO v3.0</div>
+      <div class="studio-brand-badge">PRO v3.3</div>
       <select class="page-selector-select" id="studioPageSelector" onchange="StudioCore.switchPage(this.value)">
         <option value="home">トップページ (index.html)</option>
         <option value="services">サービス案内 (services.html)</option>
@@ -111,10 +111,10 @@
       <button class="studio-btn-icon" id="btnDeviceMob" onclick="StudioCore.setDevice('mobile')">📲 スマホ (390px)</button>
     </div>
 
-    <!-- アクションボタン -->
+    <!-- アクションボタン（安全保存モーダル接続） -->
     <div class="actions-group">
       <button class="btn-studio btn-studio-outline" onclick="StudioCore.previewSite()">👁️ プレビュー</button>
-      <button class="btn-studio btn-studio-gold" onclick="StudioCore.saveToDisk()">💾 下書き保存</button>
+      <button class="btn-studio btn-studio-gold" onclick="StudioSync.openSaveDialog()">💾 保存・確認</button>
     </div>
   </header>
 
@@ -123,11 +123,14 @@
     <!-- 左側サイドバー -->
     <aside class="studio-sidebar">
       <div class="sidebar-tabs">
-        <button class="sidebar-tab-btn is-active" onclick="StudioCore.switchSidebarTab('layers')">セクション階層</button>
-        <button class="sidebar-tab-btn" onclick="StudioCore.switchSidebarTab('blocks')">ブロック追加</button>
+        <button class="sidebar-tab-btn is-active">セクション階層</button>
       </div>
       <div class="sidebar-content-area" id="studioSidebarContent">
         <!-- セクション階層リストが動的描画される -->
+      </div>
+      <div style="padding:10px;border-top:1px solid var(--studio-border);background:#fafafa;">
+        <label style="font-size:11px;font-weight:700;color:#606266;display:block;margin-bottom:4px;">バックアップ復元:</label>
+        <input type="file" accept=".json" onchange="StudioSync.importBackupFile(this)" style="font-size:11px;width:100%;">
       </div>
     </aside>
 
@@ -156,9 +159,11 @@
     <span id="studioSyncTarget">正本: content/pages/home_blocks.json</span>
   </footer>
 
-  <!-- スクリプト統合（モジュール分割） -->
+  <!-- スクリプト統合（完全全置き換え版モジュール） -->
   <script src="../assets/js/cms-renderer.js"></script>
+  <script src="../assets/js/studio-storage.js"></script>
   <script src="../assets/js/studio-core.js"></script>
   <script src="../assets/js/studio-props.js"></script>
+  <script src="../assets/js/studio-sync.js"></script>
 </body>
 </html>
