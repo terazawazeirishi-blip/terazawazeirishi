@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TERAZAWA STUDIO - Visual Editor PoC</title>
+  <style>
+    :root {
+      --poc-primary: #1b2a4a;
+      --poc-gold: #a08c4a;
+      --poc-bg: #f4f6f9;
+      --poc-border: #dcdfe6;
+      --poc-text: #2c3e50;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--poc-bg); color: var(--poc-text); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+    /* 上部ツールバー */
+    .studio-header { background: #fff; height: 56px; border-bottom: 1px solid var(--poc-border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 100; flex-shrink: 0; }
+    .studio-brand { font-weight: 700; color: var(--poc-primary); display: flex; align-items: center; gap: 8px; font-size: 15px; }
+    .studio-brand span { color: var(--poc-gold); font-size: 12px; border: 1px solid var(--poc-gold); padding: 2px 6px; border-radius: 4px; }
+    
+    .device-controls { display: flex; background: var(--poc-bg); border-radius: 6px; padding: 3px; gap: 4px; }
+    .device-btn { border: none; background: transparent; padding: 6px 12px; font-size: 12px; cursor: pointer; border-radius: 4px; font-weight: 500; color: #606266; }
+    .device-btn.is-active { background: #fff; color: var(--poc-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+    .action-controls { display: flex; gap: 10px; align-items: center; }
+    .btn { padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
+    .btn-outline { background: #fff; border-color: var(--poc-border); color: #606266; }
+    .btn-gold { background: var(--poc-gold); color: #fff; }
+    .btn-gold:hover { opacity: 0.9; }
+
+    /* メイン作業エリア */
+    .studio-main { display: flex; flex: 1; overflow: hidden; }
+
+    /* 左側ブロック階層パネル */
+    .studio-sidebar { width: 280px; background: #fff; border-right: 1px solid var(--poc-border); display: flex; flex-direction: column; flex-shrink: 0; }
+    .sidebar-title { padding: 16px; font-size: 13px; font-weight: 700; border-bottom: 1px solid var(--poc-border); background: #fafafa; }
+    .block-list { list-style: none; padding: 12px; flex: 1; overflow-y: auto; }
+    .block-item { background: #fff; border: 1px solid var(--poc-border); border-radius: 6px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.2s; }
+    .block-item:hover, .block-item.is-selected { border-color: var(--poc-gold); background: #fdfcf9; }
+    .block-info h4 { font-size: 13px; color: var(--poc-primary); margin-bottom: 2px; }
+    .block-info p { font-size: 11px; color: #909399; }
+    .block-moves { display: flex; gap: 4px; }
+    .move-btn { border: 1px solid var(--poc-border); background: #fff; width: 24px; height: 24px; border-radius: 4px; font-size: 11px; cursor: pointer; }
+    .move-btn:hover { background: #f0f2f5; }
+
+    /* 中央編集キャンバス */
+    .studio-canvas-wrap { flex: 1; background: #e5e9f2; display: flex; justify-content: center; align-items: flex-start; padding: 24px; overflow: auto; }
+    .canvas-frame-container { background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,0.12); border-radius: 8px; overflow: hidden; transition: width 0.3s ease; width: 100%; max-width: 1200px; min-height: 800px; display: flex; flex-direction: column; }
+    
+    /* 編集キャンバス内の簡易モックUI */
+    .canvas-section { position: relative; border: 2px dashed transparent; transition: border-color 0.2s; }
+    .canvas-section:hover { border-color: var(--poc-gold); }
+    .canvas-section-badge { position: absolute; top: 8px; right: 8px; background: var(--poc-gold); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.2s; z-index: 10; }
+    .canvas-section:hover .canvas-section-badge { opacity: 1; }
+
+    /* 直接テキスト編集のハイライト */
+    [contenteditable="true"] { outline: none; border-radius: 4px; transition: background 0.2s, box-shadow 0.2s; }
+    [contenteditable="true"]:hover { background: rgba(160, 140, 74, 0.08); }
+    [contenteditable="true"]:focus { background: rgba(160, 140, 74, 0.15); box-shadow: 0 0 0 2px var(--poc-gold); }
+
+    /* ヒーローブロック再現モック */
+    .mock-hero { background: #fff; padding: 60px 40px; position: relative; overflow: hidden; }
+    .mock-hero-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 100px; font-weight: 900; color: rgba(27, 42, 74, 0.04); pointer-events: none; }
+    .mock-badge { display: inline-block; background: #eef2f7; color: var(--poc-primary); font-size: 12px; padding: 4px 12px; border-radius: 12px; margin-bottom: 16px; }
+    .mock-title { font-size: 32px; color: var(--poc-primary); margin-bottom: 16px; line-height: 1.3; }
+    .mock-subtitle { font-size: 15px; color: #606266; line-height: 1.6; max-width: 600px; }
+
+    /* サービスブロック再現モック */
+    .mock-services { background: #fafbfc; padding: 60px 40px; border-top: 1px solid #eee; }
+    .mock-sec-head { margin-bottom: 30px; }
+    .mock-sec-sub { font-size: 11px; color: var(--poc-gold); font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+    .mock-sec-title { font-size: 24px; color: var(--poc-primary); }
+    .mock-service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .mock-card { background: #fff; border: 1px solid #ebeef5; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .mock-card-num { font-size: 12px; font-weight: 800; color: var(--poc-gold); margin-bottom: 8px; display: block; }
+    .mock-card-title { font-size: 16px; color: var(--poc-primary); margin-bottom: 8px; }
+    .mock-card-desc { font-size: 13px; color: #666; line-height: 1.5; }
+
+    /* 下部ステータスバー */
+    .studio-footer { height: 32px; background: #fff; border-top: 1px solid var(--poc-border); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-size: 11px; color: #909399; }
+  </style>
+</head>
+<body>
+
+  <!-- 上部ヘッダー -->
+  <header class="studio-header">
+    <div class="studio-brand">
+      TERAZAWA STUDIO <span>PoC v1.0</span>
+    </div>
+    
+    <div class="device-controls">
+      <button class="device-btn is-active" onclick="setDevice('pc')">💻 PC (1200px)</button>
+      <button class="device-btn" onclick="setDevice('tablet')">📱 タブレット (768px)</button>
+      <button class="device-btn" onclick="setDevice('mobile')">📲 スマホ (390px)</button>
+    </div>
+
+    <div class="action-controls">
+      <button class="btn btn-outline" onclick="resetDefaults()">初期状態に戻す</button>
+      <button class="btn btn-gold" onclick="saveToStorage()">💾 下書き保存</button>
+    </div>
+  </header>
+
+  <!-- メイン作業エリア -->
+  <div class="studio-main">
+    <!-- 左側セクション一覧・並び替え -->
+    <aside class="studio-sidebar">
+      <div class="sidebar-title">セクション構成（順序変更）</div>
+      <ul class="block-list" id="blockListContainer"></ul>
+    </aside>
+
+    <!-- 中央編集キャンバス -->
+    <main class="studio-canvas-wrap">
+      <div class="canvas-frame-container" id="canvasFrame">
+        <div id="sectionsContainer"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 下部ステータスバー -->
+  <footer class="studio-footer">
+    <span id="statusMessage">準備完了（文章をクリックして直接編集できます）</span>
+    <span>Single Source of Truth: content/pages/home_blocks.json</span>
+  </footer>
+
+  <script>
+    // 初期ブロックデータ (PoC用: ヒーロー ＆ サービス紹介)
+    const DEFAULT_BLOCKS = [
+      {
+        id: "block-hero-01",
+        type: "hero",
+        badge: "税務調査・経営DX・天草と全国対応",
+        title: "数字を、経営の最強の武器に。",
+        subtitle: "元国税調査官 × 実務35年ベテラン税理士の2人体制。圧倒的な税務調査防衛力と、クラウドDXによる未来志向の財務戦略を提供します。"
+      },
+      {
+        id: "block-services-01",
+        type: "services",
+        subheading: "OUR SERVICES",
+        heading: "提供サービス案内",
+        cards: [
+          { num: "01", title: "法人税務顧問・決算申告", desc: "元国税調査官と35年ベテランの二重チェックによる安心の税務顧問。" },
+          { num: "02", title: "税務調査対策・事前模擬調査", desc: "元法人課税部門統括官が直接主導する圧倒的な税務調査防衛力。" }
+        ]
+      }
+    ];
+
+    let currentBlocks = JSON.parse(localStorage.getItem('terazawa_poc_blocks')) || DEFAULT_BLOCKS;
+
+    function renderEditor() {
+      renderSidebar();
+      renderCanvas();
+    }
+
+    // 左側リスト描画
+    function renderSidebar() {
+      const container = document.getElementById('blockListContainer');
+      container.innerHTML = '';
+      currentBlocks.forEach((b, idx) => {
+        const li = document.createElement('li');
+        li.className = 'block-item';
+        const label = b.type === 'hero' ? 'ヒーロー（メイン看板）' : 'サービス紹介';
+        li.innerHTML = `
+          <div class="block-info">
+            <h4>${label}</h4>
+            <p>${b.id}</p>
+          </div>
+          <div class="block-moves">
+            <button class="move-btn" onclick="moveBlock(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>↑</button>
+            <button class="move-btn" onclick="moveBlock(${idx}, 1)" ${idx === currentBlocks.length - 1 ? 'disabled' : ''}>↓</button>
+          </div>
+        `;
+        container.appendChild(li);
+      });
+    }
+
+    // 中央キャンバス描画（クリック直接編集対応）
+    function renderCanvas() {
+      const container = document.getElementById('sectionsContainer');
+      container.innerHTML = '';
+
+      currentBlocks.forEach((b, idx) => {
+        const sec = document.createElement('div');
+        sec.className = 'canvas-section';
+
+        if (b.type === 'hero') {
+          sec.innerHTML = `
+            <div class="canvas-section-badge">ヒーロー編集可</div>
+            <div class="mock-hero">
+              <div class="mock-hero-watermark">TERAZAWA</div>
+              <span class="mock-badge" contenteditable="true" onblur="updateText(${idx}, 'badge', this.innerText)">${b.badge}</span>
+              <h1 class="mock-title" contenteditable="true" onblur="updateText(${idx}, 'title', this.innerText)">${b.title}</h1>
+              <p class="mock-subtitle" contenteditable="true" onblur="updateText(${idx}, 'subtitle', this.innerText)">${b.subtitle}</p>
+            </div>
+          `;
+        } else if (b.type === 'services') {
+          let cardsHtml = b.cards.map((c, cIdx) => `
+            <div class="mock-card">
+              <span class="mock-card-num">${c.num}</span>
+              <h3 class="mock-card-title" contenteditable="true" onblur="updateCardText(${idx}, ${cIdx}, 'title', this.innerText)">${c.title}</h3>
+              <p class="mock-card-desc" contenteditable="true" onblur="updateCardText(${idx}, ${cIdx}, 'desc', this.innerText)">${c.desc}</p>
+            </div>
+          `).join('');
+
+          sec.innerHTML = `
+            <div class="canvas-section-badge">サービス編集可</div>
+            <div class="mock-services">
+              <div class="mock-sec-head">
+                <span class="mock-sec-sub" contenteditable="true" onblur="updateText(${idx}, 'subheading', this.innerText)">${b.subheading}</span>
+                <h2 class="mock-sec-title" contenteditable="true" onblur="updateText(${idx}, 'heading', this.innerText)">${b.heading}</h2>
+              </div>
+              <div class="mock-service-grid">${cardsHtml}</div>
+            </div>
+          `;
+        }
+        container.appendChild(sec);
+      });
+    }
+
+    // インライン直接編集の同期
+    function updateText(blockIdx, field, newText) {
+      currentBlocks[blockIdx][field] = newText.trim();
+      notifyChange('テキストを更新しました');
+    }
+
+    function updateCardText(blockIdx, cardIdx, field, newText) {
+      currentBlocks[blockIdx].cards[cardIdx][field] = newText.trim();
+      notifyChange('カードテキストを更新しました');
+    }
+
+    // ブロック順序入れ替え
+    function moveBlock(idx, dir) {
+      const targetIdx = idx + dir;
+      if (targetIdx < 0 || targetIdx >= currentBlocks.length) return;
+      const temp = currentBlocks[idx];
+      currentBlocks[idx] = currentBlocks[targetIdx];
+      currentBlocks[targetIdx] = temp;
+      renderEditor();
+      notifyChange('セクション順序を入れ替えました');
+    }
+
+    // デバイス幅切り替え
+    function setDevice(device) {
+      const frame = document.getElementById('canvasFrame');
+      document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('is-active'));
+      event.target.classList.add('is-active');
+
+      if (device === 'pc') frame.style.maxWidth = '1200px';
+      if (device === 'tablet') frame.style.maxWidth = '768px';
+      if (device === 'mobile') frame.style.maxWidth = '390px';
+      notifyChange('表示幅を変更しました: ' + device);
+    }
+
+    // 保存＆リセット
+    function saveToStorage() {
+      localStorage.setItem('terazawa_poc_blocks', JSON.stringify(currentBlocks, null, 2));
+      notifyChange('下書きを保存しました（ブラウザ再読み込み後も復元されます）');
+      console.log('[TERAZAWA Studio PoC] Saved Blocks JSON:', currentBlocks);
+    }
+
+    function resetDefaults() {
+      if (confirm('初期状態に戻しますか？')) {
+        currentBlocks = JSON.parse(JSON.stringify(DEFAULT_BLOCKS));
+        localStorage.removeItem('terazawa_poc_blocks');
+        renderEditor();
+        notifyChange('初期状態にリセットしました');
+      }
+    }
+
+    function notifyChange(msg) {
+      document.getElementById('statusMessage').textContent = msg + ' (' + new Date().toLocaleTimeString() + ')';
+    }
+
+    // 起動時レンダリング
+    renderEditor();
+  </script>
+</body>
+</html>
