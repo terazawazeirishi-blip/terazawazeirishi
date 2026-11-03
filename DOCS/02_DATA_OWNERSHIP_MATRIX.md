@@ -1,14 +1,18 @@
-# 02. データ所有権・管理領域マトリクス (Data Ownership Matrix)
+# 02. データ所有権マトリクス (Data Ownership Matrix)
 
-| 領域番号 | 管理対象データ | 正本ファイル | 編集インターフェース | 公開側反映処理 | 状態 / 課題 |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-| **01** | 全画像スロット (17種) | `content/site_images.json` | Pages CMS / Studio | `main.js (syncCmsImages)` | 稼働中（正常） |
-| **02** | ホームテキスト (見出し等) | `content/home_texts.json` | Pages CMS / Studio | `main.js (syncHomeTexts)` | 要スキーマ確認 |
-| **03** | 事務所基本情報 | `content/office_info.json` | Pages CMS / Studio | `main.js (syncOfficeInfo)` | 表記ゆれ統一が必要 |
-| **04** | 税理士プロフィール | `content/profile_texts.json` | Pages CMS / Studio | `main.js (syncProfileTexts)`| ベテラン税理士名確認 |
-| **05** | 7大サービス内容 | `content/services.json` | Pages CMS / Studio | `main.js (syncServicesTexts)`| 配列件数同期の検証 |
-| **06** | 料金プラン・規定 | `content/pricing.json` | Pages CMS / Studio | `main.js (syncPricingTexts)` | テーブル生成ロジック |
-| **07** | よくある質問 (FAQ) | `content/faq.json` | Pages CMS / Studio | `main.js (syncFaqTexts)` | アコーディオン同期 |
-| **08** | 法的表記・ポリシー | `content/legal_texts.json` | Pages CMS / Studio | `main.js (syncLegalTexts)` | プライバシー文面 |
-| **09** | 税務コラム記事 | `blog/*.md` | Pages CMS / Studio | `build_blog.py -> deploy.yml`| 稼働中（正常） |
-| **10** | お知らせ (News) | `content/news/*.md` | Pages CMS / Studio | `main.js / build処理` | 表示パイプライン検証 |
+| ID | 管理データ名 | 正本ファイル（Single Source of Truth） | Pages CMS画面 | ビジュアルエディタ | 公開反映スクリプト / 関数 |
+| :---: | :--- | :--- | :---: | :---: | :--- |
+| **01** | 全画像スロット (17箇所) | `content/site_images.json` | ○ | ○ | `main.js: syncCmsImages()` |
+| **02** | ホームテキスト | `content/home_texts.json` | ○ | ○ | `main.js: syncHomeTexts()` |
+| **03** | 事務所基本情報 | `content/office_info.json` | ○ | △ (一部保護) | `main.js: syncOfficeInfo()` |
+| **04** | 税理士プロフィール | `content/profile_texts.json` | ○ | ○ | `main.js: syncProfileTexts()` |
+| **05** | 7大サービス内容 | `content/services.json` | ○ | ○ | `main.js: renderServicesDynamic()` |
+| **06** | 料金体系・プラン | `content/pricing.json` | ○ | △ (保護) | `main.js: renderPricingDynamic()` |
+| **07** | よくある質問 (FAQ) | `content/faq.json` | ○ | ○ | `main.js: renderFaqDynamic()` |
+| **08** | 法的表記・ポリシー | `content/legal_texts.json` | ○ | × (保護) | `main.js: syncLegalTexts()` |
+| **09** | 税務コラム記事 | `blog/*.md` | ○ | ○ | `build_blog.py -> deploy.yml` |
+| **10** | お知らせ (News) | `content/news/*.md` | ○ | ○ | `main.js: renderNewsDynamic()` |
+
+### 整合性保護ルール
+- **事務所基本情報・料金・法的表記**: 事務所の信頼性・法的責任に直結するため、ビジュアルエディタでの偶発的なドラッグ削除をロックし、Pages CMSまたは専用プロパティパネルからのみ編集可能とする。
+- **データマージ保護**: Pages CMS保存時にスキーマ外のキーが消失しないよう、`.pages.yml` の定義とJSONスキーマを完全一致させる。
