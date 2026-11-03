@@ -1,21 +1,38 @@
 /**
  * TERAZAWA WEBSITE STUDIO - Block Rendering Engine
  * Module: assets/js/block-renderer.js
- * Version: 3.1.0 (Athena Standard / Dynamic Section Reordering)
+ * Version: 3.5.0 (Dynamic Section & High-Precision Image Injector)
  */
 (function (global) {
   'use strict';
 
   const pathname = window.location.pathname;
   const isHome = pathname.endsWith('index.html') || pathname.endsWith('/terazawazeirishi/') || pathname.endsWith('/');
-  if (!isHome) return; // トップページ以外では待機
+  if (!isHome) return;
 
   function resolveUrl(rawPath) {
     if (!rawPath || typeof rawPath !== 'string') return '';
     const trimmed = rawPath.trim();
+    if (/^(javascript|data|vbscript):/i.test(trimmed)) return '#';
     if (/^(https?:|mailto:|tel:|#)/i.test(trimmed)) return trimmed;
-    const clean = trimmed.replace(/^(\.\/|\/)+/, '');
+    let clean = trimmed.replace(/^(\.\/|\/)+/, '');
     return './' + clean.replace(/^terazawazeirishi\//, '');
+  }
+
+  function resolveImgUrl(rawPath) {
+    if (!rawPath || typeof rawPath !== 'string') return '';
+    let clean = rawPath.trim().replace(/^(\.\/|\/)+/, '');
+    if (clean.startsWith('terazawazeirishi/')) {
+      clean = clean.replace(/^terazawazeirishi\//, '');
+    }
+    if (!clean.includes('/') && !clean.startsWith('data:')) {
+      clean = 'assets/images/uploads/' + clean;
+    }
+    let full = resolveUrl(clean);
+    if (full && !full.startsWith('data:') && !full.startsWith('#')) {
+      full += (full.includes('?') ? '&' : '?') + 't=' + Date.now();
+    }
+    return full;
   }
 
   async function fetchBlockData() {
@@ -24,7 +41,6 @@
       if (!res.ok) return null;
       return await res.json();
     } catch (e) {
-      console.warn('[TERAZAWA BlockRenderer] Fallback to static HTML sections:', e.message);
       return null;
     }
   }
@@ -46,25 +62,17 @@
     return el;
   }
 
-  // ブロック個別ビルダー群 (アテナ税理士法人完全準拠)
   const BlockBuilders = {
     hero: function (b, images) {
       const sec = createEl('section', 'athena-hero');
       sec.id = b.id || 'section-hero';
-
-      const bgText = createEl('div', 'athena-hero-bg-text', b.bgWatermark || 'TERAZAWA');
-      sec.appendChild(bgText);
+      sec.appendChild(createEl('div', 'athena-hero-bg-text', b.bgWatermark || 'TERAZAWA'));
 
       const container = createEl('div', 'container athena-hero-inner');
       const content = createEl('div', 'athena-hero-content');
-
-      if (b.badge) {
-        content.appendChild(createEl('span', 'athena-hero-badge', b.badge));
-      }
+      if (b.badge) content.appendChild(createEl('span', 'athena-hero-badge', b.badge));
       content.appendChild(createEl('h1', 'athena-hero-title', b.title || '数字を、経営の最強の武器に。'));
-      if (b.subtitle) {
-        content.appendChild(createEl('p', 'athena-hero-lead', b.subtitle));
-      }
+      if (b.subtitle) content.appendChild(createEl('p', 'athena-hero-lead', b.subtitle));
 
       const btnWrap = createEl('div', 'athena-hero-actions');
       if (b.primaryBtnText && b.primaryBtnUrl) {
@@ -80,11 +88,10 @@
       content.appendChild(btnWrap);
       container.appendChild(content);
 
-      // ヒーロー象徴アート（下部グラデーションマスク適用）
       const rawImg = images[b.illustrationKey || 'hero_illustration'] || 'assets/images/uploads/hero-bg-photo.svg';
       const artWrap = createEl('div', 'hero-bg-artwork-wrap athena-hero-art');
       const img = createEl('img');
-      img.src = resolveUrl(rawImg);
+      img.src = resolveImgUrl(rawImg);
       img.alt = 'TERAZAWA Brand Emblem';
       artWrap.appendChild(img);
       container.appendChild(artWrap);
@@ -97,10 +104,9 @@
       const sec = createEl('section', 'news-bar-section');
       sec.id = b.id || 'section-news';
       const container = createEl('div', 'container news-bar-inner');
-      const label = createEl('span', 'news-bar-label', 'NEWS');
+      container.appendChild(createEl('span', 'news-bar-label', 'NEWS'));
       const text = createEl('a', 'news-bar-text', (b.date ? b.date + ' ' : '') + (b.title || ''));
       text.href = resolveUrl(b.url || './blog/index.html');
-      container.appendChild(label);
       container.appendChild(text);
       sec.appendChild(container);
       return sec;
@@ -110,7 +116,6 @@
       const sec = createEl('section', 'features-section section-padding');
       sec.id = b.id || 'section-features';
       const container = createEl('div', 'container');
-
       const header = createEl('div', 'section-header text-center');
       if (b.subheading) header.appendChild(createEl('span', 'section-sub', b.subheading));
       header.appendChild(createEl('h2', 'section-title', b.heading || '選ばれる理由'));
@@ -119,18 +124,16 @@
       if (Array.isArray(b.items)) {
         const list = createEl('div', 'features-zigzag-list');
         b.items.forEach(function (item, idx) {
-          const rowClass = 'feature-row' + (idx % 2 === 1 ? ' is-reverse' : '');
-          const row = createEl('div', rowClass);
-
+          const row = createEl('div', 'feature-row' + (idx % 2 === 1 ? ' is-reverse' : ''));
           const textCol = createEl('div', 'feature-text-col');
           textCol.appendChild(createEl('span', 'feature-num', item.num || ('0' + (idx + 1))));
           textCol.appendChild(createEl('h3', 'feature-item-title', item.title || ''));
           textCol.appendChild(createEl('p', 'feature-item-desc', item.text || ''));
 
           const imgCol = createEl('div', 'feature-img-col');
-          const rawImg = images[item.imageKey] || 'assets/images/uploads/about_' + ('0' + (idx + 1)) + '.webp';
+          const rawImg = images[item.imageKey] || ('assets/images/uploads/about_' + ('0' + (idx + 1)) + '.webp');
           const img = createEl('img', 'feature-img');
-          img.src = resolveUrl(rawImg);
+          img.src = resolveImgUrl(rawImg);
           img.alt = item.title || '選ばれる理由';
           img.loading = 'lazy';
           imgCol.appendChild(img);
@@ -149,7 +152,6 @@
       const sec = createEl('section', 'services-sticky-section section-padding bg-light');
       sec.id = b.id || 'section-services';
       const container = createEl('div', 'container athena-service-layout');
-
       const leftCol = createEl('div', 'athena-service-sticky-col');
       if (b.subheading) leftCol.appendChild(createEl('span', 'section-sub', b.subheading));
       leftCol.appendChild(createEl('h2', 'section-title', b.heading || '提供サービス案内'));
@@ -172,7 +174,6 @@
       const sec = createEl('section', 'profile-double-section section-padding');
       sec.id = b.id || 'section-profile';
       const container = createEl('div', 'container');
-
       const header = createEl('div', 'section-header text-center');
       if (b.subheading) header.appendChild(createEl('span', 'section-sub', b.subheading));
       header.appendChild(createEl('h2', 'section-title', b.heading || '税理士紹介'));
@@ -185,12 +186,13 @@
         const card = createEl('div', 'representative-card');
         const frame = createEl('div', 'representative-photo-frame');
         const rawPhoto = images[rep.photoKey] || '';
-        const img = createEl('img');
-        img.src = resolveUrl(rawPhoto);
-        img.alt = rep.name || '税理士写真';
-        frame.appendChild(img);
+        if (rawPhoto) {
+          const img = createEl('img');
+          img.src = resolveImgUrl(rawPhoto);
+          img.alt = rep.name || '税理士写真';
+          frame.appendChild(img);
+        }
         card.appendChild(frame);
-
         card.appendChild(createEl('span', 'representative-title', rep.title || ''));
         card.appendChild(createEl('h3', 'representative-name', rep.name || ''));
         card.appendChild(createEl('p', 'representative-desc', rep.desc || ''));
@@ -206,7 +208,6 @@
       const sec = createEl('section', 'cta-banner-section');
       sec.id = b.id || 'section-cta';
       const container = createEl('div', 'container cta-banner-inner text-center');
-
       sec.appendChild(createEl('div', 'cta-banner-bg-overlay'));
       container.appendChild(createEl('h2', 'cta-heading', b.heading || '無料相談受付中'));
       if (b.lead) container.appendChild(createEl('p', 'cta-lead', b.lead));
@@ -225,7 +226,6 @@
         btn.href = resolveUrl(b.buttonUrl);
         container.appendChild(btn);
       }
-
       sec.appendChild(container);
       return sec;
     }
@@ -233,10 +233,7 @@
 
   async function renderBlocks() {
     const data = await fetchBlockData();
-    if (!data || !Array.isArray(data.blocks) || data.blocks.length === 0) {
-      return; // データ未配備・通信不良時は静的HTMLフォールバックを維持
-    }
-
+    if (!data || !Array.isArray(data.blocks) || data.blocks.length === 0) return;
     const mainContainer = document.querySelector('main.site-main, main');
     if (!mainContainer) return;
 
@@ -244,7 +241,7 @@
     const fragment = document.createDocumentFragment();
 
     data.blocks.forEach(function (block) {
-      if (block.visible === false) return; // 非表示フラグ尊重
+      if (block.visible === false) return;
       const builder = BlockBuilders[block.type];
       if (typeof builder === 'function') {
         const secEl = builder(block, images);
@@ -253,7 +250,7 @@
     });
 
     if (fragment.childNodes.length > 0) {
-      mainContainer.textContent = ''; // 既存の静的要素を最新ブロック順で置換
+      mainContainer.textContent = '';
       mainContainer.appendChild(fragment);
     }
   }
@@ -264,7 +261,5 @@
     renderBlocks();
   }
 
-  global.BlockRenderer = {
-    renderBlocks: renderBlocks
-  };
+  global.BlockRenderer = { renderBlocks: renderBlocks };
 })(typeof window !== 'undefined' ? window : this);
