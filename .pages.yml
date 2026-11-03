@@ -1,6 +1,6 @@
 # ==============================================================================
 # TERAZAWA WEBSITE STUDIO - Pages CMS Schema Configuration
-# Version: 3.1.0 (Athena Standard / 11 Collections & Block Builder Complete)
+# Version: 3.1.1 (Fixed: List Summary Tokens & [object Object] Resolution)
 # ==============================================================================
 
 media:
@@ -36,7 +36,7 @@ content:
       - { name: cta_banner_bg, label: "下部CTAバナー背景画像", type: image }
 
   # ----------------------------------------------------------------------------
-  # 02. トップページ・ブロック式編集（セクション並び替え・追加・削除）
+  # 02. トップページ・ブロック式編集（[object Object]解消・並び替え）
   # ----------------------------------------------------------------------------
   - name: home_blocks
     label: "🧱 トップページ・ブロック構造編集（並び替え）"
@@ -46,7 +46,11 @@ content:
       - { name: pageTitle, label: "ページ管理用タイトル", type: string }
       - name: blocks
         label: "配置セクション一覧（ドラッグで順序変更・非表示可能）"
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.id} 【種類: {fields.type}】"
         fields:
           - { name: id, label: "セクション固有ID（例 block-hero-01）", type: string }
           - name: type
@@ -141,7 +145,11 @@ content:
           - { name: message, label: "代表メッセージ", type: text }
           - name: biography
             label: "経歴年表"
-            type: list
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.year} {fields.desc}"
             fields:
               - { name: year, label: "年月", type: string }
               - { name: desc, label: "経歴内容", type: string }
@@ -156,7 +164,11 @@ content:
           - { name: message, label: "メッセージ", type: text }
           - name: biography
             label: "経歴年表"
-            type: list
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.year} {fields.desc}"
             fields:
               - { name: year, label: "年月", type: string }
               - { name: desc, label: "経歴内容", type: string }
@@ -173,7 +185,11 @@ content:
       - { name: section_subtitle, label: "英語サブタイトル", type: string }
       - name: services
         label: "サービスカード一覧"
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.num} {fields.title}"
         fields:
           - { name: id, label: "アンカーID（例 service-01）", type: string }
           - { name: num, label: "通し番号（例 01）", type: string }
@@ -196,7 +212,11 @@ content:
       - { name: intro_text, label: "料金ポリシー導入文", type: text }
       - name: plans
         label: "顧問料金プラン一覧"
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}（月額: {fields.monthly_fee}）"
         fields:
           - { name: id, label: "プランID", type: string }
           - { name: name, label: "プラン名称", type: string }
@@ -205,13 +225,14 @@ content:
           - { name: monthly_fee, label: "月額顧問料（例 38,500円〜）", type: string }
           - { name: settlement_fee, label: "決算申告料（例 165,000円〜）", type: string }
           - { name: target, label: "対象企業規模目安", type: string }
-          - name: features
-            label: "提供サポート内容リスト"
-            type: list
-            field: { type: string, label: "項目" }
+          - { name: features, label: "提供サポート内容リスト", type: string, list: true }
       - name: spot_fees
         label: "スポット業務報酬規定"
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.service_name}（{fields.price}）"
         fields:
           - { name: service_name, label: "業務名", type: string }
           - { name: price, label: "報酬額", type: string }
@@ -229,7 +250,11 @@ content:
       - { name: page_subtitle, label: "英語サブタイトル", type: string }
       - name: faq_list
         label: "Q&A リスト"
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Q. {fields.question}"
         fields:
           - { name: id, label: "質問ID（例 faq-01）", type: string }
           - { name: question, label: "質問内容（Q）", type: string }
@@ -249,7 +274,11 @@ content:
       - { name: declaration, label: "宣誓基本方針文", type: text }
       - name: sections
         label: "規約条項セクション"
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.heading}"
         fields:
           - { name: heading, label: "条項見出し", type: string }
           - { name: body, label: "条項本文", type: text }
