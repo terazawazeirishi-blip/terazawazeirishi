@@ -1,43 +1,55 @@
 # 00. 現行システム詳細監査書 (Current System Audit)
 
-## 1. システム全体概要
-- 公開URL: https://terazawazeirishi-blip.github.io/terazawazeirishi/
+## 1. 調査対象と基本環境
 - リポジトリ: terazawazeirishi-blip/terazawazeirishi (mainブランチ)
-- ホスティング: GitHub Pages (サブディレクトリ運用: /terazawazeirishi/)
-- CMS: Pages CMS (app.pagescms.org) 主体 + Sveltia CMS (/admin) 保管
-- 問い合わせ・バックエンド: Googleフォーム + スプレッドシート + Google Apps Script (Zero-API-Key)
+- 公開URL: https://terazawazeirishi-blip.github.io/terazawazeirishi/index.html
+- 管理画面: Pages CMS (https://app.pagescms.org/)
+- ホスティング環境: GitHub Pages (Project Site / ベースパス: `/terazawazeirishi/`)
 
-## 2. 実在が確認されたファイル構成
-terazawazeirishi/
-├── .github/workflows/deploy.yml   # 自動ビルド＆デプロイ
-├── admin/                         # Sveltia CMSホスト環境
-├── assets/
-│   ├── css/style.css              # アテナ準拠メインスタイル
-│   ├── images/ (uploads/, svg等)  # サイト全画像
-│   └── js/main.js                 # パス自動補正・CMSデータ同期
-├── blog/ (index.html, *.md, *.html) # コラム管理（単一収束済み）
-├── content/
-│   ├── site_images.json           # 全17画像スロット正本
-│   └── news/                      # お知らせMarkdown
-├── gas/Code.gs                    # メール自動返信・2人体制通知
-├── scripts/
-│   ├── build_blog.py              # コラムMarkdown->HTML自動生成
-│   └── deterministic_validator.py # 整合性検証
-├── .nojekyll                      # Jekyll無効化フラグ
-├── .pages.yml                     # Pages CMS定義ファイル
-├── 404.html, contact.html, faq.html, index.html, pricing.html,
-│   privacy.html, profile.html, services.html, sitemap.html,
-│   robots.txt, sitemap.xml
-└── terazawazeirishi-main(2)/      # 【要整理】ZIP解凍の残骸ディレクトリ
+## 2. 実際に確認したファイル構成
+### A. ルート直下
+- `index.html` (メインページ / アテナ準拠デザイン)
+- `services.html` (サービス案内)
+- `pricing.html` (料金案内)
+- `profile.html` (税理士紹介・事務所概要)
+- `faq.html` (よくある質問)
+- `contact.html` (お問い合わせ)
+- `privacy.html` (プライバシーポリシー)
+- `sitemap.html` (HTMLサイトマップ)
+- `sitemap.xml` / `robots.txt`
+- `404.html`
+- `.nojekyll` (1行コメント `# Disable Jekyll` 含有)
+- `.pages.yml` (Pages CMSスキーマ定義)
 
-## 3. 確定済み仕様と遵守ルール
-- API-Key完全不使用（Zero-Fail原則）
-- 提携先「ザワテラス社労士（https://terazawa-sr.jbcsite.com/）」リンクの維持
-- 英語表記「TERAZAWA TAX & CONSULTING」の統一
-- サブディレクトリ相対パス解決（repoBase）の維持
+### B. ディレクトリ構成
+- `.github/workflows/deploy.yml`: GitHub Actions 自動ビルド＆Pagesデプロイ
+- `admin/`: Sveltia CMS環境 (`config.yml`, `index.html`)
+- `assets/css/`: `style.css` (:root先頭定義、アテナ準拠デザイントークン)
+- `assets/images/`: `uploads/`, `hero-bg-photo.svg`, `logo-athena-wing.svg`, `watermark-crest.svg`
+- `assets/js/`: `main.js` (repoBaseパス解決、8大同期関数)
+- `blog/`: `index.html`, `sample.md`, `sample-post.html` (コラム単一収束先)
+- `content/`: `site_images.json`, `news/sample.md` (※他JSONはmain.js内で参照)
+- `gas/`: `Code.gs` (2人体制通知・即時返信・スプレッドシート連携)
+- `scripts/`: `build_blog.py` (Markdown->HTML変換), `deterministic_validator.py`
+- `terazawazeirishi-main(2)/`: 【異常検出】入れ子の展開残骸ディレクトリ
 
-## 4. 検出された課題・既知の問題
-1. ルート直下の「terazawazeirishi-main(2)」ディレクトリの混入（リポジトリの肥大化）。
-2. 代表税理士の苗字表記ゆれ（「寺澤」と「寺沢」）。
-3. ベテラン税理士の氏名（「田河 定茂」氏の記述と空欄箇所の混在）。
-4. Pages CMS管理領域と公開側JSの同期範囲（10管理領域のうち、JSONファイルが存在しない領域の特定が必要）。
+## 3. Pages CMS 10管理領域の定義状況
+1. `site_images`: `content/site_images.json` (17スロット画像管理)
+2. `home_texts`: `content/home_texts.json`
+3. `office_info_manager`: `content/office_info.json`
+4. `profile_texts`: `content/profile_texts.json`
+5. `services_manager`: `content/services.json`
+6. `pricing_manager`: `content/pricing.json`
+7. `faq_manager`: `content/faq.json`
+8. `legal_texts`: `content/legal_texts.json`
+9. `blog`: `blog/*.md`
+10. `news`: `content/news/*.md`
+
+## 4. 検出された既知の問題と修正候補
+- **問題A (サービス)**: `syncServicesTexts()` が既存HTMLカード数に依存。カード動的生成エンジンへ改修が必要。
+- **問題B (料金)**: `syncPricingTexts()` で `plans` / `spot_fees` のテーブル動的レンダリングが未実装。
+- **問題C (FAQ)**: `syncFaqTexts()` で `faq_list` 配列からアコーディオンを動的生成する処理が不足。
+- **問題D (セキュリティ)**: `setOrHide()` 等における `innerHTML` 直接挿入を廃止し、サニタイズされたDOM生成（`textContent` 優先）へ置換。
+- **問題E (エラー処理)**: `catch (e) {}` の無言無視を廃止。コンソールログ・管理者診断通知を導入。
+- **問題F (CMS重複)**: `admin/` (Sveltia) と `.pages.yml` (Pages CMS) の併存。Pages CMSを主として保護し、`content/blog/` の残骸有無を確認。
+- **問題G (残骸フォルダ)**: `terazawazeirishi-main(2)/` の隔離と削除準備。
