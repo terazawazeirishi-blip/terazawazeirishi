@@ -3,49 +3,64 @@
   <!-- トップページ -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/index.html</loc>
-    <priority>1.0</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   <!-- サービス案内 -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html</loc>
-    <priority>0.9</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <!-- 料金案内 -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/pricing.html</loc>
-    <priority>0.9</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
-  <!-- 事務所概要・税理士紹介 -->
+  <!-- 税理士紹介・事務所概要 -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/profile.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <!-- よくある質問 -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/faq.html</loc>
-    <priority>0.7</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
-  </url>
-  <!-- 無料相談・お問い合わせ -->
-  <url>
-    <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/contact.html</loc>
-    <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <!-- 税務・経営コラム一覧 -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/blog/index.html</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 初回無料相談・お問い合わせ -->
+  <url>
+    <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/contact.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <!-- 個人情報保護方針 -->
   <url>
     <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/privacy.html</loc>
-    <priority>0.5</priority>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <!-- HTMLサイトマップ -->
+  <url>
+    <loc>https://terazawazeirishi-blip.github.io/terazawazeirishi/sitemap.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>
