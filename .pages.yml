@@ -30,11 +30,11 @@ media:
       - name: "rep_senior"
         label: "ベテラン税理士の写真"
         type: "image"
-      - name: "about_01（税理士２人体制によるダブルチェック）の写真"
-        label: 
+      - name: "about_01"
+        label: "About 01（税理士２人体制によるダブルチェック）の写真"
         type: "image"
-      - name: "about_02（国税出身の２名の税理士で対応する税務調査）の写真"
-        label: 
+      - name: "about_02"
+        label: "About 02（国税出身の２名の税理士で対応する税務調査）の写真"
         type: "image"
       - name: "about_03"
         label: "About 03（税理士歴35年実績）の写真"
