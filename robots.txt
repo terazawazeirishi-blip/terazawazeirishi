@@ -1,6 +1,8 @@
 User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /content/
+Allow: /terazawazeirishi/
+Disallow: /terazawazeirishi/admin/
+Disallow: /terazawazeirishi/content/
+Disallow: /terazawazeirishi/scripts/
+Disallow: /terazawazeirishi/gas/
 
 Sitemap: https://terazawazeirishi-blip.github.io/terazawazeirishi/sitemap.xml
