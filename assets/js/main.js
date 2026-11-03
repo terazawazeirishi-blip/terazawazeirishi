@@ -1,14 +1,12 @@
 /**
  * TERAZAWA WEBSITE STUDIO - Public Rendering & CMS Sync Engine
  * Module: assets/js/main.js
- * Version: 3.7.0 (Fixed: Confined Photo Sizing & Clean Safe Fallback)
+ * Version: 3.8.0 (Final Deterministic Edition: Safe Photo Inset & Zero-Fail)
  */
 (function () {
   'use strict';
 
-  /* ==========================================================================
-   * 1. パス解決エンジン
-   * ========================================================================== */
+  /* 1. パス解決エンジン */
   const pathname = window.location.pathname;
   const isSubDirBlog = pathname.indexOf('/blog/') !== -1;
   const repoBase = isSubDirBlog ? '../' : './';
@@ -35,6 +33,7 @@
       clean = 'assets/images/uploads/' + clean;
     }
     let full = resolveUrl(clean);
+    // キャッシュバスター付与（ブラウザキャッシュを確実に破棄）
     if (full && !full.startsWith('data:') && !full.startsWith('#')) {
       full += (full.includes('?') ? '&' : '?') + 't=' + Date.now();
     }
@@ -52,113 +51,75 @@
     }
   }
 
-  function setTextSafe(selectorOrEl, value) {
-    if (value === undefined || value === null || value === '') return;
-    const targets = typeof selectorOrEl === 'string'
-      ? document.querySelectorAll(selectorOrEl)
-      : [selectorOrEl];
-    targets.forEach(function (el) {
-      if (el) el.textContent = String(value);
+  /* 2. 画像の安全な枠内挿入（サイズを厳格固定） */
+  function setPhoto(frameSelector, imgUrl, altText, isRepresentative) {
+    if (!imgUrl) return;
+    const frames = document.querySelectorAll(frameSelector);
+    frames.forEach(function (frame) {
+      frame.textContent = ''; // プレースホルダーの文字を消去
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      img.alt = altText || 'サイト画像';
+      if (isRepresentative) {
+        // 代表・副代表写真: 最大幅260pxの正方形枠に厳密固定（巨大化を物理防止）
+        img.style.cssText = 'width: 100%; max-width: 260px; height: 260px; object-fit: cover; border-radius: 8px; display: block; margin: 0 auto; box-shadow: 0 4px 16px rgba(27,42,74,0.08);';
+      } else {
+        // 選ばれる理由01〜05: 最大幅500pxの枠内に収める
+        img.style.cssText = 'width: 100%; max-width: 500px; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display: block; margin: 0 auto;';
+      }
+      frame.appendChild(img);
     });
   }
 
-  /**
-   * 安全な画像挿入（枠の大きさを絶対に超えないストッパー付き）
-   */
-  function injectPhotoSafely(frameEl, imgUrl, altText) {
-    if (!frameEl || !imgUrl) return;
-    frameEl.textContent = ''; // 枠内のプレースホルダー文字のみ消去
-    const img = document.createElement('img');
-    img.src = imgUrl;
-    img.alt = altText || '税理士写真';
-    // 最大幅260pxを超えず、枠内に美しく収まるスタイルを強制
-    img.style.cssText = 'width: 100%; max-width: 260px; height: auto; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; display: block; margin: 0 auto; box-shadow: 0 4px 16px rgba(27,42,74,0.08);';
-    frameEl.appendChild(img);
-  }
-
-  /* ==========================================================================
-   * 2. サイト画像同期（写真枠限定・安全実行）
-   * ========================================================================== */
+  /* 3. サイト画像同期処理 */
   async function syncCmsImages() {
     const data = await fetchCmsJson('site_images.json');
     if (!data) return null;
 
-    // 代表税理士 寺澤景子（幅260px枠に安全限定）
+    // 代表税理士 寺澤景子（260px固定）
     if (data.rep_keiko) {
-      const keikoUrl = resolveImgUrl(data.rep_keiko);
-      document.querySelectorAll('.representative-card:first-child .representative-photo-frame, [data-rep-photo="keiko"], .rep-photo-keiko, [data-cms-img="rep_keiko"]').forEach(function (el) {
-        injectPhotoSafely(el, keikoUrl, '寺澤 景子 代表税理士');
-      });
+      const url = resolveImgUrl(data.rep_keiko);
+      setPhoto('.representative-card:first-child .representative-photo-frame, .rep-photo-keiko, [data-rep-photo="keiko"], [data-cms-img="rep_keiko"]', url, '寺澤 景子 代表税理士', true);
     }
 
-    // 副代表・ベテラン税理士 田河定茂（幅260px枠に安全限定）
+    // 副代表・ベテラン税理士 田河定茂（260px固定）
     if (data.rep_senior) {
-      const seniorUrl = resolveImgUrl(data.rep_senior);
-      document.querySelectorAll('.representative-card:last-child .representative-photo-frame, [data-rep-photo="senior"], .rep-photo-senior, [data-cms-img="rep_senior"]').forEach(function (el) {
-        injectPhotoSafely(el, seniorUrl, '田河 定茂 副代表税理士');
-      });
+      const url = resolveImgUrl(data.rep_senior);
+      setPhoto('.representative-card:last-child .representative-photo-frame, .rep-photo-senior, [data-rep-photo="senior"], [data-cms-img="rep_senior"]', url, '田河 定茂 副代表税理士', true);
     }
 
-    // 選ばれる理由01〜05（写真枠のみに限定）
+    // 選ばれる理由 01〜05（各行の写真枠に限定挿入）
     for (let i = 1; i <= 5; i++) {
-      const slotKey = 'about_0' + i;
-      if (data[slotKey]) {
-        const aboutUrl = resolveImgUrl(data[slotKey]);
-        document.querySelectorAll('.features-zigzag-list .feature-row:nth-child(' + i + ') .feature-img-col, [data-cms-img="' + slotKey + '"]').forEach(function (el) {
-          el.textContent = '';
-          const img = document.createElement('img');
-          img.src = aboutUrl;
-          img.alt = '選ばれる理由 ' + i;
-          img.style.cssText = 'width: 100%; max-width: 500px; height: auto; border-radius: 8px; display: block;';
-          el.appendChild(img);
-        });
+      const key = 'about_0' + i;
+      if (data[key]) {
+        const url = resolveImgUrl(data[key]);
+        setPhoto('.features-zigzag-list .feature-row:nth-child(' + i + ') .feature-img-col, .features-zigzag-list .feature-row:nth-child(' + i + ') .about-photo-placeholder, [data-cms-img="' + key + '"]', url, '選ばれる理由 ' + i, false);
       }
-    }
-
-    // ロゴ
-    if (data.logo_img) {
-      const logoUrl = resolveImgUrl(data.logo_img);
-      document.querySelectorAll('.site-logo img, [data-cms-img="logo_img"]').forEach(function (img) {
-        img.src = logoUrl;
-      });
     }
 
     // ヒーロー象徴アート
     if (data.hero_illustration) {
-      const heroUrl = resolveImgUrl(data.hero_illustration);
+      const url = resolveImgUrl(data.hero_illustration);
       document.querySelectorAll('.hero-bg-artwork-wrap img, .athena-hero-art img, [data-cms-img="hero_illustration"]').forEach(function (img) {
-        img.src = heroUrl;
+        img.src = url;
+      });
+    }
+
+    // ロゴ
+    if (data.logo_img) {
+      const url = resolveImgUrl(data.logo_img);
+      document.querySelectorAll('.site-logo img, [data-cms-img="logo_img"]').forEach(function (img) {
+        img.src = url;
       });
     }
 
     return data;
   }
 
-  /* ==========================================================================
-   * 3. 基本情報同期
-   * ========================================================================== */
-  async function syncOfficeInfo() {
-    const data = await fetchCmsJson('office_info.json');
-    if (!data) return;
-    ['office_name', 'english_name', 'postal_code', 'address', 'tel', 'fax', 'business_hours', 'target_area', 'affiliation', 'copyright_text'].forEach(function(k){
-      setTextSafe('[data-cms="' + k + '"]', data[k]);
-    });
-    if (data.tel) {
-      document.querySelectorAll('a[data-cms-tel]').forEach(function (a) { a.href = 'tel:' + String(data.tel).replace(/[^\d+]/g, ''); });
-    }
-  }
-
-  /* ==========================================================================
-   * 4. 起動処理
-   * ========================================================================== */
-  async function init() {
-    await syncCmsImages();
-    await syncOfficeInfo();
-  }
-
+  /* 4. 起動処理 */
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', syncCmsImages);
   } else {
-    init();
+    syncCmsImages();
   }
 })();
