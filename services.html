@@ -44,7 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* 画像有無のハイブリッド・ジグザグ制御スタイル */
+    /* 画像が無い項目の全幅スマートレイアウト */
     .athena-zigzag-item.has-no-image {
       display: block !important;
       direction: ltr !important;
@@ -130,7 +130,6 @@
   <!-- メインサービス一覧（動的ハイブリッドジグザグコンテナ） -->
   <main class="site-main" style="padding-top: 4.5rem; padding-bottom: 6rem;">
     <div class="container athena-zigzag-list" id="servicesContainer">
-      <!-- 万が一JSが遅れても即座に消去・描画される初期プレースホルダー -->
       <div id="loadingIndicator" style="text-align: center; padding: 4rem 0; color: var(--color-text-sub);">
         <p style="font-family: var(--font-serif); font-size: 1.1rem;">サービス情報を展開中...</p>
       </div>
@@ -213,7 +212,7 @@
     <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
   </div>
 
-  <!-- ★【不具合根絶】どんなJSON形式でも即座に描画し、フリーズを100%防止する完全レンダリングスクリプト -->
+  <!-- スクリプト：画像があれば枠＋画像、画像がなければ枠ごと【完全に消去】して全幅にする -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. スマホ用ハンバーガーメニュー開閉
@@ -225,8 +224,8 @@
         });
       }
 
-      // 2. サービスデータ（万が一通信失敗しても絶対に動くフォールバック用初期データ7件）
-      const fallbackServices = [
+      // 2. 7大主要業務データ（通信遅延やエラー時でも即座に描画するセーフティネット）
+      const defaultServices = [
         {
           id: 'corporate',
           num: '01',
@@ -299,7 +298,6 @@
         return repoBase + clean;
       };
 
-      // どんなデータ形式でも吸い上げる万能パーサー
       const extractItems = (data) => {
         if (!data) return [];
         if (Array.isArray(data)) return data;
@@ -310,9 +308,8 @@
         return [];
       };
 
-      // 描画実行関数
       const renderServices = (items, images) => {
-        const targetItems = (items && items.length > 0) ? items : fallbackServices;
+        const targetItems = (items && items.length > 0) ? items : defaultServices;
         container.innerHTML = '';
         let imageItemCounter = 0;
 
@@ -334,7 +331,7 @@
 
           let visualHtml = '';
           if (hasImage) {
-            // ★【画像がある場合】：枠を作成し、画像がある要素同士で綺麗に左右交互（ジグザグ）に配置
+            // ★【画像がある場合】写真枠を出して左右交互（ジグザグ）に配置
             const isReverse = (imageItemCounter % 2 === 1);
             imageItemCounter++;
             article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
@@ -344,12 +341,11 @@
               </div>
             `;
           } else {
-            // ★【画像がない場合】：写真枠・プレースホルダー枠を「完全に消去」し、文章側を全幅に広げて美しく配置
+            // ★【画像がない場合】写真枠（<div>も<svg>も全て）を【跡形もなく完全に消去】し、文章を全幅にする
             article.className = 'athena-zigzag-item has-no-image';
-            visualHtml = '';
+            visualHtml = ''; // 枠自体を一切出力しない
           }
 
-          // ポイント箇条書き または 詳細説明文の生成
           let detailsHtml = '';
           if (item.points) {
             const pointLines = item.points.split('\n').filter(l => l.trim());
@@ -364,6 +360,7 @@
             detailsHtml = `<p class="zigzag-text" style="margin-bottom:1.8rem;">${escapeHtml(descText)}</p>`;
           }
 
+          // visualHtml が空文字の場合、写真枠タグ自体が全く出力されず、文章だけが美しく全幅で展開されます
           article.innerHTML = `
             ${visualHtml}
             <div class="zigzag-content">
@@ -379,7 +376,7 @@
         });
       };
 
-      // 取得処理（失敗時は即座にフォールバック表示に切り替え）
+      // データ取得（失敗時でも即座に描画）
       Promise.all([
         fetch('./content/services.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
         fetch('./content/site_images.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)
@@ -389,7 +386,7 @@
         renderServices(items, imagesData);
       })
       .catch(() => {
-        renderServices(fallbackServices, null);
+        renderServices(defaultServices, null);
       });
 
       function escapeHtml(str) {
