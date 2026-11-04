@@ -46,45 +46,52 @@
 </head>
 <body>
 
-  <!-- ヘッダー -->
+  <!-- 正統ヘッダー (style.css 完全適合・他ページと同一) -->
   <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
-      <a href="./index.html" class="site-logo" aria-label="寺澤景子税理士事務所 ホーム">
-        <svg class="brand-logo-img" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 38px; height: 38px; vertical-align: middle; margin-right: 8px;" aria-hidden="true">
+    <div class="container header-container">
+      <a href="./index.html" class="brand-logo" aria-label="寺澤景子税理士事務所 ホーム">
+        <svg class="brand-logo-img" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="22" cy="22" r="21" stroke="#A08C4A" stroke-width="1.5" stroke-dasharray="3 3"/>
           <path d="M22 6C14 14 12 24 22 36C32 24 30 14 22 6Z" fill="#1B2A4A" opacity="0.9"/>
           <path d="M16 20C18 26 22 30 22 36C22 30 26 26 28 20" stroke="#A08C4A" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
-        <span class="logo-main">寺澤景子税理士事務所</span>
-        <span class="logo-sub">TERAZAWA TAX &amp; CONSULTING</span>
+        <div class="brand-text">
+          <span class="brand-name">寺澤景子税理士事務所</span>
+          <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
+        </div>
       </a>
 
-      <nav class="site-nav">
+      <nav class="header-nav" id="headerNav">
         <ul class="nav-list">
-          <li><a href="./index.html">ホーム</a></li>
-          <li><a href="./services.html" class="is-current">サービス案内</a></li>
-          <li><a href="./pricing.html">料金案内</a></li>
-          <li><a href="./profile.html">税理士紹介・概要</a></li>
-          <li><a href="./faq.html">よくある質問</a></li>
-          <li><a href="./blog/index.html">税務コラム</a></li>
+          <li><a href="./index.html" class="nav-link">ホーム</a></li>
+          <li><a href="./services.html" class="nav-link is-active">サービス案内</a></li>
+          <li><a href="./pricing.html" class="nav-link">料金案内</a></li>
+          <li><a href="./profile.html" class="nav-link">税理士紹介・概要</a></li>
+          <li><a href="./faq.html" class="nav-link">よくある質問</a></li>
+          <li><a href="./blog/index.html" class="nav-link">税務コラム</a></li>
         </ul>
-        <a href="./contact.html" class="btn btn-gold nav-cta-btn">無料相談を予約</a>
+        <a href="./contact.html" class="header-cta-btn">無料相談を予約</a>
       </nav>
-      <button class="mobile-menu-toggle" aria-label="メニュー開閉"><span></span><span></span><span></span></button>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニュー開閉">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </div>
   </header>
 
   <!-- ヒーローセクション -->
   <section class="athena-hero" style="min-height: 42vh; padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SERVICES</div>
-    <div class="container" style="position: relative; z-index: 2; text-align: center;">
-      <p class="hero-sub-en" style="font-family: var(--font-serif); font-size: 0.85rem; letter-spacing: 0.16em; color: var(--color-accent); margin-bottom: 0.6rem;">PROFESSIONAL TAX &amp; DX</p>
-      <h1 class="hero-main-title" style="font-family: var(--font-serif); font-size: 2.3rem; color: var(--color-primary); margin-bottom: 1rem;">提供サービス案内</h1>
-      <p class="hero-lead-text" style="color: var(--color-text-sub); max-width: 680px; margin: 0 auto; line-height: 1.8;">国税調査官21年の実績に基づく高度税務調査対策から、クラウド会計DX、事業承継まで。2名の税理士と提携社労士がワンストップで伴走します。</p>
+    <div class="container hero-container-front" style="text-align: center;">
+      <p class="hero-sub-en">PROFESSIONAL TAX &amp; DX</p>
+      <h1 class="hero-main-title">提供サービス案内</h1>
+      <p class="hero-lead-text" style="max-width: 680px; margin: 0 auto;">国税調査官21年の実績に基づく高度税務調査対策から、クラウド会計DX、事業承継まで。2名の税理士と提携社労士がワンストップで伴走します。</p>
     </div>
   </section>
 
-  <!-- メインサービス一覧（他ページと完全統一されたカード型セクション） -->
+  <!-- メインサービス一覧 (style.css セクション7 カード型レイアウト) -->
   <main class="site-main athena-service-section" style="padding-top: 4.5rem; padding-bottom: 6rem;">
     <div class="container container-narrow">
       <div class="service-list-cards" id="servicesContainer">
@@ -95,81 +102,99 @@
     </div>
   </main>
 
-  <!-- 下部 無料相談CTAバナー -->
-  <section class="cta-banner-section">
-    <div class="container cta-banner-inner text-center">
-      <h2 class="cta-heading">数字の不安を、未来への確信へ。</h2>
-      <p class="cta-lead">初回面談・お見積りは無料です。天草本所での対面面談はもちろん、全国オンライン（Zoom等）にも即時対応いたします。</p>
-      <div class="cta-contact-box">
-        <a href="tel:0969221166" class="cta-tel-link">TEL: 0969-22-1166</a>
-        <span class="cta-hours">平日 9:30 〜 17:30（土日祝面談は事前予約対応）</span>
+  <!-- 下部 無料相談CTAバナー (style.css 完全適合) -->
+  <section class="athena-hero" style="min-height: auto; padding: 5rem 0; background: linear-gradient(135deg, var(--color-bg-subtle) 0%, #FFFFFF 100%); text-align: center;">
+    <div class="container">
+      <h2 class="section-title" data-en="CONTACT" style="margin-bottom: 1.5rem;">数字の不安を、未来への確信へ。</h2>
+      <p class="section-lead" style="max-width: 680px; margin: 0 auto 2.5rem auto;">初回面談・お見積りは無料です。天草本所での対面面談はもちろん、全国オンライン（Zoom等）にも即時対応いたします。</p>
+      <div style="margin-bottom: 2.5rem;">
+        <a href="tel:0969221166" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.4rem;">TEL: 0969-22-1166</a>
+        <p style="font-size: 0.9rem; color: var(--color-text-sub);">平日 9:30 〜 17:30（土日祝面談は事前予約対応）</p>
       </div>
-      <a href="./contact.html" class="btn btn-gold btn-large cta-btn">初回無料相談フォームへ進む</a>
+      <div>
+        <a href="./contact.html" class="header-cta-btn" style="padding: 1rem 2.5rem; font-size: 1.05rem;">初回無料相談フォームへ進む</a>
+      </div>
     </div>
   </section>
 
-  <!-- 4カラム完全フッター -->
+  <!-- 4カラム完全フッター (style.css 完全準拠) -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-col footer-info">
-        <div class="footer-logo">
-          <span class="logo-main">寺澤景子税理士事務所</span>
-          <span class="logo-sub">TERAZAWA TAX &amp; CONSULTING</span>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-name">
+            <span class="brand-name">寺澤景子税理士事務所</span><br>
+            <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
+          </div>
+          <address class="footer-address" style="margin-top: 1rem;">
+            〒863-0023 熊本県天草市南町5-22<br>
+            TEL: <a href="tel:0969221166">0969-22-1166</a><br>
+            <small style="color: var(--color-text-sub); display: inline-block; margin-top: 0.5rem;">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</small>
+          </address>
         </div>
-        <p class="footer-address">〒863-0023 熊本県天草市南町5-22</p>
-        <p class="footer-tel">TEL: <a href="tel:0969221166">0969-22-1166</a></p>
-        <p class="footer-affiliation">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</p>
+
+        <div>
+          <h4 class="footer-nav-title">サービス案内</h4>
+          <ul class="footer-nav-list">
+            <li><a href="./services.html#service-01" class="footer-nav-link">法人税務顧問・決算申告</a></li>
+            <li><a href="./services.html#service-02" class="footer-nav-link">税務調査対策・模擬調査</a></li>
+            <li><a href="./services.html#service-03" class="footer-nav-link">会社設立・創業支援</a></li>
+            <li><a href="./services.html#service-04" class="footer-nav-link">創業融資・公庫対策</a></li>
+            <li><a href="./services.html#service-05" class="footer-nav-link">クラウド会計DX</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-nav-title">事務所案内</h4>
+          <ul class="footer-nav-list">
+            <li><a href="./index.html" class="footer-nav-link">ホーム</a></li>
+            <li><a href="./services.html" class="footer-nav-link">サービス一覧</a></li>
+            <li><a href="./pricing.html" class="footer-nav-link">料金案内</a></li>
+            <li><a href="./profile.html" class="footer-nav-link">税理士紹介・概要</a></li>
+            <li><a href="./faq.html" class="footer-nav-link">よくある質問</a></li>
+            <li><a href="./blog/index.html" class="footer-nav-link">税務・経営コラム</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-nav-title">提携士業・規約</h4>
+          <ul class="footer-nav-list">
+            <li><a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" class="footer-nav-link">提携：ザワテラス社労士 HP →</a></li>
+            <li><a href="./privacy.html" class="footer-nav-link">個人情報保護方針・守秘義務</a></li>
+            <li><a href="./sitemap.html" class="footer-nav-link">HTMLサイトマップ</a></li>
+            <li><a href="./contact.html" class="footer-nav-link">初回無料相談・お問い合わせ</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="footer-col">
-        <h4 class="footer-col-title">サービス案内</h4>
-        <ul class="footer-links">
-          <li><a href="./services.html#service-01">法人税務顧問・決算申告</a></li>
-          <li><a href="./services.html#service-02">税務調査対策・模擬調査</a></li>
-          <li><a href="./services.html#service-03">会社設立・創業支援</a></li>
-          <li><a href="./services.html#service-04">創業融資・公庫対策</a></li>
-          <li><a href="./services.html#service-05">クラウド会計DX</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <small>© TERAZAWA KEIKO TAX ACCOUNTING OFFICE. All Rights Reserved.</small>
       </div>
-
-      <div class="footer-col">
-        <h4 class="footer-col-title">事務所案内</h4>
-        <ul class="footer-links">
-          <li><a href="./index.html">ホーム</a></li>
-          <li><a href="./services.html">サービス一覧</a></li>
-          <li><a href="./pricing.html">料金案内</a></li>
-          <li><a href="./profile.html">税理士紹介・事務所概要</a></li>
-          <li><a href="./faq.html">よくある質問</a></li>
-          <li><a href="./blog/index.html">税務・経営コラム</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-col-title">提携士業・規約</h4>
-        <ul class="footer-links">
-          <li><a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer">提携：ザワテラス社労士 HP →</a></li>
-          <li><a href="./privacy.html">個人情報保護方針・守秘義務</a></li>
-          <li><a href="./sitemap.html">HTMLサイトマップ</a></li>
-          <li><a href="./contact.html">初回無料相談・お問い合わせ</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom text-center">
-      <p class="copyright">© TERAZAWA KEIKO TAX ACCOUNTING OFFICE. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- 常駐型フローティングCTAボタン -->
-  <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
+  <!-- 常駐型フローティングCTAボタン (style.css 完全適合) -->
+  <div class="floating-cta">
+    <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
+  </div>
 
-  <!-- ★ 他ページ完全調和・サービスカード型レンダリングスクリプト -->
+  <!-- スクリプト：ヘッダー開閉＆サービス動的レンダリング -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. スマホ用ハンバーガーメニュー開閉
+      const hamburger = document.getElementById('hamburgerBtn');
+      const nav = document.getElementById('headerNav');
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          nav.classList.toggle('is-open');
+        });
+      }
+
+      // 2. サービスデータ読み込み
       const container = document.getElementById('servicesContainer');
       const serviceTargetIds = ['corporate', 'audit', 'startup', 'finance', 'cloud', 'inheritance', 'labor'];
       const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
 
-      // サブディレクトリ対応パスヘルパー
       const pathParts = window.location.pathname.split('/');
       let repoBase = './';
       const repoIndex = pathParts.indexOf('terazawazeirishi');
@@ -189,7 +214,6 @@
         return repoBase + clean;
       };
 
-      // 文章データと画像データを同時に取得
       Promise.all([
         fetch('./content/services.json?v=' + Date.now()).then(r => r.ok ? r.json() : null),
         fetch('./content/site_images.json?v=' + Date.now()).then(r => r.ok ? r.json() : null)
@@ -209,10 +233,8 @@
 
           const article = document.createElement('article');
           article.id = targetId;
-          // style.css セクション7「.service-card-item」に完全準拠
           article.className = 'service-card-item';
 
-          // 画像枠の生成（.service-card-img-slot）
           let visualHtml = '';
           const rawImg = (imagesData && imagesData[key]) || item.image || '';
           const imgPath = rawImg ? resolveImgUrl(rawImg) : '';
@@ -220,7 +242,6 @@
           if (imgPath) {
             visualHtml = `<img src="${imgPath}" alt="${escapeHtml(item.title)}" class="service-card-img">`;
           } else {
-            // 画像未設定時のアテナ公式プレースホルダー
             visualHtml = `
               <svg class="service-card-img" viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; background:#FAF8F5;">
                 <circle cx="200" cy="130" r="70" fill="#F4EEDC" opacity="0.7"/>
@@ -229,7 +250,6 @@
             `;
           }
 
-          // チェックポイントまたは説明文の生成
           let detailsHtml = '';
           if (item.points) {
             const pointLines = item.points.split('\n').filter(l => l.trim());
@@ -244,7 +264,6 @@
             detailsHtml = `<p class="service-card-desc" style="margin-top:0.5rem; margin-bottom:1rem;">${escapeHtml(descText)}</p>`;
           }
 
-          // カード内部の構造（左：画像スロット、右：テキストコンテンツ）
           article.innerHTML = `
             <div class="service-card-img-slot">
               ${visualHtml}
