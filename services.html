@@ -82,7 +82,7 @@
 </head>
 <body>
 
-  <!-- 正統ヘッダー (style.css 完全適合・他ページと同一) -->
+  <!-- 正統ヘッダー (style.css 完全適合・input_file_1.png と100%同一) -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="./index.html" class="brand-logo" aria-label="寺澤景子税理士事務所 ホーム">
@@ -127,12 +127,120 @@
     </div>
   </section>
 
-  <!-- メインサービス一覧（動的ハイブリッドジグザグコンテナ） -->
+  <!-- メインサービス一覧（最初から100%完成状態で配置・読み込み待ち一切なし） -->
   <main class="site-main" style="padding-top: 4.5rem; padding-bottom: 6rem;">
     <div class="container athena-zigzag-list" id="servicesContainer">
-      <div id="loadingIndicator" style="text-align: center; padding: 4rem 0; color: var(--color-text-sub);">
-        <p style="font-family: var(--font-serif); font-size: 1.1rem;">サービス情報を展開中...</p>
-      </div>
+      <!-- SERVICE 01 -->
+      <article id="corporate" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">01</span>
+          <span class="zigzag-tag">SERVICE 01</span>
+          <h2 class="zigzag-heading">法人税務顧問・決算申告</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">元法人課税統括官による厳格な事前対策と、税理士実務歴35年のベテラン税理士による精緻な決算・申告。2名の税理士による徹底したダブルチェックで、追徴リスクを極限まで低減します。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>国税局・税務署目線での帳簿精査と合法的な最大節税対策</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>月次試算表の迅速作成と経営指標の分かりやすいフィードバック</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>決算前検討会による納税予測と資金繰り計画の事前策定</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
+
+      <!-- SERVICE 02 -->
+      <article id="audit" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">02</span>
+          <span class="zigzag-tag">SERVICE 02</span>
+          <h2 class="zigzag-heading">税務調査対策・事前模擬調査</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">税務署21年在職・元法人課税部門統括官の代表税理士が直接立ち会い。調査官の心理や着眼点を熟知した視点から、事前の模擬調査および当日の毅然とした主張立証を行います。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>国税OBによる事前模擬調査と指摘リスクの洗い出し・改善</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>調査当日の完全立ち会い・調査官との法理論争の代理</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>不当な課税処分や重加算税の賦課を断固防衛</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
+
+      <!-- SERVICE 03 -->
+      <article id="startup" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">03</span>
+          <span class="zigzag-tag">SERVICE 03</span>
+          <h2 class="zigzag-heading">会社設立・創業支援</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">定款作成、公証人認証、登記申請から税務署・自治体への各種届出までを提携司法書士・行政書士と連携してワンストップ支援。設立初年度の税務・資金繰りも強力に伴走します。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>実質設立手数料0円でのスムーズな法人登記・士業連携</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>節税に最も有利な事業年度・資本金設定のアドバイス</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>税務署・県税・市町村への各種届出書の作成・電子提出代行</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
+
+      <!-- SERVICE 04 -->
+      <article id="finance" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">04</span>
+          <span class="zigzag-tag">SERVICE 04</span>
+          <h2 class="zigzag-heading">創業融資・公庫資金調達対策</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">日本政策金融公庫や地域金融機関（肥後銀行・熊本銀行等）からの創業融資・設備資金調達を支援。審査担当者を納得させる精緻な創業計画書・事業収支計画を共同作成します。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>公庫創業融資（新創業融資制度等）の事業計画書策定支援</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>面談時の想定問答シミュレーションと同行サポート</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>認定支援機関としての優遇金利適用アドバイス</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
+
+      <!-- SERVICE 05 -->
+      <article id="cloud" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">05</span>
+          <span class="zigzag-tag">SERVICE 05</span>
+          <h2 class="zigzag-heading">クラウド会計DX（マネーフォワード・freee）</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">領収書や通帳の山から解放され、経営数値をリアルタイムで把握できるクラウド会計の導入をゼロから完全サポート。ネットバンキングやPOSレジ連携で経理業務を劇的に効率化します。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>マネーフォワード クラウド・freee会計の初期セットアップ</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>銀行口座・クレジットカード・電子マネーの自動連携設計</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>請求書・領収書のスキャンデータ化による電帳法完全対応</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
+
+      <!-- SERVICE 06 -->
+      <article id="inheritance" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">06</span>
+          <span class="zigzag-tag">SERVICE 06</span>
+          <h2 class="zigzag-heading">相続・事業承継・資産税対策</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">次世代へ円滑に資産と経営を繋ぐための相続税申告・事前節税対策。不動産や非上場株式の評価見直し、納税資金の確保、遺産分割協議書の作成支援まで親身に寄り添います。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>相続税のシミュレーションと生前贈与等の長期節税プラン</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>自社株評価の引き下げと特例事業承継税制の活用</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>書面添付制度を活用した相続税調査リスクの徹底排除</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
+
+      <!-- SERVICE 07 -->
+      <article id="labor" class="athena-zigzag-item has-no-image">
+        <div class="zigzag-content">
+          <span class="athena-num-bg" aria-hidden="true">07</span>
+          <span class="zigzag-tag">SERVICE 07</span>
+          <h2 class="zigzag-heading">助成金・労務ワンストップ支援（提携社労士連携）</h2>
+          <p class="zigzag-text" style="margin-bottom:1.2rem;">同一ビル・提携関係にある「ザワテラス社会保険労務士事務所」と密接に連携。税務と労務の境目をなくし、雇用関係助成金の受給申請や就業規則策定、社会保険手続きを一括対応します。</p>
+          <ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>キャリアアップ助成金・雇用調整助成金等の診断・申請代行</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>労務トラブルを未然に防ぐ就業規則・雇用契約書の整備</span></li>
+            <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg><span>税務顧問と完全に情報共有されたシームレスな給与計算</span></li>
+          </ul>
+          <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
+        </div>
+      </article>
     </div>
   </main>
 
@@ -212,185 +320,15 @@
     <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
   </div>
 
-  <!-- スクリプト：画像があれば枠＋画像、画像がなければ枠ごと【完全に消去】して全幅にする -->
+  <!-- スクリプト：ハンバーガーメニュー開閉のみ -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. スマホ用ハンバーガーメニュー開閉
       const hamburger = document.getElementById('hamburgerBtn');
       const nav = document.getElementById('headerNav');
       if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
           nav.classList.toggle('is-open');
         });
-      }
-
-      // 2. 7大主要業務データ（通信遅延やエラー時でも即座に描画するセーフティネット）
-      const defaultServices = [
-        {
-          id: 'corporate',
-          num: '01',
-          title: '法人税務顧問・決算申告',
-          lead: '元法人課税統括官による厳格な事前対策と、税理士実務歴35年のベテラン税理士による精緻な決算・申告。2名の税理士による徹底したダブルチェックで、追徴リスクを極限まで低減します。',
-          points: '国税局・税務署目線での帳簿精査と合法的な最大節税対策\n月次試算表の迅速作成と経営指標の分かりやすいフィードバック\n決算前検討会による納税予測と資金繰り計画の事前策定'
-        },
-        {
-          id: 'audit',
-          num: '02',
-          title: '税務調査対策・事前模擬調査',
-          lead: '税務署21年在職・元法人課税部門統括官の代表税理士が直接立ち会い。調査官の心理や着眼点を熟知した視点から、事前の模擬調査および当日の毅然とした主張立証を行います。',
-          points: '国税OBによる事前模擬調査と指摘リスクの洗い出し・改善\n調査当日の完全立ち会い・調査官との法理論争の代理\n不当な課税処分や重加算税の賦課を断固防衛'
-        },
-        {
-          id: 'startup',
-          num: '03',
-          title: '会社設立・創業支援',
-          lead: '定款作成、公証人認証、登記申請から税務署・自治体への各種届出までを提携司法書士・行政書士と連携してワンストップ支援。設立初年度の税務・資金繰りも強力に伴走します。',
-          points: '実質設立手数料0円でのスムーズな法人登記・士業連携\n節税に最も有利な事業年度・資本金設定のアドバイス\n税務署・県税・市町村への各種届出書の作成・電子提出代行'
-        },
-        {
-          id: 'finance',
-          num: '04',
-          title: '創業融資・公庫資金調達対策',
-          lead: '日本政策金融公庫や地域金融機関（肥後銀行・熊本銀行等）からの創業融資・設備資金調達を支援。審査担当者を納得させる精緻な創業計画書・事業収支計画を共同作成します。',
-          points: '公庫創業融資（新創業融資制度等）の事業計画書策定支援\n面談時の想定問答シミュレーションと同行サポート\n認定支援機関としての優遇金利適用アドバイス'
-        },
-        {
-          id: 'cloud',
-          num: '05',
-          title: 'クラウド会計DX（マネーフォワード・freee）',
-          lead: '領収書や通帳の山から解放され、経営数値をリアルタイムで把握できるクラウド会計の導入をゼロから完全サポート。ネットバンキングやPOSレジ連携で経理業務を劇的に効率化します。',
-          points: 'マネーフォワード クラウド・freee会計の初期セットアップ\n銀行口座・クレジットカード・電子マネーの自動連携設計\n請求書・領収書のスキャンデータ化による電帳法完全対応'
-        },
-        {
-          id: 'inheritance',
-          num: '06',
-          title: '相続・事業承継・資産税対策',
-          lead: '次世代へ円滑に資産と経営を繋ぐための相続税申告・事前節税対策。不動産や非上場株式の評価見直し、納税資金の確保、遺産分割協議書の作成支援まで親身に寄り添います。',
-          points: '相続税のシミュレーションと生前贈与等の長期節税プラン\n自社株評価の引き下げと特例事業承継税制の活用\n書面添付制度を活用した相続税調査リスクの徹底排除'
-        },
-        {
-          id: 'labor',
-          num: '07',
-          title: '助成金・労務ワンストップ支援（提携社労士連携）',
-          lead: '同一ビル・提携関係にある「ザワテラス社会保険労務士事務所」と密接に連携。税務と労務の境目をなくし、雇用関係助成金の受給申請や就業規則策定、社会保険手続きを一括対応します。',
-          points: 'キャリアアップ助成金・雇用調整助成金等の診断・申請代行\n労務トラブルを未然に防ぐ就業規則・雇用契約書の整備\n税務顧問と完全に情報共有されたシームレスな給与計算'
-        }
-      ];
-
-      const container = document.getElementById('servicesContainer');
-
-      const pathParts = window.location.pathname.split('/');
-      let repoBase = './';
-      const repoIndex = pathParts.indexOf('terazawazeirishi');
-      if (repoIndex !== -1) {
-        repoBase = pathParts.slice(0, repoIndex + 1).join('/') + '/';
-      }
-
-      const resolveImgUrl = (rawPath) => {
-        if (!rawPath || typeof rawPath !== 'string') return '';
-        const trimmed = rawPath.trim();
-        if (!trimmed) return '';
-        if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
-        let clean = trimmed.replace(/^(\.\/|\/)/, '');
-        if (clean.startsWith('terazawazeirishi/')) {
-          clean = clean.replace('terazawazeirishi/', '');
-        }
-        return repoBase + clean;
-      };
-
-      const extractItems = (data) => {
-        if (!data) return [];
-        if (Array.isArray(data)) return data;
-        if (Array.isArray(data.services)) return data.services;
-        if (Array.isArray(data.service_items)) return data.service_items;
-        if (Array.isArray(data.items)) return data.items;
-        if (Array.isArray(data.list)) return data.list;
-        return [];
-      };
-
-      const renderServices = (items, images) => {
-        const targetItems = (items && items.length > 0) ? items : defaultServices;
-        container.innerHTML = '';
-        let imageItemCounter = 0;
-
-        targetItems.forEach((item, index) => {
-          const targetId = item.id || `service-${index + 1}`;
-          const key = item.image_key || `service_${String(index + 1).padStart(2, '0')}`;
-          const serviceNumStr = String(index + 1).padStart(2, '0');
-          const serviceNo = item.service_no || (item.num ? `SERVICE ${item.num}` : `SERVICE ${serviceNumStr}`);
-          const leadText = item.lead || item.summary || '';
-          const descText = item.description || '';
-
-          // 画像の有無を厳格に判定
-          const rawImg = (images && images[key]) || item.image || '';
-          const imgPath = rawImg ? resolveImgUrl(rawImg) : '';
-          const hasImage = Boolean(imgPath);
-
-          const article = document.createElement('article');
-          article.id = targetId;
-
-          let visualHtml = '';
-          if (hasImage) {
-            // ★【画像がある場合】写真枠を出して左右交互（ジグザグ）に配置
-            const isReverse = (imageItemCounter % 2 === 1);
-            imageItemCounter++;
-            article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
-            visualHtml = `
-              <div class="zigzag-visual-slot">
-                <img src="${imgPath}" alt="${escapeHtml(item.title)}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-              </div>
-            `;
-          } else {
-            // ★【画像がない場合】写真枠（<div>も<svg>も全て）を【跡形もなく完全に消去】し、文章を全幅にする
-            article.className = 'athena-zigzag-item has-no-image';
-            visualHtml = ''; // 枠自体を一切出力しない
-          }
-
-          let detailsHtml = '';
-          if (item.points) {
-            const pointLines = item.points.split('\n').filter(l => l.trim());
-            const pointsList = pointLines.map(p => `
-              <li style="display:flex; align-items:flex-start; gap:8px; font-size:0.95rem; color:var(--color-primary); line-height:1.6;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" style="flex-shrink:0; margin-top:3px;"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>${escapeHtml(p)}</span>
-              </li>
-            `).join('');
-            detailsHtml = `<ul style="display:flex; flex-direction:column; gap:8px; margin:1rem 0 1.8rem; padding:0;">${pointsList}</ul>`;
-          } else if (descText) {
-            detailsHtml = `<p class="zigzag-text" style="margin-bottom:1.8rem;">${escapeHtml(descText)}</p>`;
-          }
-
-          // visualHtml が空文字の場合、写真枠タグ自体が全く出力されず、文章だけが美しく全幅で展開されます
-          article.innerHTML = `
-            ${visualHtml}
-            <div class="zigzag-content">
-              <span class="athena-num-bg" aria-hidden="true">${serviceNumStr}</span>
-              <span class="zigzag-tag">${escapeHtml(serviceNo)}</span>
-              <h2 class="zigzag-heading">${escapeHtml(item.title)}</h2>
-              <p class="zigzag-text" style="margin-bottom:1.2rem;">${escapeHtml(leadText)}</p>
-              ${detailsHtml}
-              <a href="./pricing.html#plans" class="service-card-link">料金を見る &rarr;</a>
-            </div>
-          `;
-          container.appendChild(article);
-        });
-      };
-
-      // データ取得（失敗時でも即座に描画）
-      Promise.all([
-        fetch('./content/services.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
-        fetch('./content/site_images.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)
-      ])
-      .then(([servicesData, imagesData]) => {
-        const items = extractItems(servicesData);
-        renderServices(items, imagesData);
-      })
-      .catch(() => {
-        renderServices(defaultServices, null);
-      });
-
-      function escapeHtml(str) {
-        return String(str).replace(/[&<>'"]/g, t => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t] || t));
       }
     });
   </script>
