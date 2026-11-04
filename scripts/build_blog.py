@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-寺沢景子税理士事務所 コラム自動生成ビルドスクリプト（モバイルメニュー完全対応版）
+寺沢景子税理士事務所 コラム自動生成ビルドスクリプト（モバイルメニュー完全対応・削除自動同期版）
 ファイルパス: scripts/build_blog.py
-仕様: コラムヘッダーにハンバーガーボタンを完全装備
+仕様: コラムヘッダーにハンバーガーボタンを完全装備、記事削除時の自動クリーンアップ完全対応
 """
 
 import os
@@ -71,16 +71,28 @@ def parse_markdown(filepath):
     }
 
 def build_blog():
-    print("=== コラム自動生成処理（ハンバーガーボタン完備）開始 ===")
+    print("=== コラム自動生成処理（ハンバーガーボタン完備・自動削除同期）開始 ===")
     if not BLOG_DIR.exists():
         return
     md_files = list(BLOG_DIR.glob("*.md"))
-    if not md_files:
-        return
-    articles = [parse_markdown(f) for f in md_files]
+    
+    # 存在する .md ファイルから記事オブジェクトを生成
+    articles = [parse_markdown(f) for f in md_files] if md_files else []
     articles.sort(key=lambda x: str(x["date"]), reverse=True)
 
-    # ★ ハンバーガーボタン（hamburger-btn）を確実に配備
+    # 現在存在する記事のファイル名一覧
+    active_html_files = {art["filename"] for art in articles}
+
+    # ★【新設】削除された記事の古いHTMLファイルを自動検知して完全に消去（クリーンアップ）
+    for old_file in BLOG_DIR.glob("*.html"):
+        if old_file.name != "index.html" and old_file.name not in active_html_files:
+            try:
+                old_file.unlink()
+                print(f"  🗑️ 削除された記事HTMLを自動消去: {old_file.name}")
+            except Exception as e:
+                print(f"  ⚠️ 古いHTMLの消去に失敗: {e}")
+
+    # ★ ハンバーガーボタン（hamburger-btn）を確実に配備（原本100%維持）
     header_html = """
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
@@ -173,6 +185,7 @@ def build_blog():
   <script src="../assets/js/main.js" defer></script>
 """
 
+    # 各記事詳細HTMLの書き出し
     for art in articles:
         detail_thumb_html = ""
         if art["thumbnail"]:
@@ -216,20 +229,22 @@ def build_blog():
 """
         (BLOG_DIR / art["filename"]).write_text(detail_html, encoding="utf-8")
 
+    # 記事一覧カードHTMLの組み立て
     cards_html = ""
-    for art in articles:
-        if art["thumbnail"]:
-            thumb_box = f"""
+    if articles:
+        for art in articles:
+            if art["thumbnail"]:
+                thumb_box = f"""
         <a href="./{art['filename']}" style="aspect-ratio: 16/9; overflow: hidden; display: block; border-bottom: 1px solid var(--color-border); background: var(--color-bg-subtle);">
           <img src="{art['thumbnail']}" alt="{html.escape(art['title'])}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
         </a>"""
-        else:
-            thumb_box = f"""
+            else:
+                thumb_box = f"""
         <a href="./{art['filename']}" style="aspect-ratio: 16/9; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border);">
           <span style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-accent); font-weight: 600; letter-spacing: 0.1em;">{html.escape(art['category'])}</span>
         </a>"""
 
-        cards_html += f"""
+            cards_html += f"""
       <article style="background: var(--color-bg-card); border-radius: var(--radius-lg); border: 1px solid var(--color-border); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
         {thumb_box}
         <div style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
@@ -246,6 +261,14 @@ def build_blog():
           </div>
         </div>
       </article>
+"""
+    else:
+        # ★【新設】記事が0件のときに表示するクリーンな空表示
+        cards_html = """
+      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--color-text-muted);">
+        <p style="font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.8rem; color: var(--color-primary);">現在公開中のコラムはありません。</p>
+        <p style="font-size: 0.88rem;">新しい記事が投稿されるまでお待ちください。</p>
+      </div>
 """
 
     index_html = f"""<!DOCTYPE html>
@@ -279,7 +302,7 @@ def build_blog():
 </html>
 """
     (BLOG_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print("  ✅ blog/index.html (ハンバーガーボタン完備) 出力完了")
+    print("  ✅ blog/index.html (ハンバーガーボタン完備・自動削除同期) 出力完了")
 
 def build_news():
     if not NEWS_DIR.exists() or not INDEX_HTML_PATH.exists():
