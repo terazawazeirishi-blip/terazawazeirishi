@@ -6,7 +6,6 @@
   <title>提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）</title>
   <meta name="description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
   <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html">
-  <!-- Open Graph Protocol -->
   <meta property="og:site_name" content="寺澤景子税理士事務所">
   <meta property="og:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
   <meta property="og:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
@@ -14,7 +13,6 @@
   <meta property="og:image" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/uploads/hero-bg-photo.svg">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="ja_JP">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
   <meta name="twitter:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
@@ -44,50 +42,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* 画像が無い項目の安全な全幅レイアウト（CSSエンジンが自動制御） */
-    .athena-zigzag-item.has-no-image {
-      display: block !important;
-      direction: ltr !important;
-      background: var(--color-bg-subtle);
-      padding: 3rem 3.5rem;
+    /* カード共通スタイル */
+    .service-card-item {
+      background: var(--color-bg-card);
       border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
+      padding: 3rem;
       box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+      transition: var(--transition-normal);
+      margin-bottom: 2.5rem;
     }
-    .athena-zigzag-item.has-no-image .zigzag-visual-slot {
+    .service-card-item:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-border-gold);
+    }
+    /* 画像が無い時：枠を完全に消去し、100%全幅展開 */
+    .service-card-item.no-image {
+      display: block !important;
+    }
+    .service-card-item.no-image .service-card-img-slot {
       display: none !important;
     }
-    .athena-zigzag-item.has-no-image .zigzag-content {
-      max-width: 100% !important;
+    .service-card-item.no-image .service-card-content {
       width: 100% !important;
-      direction: ltr !important;
-      text-align: left !important;
+      max-width: 100% !important;
     }
-    .athena-zigzag-item.has-no-image .athena-num-bg {
-      top: -1.2rem;
-      right: 2rem;
+    /* 画像がある時：横長2カラム・左右交互（ジグザグ） */
+    .service-card-item.with-image {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      align-items: center;
     }
-    .athena-zigzag-item:not(.has-no-image) {
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: 5rem;
+    .service-card-item.with-image.is-reverse {
+      grid-template-columns: 1fr 280px;
     }
-    .athena-zigzag-item:last-child {
-      border-bottom: none !important;
-      padding-bottom: 0 !important;
+    .service-card-item.with-image.is-reverse .service-card-img-slot {
+      order: 2;
+    }
+    .service-card-item.with-image.is-reverse .service-card-content {
+      order: 1;
     }
     @media (max-width: 768px) {
-      .athena-zigzag-item.has-no-image {
-        padding: 2rem 1.4rem;
+      .service-card-item {
+        padding: 1.8rem 1.4rem;
+        margin-bottom: 1.8rem;
       }
-      .athena-zigzag-item:not(.has-no-image) {
-        padding-bottom: 3.5rem;
+      .service-card-item.with-image,
+      .service-card-item.with-image.is-reverse {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .service-card-item.with-image.is-reverse .service-card-img-slot {
+        order: 1;
+      }
+      .service-card-item.with-image.is-reverse .service-card-content {
+        order: 2;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- 正統ヘッダー (style.css 完全適合・input_file_1.png と100%同一) -->
+  <!-- 正統ヘッダー (input_file_1.png と100%同一) -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="./index.html" class="brand-logo" aria-label="寺澤景子税理士事務所 ホーム">
@@ -122,8 +139,8 @@
     </div>
   </header>
 
-  <!-- ヒーローセクション -->
-  <section class="athena-hero" style="min-height: 42vh; padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 2.5rem;">
+  <!-- ヒーローセクション（余白を拡大し、見出しのヘッダー裏へのめり込みを完全解消） -->
+  <section class="athena-hero" style="min-height: auto; padding-top: calc(var(--header-height) + 4.5rem); padding-bottom: 3.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SERVICES</div>
     <div class="container hero-container-front" style="text-align: center;">
       <p class="hero-sub-en">PROFESSIONAL TAX &amp; DX</p>
@@ -132,17 +149,16 @@
     </div>
   </section>
 
-  <!-- メインサービス一覧（現物 services.json の全7サービスを完全静的配置） -->
-  <main class="site-main" style="padding-top: 4.5rem; padding-bottom: 6rem;">
-    <div class="container athena-zigzag-list" id="servicesContainer">
+  <!-- メインサービス一覧（左の四角い枠を完全消去し、全幅100%で配置） -->
+  <main class="site-main" style="padding-top: 3.5rem; padding-bottom: 6rem; background-color: var(--color-bg-subtle);">
+    <div class="container container-narrow" id="servicesContainer">
 
       <!-- 01 法人税務顧問・決算申告 -->
-      <article id="service-01" class="athena-zigzag-item has-no-image" data-service-key="service_01">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">01</span>
+      <article id="service-01" class="service-card-item no-image" data-service-key="service_01">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 01</span>
-          <h2 class="zigzag-heading">法人税務顧問・決算申告</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">法人税務顧問・決算申告</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">元国税調査官と35年ベテランの二重チェックによる安心の税務顧問。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">毎月の試算表作成から適正な節税対策、決算申告までトータル支援。税務署目線を取り入れた事前チェックで、追徴課税リスクを最小限に抑えます。</p>
           <a href="./pricing.html#plans" class="service-card-link">詳細・料金を見る &rarr;</a>
@@ -150,12 +166,11 @@
       </article>
 
       <!-- 02 税務調査対策・事前模擬調査 -->
-      <article id="service-02" class="athena-zigzag-item has-no-image" data-service-key="service_02">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">02</span>
+      <article id="service-02" class="service-card-item no-image" data-service-key="service_02">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 02</span>
-          <h2 class="zigzag-heading">税務調査対策・事前模擬調査</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">税務調査対策・事前模擬調査</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">元法人課税部門統括官が直接主導する圧倒的な税務調査防衛力。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">調査通知前からの帳簿総点検、想定問答の作成、模擬税務調査の実施。当日の立ち会いから税務署との折衝まで完全に主導します。</p>
           <a href="./pricing.html#plans" class="service-card-link">詳細・料金を見る &rarr;</a>
@@ -163,12 +178,11 @@
       </article>
 
       <!-- 03 会社設立・創業支援パック -->
-      <article id="service-03" class="athena-zigzag-item has-no-image" data-service-key="service_03">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">03</span>
+      <article id="service-03" class="service-card-item no-image" data-service-key="service_03">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 03</span>
-          <h2 class="zigzag-heading">会社設立・創業支援パック</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">会社設立・創業支援パック</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">設立登記から税務届出、事業開始の初期設定を完全サポート。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">定款作成、公証人認証、税務関係届出書の作成・提出をワンストップで代行。初年度の経営基盤を盤石にします。</p>
           <a href="./pricing.html#plans" class="service-card-link">詳細・料金を見る &rarr;</a>
@@ -176,12 +190,11 @@
       </article>
 
       <!-- 04 創業融資・公庫資金調達対策 -->
-      <article id="service-04" class="athena-zigzag-item has-no-image" data-service-key="service_04">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">04</span>
+      <article id="service-04" class="service-card-item no-image" data-service-key="service_04">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 04</span>
-          <h2 class="zigzag-heading">創業融資・公庫資金調達対策</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">創業融資・公庫資金調達対策</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">審査官を納得させる説得力ある事業計画書策定と面談対策。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">日本政策金融公庫や地方銀行の融資審査基準を熟知。自己資金の活用法から実現性の高い収支計画の策定を伴走支援します。</p>
           <a href="./pricing.html#plans" class="service-card-link">詳細・料金を見る &rarr;</a>
@@ -189,12 +202,11 @@
       </article>
 
       <!-- 05 クラウド会計導入・自計化DX -->
-      <article id="service-05" class="athena-zigzag-item has-no-image" data-service-key="service_05">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">05</span>
+      <article id="service-05" class="service-card-item no-image" data-service-key="service_05">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 05</span>
-          <h2 class="zigzag-heading">クラウド会計導入・自計化DX</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">クラウド会計導入・自計化DX</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">マネーフォワード・freee対応。経理業務の自動化を構築。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">通帳・クレジットカード連携、領収書のスマホスキャン管理など、ペーパーレス経理を実現。バックオフィス作業を最大70%削減します。</p>
           <a href="./pricing.html#plans" class="service-card-link">詳細・料金を見る &rarr;</a>
@@ -202,12 +214,11 @@
       </article>
 
       <!-- 06 相続税申告・事業承継コンサル -->
-      <article id="service-06" class="athena-zigzag-item has-no-image" data-service-key="service_06">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">06</span>
+      <article id="service-06" class="service-card-item no-image" data-service-key="service_06">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 06</span>
-          <h2 class="zigzag-heading">相続税申告・事業承継コンサル</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">相続税申告・事業承継コンサル</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">35年の資産税ノウハウと適正評価による円満な資産承継。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">不動産評価の適正化、生前贈与プランニング、非上場株式の評価と引き継ぎ対策。家族の絆を守る円満な承継を実現します。</p>
           <a href="./pricing.html#plans" class="service-card-link">詳細・料金を見る &rarr;</a>
@@ -215,12 +226,11 @@
       </article>
 
       <!-- 07 助成金受給・労務管理支援 -->
-      <article id="service-07" class="athena-zigzag-item has-no-image" data-service-key="service_07">
-        <div class="zigzag-visual-slot" style="display:none;"></div>
-        <div class="zigzag-content">
-          <span class="athena-num-bg" aria-hidden="true">07</span>
+      <article id="service-07" class="service-card-item no-image" data-service-key="service_07">
+        <div class="service-card-img-slot" style="display:none;"></div>
+        <div class="service-card-content">
           <span class="zigzag-tag">SERVICE 07</span>
-          <h2 class="zigzag-heading">助成金受給・労務管理支援</h2>
+          <h2 class="zigzag-heading" style="margin-bottom:0.8rem;">助成金受給・労務管理支援</h2>
           <p class="zigzag-text" style="font-size:1.05rem; font-weight:500; color:var(--color-primary); margin-bottom:0.8rem;">提携「ザワテラス社労士」との強固なワンストップ支援。</p>
           <p class="zigzag-text" style="margin-bottom:1.5rem;">雇用関係助成金の申請、就業規則の作成、給与計算、社会保険手続きをワンストップで連携。労務・税務を一体で守護します。</p>
           <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" class="service-card-link">提携社労士サイトを見る &rarr;</a>
@@ -230,7 +240,7 @@
     </div>
   </main>
 
-  <!-- 下部 無料相談CTAバナー (style.css 完全適合) -->
+  <!-- 下部 無料相談CTAバナー -->
   <section class="athena-hero" style="min-height: auto; padding: 5rem 0; background: linear-gradient(135deg, var(--color-bg-subtle) 0%, #FFFFFF 100%); text-align: center;">
     <div class="container">
       <h2 class="section-title" data-en="CONTACT" style="margin-bottom: 1.5rem;">数字の不安を、未来への確信へ。</h2>
@@ -245,7 +255,7 @@
     </div>
   </section>
 
-  <!-- 4カラム完全フッター (style.css 完全準拠) -->
+  <!-- 4カラム完全フッター -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
@@ -268,7 +278,7 @@
             <li><a href="./services.html#service-02" class="footer-nav-link">税務調査対策・模擬調査</a></li>
             <li><a href="./services.html#service-03" class="footer-nav-link">会社設立・創業支援</a></li>
             <li><a href="./services.html#service-04" class="footer-nav-link">創業融資・公庫対策</a></li>
-            <li><a href="./services.html#service-05" class="footer-nav-link">クラウド会計DX</a></li>
+            <li><a href="./services.html#cloud" class="footer-nav-link">クラウド会計DX</a></li>
           </ul>
         </div>
 
@@ -306,7 +316,7 @@
     <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
   </div>
 
-  <!-- スクリプト：メニュー開閉 ＆ CMS画像登録時の自動写真枠展開（無ければ100%全幅維持） -->
+  <!-- スクリプト：メニュー開閉 ＆ CMS画像登録時の自動写真枠展開 -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. スマホ用ハンバーガーメニュー開閉
@@ -318,7 +328,7 @@
         });
       }
 
-      // 2. CMS画像ハイドレーション（site_images.json に画像がある場合のみ写真枠を展開しジグザグ化）
+      // 2. CMS画像ハイドレーション（画像がある場合のみ写真枠を展開しジグザグ化）
       const pathParts = window.location.pathname.split('/');
       let repoBase = './';
       const repoIndex = pathParts.indexOf('terazawazeirishi');
@@ -343,23 +353,24 @@
         .then(imagesData => {
           if (!imagesData) return;
 
-          const articles = document.querySelectorAll('#servicesContainer .athena-zigzag-item');
+          const articles = document.querySelectorAll('#servicesContainer .service-card-item');
           let imageCounter = 0;
 
           articles.forEach(art => {
             const key = art.getAttribute('data-service-key');
             const rawImg = imagesData[key] || '';
             const imgPath = resolveImgUrl(rawImg);
-            const visualSlot = art.querySelector('.zigzag-visual-slot');
+            const visualSlot = art.querySelector('.service-card-img-slot');
 
             // site_images.json に画像が登録された場合のみ枠を展開してジグザグ配置
             if (imgPath && visualSlot) {
               const isReverse = (imageCounter % 2 === 1);
               imageCounter++;
-              art.classList.remove('has-no-image');
+              art.classList.remove('no-image');
+              art.classList.add('with-image');
               if (isReverse) art.classList.add('is-reverse');
               visualSlot.style.display = '';
-              visualSlot.innerHTML = `<img src="${imgPath}" alt="${art.querySelector('.zigzag-heading').textContent}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+              visualSlot.innerHTML = `<img src="${imgPath}" alt="${art.querySelector('.zigzag-heading').textContent}" class="service-card-img" style="width:100%; height:100%; object-fit:cover; border-radius:var(--radius-md); display:block;">`;
             }
           });
         })
