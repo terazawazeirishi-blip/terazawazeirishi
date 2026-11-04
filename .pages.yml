@@ -1,329 +1,86 @@
-# ==============================================================================
-# TERAZAWA WEBSITE STUDIO - Pages CMS Schema Configuration
-# Version: 3.6.0 (Fixed: .md Extension for Blog & News Collections)
-# ==============================================================================
+/**
+ * TERAZAWA WEBSITE STUDIO - Public Rendering & CMS Sync Engine
+ * Module: assets/js/main.js
+ * Version: 4.0.0 (Safe Restored Edition: Zero Display-None & Guaranteed 260px Photo)
+ */
+(function () {
+  'use strict';
 
-media:
-  input: assets/images/uploads
-  output: assets/images/uploads
+  // blog/ 階層判定（サブディレクトリ対応）
+  const isBlog = window.location.pathname.indexOf('/blog/') !== -1;
+  const basePath = isBlog ? '../' : './';
 
-content:
-  # ----------------------------------------------------------------------------
-  # 01. サイト全画像スロット管理 (17箇所)
-  # ----------------------------------------------------------------------------
-  - name: site_images
-    label: "📷 サイト全画像スロット管理"
-    type: file
-    path: content/site_images.json
-    fields:
-      - { name: logo_img, label: "ヘッダー・フッター用ロゴ画像", type: image }
-      - { name: watermark_crest, label: "ファーストビュー背景の透かし幾何学SVG", type: image }
-      - { name: hero_illustration, label: "ヒーロー象徴アート（下部マスク画像）", type: image }
-      - { name: rep_keiko, label: "寺澤景子 代表税理士 写真", type: image }
-      - { name: rep_senior, label: "田河定茂 副代表・ベテラン税理士 写真", type: image }
-      - { name: about_01, label: "選ばれる理由01 写真（2人体制）", type: image }
-      - { name: about_02, label: "選ばれる理由02 写真（国税21年統括官）", type: image }
-      - { name: about_03, label: "選ばれる理由03 写真（実務35年）", type: image }
-      - { name: about_04, label: "選ばれる理由04 写真（社労士連携）", type: image }
-      - { name: about_05, label: "選ばれる理由05 写真（サロン風相談室）", type: image }
-      - { name: service_01, label: "サービス01 写真（法人税務顧問）", type: image }
-      - { name: service_02, label: "サービス02 写真（税務調査対策）", type: image }
-      - { name: service_03, label: "サービス03 写真（会社設立パック）", type: image }
-      - { name: service_04, label: "サービス04 写真（創業融資対策）", type: image }
-      - { name: service_05, label: "サービス05 写真（クラウド会計DX）", type: image }
-      - { name: service_06, label: "サービス06 写真（相続・事業承継）", type: image }
-      - { name: service_07, label: "サービス07 写真（助成金・労務支援）", type: image }
-      - { name: cta_banner_bg, label: "下部CTAバナー背景画像", type: image }
+  function resolveUrl(path) {
+    if (!path || typeof path !== 'string') return '';
+    let c = path.trim().replace(/^(\.\/|\/)+/, '').replace(/^terazawazeirishi\//, '');
+    if (!c.includes('/') && !c.startsWith('data:')) c = 'assets/images/uploads/' + c;
+    return basePath + c + '?t=' + Date.now();
+  }
 
-  # ----------------------------------------------------------------------------
-  # 02. トップページ・ブロック構造編集（並び替え）
-  # ----------------------------------------------------------------------------
-  - name: home_blocks
-    label: "🧱 トップページ・ブロック構造編集（並び替え）"
-    type: file
-    path: content/pages/home_blocks.json
-    fields:
-      - { name: pageTitle, label: "ページ管理用タイトル", type: string }
-      - name: blocks
-        label: "配置セクション一覧（ドラッグで順序変更・非表示可能）"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.id} 【種類: {fields.type}】"
-        fields:
-          - { name: id, label: "セクション固有ID（例 block-hero-01）", type: string }
-          - name: type
-            label: "セクション種類"
-            type: select
-            options:
-              values:
-                - "hero"
-                - "news-banner"
-                - "features-zigzag"
-                - "services-sticky"
-                - "profile-double"
-                - "cta-banner"
-          - { name: visible, label: "このセクションを表示する", type: boolean }
-          - { name: heading, label: "セクション見出し", type: string }
-          - { name: subheading, label: "英語サブ見出し", type: string }
-          - { name: badge, label: "バッジ文言（ヒーロー等）", type: string }
-          - { name: title, label: "キャッチコピー主見出し", type: string }
-          - { name: subtitle, label: "説明リード文章", type: text }
-          - { name: primaryBtnText, label: "主ボタン文言", type: string }
-          - { name: primaryBtnUrl, label: "主ボタンリンク先URL", type: string }
-          - { name: secondaryBtnText, label: "副ボタン文言", type: string }
-          - { name: secondaryBtnUrl, label: "副ボタンリンク先URL", type: string }
+  // 安全に写真枠の中へ画像を挿入（サイズ固定・枠消去は一切行わない）
+  function setPhotoSafe(searchText, imgUrl, maxW, isSquare) {
+    if (!imgUrl) return;
+    const all = document.querySelectorAll('div, p, span');
+    for (let i = 0; i < all.length; i++) {
+      const el = all[i];
+      if (el.textContent.includes(searchText) && el.querySelectorAll('div').length === 0) {
+        const frame = el.closest('div') || el;
+        frame.textContent = ''; // プレースホルダーの文字のみ消去
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = '写真';
+        img.style.cssText = 'width:100%;max-width:' + maxW + 'px;' + (isSquare ? 'height:' + maxW + 'px;' : 'height:auto;aspect-ratio:4/3;') + 'object-fit:cover;border-radius:8px;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(27,42,74,0.08);';
+        frame.appendChild(img);
+        break;
+      }
+    }
+  }
 
-  # ----------------------------------------------------------------------------
-  # 03. トップページ文章・個別テキスト設定
-  # ----------------------------------------------------------------------------
-  - name: home_texts
-    label: "🏠 トップページ文章設定（個別）"
-    type: file
-    path: content/home_texts.json
-    fields:
-      - { name: hero_badge, label: "ヒーロー上部バッジ文言", type: string }
-      - { name: hero_catch_main, label: "メインキャッチコピー", type: string }
-      - { name: hero_catch_sub, label: "サブキャッチコピー文章", type: text }
-      - { name: news_title, label: "お知らせバナー見出し", type: string }
-      - { name: news_url, label: "お知らせリンク先URL", type: string }
-      - { name: features_title, label: "選ばれる理由 セクション見出し", type: string }
-      - { name: features_subtitle, label: "選ばれる理由 サブ英語タイトル", type: string }
-      - { name: feature_01_title, label: "理由01 タイトル", type: string }
-      - { name: feature_01_text, label: "理由01 説明文", type: text }
-      - { name: feature_02_title, label: "理由02 タイトル", type: string }
-      - { name: feature_02_text, label: "理由02 説明文", type: text }
-      - { name: feature_03_title, label: "理由03 タイトル", type: string }
-      - { name: feature_03_text, label: "理由03 説明文", type: text }
-      - { name: feature_04_title, label: "理由04 タイトル", type: string }
-      - { name: feature_04_text, label: "理由04 説明文", type: text }
-      - { name: feature_05_title, label: "理由05 タイトル", type: string }
-      - { name: feature_05_text, label: "理由05 説明文", type: text }
+  async function syncImages() {
+    try {
+      const res = await fetch(basePath + 'content/site_images.json?v=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return;
+      const data = await res.json();
 
-  # ----------------------------------------------------------------------------
-  # 04. 事務所基本情報・提携士業
-  # ----------------------------------------------------------------------------
-  - name: office_info_manager
-    label: "🏛️ 事務所基本情報・提携士業"
-    type: file
-    path: content/office_info.json
-    fields:
-      - { name: office_name, label: "正式事務所名", type: string }
-      - { name: english_name, label: "英語事務所名", type: string }
-      - { name: representative, label: "代表税理士肩書・氏名", type: string }
-      - { name: postal_code, label: "郵便番号", type: string }
-      - { name: address, label: "事務所所在地", type: string }
-      - { name: tel, label: "代表電話番号", type: string }
-      - { name: fax, label: "FAX番号", type: string }
-      - { name: business_hours, label: "営業時間案内", type: string }
-      - { name: target_area, label: "対応地域", type: string }
-      - { name: affiliation, label: "所属税理士会・登録番号", type: string }
-      - { name: partner_sr_name, label: "提携社労士名（ザワテラス社労士）", type: string }
-      - { name: partner_sr_url, label: "提携社労士リンクURL", type: string }
-      - { name: google_map_url, label: "GoogleマップURL", type: string }
-      - { name: copyright_text, label: "フッター著作権表記", type: string }
+      // 1. 代表税理士（寺澤景子）: 260px正方形枠に確実に挿入（枠消去なし）
+      if (data.rep_keiko) {
+        setPhotoSafe('Keiko Terazawa', resolveUrl(data.rep_keiko), 260, true);
+      }
 
-  # ----------------------------------------------------------------------------
-  # 05. 税理士紹介・プロフィール
-  # ----------------------------------------------------------------------------
-  - name: profile_texts
-    label: "👤 税理士紹介・プロフィール詳細"
-    type: file
-    path: content/profile_texts.json
-    fields:
-      - { name: page_title, label: "ページ大見出し", type: string }
-      - { name: page_subtitle, label: "ページ英語サブタイトル", type: string }
-      - name: rep_keiko
-        label: "代表税理士 寺澤景子"
-        type: object
-        fields:
-          - { name: name, label: "氏名", type: string }
-          - { name: name_kana, label: "ふりがな", type: string }
-          - { name: title, label: "肩書", type: string }
-          - { name: registration_number, label: "登録番号", type: string }
-          - { name: message, label: "代表メッセージ", type: text }
-          - name: biography
-            label: "経歴年表"
-            type: object
-            list:
-              collapsible:
-                collapsed: true
-                summary: "{fields.year} {fields.desc}"
-            fields:
-              - { name: year, label: "年月", type: string }
-              - { name: desc, label: "経歴内容", type: string }
-      - name: rep_senior
-        label: "副代表・ベテラン税理士 田河定茂"
-        type: object
-        fields:
-          - { name: name, label: "氏名", type: string }
-          - { name: name_kana, label: "ふりがな", type: string }
-          - { name: title, label: "肩書", type: string }
-          - { name: registration_number, label: "所属情報", type: string }
-          - { name: message, label: "メッセージ", type: text }
-          - name: biography
-            label: "経歴年表"
-            type: object
-            list:
-              collapsible:
-                collapsed: true
-                summary: "{fields.year} {fields.desc}"
-            fields:
-              - { name: year, label: "年月", type: string }
-              - { name: desc, label: "経歴内容", type: string }
+      // 2. 副代表（田河定茂）: 260px正方形枠に確実に挿入（枠消去なし）
+      if (data.rep_senior) {
+        setPhotoSafe('Senior Tax Advisor', resolveUrl(data.rep_senior), 260, true);
+      }
 
-  # ----------------------------------------------------------------------------
-  # 06. 7大サービス内容（追加・削除・並び替え可能）
-  # ----------------------------------------------------------------------------
-  - name: services_manager
-    label: "💼 サービス案内管理"
-    type: file
-    path: content/services.json
-    fields:
-      - { name: section_title, label: "セクション見出し", type: string }
-      - { name: section_subtitle, label: "英語サブタイトル", type: string }
-      - name: services
-        label: "サービスカード一覧"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.num} {fields.title}"
-        fields:
-          - { name: id, label: "アンカーID（例 service-01）", type: string }
-          - { name: num, label: "通し番号（例 01）", type: string }
-          - { name: title, label: "サービス名称", type: string }
-          - { name: summary, label: "簡潔な要約キャッチ", type: string }
-          - { name: description, label: "サービス詳細説明文", type: text }
-          - { name: link, label: "詳細リンク先URL", type: string }
-          - { name: image_key, label: "画像スロット名（例 service_01）", type: string }
+      // 3. 選ばれる理由01〜05（文字枠の中に確実に挿入、枠消去なし）
+      if (data.about_01) setPhotoSafe('2人体制写真', resolveUrl(data.about_01), 500, false);
+      if (data.about_02) setPhotoSafe('調査防衛枠', resolveUrl(data.about_02), 500, false);
+      if (data.about_03) setPhotoSafe('実務枠', resolveUrl(data.about_03), 500, false);
+      if (data.about_04) setPhotoSafe('社労士連携枠', resolveUrl(data.about_04), 500, false);
+      if (data.about_05) setPhotoSafe('花のあるサロン枠', resolveUrl(data.about_05), 500, false);
 
-  # ----------------------------------------------------------------------------
-  # 07. 料金案内（プラン・スポット報酬）
-  # ----------------------------------------------------------------------------
-  - name: pricing_manager
-    label: "💰 料金案内・スポット報酬"
-    type: file
-    path: content/pricing.json
-    fields:
-      - { name: page_title, label: "ページ大見出し", type: string }
-      - { name: page_subtitle, label: "英語サブタイトル", type: string }
-      - { name: intro_text, label: "料金ポリシー導入文", type: text }
-      - name: plans
-        label: "顧問料金プラン一覧"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.name}（月額: {fields.monthly_fee}）"
-        fields:
-          - { name: id, label: "プランID", type: string }
-          - { name: name, label: "プラン名称", type: string }
-          - { name: is_recommended, label: "おすすめバッジを表示する", type: boolean }
-          - { name: badge, label: "バッジ文言（例 一番人気）", type: string }
-          - { name: monthly_fee, label: "月額顧問料（例 38,500円〜）", type: string }
-          - { name: settlement_fee, label: "決算申告料（例 165,000円〜）", type: string }
-          - { name: target, label: "対象企業規模目安", type: string }
-          - { name: features, label: "提供サポート内容リスト", type: string, list: true }
-      - name: spot_fees
-        label: "スポット業務報酬規定"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.service_name}（{fields.price}）"
-        fields:
-          - { name: service_name, label: "業務名", type: string }
-          - { name: price, label: "報酬額", type: string }
-          - { name: notes, label: "備考・補足事項", type: string }
+      // 4. ロゴ
+      if (data.logo_img) {
+        document.querySelectorAll('.site-logo img').forEach(function (img) {
+          img.src = resolveUrl(data.logo_img);
+        });
+      }
 
-  # ----------------------------------------------------------------------------
-  # 08. よくある質問 (FAQ)
-  # ----------------------------------------------------------------------------
-  - name: faq_manager
-    label: "❓ よくある質問（FAQ）"
-    type: file
-    path: content/faq.json
-    fields:
-      - { name: page_title, label: "ページ大見出し", type: string }
-      - { name: page_subtitle, label: "英語サブタイトル", type: string }
-      - name: faq_list
-        label: "Q&A リスト"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "Q. {fields.question}"
-        fields:
-          - { name: id, label: "質問ID（例 faq-01）", type: string }
-          - { name: question, label: "質問内容（Q）", type: string }
-          - { name: answer, label: "回答内容（A）", type: text }
+      // 5. ヒーロー象徴アート
+      if (data.hero_illustration) {
+        document.querySelectorAll('.hero-bg-artwork-wrap img, .athena-hero-art img').forEach(function (img) {
+          img.src = resolveUrl(data.hero_illustration);
+        });
+      }
 
-  # ----------------------------------------------------------------------------
-  # 09. プライバシーポリシー・法的表記
-  # ----------------------------------------------------------------------------
-  - name: legal_texts
-    label: "📜 個人情報保護方針・利用規約"
-    type: file
-    path: content/legal_texts.json
-    fields:
-      - { name: page_title, label: "ページ大見出し", type: string }
-      - { name: page_subtitle, label: "英語サブタイトル", type: string }
-      - { name: last_updated, label: "最終改定日", type: string }
-      - { name: declaration, label: "宣誓基本方針文", type: text }
-      - name: sections
-        label: "規約条項セクション"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.heading}"
-        fields:
-          - { name: heading, label: "条項見出し", type: string }
-          - { name: body, label: "条項本文", type: text }
+    } catch (e) {
+      console.warn('[TERAZAWA] Image sync error:', e);
+    }
+  }
 
-  # ----------------------------------------------------------------------------
-  # 10. 税務・経営コラム (blog/ 単一収束・.md拡張子補正済み)
-  # ----------------------------------------------------------------------------
-  - name: blog
-    label: "📝 税務・経営コラム"
-    type: collection
-    path: blog
-    format: yaml-frontmatter
-    filename: "{fields.date}-{fields.title}.md"
-    view:
-      fields: [date, title, category]
-    fields:
-      - { name: title, label: "記事タイトル", type: string, required: true }
-      - { name: date, label: "公開日（YYYY-MM-DD形式）", type: date, required: true }
-      - name: category
-        label: "カテゴリー"
-        type: select
-        required: true
-        options:
-          values:
-            - "税務調査対策"
-            - "会社設立・創業融資"
-            - "クラウド会計・DX"
-            - "事業承継・相続税"
-            - "労務・助成金情報"
-            - "天草・地域情報"
-      - { name: thumbnail, label: "サムネイル画像", type: image }
-      - { name: body, label: "コラム本文", type: rich-text }
-
-  # ----------------------------------------------------------------------------
-  # 11. お知らせ (News・.md拡張子補正済み)
-  # ----------------------------------------------------------------------------
-  - name: news
-    label: "📢 お知らせ・新着情報"
-    type: collection
-    path: content/news
-    format: yaml-frontmatter
-    filename: "{fields.date}-{fields.title}.md"
-    view:
-      fields: [date, title]
-    fields:
-      - { name: title, label: "お知らせ見出し", type: string, required: true }
-      - { name: date, label: "掲載日（YYYY-MM-DD形式）", type: date, required: true }
-      - { name: body, label: "お知らせ詳細", type: rich-text }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncImages);
+  } else {
+    syncImages();
+  }
+})();
