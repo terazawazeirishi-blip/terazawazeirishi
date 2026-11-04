@@ -1,7 +1,7 @@
 /**
  * TERAZAWA WEBSITE STUDIO - Public Rendering & CMS Sync Engine
  * Module: assets/js/main.js
- * Version: 6.0.0 (Master Unified Edition: Zero HTML-Touch & Complete 18-Slot Sync)
+ * Version: 7.0.0 (Bug-Free Photo Insertion & Complete 18-Slot Sync)
  */
 (function () {
   'use strict';
@@ -28,35 +28,25 @@
     return repoBase + clean + '?v=' + Date.now();
   }
 
-  // 安全に写真枠の中へ画像を挿入（元の安定版 4.0.0 ロジックを完全継承・位置ズレゼロ）
-  function setPhotoSafe(searchText, imgUrl, maxW, isSquare) {
-    if (!imgUrl) return;
-    const all = document.querySelectorAll('div, p, span, text');
-    for (let i = 0; i < all.length; i++) {
-      const el = all[i];
-      if (el.textContent && el.textContent.includes(searchText)) {
-        const frame = el.closest('.representative-photo-frame, .zigzag-visual-slot, div');
-        if (frame) {
-          frame.textContent = ''; // プレースホルダーの文字・SVGのみ消去
-          const img = document.createElement('img');
-          img.src = imgUrl;
-          img.alt = searchText;
-          img.className = 'representative-photo-img zigzag-visual-img';
-          img.style.cssText = 'width:100%;' + (maxW ? 'max-width:' + maxW + 'px;' : '') + (isSquare ? 'height:' + maxW + 'px;aspect-ratio:1/1;' : 'height:auto;aspect-ratio:4/3;') + 'object-fit:cover;border-radius:8px;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(27,42,74,0.08);';
-          frame.appendChild(img);
-          break;
-        }
-      }
-    }
+  // ★【破壊根絶】親カードの文字や説明文を絶対に消さず、写真枠の中だけを安全に差し替える
+  function insertPhotoDirect(frameElement, imgUrl, altText, maxW, isSquare) {
+    if (!frameElement || !imgUrl) return;
+    // 枠の中にある古いプレースホルダーSVGやテキストだけを消去
+    frameElement.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = imgUrl;
+    img.alt = altText || '写真';
+    img.className = 'representative-photo-img zigzag-visual-img';
+    img.style.cssText = 'width:100%;' + (maxW ? 'max-width:' + maxW + 'px;' : '') + (isSquare ? 'height:' + maxW + 'px;aspect-ratio:1/1;' : 'height:auto;aspect-ratio:4/3;') + 'object-fit:cover;border-radius:8px;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(27,42,74,0.08);';
+    frameElement.appendChild(img);
   }
 
-  // 幾何学的整合性を担保する動的CSSルール（HTML側のCSS未定義による位置ズレを完全防御）
+  // 幾何学的防護CSS（枠消去 ＆ 100%全幅展開の保証）
   function injectGeometryGuardCSS() {
     if (document.getElementById('terazawa-geometry-guard')) return;
     const style = document.createElement('style');
     style.id = 'terazawa-geometry-guard';
     style.textContent = `
-      /* 画像なし項目の幾何学的整合性保証（枠完全消去 ＆ 100%全幅展開） */
       .athena-zigzag-item.has-no-image {
         display: block !important;
         direction: ltr !important;
@@ -77,11 +67,6 @@
         direction: ltr !important;
         text-align: left !important;
       }
-      .athena-zigzag-item.has-no-image .athena-num-bg {
-        top: -1.2rem;
-        right: 2rem;
-      }
-
       .service-card-item.no-image {
         display: block !important;
         grid-template-columns: 1fr !important;
@@ -97,22 +82,15 @@
         max-width: 100% !important;
         display: block !important;
       }
-
       @media (max-width: 768px) {
-        .athena-zigzag-item.has-no-image {
-          padding: 2rem 1.4rem;
-        }
-        .service-card-item {
-          padding: 1.8rem 1.4rem;
-          margin-bottom: 1.5rem;
-        }
+        .athena-zigzag-item.has-no-image { padding: 2rem 1.4rem; }
+        .service-card-item { padding: 1.8rem 1.4rem; margin-bottom: 1.5rem; }
       }
     `;
     document.head.appendChild(style);
   }
 
   async function syncAllCmsData() {
-    // 1. 幾何学的防護CSSを注入
     injectGeometryGuardCSS();
 
     try {
@@ -145,14 +123,17 @@
       }
 
       // ------------------------------------------------------------------------
-      // 02. 代表税理士（寺澤景子）＆ 副代表（田河定茂）写真 (rep_keiko, rep_senior)
-      // 安定版 4.0.0 の実績ある安全ロジック（位置ズレ一切なし）
+      // 02. 代表税理士（寺澤代表 ＆ 田河副代表）写真
+      // 親カードを消さず、写真枠 (.representative-photo-frame) の中だけを安全に差し替える
       // ------------------------------------------------------------------------
-      if (data.rep_keiko) {
-        setPhotoSafe('Keiko Terazawa', resolveUrl(data.rep_keiko), 260, true);
+      const teamFrames = document.querySelectorAll('#team .representative-photo-frame');
+      // 1人目：寺澤景子 代表税理士
+      if (data.rep_keiko && teamFrames.length > 0) {
+        insertPhotoDirect(teamFrames[0], resolveUrl(data.rep_keiko), '代表税理士 寺澤景子', 260, true);
       }
-      if (data.rep_senior) {
-        setPhotoSafe('Senior Tax Advisor', resolveUrl(data.rep_senior), 260, true);
+      // 2人目：田河定茂 副代表・ベテラン税理士
+      if (data.rep_senior && teamFrames.length > 1) {
+        insertPhotoDirect(teamFrames[1], resolveUrl(data.rep_senior), '副代表・ベテラン税理士 田河定茂', 260, true);
       }
 
       // ------------------------------------------------------------------------
@@ -183,7 +164,6 @@
 
       // ------------------------------------------------------------------------
       // 05. 選ばれる理由01〜05 (about_01 〜 about_05)
-      // 画像があれば写真展開、無ければ枠完全消去 ＆ 100%全幅化
       // ------------------------------------------------------------------------
       const aboutKeys = ['about_01', 'about_02', 'about_03', 'about_04', 'about_05'];
       const aboutItems = document.querySelectorAll('#about .athena-zigzag-item');
@@ -195,7 +175,6 @@
         const slot = item.querySelector('.zigzag-visual-slot');
 
         if (rawImg && slot) {
-          // 画像がある場合：枠を表示し画像を挿入
           const isReverse = (aboutCounter % 2 === 1);
           aboutCounter++;
           item.classList.remove('has-no-image');
@@ -212,7 +191,6 @@
           img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
           slot.appendChild(img);
         } else if (slot) {
-          // 画像が無い場合：枠を完全に非表示化し、全幅カードへ変換
           item.classList.add('has-no-image');
           item.classList.remove('is-reverse');
           slot.style.display = 'none';
@@ -221,7 +199,6 @@
 
       // ------------------------------------------------------------------------
       // 06. 提供サービス (service_01 〜 service_07)
-      // 画像があれば枠を展開、無ければ枠完全消去 ＆ 100%全幅化
       // ------------------------------------------------------------------------
       const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
       const serviceCards = document.querySelectorAll('#services .service-card-item, #servicesContainer .service-card-item');
@@ -233,7 +210,6 @@
         const slot = card.querySelector('.service-card-img-slot, .zigzag-visual-slot');
 
         if (rawImg && slot) {
-          // 画像がある場合：枠を表示し画像を挿入
           const isReverse = (serviceCounter % 2 === 1);
           serviceCounter++;
           card.classList.remove('no-image', 'has-no-image');
@@ -251,31 +227,17 @@
           img.style.cssText = 'width:100%; height:100%; object-fit:cover; border-radius:var(--radius-md); display:block;';
           slot.appendChild(img);
         } else if (slot) {
-          // 画像が無い場合：枠を完全に非表示化し、全幅カードへ変換
           card.classList.add('no-image', 'has-no-image');
           card.classList.remove('with-image', 'is-reverse');
           slot.style.display = 'none';
         }
       });
 
-      // ------------------------------------------------------------------------
-      // 07. 下部CTAバナー背景 (cta_banner_bg)
-      // ------------------------------------------------------------------------
-      if (data.cta_banner_bg) {
-        const ctaBgUrl = resolveUrl(data.cta_banner_bg);
-        document.querySelectorAll('.cta-banner-section, section:has(.cta-heading)').forEach(sec => {
-          sec.style.backgroundImage = `linear-gradient(rgba(27, 42, 74, 0.88), rgba(27, 42, 74, 0.92)), url('${ctaBgUrl}')`;
-          sec.style.backgroundSize = 'cover';
-          sec.style.backgroundPosition = 'center';
-        });
-      }
-
     } catch (e) {
       console.warn('[TERAZAWA] Sync engine error:', e);
     }
   }
 
-  // 実行トリガー
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', syncAllCmsData);
   } else {
