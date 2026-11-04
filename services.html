@@ -6,39 +6,7 @@
   <title>提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）</title>
   <meta name="description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
   <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html">
-  <!-- Open Graph Protocol -->
-  <meta property="og:site_name" content="寺澤景子税理士事務所">
-  <meta property="og:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
-  <meta property="og:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
-  <meta property="og:url" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html">
-  <meta property="og:image" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/uploads/hero-bg-photo.svg">
-  <meta property="og:type" content="article">
-  <meta property="og:locale" content="ja_JP">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
-  <meta name="twitter:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
-  <meta name="twitter:image" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/uploads/hero-bg-photo.svg">
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "ホーム",
-      "item": "https://terazawazeirishi-blip.github.io/terazawazeirishi/index.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "提供サービス案内",
-      "item": "https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html"
-    }
-  ]
-}
-  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
@@ -160,7 +128,7 @@
   <!-- 常駐型フローティングCTAボタン -->
   <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
 
-  <!-- ★【完全修復】画像があるときはジグザグ表示、ないときは枠ごと消して文章を全幅に広げる自動制御スクリプト -->
+  <!-- ★【完全復元】元のアテナジグザグ2カラムレイアウトを100%維持するスクリプト -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const container = document.getElementById('servicesContainer');
@@ -205,35 +173,31 @@
           const leadText = item.lead || item.summary || '';
           const descText = item.description || '';
 
-          // 画像の有無判定
+          const article = document.createElement('article');
+          article.id = targetId;
+          // ★ display: block などの破壊的スタイルは完全撤廃。原本の athena-zigzag-item を100%維持
+          article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
+          article.style.cssText = 'border-bottom: 1px solid var(--color-border); padding-bottom: 5rem;';
+
+          // 画像の処理
+          let visualHtml = '';
           const rawImg = (imagesData && imagesData[key]) || item.image || '';
           const imgPath = rawImg ? resolveImgUrl(rawImg) : '';
 
-          const article = document.createElement('article');
-          article.id = targetId;
-          article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
-
-          let visualHtml = '';
-          let articleStyle = 'border-bottom: 1px solid var(--color-border); padding-bottom: 5rem;';
-          let contentStyle = '';
-
           if (imgPath) {
-            // ★【画像がある場合】枠を作って画像を挿入（通常のジグザグ写真レイアウト）
-            visualHtml = `
-              <div class="zigzag-visual-slot">
-                <img src="${imgPath}" alt="${escapeHtml(item.title)}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">
-              </div>
-            `;
+            visualHtml = `<img src="${imgPath}" alt="${escapeHtml(item.title)}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">`;
           } else {
-            // ★【画像がない場合】写真枠を出さず、文章側を全幅（100%）に広げてレイアウトを最適化
-            visualHtml = '';
-            articleStyle += ' display: block;';
-            contentStyle = 'max-width: 100%; width: 100%;';
+            // 画像未設定時は原本の美しい幾何学SVG枠を表示し、2カラムレイアウトを完全に維持
+            visualHtml = `
+              <svg class="zigzag-visual-img" viewBox="0 0 700 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="700" height="460" fill="#FAF8F5"/>
+                <circle cx="350" cy="230" r="140" fill="#F4EEDC" opacity="0.6"/>
+                <text x="350" y="235" font-family="'Cinzel', serif" font-size="22" fill="#1B2A4A" text-anchor="middle" font-weight="600">${escapeHtml(serviceNo)}</text>
+              </svg>
+            `;
           }
 
-          article.style.cssText = articleStyle;
-
-          // ポイント箇条書き または 詳細説明文の生成
+          // ポイントまたは詳細説明文の生成
           let detailsHtml = '';
           if (item.points) {
             const pointLines = item.points.split('\n').filter(l => l.trim());
@@ -249,8 +213,10 @@
           }
 
           article.innerHTML = `
-            ${visualHtml}
-            <div class="zigzag-content" style="${contentStyle}">
+            <div class="zigzag-visual-slot">
+              ${visualHtml}
+            </div>
+            <div class="zigzag-content">
               <span class="zigzag-tag">${escapeHtml(serviceNo)}</span>
               <h2 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-primary); margin-bottom: 1rem;">${escapeHtml(item.title)}</h2>
               <p style="color: var(--color-text-sub); line-height: 1.9; margin-bottom: 1.5rem;">${escapeHtml(leadText)}</p>
