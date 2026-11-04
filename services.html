@@ -6,7 +6,6 @@
   <title>提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）</title>
   <meta name="description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
   <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html">
-  <!-- Open Graph Protocol -->
   <meta property="og:site_name" content="寺澤景子税理士事務所">
   <meta property="og:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
   <meta property="og:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
@@ -14,7 +13,6 @@
   <meta property="og:image" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/uploads/hero-bg-photo.svg">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="ja_JP">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
   <meta name="twitter:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
@@ -44,7 +42,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* カード共通スタイル */
+    /* カード共通 */
     .service-card-item {
       background: var(--color-bg-card);
       border-radius: var(--radius-lg);
@@ -58,32 +56,38 @@
       box-shadow: var(--shadow-md);
       border-color: var(--color-border-gold);
     }
-    /* 画像が無い時：枠を完全に消去し、100%全幅展開 */
+    /* ★重要：style.css の 220px 隙間を完全消去し、100%全幅にする */
     .service-card-item.no-image {
       display: block !important;
+      grid-template-columns: 1fr !important;
     }
     .service-card-item.no-image .service-card-img-slot {
       display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     .service-card-item.no-image .service-card-content {
       width: 100% !important;
       max-width: 100% !important;
+      display: block !important;
     }
     /* 画像がある時：横長2カラム・左右交互（ジグザグ） */
     .service-card-item.with-image {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 3rem;
-      align-items: center;
+      display: grid !important;
+      grid-template-columns: 280px 1fr !important;
+      gap: 3rem !important;
+      align-items: center !important;
     }
     .service-card-item.with-image.is-reverse {
-      grid-template-columns: 1fr 280px;
+      grid-template-columns: 1fr 280px !important;
     }
     .service-card-item.with-image.is-reverse .service-card-img-slot {
-      order: 2;
+      order: 2 !important;
     }
     .service-card-item.with-image.is-reverse .service-card-content {
-      order: 1;
+      order: 1 !important;
     }
     @media (max-width: 768px) {
       .service-card-item {
@@ -92,21 +96,21 @@
       }
       .service-card-item.with-image,
       .service-card-item.with-image.is-reverse {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
       }
       .service-card-item.with-image.is-reverse .service-card-img-slot {
-        order: 1;
+        order: 1 !important;
       }
       .service-card-item.with-image.is-reverse .service-card-content {
-        order: 2;
+        order: 2 !important;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- 正統ヘッダー (input_file_1.png と100%同一) -->
+  <!-- 正統ヘッダー -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="./index.html" class="brand-logo" aria-label="寺澤景子税理士事務所 ホーム">
@@ -141,8 +145,8 @@
     </div>
   </header>
 
-  <!-- ヒーローセクション（余白を拡大し、見出しのヘッダー裏へのめり込みを完全解消） -->
-  <section class="athena-hero" style="min-height: auto; padding-top: calc(var(--header-height) + 4.5rem); padding-bottom: 3.5rem;">
+  <!-- ヒーローセクション（余白を拡張し、見出しのヘッダー被りを完全解消） -->
+  <section class="athena-hero" style="min-height: auto; padding-top: calc(var(--header-height) + 5rem); padding-bottom: 3.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SERVICES</div>
     <div class="container hero-container-front" style="text-align: center;">
       <p class="hero-sub-en">PROFESSIONAL TAX &amp; DX</p>
@@ -151,7 +155,7 @@
     </div>
   </section>
 
-  <!-- メインサービス一覧（左の四角い枠を完全消去し、全幅100%で配置） -->
+  <!-- メインサービス一覧（左の220px空白を消去し、100%全幅配置） -->
   <main class="site-main" style="padding-top: 3.5rem; padding-bottom: 6rem; background-color: var(--color-bg-subtle);">
     <div class="container container-narrow" id="servicesContainer">
 
@@ -330,7 +334,7 @@
         });
       }
 
-      // 2. CMS画像ハイドレーション（画像がある場合のみ写真枠を展開しジグザグ化）
+      // 2. CMS画像ハイドレーション
       const pathParts = window.location.pathname.split('/');
       let repoBase = './';
       const repoIndex = pathParts.indexOf('terazawazeirishi');
@@ -364,7 +368,6 @@
             const imgPath = resolveImgUrl(rawImg);
             const visualSlot = art.querySelector('.service-card-img-slot');
 
-            // site_images.json に画像が登録された場合のみ枠を展開してジグザグ配置
             if (imgPath && visualSlot) {
               const isReverse = (imageCounter % 2 === 1);
               imageCounter++;
