@@ -1,6 +1,6 @@
 # ==============================================================================
 # TERAZAWA WEBSITE STUDIO - Pages CMS Schema Configuration
-# Version: 3.1.1 (Fixed: List Summary Tokens & [object Object] Resolution)
+# Version: 3.6.0 (Fixed: .md Extension for Blog & News Collections)
 # ==============================================================================
 
 media:
@@ -36,7 +36,7 @@ content:
       - { name: cta_banner_bg, label: "下部CTAバナー背景画像", type: image }
 
   # ----------------------------------------------------------------------------
-  # 02. トップページ・ブロック式編集（[object Object]解消・並び替え）
+  # 02. トップページ・ブロック構造編集（並び替え）
   # ----------------------------------------------------------------------------
   - name: home_blocks
     label: "🧱 トップページ・ブロック構造編集（並び替え）"
@@ -284,14 +284,14 @@ content:
           - { name: body, label: "条項本文", type: text }
 
   # ----------------------------------------------------------------------------
-  # 10. 税務・経営コラム (blog/ 単一収束)
+  # 10. 税務・経営コラム (blog/ 単一収束・.md拡張子補正済み)
   # ----------------------------------------------------------------------------
   - name: blog
     label: "📝 税務・経営コラム"
     type: collection
     path: blog
     format: yaml-frontmatter
-    filename: "{fields.date}-{fields.title}"
+    filename: "{fields.date}-{fields.title}.md"
     view:
       fields: [date, title, category]
     fields:
@@ -313,14 +313,14 @@ content:
       - { name: body, label: "コラム本文", type: rich-text }
 
   # ----------------------------------------------------------------------------
-  # 11. お知らせ (News)
+  # 11. お知らせ (News・.md拡張子補正済み)
   # ----------------------------------------------------------------------------
   - name: news
     label: "📢 お知らせ・新着情報"
     type: collection
     path: content/news
     format: yaml-frontmatter
-    filename: "{fields.date}-{fields.title}"
+    filename: "{fields.date}-{fields.title}.md"
     view:
       fields: [date, title]
     fields:
