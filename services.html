@@ -6,7 +6,6 @@
   <title>提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）</title>
   <meta name="description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
   <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/services.html">
-  <!-- Open Graph Protocol -->
   <meta property="og:site_name" content="寺澤景子税理士事務所">
   <meta property="og:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
   <meta property="og:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
@@ -14,7 +13,6 @@
   <meta property="og:image" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/uploads/hero-bg-photo.svg">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="ja_JP">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="提供サービス案内 | 寺澤景子税理士事務所（熊本・天草）">
   <meta name="twitter:description" content="法人税務顧問、税務調査対策（事前模擬調査）、会社設立、創業融資、クラウド会計DX、相続・事業承継、助成金・労務支援まで、7大主要業務を網羅。2人体制で死角のないサポートを実施します。">
@@ -44,7 +42,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* 画像が無い項目の安全な全幅レイアウト（direction: rtl の影響を完全遮断） */
     .athena-zigzag-item.has-no-image {
       display: block !important;
       direction: ltr !important;
@@ -84,7 +81,6 @@
 </head>
 <body>
 
-  <!-- 正統ヘッダー (style.css 完全適合・input_file_1.png と100%同一) -->
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
       <a href="./index.html" class="brand-logo" aria-label="寺澤景子税理士事務所 ホーム">
@@ -119,7 +115,6 @@
     </div>
   </header>
 
-  <!-- ヒーローセクション -->
   <section class="athena-hero" style="min-height: 42vh; padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SERVICES</div>
     <div class="container hero-container-front" style="text-align: center;">
@@ -129,7 +124,6 @@
     </div>
   </section>
 
-  <!-- メインサービス一覧（動的ハイブリッドジグザグコンテナ） -->
   <main class="site-main" style="padding-top: 4.5rem; padding-bottom: 6rem;">
     <div class="container athena-zigzag-list" id="servicesContainer">
       <div id="loadingIndicator" style="text-align: center; padding: 4rem 0; color: var(--color-text-sub);">
@@ -138,7 +132,6 @@
     </div>
   </main>
 
-  <!-- 下部 無料相談CTAバナー (style.css 完全適合) -->
   <section class="athena-hero" style="min-height: auto; padding: 5rem 0; background: linear-gradient(135deg, var(--color-bg-subtle) 0%, #FFFFFF 100%); text-align: center;">
     <div class="container">
       <h2 class="section-title" data-en="CONTACT" style="margin-bottom: 1.5rem;">数字の不安を、未来への確信へ。</h2>
@@ -153,7 +146,6 @@
     </div>
   </section>
 
-  <!-- 4カラム完全フッター (style.css 完全準拠) -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
@@ -209,15 +201,12 @@
     </div>
   </footer>
 
-  <!-- 常駐型フローティングCTAボタン -->
   <div class="floating-cta">
     <a href="./contact.html" class="floating-cta-btn" aria-label="初回無料相談予約">無料相談はこちら</a>
   </div>
 
-  <!-- ★【完全解決版】ユーザー参考コードのバグを完全解消したCMS動的連携スクリプト -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. スマホ用ハンバーガーメニュー開閉
       const hamburger = document.getElementById('hamburgerBtn');
       const nav = document.getElementById('headerNav');
       if (hamburger && nav) {
@@ -226,12 +215,10 @@
         });
       }
 
-      // 2. サービスデータ読み込み＆動的ハイブリッドレンダリング
       const container = document.getElementById('servicesContainer');
       const serviceTargetIds = ['corporate', 'audit', 'startup', 'finance', 'cloud', 'inheritance', 'labor'];
       const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
 
-      // サブディレクトリ対応パスヘルパー
       const pathParts = window.location.pathname.split('/');
       let repoBase = './';
       const repoIndex = pathParts.indexOf('terazawazeirishi');
@@ -251,7 +238,7 @@
         return repoBase + clean;
       };
 
-      // どんなJSON構造でも吸い上げる万能抽出関数
+      // 配列でもオブジェクトでも100%吸い出すパーサー
       const extractServices = (data) => {
         if (!data) return [];
         if (Array.isArray(data)) return data;
@@ -262,7 +249,6 @@
         return [];
       };
 
-      // 文章データと画像データを同時に取得
       Promise.all([
         fetch('./content/services.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
         fetch('./content/site_images.json?v=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null)
@@ -272,7 +258,7 @@
         if (!rawItems || rawItems.length === 0) return;
 
         container.innerHTML = '';
-        let imageCounter = 0; // ★重要：画像があるアイテムだけを数えてジグザグの左右反転を制御
+        let imageCounter = 0;
 
         rawItems.forEach((item, index) => {
           const targetId = item.id || serviceTargetIds[index] || `service-${index + 1}`;
@@ -282,7 +268,6 @@
           const leadText = item.lead || item.summary || '';
           const descText = item.description || '';
 
-          // 画像の有無判定
           const rawImg = (imagesData && imagesData[key]) || item.image || '';
           const imgPath = rawImg ? resolveImgUrl(rawImg) : '';
           const hasImage = Boolean(imgPath);
@@ -292,7 +277,7 @@
 
           let visualHtml = '';
           if (hasImage) {
-            // ★【画像がある場合】：画像ありアイテムだけで交互（ジグザグ）に配置
+            // 画像がある時：枠を出して左右交互（ジグザグ）
             const isReverse = (imageCounter % 2 === 1);
             imageCounter++;
             article.className = `athena-zigzag-item ${isReverse ? 'is-reverse' : ''}`;
@@ -302,12 +287,11 @@
               </div>
             `;
           } else {
-            // ★【画像がない場合】：写真枠タグを【完全に0文字】にし、direction: ltr で全幅に広げる（右揃えバグを完全防止）
+            // 画像が無い時：枠（<div>も<svg>も全て）を【0文字】にして全幅化
             article.className = 'athena-zigzag-item has-no-image';
             visualHtml = '';
           }
 
-          // ポイント箇条書き または 詳細説明文の生成
           let detailsHtml = '';
           if (item.points) {
             const pointLines = item.points.split('\n').filter(l => l.trim());
