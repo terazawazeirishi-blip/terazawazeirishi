@@ -6,7 +6,6 @@
   <title>寺澤景子税理士事務所 | 数字を、経営の最強の武器に。熊本・天草の税理士</title>
   <meta name="description" content="熊本県天草市の寺澤景子税理士事務所。元国税調査官（在職21年・元統括官）×実務35年ベテラン税理士の2人体制によるダブルチェック。圧倒的な税務調査防衛力とクラウド会計DX、提携社労士とのワンストップ支援を提供します。">
   <link rel="canonical" href="https://terazawazeirishi-blip.github.io/terazawazeirishi/index.html">
-  <!-- Open Graph Protocol -->
   <meta property="og:site_name" content="寺澤景子税理士事務所">
   <meta property="og:title" content="寺澤景子税理士事務所 | 数字を、経営の最強の武器に。熊本・天草の税理士">
   <meta property="og:description" content="熊本県天草市の寺澤景子税理士事務所。元国税調査官（在職21年・元統括官）×実務35年ベテラン税理士の2人体制によるダブルチェック。圧倒的な税務調査防衛力とクラウド会計DX、提携社労士とのワンストップ支援を提供します。">
@@ -14,7 +13,6 @@
   <meta property="og:image" content="https://terazawazeirishi-blip.github.io/terazawazeirishi/assets/images/uploads/hero-bg-photo.svg">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ja_JP">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="寺澤景子税理士事務所 | 数字を、経営の最強の武器に。熊本・天草の税理士">
   <meta name="twitter:description" content="熊本県天草市の寺澤景子税理士事務所。元国税調査官（在職21年・元統括官）×実務35年ベテラン税理士の2人体制によるダブルチェック。圧倒的な税務調査防衛力とクラウド会計DX、提携社労士とのワンストップ支援を提供します。">
@@ -64,8 +62,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* 【自動制御】画像なし項目の枠完全消滅 ＆ 100%全幅レイアウト */
-    /* 1. 選ばれる5つの理由（About Us） */
+    /* 選ばれる理由 & サービスの枠消去・全幅化 */
     .athena-zigzag-item.has-no-image {
       display: block !important;
       direction: ltr !important;
@@ -99,7 +96,6 @@
       padding-bottom: 0 !important;
     }
 
-    /* 2. 提供サービス（Services） */
     .service-card-item {
       background: var(--color-bg-card);
       border-radius: var(--radius-lg);
@@ -122,26 +118,10 @@
       width: 0 !important;
       height: 0 !important;
     }
-    .service-card-item.no-image .service-card-body,
-    .service-card-item.no-image .service-card-content {
+    .service-card-item.no-image .service-card-body {
       width: 100% !important;
       max-width: 100% !important;
       display: block !important;
-    }
-    .service-card-item.with-image {
-      display: grid !important;
-      grid-template-columns: 280px 1fr !important;
-      gap: 3rem !important;
-      align-items: center !important;
-    }
-    .service-card-item.with-image.is-reverse {
-      grid-template-columns: 1fr 280px !important;
-    }
-    .service-card-item.with-image.is-reverse .service-card-img-slot {
-      order: 2 !important;
-    }
-    .service-card-item.with-image.is-reverse .service-card-body {
-      order: 1 !important;
     }
 
     @media (max-width: 768px) {
@@ -151,17 +131,6 @@
       .service-card-item {
         padding: 1.8rem 1.4rem;
         margin-bottom: 1.5rem;
-      }
-      .service-card-item.with-image,
-      .service-card-item.with-image.is-reverse {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-      }
-      .service-card-item.with-image.is-reverse .service-card-img-slot {
-        order: 1 !important;
-      }
-      .service-card-item.with-image.is-reverse .service-card-body {
-        order: 2 !important;
       }
     }
   </style>
@@ -205,7 +174,7 @@
     </div>
   </header>
 
-  <!-- ヒーローセクション (Athena Style) -->
+  <!-- ヒーローセクション -->
   <section class="athena-hero" id="hero">
     <div class="athena-hero-bg-text" aria-hidden="true">TERAZAWA</div>
 
@@ -257,7 +226,7 @@
     </div>
   </section>
 
-  <!-- お知らせセクション (NEWS & TOPICS) -->
+  <!-- お知らせセクション -->
   <section class="athena-news-section" id="news" style="background-color: var(--color-bg-base); border-bottom: 1px solid var(--color-border);">
     <div class="container">
       <div class="athena-news-grid">
@@ -267,9 +236,7 @@
         </div>
 
         <div>
-          <!-- NEWS_START -->
           <div class="news-items-wrapper">
-            
             <div class="news-item">
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.4rem; flex-wrap: wrap;">
                 <span style="font-size: 0.82rem; color: var(--color-text-muted);">2026-10-31</span>
@@ -282,15 +249,13 @@
                 <p>国税21年在職の寺澤景子と税理士歴35年のベテラン税理士による2人体制で、地域の企業様を力強くサポートしてまいります。初回無料相談はお電話または専用フォームより承っております。</p>
               </div>
             </div>
-
           </div>
-          <!-- NEWS_END -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 01〜05 ジグザグ写真レイアウト (About Us：枠完全消去 ＆ 100%全幅レイアウト) -->
+  <!-- 01〜05 ジグザグ写真レイアウト (About Us) -->
   <section class="athena-about-section" id="about">
     <div class="container">
       <div class="section-header">
@@ -302,8 +267,7 @@
       <div class="athena-zigzag-list">
         
         <!-- 01: 2人体制のダブルチェック -->
-        <div class="athena-zigzag-item has-no-image" data-about-key="about_01">
-          <div class="zigzag-visual-slot" style="display:none;"></div>
+        <div class="athena-zigzag-item has-no-image">
           <div class="zigzag-content">
             <span class="athena-num-bg">01</span>
             <span class="zigzag-tag">TWO-SPECIALIST ADVISORY</span>
@@ -315,8 +279,7 @@
         </div>
 
         <!-- 02: 国税21年・元法人統括官の調査防衛力 -->
-        <div class="athena-zigzag-item has-no-image" data-about-key="about_02">
-          <div class="zigzag-visual-slot" style="display:none;"></div>
+        <div class="athena-zigzag-item has-no-image">
           <div class="zigzag-content">
             <span class="athena-num-bg">02</span>
             <span class="zigzag-tag">TAX AUDIT SPECIALIST</span>
@@ -328,8 +291,7 @@
         </div>
 
         <!-- 03: 税理士歴35年の豊富な実績と判断力 -->
-        <div class="athena-zigzag-item has-no-image" data-about-key="about_03">
-          <div class="zigzag-visual-slot" style="display:none;"></div>
+        <div class="athena-zigzag-item has-no-image">
           <div class="zigzag-content">
             <span class="athena-num-bg">03</span>
             <span class="zigzag-tag">DEEP EXPERIENCE</span>
@@ -341,8 +303,7 @@
         </div>
 
         <!-- 04: ザワテラス社労士との完全ワンストップ -->
-        <div class="athena-zigzag-item has-no-image" data-about-key="about_04">
-          <div class="zigzag-visual-slot" style="display:none;"></div>
+        <div class="athena-zigzag-item has-no-image">
           <div class="zigzag-content">
             <span class="athena-num-bg">04</span>
             <span class="zigzag-tag">ONE-STOP ADVISORY</span>
@@ -359,8 +320,7 @@
         </div>
 
         <!-- 05: 女性税理士ならではの寄り添う対話 -->
-        <div class="athena-zigzag-item has-no-image" data-about-key="about_05">
-          <div class="zigzag-visual-slot" style="display:none;"></div>
+        <div class="athena-zigzag-item has-no-image">
           <div class="zigzag-content">
             <span class="athena-num-bg">05</span>
             <span class="zigzag-tag">WARM &amp; ACCESSIBLE</span>
@@ -375,7 +335,7 @@
     </div>
   </section>
 
-  <!-- Stickyサービスセクション (枠完全消去 ＆ 100%全幅カード仕様) -->
+  <!-- Stickyサービスセクション -->
   <section class="athena-service-section" id="services">
     <div class="container athena-service-layout">
       <div class="athena-service-sticky">
@@ -394,8 +354,7 @@
       </div>
 
       <div class="service-list-cards">
-        <article class="service-card-item no-image" data-service-key="service_01">
-          <div class="service-card-img-slot" style="display:none;"></div>
+        <article class="service-card-item no-image">
           <div class="service-card-body">
             <h3 class="service-card-title">法人税務顧問・決算申告</h3>
             <p class="service-card-desc">月次決算の把握から適正な節税対策まで、2人体制の綿密なレビューで決算書を作成します。</p>
@@ -403,8 +362,7 @@
           </div>
         </article>
 
-        <article class="service-card-item no-image" data-service-key="service_02">
-          <div class="service-card-img-slot" style="display:none;"></div>
+        <article class="service-card-item no-image">
           <div class="service-card-body">
             <h3 class="service-card-title">税務調査対策・事前模擬調査</h3>
             <p class="service-card-desc">元統括官の寺澤景子が直接立ち会い。調査官の心理を読み解き納税者の権利を護ります。</p>
@@ -412,8 +370,7 @@
           </div>
         </article>
 
-        <article class="service-card-item no-image" data-service-key="service_03">
-          <div class="service-card-img-slot" style="display:none;"></div>
+        <article class="service-card-item no-image">
           <div class="service-card-body">
             <h3 class="service-card-title">会社設立・創業融資支援</h3>
             <p class="service-card-desc">設立登記の士業連携から、公庫融資獲得に向けた説得力ある事業計画策定まで伴走します。</p>
@@ -424,7 +381,7 @@
     </div>
   </section>
 
-  <!-- 2人の税理士紹介ブロック -->
+  <!-- ★【完全復元】2人の税理士紹介ブロック（寺澤代表 ＆ 田河副代表 2名体制・説明文完全版） -->
   <section class="message-section" style="background-color: var(--color-bg-base);" id="team">
     <div class="container">
       <div class="section-header">
@@ -456,7 +413,7 @@
           </p>
         </div>
 
-        <!-- 税理士 2: ベテラン税理士［お名前仮入力］ -->
+        <!-- 税理士 2: 田河定茂 副代表・ベテラン税理士 -->
         <div style="background: var(--color-bg-subtle); border-radius: var(--radius-lg); padding: 2.5rem 2rem; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; text-align: center;">
           <div class="representative-photo-frame">
             <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -555,7 +512,6 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
-        
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
             寺澤景子税理士事務所
@@ -620,87 +576,6 @@
     <a href="./contact.html" class="floating-cta-btn"><span>無料相談はこちら</span></a>
   </aside>
 
-  <!-- ★【完全自動制御】画像がある時はジグザグ写真展開、無い時は枠完全消去＆100%全幅化 -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // パスヘルパー
-      const pathParts = window.location.pathname.split('/');
-      let repoBase = './';
-      const repoIndex = pathParts.indexOf('terazawazeirishi');
-      if (repoIndex !== -1) {
-        repoBase = pathParts.slice(0, repoIndex + 1).join('/') + '/';
-      }
-
-      const resolveImgUrl = (rawPath) => {
-        if (!rawPath || typeof rawPath !== 'string') return '';
-        const trimmed = rawPath.trim();
-        if (!trimmed) return '';
-        if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) return trimmed;
-        let clean = trimmed.replace(/^(\.\/|\/)/, '');
-        if (clean.startsWith('terazawazeirishi/')) {
-          clean = clean.replace('terazawazeirishi/', '');
-        }
-        return repoBase + clean;
-      };
-
-      // site_images.json を取得して画像がある項目だけ枠を展開
-      fetch('./content/site_images.json?v=' + Date.now())
-        .then(r => r.ok ? r.json() : null)
-        .then(imagesData => {
-          if (!imagesData) return;
-
-          // 1. 選ばれる5つの理由（About Us）の画像ハイドレーション
-          const aboutItems = document.querySelectorAll('#about .athena-zigzag-item');
-          let aboutImgCounter = 0;
-
-          aboutItems.forEach(item => {
-            const key = item.getAttribute('data-about-key');
-            const rawImg = imagesData[key] || '';
-            const imgPath = resolveImgUrl(rawImg);
-            const slot = item.querySelector('.zigzag-visual-slot');
-
-            if (imgPath && slot) {
-              const isReverse = (aboutImgCounter % 2 === 1);
-              aboutImgCounter++;
-              item.classList.remove('has-no-image');
-              if (isReverse) {
-                item.classList.add('is-reverse');
-              } else {
-                item.classList.remove('is-reverse');
-              }
-              slot.style.display = '';
-              const titleEl = item.querySelector('.zigzag-heading');
-              const altText = titleEl ? titleEl.textContent.trim().replace(/\s+/g, ' ') : '当事務所の強み';
-              slot.innerHTML = `<img src="${imgPath}" alt="${altText}" class="zigzag-visual-img" style="width:100%; height:100%; object-fit:cover; display:block;">`;
-            }
-          });
-
-          // 2. 提供サービス（Services）の画像ハイドレーション
-          const serviceCards = document.querySelectorAll('#services .service-card-item');
-          let serviceImgCounter = 0;
-
-          serviceCards.forEach(card => {
-            const key = card.getAttribute('data-service-key');
-            const rawImg = imagesData[key] || '';
-            const imgPath = resolveImgUrl(rawImg);
-            const slot = card.querySelector('.service-card-img-slot');
-
-            if (imgPath && slot) {
-              const isReverse = (serviceImgCounter % 2 === 1);
-              serviceImgCounter++;
-              card.classList.remove('no-image');
-              card.classList.add('with-image');
-              if (isReverse) card.classList.add('is-reverse');
-              slot.style.display = '';
-              const titleEl = card.querySelector('.service-card-title');
-              const altText = titleEl ? titleEl.textContent.trim() : 'サービス';
-              slot.innerHTML = `<img src="${imgPath}" alt="${altText}" class="service-card-img" style="width:100%; height:100%; object-fit:cover; border-radius:var(--radius-md); display:block;">`;
-            }
-          });
-        })
-        .catch(() => {});
-    });
-  </script>
   <script src="./assets/js/main.js" defer></script>
 </body>
 </html>
