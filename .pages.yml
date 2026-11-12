@@ -1,86 +1,941 @@
-/**
- * TERAZAWA WEBSITE STUDIO - Public Rendering & CMS Sync Engine
- * Module: assets/js/main.js
- * Version: 4.0.0 (Safe Restored Edition: Zero Display-None & Guaranteed 260px Photo)
- */
-(function () {
-  'use strict';
+# Pages CMS configuration for 寺澤景子税理士事務所
+# Existing public HTML and JSON files are preserved. This file only defines the CMS editor.
 
-  // blog/ 階層判定（サブディレクトリ対応）
-  const isBlog = window.location.pathname.indexOf('/blog/') !== -1;
-  const basePath = isBlog ? '../' : './';
+media:
+  input: assets/images/uploads
+  output: /assets/images/uploads
+  rename: false
+  categories:
+    - image
 
-  function resolveUrl(path) {
-    if (!path || typeof path !== 'string') return '';
-    let c = path.trim().replace(/^(\.\/|\/)+/, '').replace(/^terazawazeirishi\//, '');
-    if (!c.includes('/') && !c.startsWith('data:')) c = 'assets/images/uploads/' + c;
-    return basePath + c + '?t=' + Date.now();
-  }
+content:
+  - name: homepage
+    label: トップページ
+    type: group
+    items:
+      - name: home-texts
+        label: トップページ文章（公開ページ連動）
+        type: file
+        path: content/home_texts.json
+        format: json
+        fields:
+          - name: hero_badge
+            label: メイン画像上の案内文
+            type: string
+          - name: hero_catch_main
+            label: メインキャッチコピー
+            type: string
+          - name: hero_catch_sub
+            label: メイン説明文
+            type: text
+          - name: hero_cta_label
+            label: メイン相談ボタンの文字
+            type: string
+          - name: hero_cta_url
+            label: メイン相談ボタンのリンク先
+            type: string
+          - name: services_cta_label
+            label: サービス一覧ボタンの文字
+            type: string
+          - name: services_cta_url
+            label: サービス一覧ボタンのリンク先
+            type: string
+          - name: features_title
+            label: 選ばれる理由の見出し
+            type: string
+          - name: features_subtitle
+            label: 選ばれる理由の導入文
+            type: string
+          - name: feature_01_title
+            label: 選ばれる理由 1 見出し
+            type: string
+          - name: feature_01_text
+            label: 選ばれる理由 1 説明
+            type: text
+          - name: feature_02_title
+            label: 選ばれる理由 2 見出し
+            type: string
+          - name: feature_02_text
+            label: 選ばれる理由 2 説明
+            type: text
+          - name: feature_03_title
+            label: 選ばれる理由 3 見出し
+            type: string
+          - name: feature_03_text
+            label: 選ばれる理由 3 説明
+            type: text
+          - name: feature_04_title
+            label: 選ばれる理由 4 見出し
+            type: string
+          - name: feature_04_text
+            label: 選ばれる理由 4 説明
+            type: text
+          - name: feature_05_title
+            label: 選ばれる理由 5 見出し
+            type: string
+          - name: feature_05_text
+            label: 選ばれる理由 5 説明
+            type: text
 
-  // 安全に写真枠の中へ画像を挿入（サイズ固定・枠消去は一切行わない）
-  function setPhotoSafe(searchText, imgUrl, maxW, isSquare) {
-    if (!imgUrl) return;
-    const all = document.querySelectorAll('div, p, span');
-    for (let i = 0; i < all.length; i++) {
-      const el = all[i];
-      if (el.textContent.includes(searchText) && el.querySelectorAll('div').length === 0) {
-        const frame = el.closest('div') || el;
-        frame.textContent = ''; // プレースホルダーの文字のみ消去
-        const img = document.createElement('img');
-        img.src = imgUrl;
-        img.alt = '写真';
-        img.style.cssText = 'width:100%;max-width:' + maxW + 'px;' + (isSquare ? 'height:' + maxW + 'px;' : 'height:auto;aspect-ratio:4/3;') + 'object-fit:cover;border-radius:8px;display:block;margin:0 auto;box-shadow:0 4px 16px rgba(27,42,74,0.08);';
-        frame.appendChild(img);
-        break;
-      }
-    }
-  }
+      - name: home-blocks
+        label: トップページのセクション表示設定
+        type: file
+        path: content/pages/home_blocks.json
+        format: json
+        fields:
+          - name: blocks
+            label: ページ内ブロック
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{id} ({index})"
+            fields:
+              - name: id
+                label: 管理ID
+                type: string
+                readonly: true
+              - name: type
+                label: ブロック種類
+                type: string
+                readonly: true
+              - name: visible
+                label: 表示する
+                type: boolean
 
-  async function syncImages() {
-    try {
-      const res = await fetch(basePath + 'content/site_images.json?v=' + Date.now(), { cache: 'no-store' });
-      if (!res.ok) return;
-      const data = await res.json();
+      - name: site-images
+        label: ホームページ画像
+        type: file
+        path: content/site_images.json
+        format: json
+        fields:
+          - name: logo_img
+            label: 事務所ロゴ
+            type: image
+          - name: watermark_crest
+            label: 背景の紋章
+            type: image
+          - name: hero_illustration
+            label: トップページのメイン画像
+            type: image
+          - name: rep_keiko
+            label: 代表税理士の写真
+            type: image
+          - name: rep_senior
+            label: 副代表税理士の写真
+            type: image
+          - name: about_01
+            label: 選ばれる理由 1 の写真
+            type: image
+          - name: about_02
+            label: 選ばれる理由 2 の写真
+            type: image
+          - name: about_03
+            label: 選ばれる理由 3 の写真
+            type: image
+          - name: about_04
+            label: 選ばれる理由 4 の写真
+            type: image
+          - name: about_05
+            label: 選ばれる理由 5 の写真
+            type: image
+          - name: service_01
+            label: サービス 1 の写真
+            type: image
+          - name: service_02
+            label: サービス 2 の写真
+            type: image
+          - name: service_03
+            label: サービス 3 の写真
+            type: image
+          - name: service_04
+            label: サービス 4 の写真
+            type: image
+          - name: service_05
+            label: サービス 5 の写真
+            type: image
+          - name: service_06
+            label: サービス 6 の写真
+            type: image
+          - name: service_07
+            label: サービス 7 の写真
+            type: image
 
-      // 1. 代表税理士（寺澤景子）: 260px正方形枠に確実に挿入（枠消去なし）
-      if (data.rep_keiko) {
-        setPhotoSafe('Keiko Terazawa', resolveUrl(data.rep_keiko), 260, true);
-      }
+  - name: service-page
+    label: サービス案内（公開ページ連動）
+    type: file
+    path: content/services.json
+    format: json
+    fields:
+      - name: section_title
+        label: ページ見出し
+        type: string
+      - name: section_subtitle
+        label: 英語サブ見出し
+        type: string
+      - name: hero_description
+        label: ページ冒頭の説明文
+        type: text
+      - name: cta_title
+        label: ページ下部の相談見出し
+        type: string
+      - name: cta_description
+        label: ページ下部の相談説明
+        type: text
+      - name: cta_button_label
+        label: 相談ボタンの文字
+        type: string
+      - name: cta_button_url
+        label: 相談ボタンのリンク先
+        type: string
+      - name: services
+        label: サービス一覧
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} ({index})"
+        fields:
+          - name: id
+            label: 管理ID
+            type: string
+          - name: num
+            label: 表示番号
+            type: string
+          - name: title
+            label: サービス名
+            type: string
+          - name: summary
+            label: 概要
+            type: text
+          - name: description
+            label: 詳細説明
+            type: text
+          - name: link
+            label: リンク先URL
+            type: string
+          - name: link_label
+            label: リンクボタンの文字
+            type: string
+          - name: image_key
+            label: 使用画像キー
+            type: string
 
-      // 2. 副代表（田河定茂）: 260px正方形枠に確実に挿入（枠消去なし）
-      if (data.rep_senior) {
-        setPhotoSafe('Senior Tax Advisor', resolveUrl(data.rep_senior), 260, true);
-      }
+  - name: pricing-page
+    label: 料金案内
+    type: file
+    path: content/pricing.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: intro_text
+        label: ページ冒頭の説明文
+        type: text
+      - name: plans_title
+        label: 顧問プランの見出し
+        type: string
+      - name: plans_description
+        label: 顧問プランの説明
+        type: text
+      - name: spot_fees_title
+        label: スポット料金の見出し
+        type: string
+      - name: spot_fees_description
+        label: スポット料金の説明
+        type: text
+      - name: plans
+        label: 顧問プラン
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} ({index})"
+        fields:
+          - name: id
+            label: 管理ID
+            type: string
+          - name: name
+            label: プラン名
+            type: string
+          - name: is_recommended
+            label: おすすめ表示
+            type: boolean
+          - name: badge
+            label: バッジ文字
+            type: string
+          - name: monthly_fee
+            label: 月額顧問料
+            type: string
+          - name: settlement_fee
+            label: 決算申告料
+            type: string
+          - name: target
+            label: 対象となるお客様
+            type: text
+          - name: features
+            label: プランに含まれる内容
+            type: string
+            list: true
+      - name: spot_fees
+        label: スポット・個別業務料金
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{service_name} ({index})"
+        fields:
+          - name: service_name
+            label: 業務名
+            type: string
+          - name: price
+            label: 料金
+            type: string
+          - name: notes
+            label: 備考
+            type: text
 
-      // 3. 選ばれる理由01〜05（文字枠の中に確実に挿入、枠消去なし）
-      if (data.about_01) setPhotoSafe('2人体制写真', resolveUrl(data.about_01), 500, false);
-      if (data.about_02) setPhotoSafe('調査防衛枠', resolveUrl(data.about_02), 500, false);
-      if (data.about_03) setPhotoSafe('実務枠', resolveUrl(data.about_03), 500, false);
-      if (data.about_04) setPhotoSafe('社労士連携枠', resolveUrl(data.about_04), 500, false);
-      if (data.about_05) setPhotoSafe('花のあるサロン枠', resolveUrl(data.about_05), 500, false);
+  - name: profile-page
+    label: 税理士紹介（公開ページ連動）
+    type: file
+    path: content/profile_texts.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: hero_lead
+        label: ページ冒頭の説明文
+        type: text
+      - name: rep_keiko
+        label: 代表税理士
+        type: object
+        fields:
+          - name: name
+            label: 氏名
+            type: string
+          - name: display_name
+            label: ページに表示する氏名・肩書
+            type: string
+          - name: title
+            label: 役職・肩書・紹介文
+            type: string
+          - name: badge_lines
+            label: 写真下の紹介項目
+            type: string
+            list: true
+          - name: profile_paragraphs
+            label: 紹介本文（段落）
+            type: string
+            list: true
+          - name: career_title
+            label: 経歴欄の見出し
+            type: string
+          - name: career_points
+            label: 経歴・専門分野
+            type: string
+            list: true
+      - name: rep_senior
+        label: 副代表税理士
+        type: object
+        fields:
+          - name: name
+            label: 氏名
+            type: string
+          - name: display_name
+            label: ページに表示する氏名・肩書
+            type: string
+          - name: title
+            label: 役職・肩書・紹介文
+            type: string
+          - name: badge_lines
+            label: 写真下の紹介項目
+            type: string
+            list: true
+          - name: profile_paragraphs
+            label: 紹介本文（段落）
+            type: string
+            list: true
+          - name: career_title
+            label: 経歴欄の見出し
+            type: string
+          - name: career_points
+            label: 経歴・専門分野
+            type: string
+            list: true
 
-      // 4. ロゴ
-      if (data.logo_img) {
-        document.querySelectorAll('.site-logo img').forEach(function (img) {
-          img.src = resolveUrl(data.logo_img);
-        });
-      }
+  - name: office-page
+    label: 事務所概要（公開ページ連動）
+    type: file
+    path: content/office_info.json
+    format: json
+    fields:
+      - name: office_name
+        label: 事務所名
+        type: string
+      - name: english_name
+        label: 英文事務所名
+        type: string
+      - name: representative
+        label: 代表者名
+        type: string
+      - name: team_description
+        label: 税理士の体制
+        type: string
+      - name: postal_code
+        label: 郵便番号
+        type: string
+      - name: address
+        label: 住所
+        type: string
+      - name: tel
+        label: 電話番号
+        type: string
+      - name: fax
+        label: FAX番号
+        type: string
+      - name: business_hours
+        label: 営業時間
+        type: text
+      - name: target_area
+        label: 対応地域
+        type: text
+      - name: affiliation
+        label: 所属・登録番号
+        type: string
+      - name: partner_sr_name
+        label: 提携社労士名
+        type: string
+      - name: partner_sr_url
+        label: 提携社労士リンク
+        type: string
+      - name: google_map_url
+        label: 地図URL
+        type: string
+      - name: copyright_text
+        label: 著作権表示
+        type: string
 
-      // 5. ヒーロー象徴アート
-      if (data.hero_illustration) {
-        document.querySelectorAll('.hero-bg-artwork-wrap img, .athena-hero-art img').forEach(function (img) {
-          img.src = resolveUrl(data.hero_illustration);
-        });
-      }
+  - name: faq-page
+    label: よくある質問
+    type: file
+    path: content/faq.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: hero_description
+        label: ページ冒頭の説明文
+        type: text
+      - name: faq_list
+        label: 質問と回答
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{question} ({index})"
+        fields:
+          - name: id
+            label: 管理ID
+            type: string
+          - name: question
+            label: 質問
+            type: text
+          - name: answer
+            label: 回答
+            type: text
 
-    } catch (e) {
-      console.warn('[TERAZAWA] Image sync error:', e);
-    }
-  }
+  - name: legal-page
+    label: 個人情報保護方針（公開ページ連動）
+    type: file
+    path: content/legal_texts.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: last_updated
+        label: 制定・更新日
+        type: string
+      - name: declaration
+        label: 基本方針
+        type: text
+      - name: sections
+        label: 規約の各項目
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{heading} ({index})"
+        fields:
+          - name: heading
+            label: 見出し
+            type: string
+          - name: body
+            label: 本文
+            type: text
+          - name: items
+            label: 箇条書き項目
+            type: string
+            list: true
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncImages);
-  } else {
-    syncImages();
-  }
-})();
+  - name: contact-page
+    label: お問い合わせ（公開ページ連動）
+    type: file
+    path: content/contact.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: hero_description
+        label: ページ冒頭の説明文
+        type: text
+      - name: phone_intro
+        label: 電話案内の見出し
+        type: string
+      - name: form_title
+        label: フォーム見出し
+        type: string
+      - name: form_description
+        label: フォーム説明文
+        type: text
+      - name: form_url
+        label: お問い合わせフォームURL
+        type: string
+      - name: form_button_label
+        label: フォームボタンの文字
+        type: string
+
+  - name: sitemap-page
+    label: サイトマップ（公開ページ連動）
+    type: file
+    path: content/sitemap.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: hero_description
+        label: ページ冒頭の説明文
+        type: text
+      - name: main_pages_title
+        label: メインページ欄の見出し
+        type: string
+      - name: main_pages
+        label: メインページのリンク一覧
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label} ({index})"
+        fields:
+          - name: label
+            label: 表示文字
+            type: string
+          - name: url
+            label: リンク先URL
+            type: string
+      - name: services_title
+        label: サービス一覧の見出し
+        type: string
+      - name: services
+        label: サービスのリンク一覧
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label} ({index})"
+        fields:
+          - name: label
+            label: 表示文字
+            type: string
+          - name: url
+            label: リンク先URL
+            type: string
+      - name: other_title
+        label: 規約・その他の見出し
+        type: string
+      - name: other
+        label: 規約・その他のリンク一覧
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label} ({index})"
+        fields:
+          - name: label
+            label: 表示文字
+            type: string
+          - name: url
+            label: リンク先URL
+            type: string
+          - name: external
+            label: 別タブで開く
+            type: boolean
+
+  - name: blog-settings
+    label: コラム一覧ページ設定
+    type: file
+    path: content/blog_settings.json
+    format: json
+    fields:
+      - name: page_title
+        label: ページタイトル
+        type: string
+      - name: page_subtitle
+        label: 英語サブタイトル
+        type: string
+      - name: hero_description
+        label: ページ冒頭の説明文
+        type: text
+      - name: empty_title
+        label: 記事がない場合の見出し
+        type: string
+      - name: empty_description
+        label: 記事がない場合の説明文
+        type: text
+
+  - name: editorial
+    label: お知らせ・コラム
+    type: group
+    items:
+      - name: blog-posts
+        label: 税務・経営コラム記事
+        type: collection
+        path: blog
+        filename: "{year}-{month}-{day}-{title}.md"
+        exclude:
+          - index.html
+          - "*.html"
+        format: yaml-frontmatter
+        view:
+          primary: title
+          fields:
+            - title
+            - date
+            - category
+          sort: date
+          order: desc
+        fields:
+          - name: title
+            label: 記事タイトル
+            type: string
+            required: true
+          - name: date
+            label: 公開日
+            type: date
+          - name: category
+            label: カテゴリー
+            type: string
+          - name: description
+            label: 記事の要約
+            type: text
+          - name: thumbnail
+            label: サムネイル画像
+            type: image
+          - name: body
+            label: 記事本文
+            type: rich-text
+
+      - name: news
+        label: トップページのお知らせ
+        type: collection
+        path: content/news
+        filename: "{year}-{month}-{day}-{title}.md"
+        format: yaml-frontmatter
+        view:
+          primary: title
+          fields:
+            - title
+            - date
+            - category
+          sort: date
+          order: desc
+        fields:
+          - name: title
+            label: タイトル
+            type: string
+            required: true
+          - name: date
+            label: 公開日
+            type: date
+          - name: category
+            label: カテゴリー
+            type: string
+          - name: description
+            label: 要約文
+            type: text
+          - name: thumbnail
+            label: サムネイル画像
+            type: image
+          - name: body
+            label: 本文
+            type: rich-text
+
+  - name: seo-settings
+    label: SEO・検索表示設定
+    type: file
+    path: content/seo_meta.json
+    format: json
+    fields:
+      - name: site_name
+        label: サイト名
+        type: string
+      - name: base_url
+        label: 公開サイトURL
+        type: string
+      - name: default_og_image
+        label: SNS共通画像
+        type: image
+      - name: pages
+        label: ページ別検索表示
+        type: object
+        fields:
+          - name: home
+            label: トップページ
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: services
+            label: サービス案内
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: pricing
+            label: 料金案内
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: profile
+            label: 税理士紹介
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: faq
+            label: よくある質問
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: contact
+            label: お問い合わせ
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: privacy
+            label: 個人情報保護方針
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+          - name: blog
+            label: コラム一覧
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+
+          - name: sitemap
+            label: サイトマップ
+            type: object
+            fields:
+              - name: file
+                label: HTMLファイル
+                type: string
+              - name: title
+                label: 検索タイトル
+                type: string
+              - name: description
+                label: 検索説明文
+                type: text
+              - name: keywords
+                label: キーワード
+                type: text
+              - name: og_type
+                label: OGP種別
+                type: string
+
+  - name: html-source
+    label: ページ本文の直接編集（上級者向け）
+    type: group
+    items:
+      - name: home-html
+        label: トップページHTML（お知らせ欄は自動生成）
+        type: file
+        path: index.html
+        format: code
+      - name: services-html
+        label: サービス案内HTML
+        type: file
+        path: services.html
+        format: code
+      - name: pricing-html
+        label: 料金案内HTML
+        type: file
+        path: pricing.html
+        format: code
+      - name: profile-html
+        label: 税理士紹介HTML
+        type: file
+        path: profile.html
+        format: code
+      - name: faq-html
+        label: よくある質問HTML
+        type: file
+        path: faq.html
+        format: code
+      - name: contact-html
+        label: お問い合わせHTML
+        type: file
+        path: contact.html
+        format: code
+      - name: privacy-html
+        label: 個人情報保護方針HTML
+        type: file
+        path: privacy.html
+        format: code
+      - name: sitemap-html
+        label: サイトマップHTML
+        type: file
+        path: sitemap.html
+        format: code
+      - name: not-found-html
+        label: 404エラーページHTML
+        type: file
+        path: 404.html
+        format: code
+
+# Preserve existing keys that are intentionally not exposed in the editor.
+settings:
+  content:
+    merge: true

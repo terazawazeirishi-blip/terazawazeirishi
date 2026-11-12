@@ -69,7 +69,7 @@ def validate_html_links():
             content = f.read()
 
         # href 属性の抽出
-        links = re.findall(r'href=["\'](.*?)["\']', content, re.IGNORECASE)
+        links = re.findall(r"""(?<![A-Za-z0-9_-])href\s*=\s*["'](.*?)["']""", content, re.IGNORECASE)
         for link in links:
             raw = link.strip()
             if not raw or raw.startswith("#") or raw.startswith("tel:") or raw.startswith("mailto:"):

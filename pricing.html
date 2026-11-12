@@ -152,7 +152,7 @@
     }
   </style>
 </head>
-<body>
+<body data-cms-page="pricing">
 
   <!-- 完全統一ヘッダー -->
   <header class="site-header" id="siteHeader">
@@ -193,9 +193,9 @@
   <section class="athena-hero" style="min-height: 48vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 3rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">PRICING</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
-      <p class="hero-sub-en">TRANSPARENT FEE STRUCTURE</p>
-      <h1 class="hero-main-title" style="margin-bottom: 1rem;">明瞭な料金案内</h1>
-      <p class="hero-lead-text" style="max-width: 720px; margin: 0 auto;">
+      <p class="hero-sub-en" data-cms-value="pricing.page_subtitle">TRANSPARENT FEE STRUCTURE</p>
+      <h1 class="hero-main-title" data-cms-value="pricing.page_title" style="margin-bottom: 1rem;">明瞭な料金案内</h1>
+      <p class="hero-lead-text" data-cms-value="pricing.intro_text" style="max-width: 720px; margin: 0 auto; white-space: pre-line;">
         事業規模やご要望に応じた事前のお見積もりを徹底。<br>
         不透明な追加請求は一切ございません。
       </p>
@@ -207,8 +207,8 @@
     
     <!-- 顧問プラン一覧 -->
     <div class="section-header">
-      <h2 class="section-title" data-en="PLANS">法人税務顧問プラン</h2>
-      <p class="section-lead">自社の成長フェーズに合わせて最適なプランをお選びいただけます。</p>
+      <h2 class="section-title" data-en="PLANS" data-cms-value="pricing.plans_title">法人税務顧問プラン</h2>
+      <p class="section-lead" data-cms-value="pricing.plans_description">自社の成長フェーズに合わせて最適なプランをお選びいただけます。</p>
     </div>
 
     <!-- 顧問プランカード一覧（最初から本物データ配置・通信待ちフリーズゼロ） -->
@@ -265,8 +265,8 @@
 
     <!-- スポット料金表 -->
     <div class="section-header">
-      <h2 class="section-title" data-en="SPOTS">スポット・個別業務料金</h2>
-      <p class="section-lead">顧問契約のないお客様でも、個別業務を承っております。</p>
+      <h2 class="section-title" data-en="SPOTS" data-cms-value="pricing.spot_fees_title">スポット・個別業務料金</h2>
+      <p class="section-lead" data-cms-value="pricing.spot_fees_description">顧問契約のないお客様でも、個別業務を承っております。</p>
     </div>
 
     <div class="spot-table-wrap">
@@ -316,15 +316,15 @@
       <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
-            寺澤景子税理士事務所
+            <span data-cms-value="office.office_name">寺澤景子税理士事務所</span>
           </div>
           <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
-            TERAZAWA TAX &amp; CONSULTING
+            <span data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            <span data-cms-value="office.postal_code">〒863-0023</span> <span data-cms-value="office.address">熊本県天草市南町5-22</span><br>
+            TEL: <a data-cms-href="office.tel" href="tel:0969221166"><span data-cms-value="office.tel">0969-22-1166</span></a> / FAX: <span data-cms-value="office.fax">0969-22-1167</span><br>
+            <span data-cms-value="office.affiliation">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</span>
           </address>
         </div>
 
@@ -362,7 +362,7 @@
       </div>
 
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
-        <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
+        <p data-cms-value="office.copyright_text">&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
     </div>
   </footer>

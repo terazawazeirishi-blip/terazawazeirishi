@@ -92,7 +92,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
+<body data-cms-page="faq">
 
   <!-- 完全統一ヘッダー -->
   <header class="site-header" id="siteHeader">
@@ -133,9 +133,9 @@
   <section class="athena-hero" style="min-height: 44vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">FAQ</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
-      <p class="hero-sub-en">FREQUENTLY ASKED QUESTIONS</p>
-      <h1 class="hero-main-title" style="margin-bottom: 1rem;">よくあるご質問</h1>
-      <p class="hero-lead-text">お客様からよくいただくご質問とその回答をまとめました。</p>
+      <p class="hero-sub-en" data-cms-value="faq.page_subtitle">FREQUENTLY ASKED QUESTIONS</p>
+      <h1 class="hero-main-title" data-cms-value="faq.page_title" style="margin-bottom: 1rem;">よくあるご質問</h1>
+      <p class="hero-lead-text" data-cms-value="faq.hero_description">お客様からよくいただくご質問とその回答をまとめました。</p>
     </div>
   </section>
 
@@ -152,15 +152,15 @@
       <div class="footer-top" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem;">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
-            寺澤景子税理士事務所
+            <span data-cms-value="office.office_name">寺澤景子税理士事務所</span>
           </div>
           <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
-            TERAZAWA TAX &amp; CONSULTING
+            <span data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            <span data-cms-value="office.postal_code">〒863-0023</span> <span data-cms-value="office.address">熊本県天草市南町5-22</span><br>
+            TEL: <a data-cms-href="office.tel" href="tel:0969221166"><span data-cms-value="office.tel">0969-22-1166</span></a> / FAX: <span data-cms-value="office.fax">0969-22-1167</span><br>
+            <span data-cms-value="office.affiliation">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</span>
           </address>
         </div>
 
@@ -198,7 +198,7 @@
       </div>
 
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
-        <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
+        <p data-cms-value="office.copyright_text">&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
     </div>
   </footer>

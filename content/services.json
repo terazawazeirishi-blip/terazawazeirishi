@@ -1,6 +1,6 @@
 {
   "section_title": "提供サービス案内",
-  "section_subtitle": "OUR SERVICES",
+  "section_subtitle": "PROFESSIONAL TAX & DX",
   "services": [
     {
       "id": "service-01",
@@ -8,8 +8,9 @@
       "title": "法人税務顧問・決算申告",
       "summary": "元国税調査官と35年ベテランの二重チェックによる安心の税務顧問。",
       "description": "毎月の試算表作成から適正な節税対策、決算申告までトータル支援。税務署目線を取り入れた事前チェックで、追徴課税リスクを最小限に抑えます。",
-      "link": "./services.html#service-01",
-      "image_key": "service_01"
+      "link": "./pricing.html#plans",
+      "image_key": "service_01",
+      "link_label": "詳細・料金を見る"
     },
     {
       "id": "service-02",
@@ -17,8 +18,9 @@
       "title": "税務調査対策・事前模擬調査",
       "summary": "元法人課税部門統括官が直接主導する圧倒的な税務調査防衛力。",
       "description": "調査通知前からの帳簿総点検、想定問答の作成、模擬税務調査の実施。当日の立ち会いから税務署との折衝まで完全に主導します。",
-      "link": "./services.html#service-02",
-      "image_key": "service_02"
+      "link": "./pricing.html#plans",
+      "image_key": "service_02",
+      "link_label": "詳細・料金を見る"
     },
     {
       "id": "service-03",
@@ -26,8 +28,9 @@
       "title": "会社設立・創業支援パック",
       "summary": "設立登記から税務届出、事業開始の初期設定を完全サポート。",
       "description": "定款作成、公証人認証、税務関係届出書の作成・提出をワンストップで代行。初年度の経営基盤を盤石にします。",
-      "link": "./services.html#service-03",
-      "image_key": "service_03"
+      "link": "./pricing.html#plans",
+      "image_key": "service_03",
+      "link_label": "詳細・料金を見る"
     },
     {
       "id": "service-04",
@@ -35,8 +38,9 @@
       "title": "創業融資・公庫資金調達対策",
       "summary": "審査官を納得させる説得力ある事業計画書策定と面談対策。",
       "description": "日本政策金融公庫や地方銀行の融資審査基準を熟知。自己資金の活用法から実現性の高い収支計画の策定を伴走支援します。",
-      "link": "./services.html#service-04",
-      "image_key": "service_04"
+      "link": "./pricing.html#plans",
+      "image_key": "service_04",
+      "link_label": "詳細・料金を見る"
     },
     {
       "id": "service-05",
@@ -44,8 +48,9 @@
       "title": "クラウド会計導入・自計化DX",
       "summary": "マネーフォワード・freee対応。経理業務の自動化を構築。",
       "description": "通帳・クレジットカード連携、領収書のスマホスキャン管理など、ペーパーレス経理を実現。バックオフィス作業を最大70%削減します。",
-      "link": "./services.html#service-05",
-      "image_key": "service_05"
+      "link": "./pricing.html#plans",
+      "image_key": "service_05",
+      "link_label": "詳細・料金を見る"
     },
     {
       "id": "service-06",
@@ -53,8 +58,9 @@
       "title": "相続税申告・事業承継コンサル",
       "summary": "35年の資産税ノウハウと適正評価による円満な資産承継。",
       "description": "不動産評価の適正化、生前贈与プランニング、非上場株式の評価と引き継ぎ対策。家族の絆を守る円満な承継を実現します。",
-      "link": "./services.html#service-06",
-      "image_key": "service_06"
+      "link": "./pricing.html#plans",
+      "image_key": "service_06",
+      "link_label": "詳細・料金を見る"
     },
     {
       "id": "service-07",
@@ -63,7 +69,13 @@
       "summary": "提携「ザワテラス社労士」との強固なワンストップ支援。",
       "description": "雇用関係助成金の申請、就業規則の作成、給与計算、社会保険手続きをワンストップで連携。労務・税務を一体で守護します。",
       "link": "https://terazawa-sr.jbcsite.com/",
-      "image_key": "service_07"
+      "image_key": "service_07",
+      "link_label": "提携社労士サイトを見る"
     }
-  ]
+  ],
+  "hero_description": "国税調査官21年の実績に基づく高度税務調査対策から、クラウド会計DX、事業承継まで。2名の税理士と提携社労士がワンストップで伴走します。",
+  "cta_title": "数字の不安を、未来への確信へ。",
+  "cta_description": "初回面談・お見積りは無料です。天草本所での対面面談はもちろん、全国オンライン（Zoom等）にも即時対応いたします。",
+  "cta_button_label": "初回無料相談フォームへ進む",
+  "cta_button_url": "./contact.html"
 }
