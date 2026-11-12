@@ -1,0 +1,84 @@
+{
+  "page_title": "サイトマップ",
+  "page_subtitle": "SITE STRUCTURE",
+  "hero_description": "当Webサイトの全ページ構成一覧です。",
+  "main_pages_title": "メインページ",
+  "services_title": "提供サービス一覧",
+  "other_title": "規約・その他",
+  "main_pages": [
+    {
+      "label": "・ ホーム（トップページ）",
+      "url": "./index.html"
+    },
+    {
+      "label": "・ 税理士紹介・事務所概要",
+      "url": "./profile.html"
+    },
+    {
+      "label": "・ 料金案内（顧問料・スポット）",
+      "url": "./pricing.html"
+    },
+    {
+      "label": "・ よくある質問（FAQ）",
+      "url": "./faq.html"
+    },
+    {
+      "label": "・ 初回無料相談・お問い合わせ",
+      "url": "./contact.html"
+    },
+    {
+      "label": "・ 税務・経営コラム一覧",
+      "url": "./blog/index.html"
+    }
+  ],
+  "services": [
+    {
+      "label": "・ 法人税務顧問・決算申告",
+      "url": "./services.html#service-01"
+    },
+    {
+      "label": "・ 税務調査対策・事前模擬調査",
+      "url": "./services.html#service-02"
+    },
+    {
+      "label": "・ 会社設立・創業支援",
+      "url": "./services.html#service-03"
+    },
+    {
+      "label": "・ 創業融資支援・公庫対策",
+      "url": "./services.html#service-04"
+    },
+    {
+      "label": "・ クラウド会計導入（freee/MF）",
+      "url": "./services.html#service-05"
+    },
+    {
+      "label": "・ 相続税申告・事業承継対策",
+      "url": "./services.html#service-06"
+    },
+    {
+      "label": "・ 助成金受給・労務管理（社労士連携）",
+      "url": "./services.html#service-07"
+    }
+  ],
+  "other": [
+    {
+      "label": "・ 個人情報保護方針・免責事項",
+      "url": "./privacy.html"
+    },
+    {
+      "label": "・ サイトマップ（本ページ）",
+      "url": "./sitemap.html"
+    },
+    {
+      "label": "・ XMLサイトマップ（検索エンジン用）",
+      "url": "./sitemap.xml",
+      "external": true
+    },
+    {
+      "label": "・ 提携士業：ザワテラス社労士 →",
+      "url": "https://terazawa-sr.jbcsite.com/",
+      "external": true
+    }
+  ]
+}

@@ -9,12 +9,14 @@
 import os
 import re
 import html
+import json
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 BLOG_DIR = ROOT_DIR / "blog"
 NEWS_DIR = ROOT_DIR / "content" / "news"
 INDEX_HTML_PATH = ROOT_DIR / "index.html"
+BLOG_SETTINGS_PATH = ROOT_DIR / "content" / "blog_settings.json"
 
 def format_image_path(raw_path):
     if not raw_path:
@@ -70,10 +72,49 @@ def parse_markdown(filepath):
         "filename": safe_slug + ".html"
     }
 
+
+def load_blog_settings():
+    """Load editable copy for the generated blog index page."""
+    try:
+        data = json.loads(BLOG_SETTINGS_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        print("  ⚠️ コラム一覧設定を読み込めないため、既定の表示文を使用します。")
+        return {}
+
+
+def load_office_info():
+    """Load shared office details used by generated blog pages."""
+    try:
+        data = json.loads((ROOT_DIR / "content" / "office_info.json").read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        print("  ⚠️ 事務所情報を読み込めないため、既定の表示を使用します。")
+        return {}
+
 def build_blog():
     print("=== コラム自動生成処理（ハンバーガーボタン完備・自動削除同期）開始 ===")
     if not BLOG_DIR.exists():
         return
+    settings = load_blog_settings()
+    page_title = str(settings.get("page_title") or "税務・経営コラム")
+    page_subtitle = str(settings.get("page_subtitle") or "TAX & MANAGEMENT INSIGHTS")
+    hero_description = str(settings.get("hero_description") or "実務の現場と税務署の視点から、経営に直結する生きた税務情報をお届けします。")
+    empty_title = str(settings.get("empty_title") or "現在公開中のコラムはありません。")
+    empty_description = str(settings.get("empty_description") or "新しい記事が投稿されるまでお待ちください。")
+    office = load_office_info()
+    office_name = html.escape(str(office.get("office_name") or "寺澤景子税理士事務所"))
+    english_name = html.escape(str(office.get("english_name") or "TERAZAWA TAX & CONSULTING"))
+    postal_code = html.escape(str(office.get("postal_code") or "〒863-0023"))
+    address = html.escape(str(office.get("address") or "熊本県天草市南町5-22"))
+    tel = str(office.get("tel") or "0969-22-1166")
+    fax = html.escape(str(office.get("fax") or "0969-22-1167"))
+    affiliation = html.escape(str(office.get("affiliation") or "南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号"))
+    partner_name = html.escape(str(office.get("partner_sr_name") or "ザワテラス社労士"))
+    partner_url_raw = str(office.get("partner_sr_url") or "https://terazawa-sr.jbcsite.com/").strip()
+    partner_url = html.escape(partner_url_raw if partner_url_raw.startswith("https://") else "https://terazawa-sr.jbcsite.com/", quote=True)
+    team_description = html.escape(str(office.get("team_description") or "税理士2名体制"))
+    copyright_text = html.escape(str(office.get("copyright_text") or "© TERAZAWA KEIKO TAX ACCOUNTING OFFICE. All Rights Reserved."))
     md_files = list(BLOG_DIR.glob("*.md"))
     
     # 存在する .md ファイルから記事オブジェクトを生成
@@ -93,18 +134,18 @@ def build_blog():
                 print(f"  ⚠️ 古いHTMLの消去に失敗: {e}")
 
     # ★ ハンバーガーボタン（hamburger-btn）を確実に配備（原本100%維持）
-    header_html = """
+    header_html = f"""
   <header class="site-header" id="siteHeader">
     <div class="container header-container">
-      <a href="../index.html" class="brand-logo" aria-label="寺沢景子税理士事務所 ホーム">
+      <a href="../index.html" class="brand-logo" aria-label="{office_name} ホーム">
         <svg class="brand-logo-img" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="22" cy="22" r="21" stroke="#A08C4A" stroke-width="1.5" stroke-dasharray="3 3"/>
           <path d="M22 6C14 14 12 24 22 36C32 24 30 14 22 6Z" fill="#1B2A4A" opacity="0.9"/>
           <path d="M16 20C18 26 22 30 22 36C22 30 26 26 28 20" stroke="#A08C4A" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
         <div class="brand-text">
-          <span class="brand-name">寺沢景子税理士事務所</span>
-          <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
+          <span class="brand-name">{office_name}</span>
+          <span class="brand-en">{english_name}</span>
         </div>
       </a>
 
@@ -130,31 +171,37 @@ def build_blog():
   </header>
 """
 
-    footer_html = """
+    footer_html = f"""
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
-            寺沢景子税理士事務所
+            {office_name}
           </div>
           <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
-            TERAZAWA TAX &amp; CONSULTING
+            {english_name}
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            {postal_code} {address}<br>
+            TEL: {html.escape(tel)} / FAX: {fax}<br>
+            {affiliation}
           </address>
+          <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65); margin-top: 0.8rem;">
+            提携士業：<a href="{partner_url}" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">{partner_name}</a>
+          </p>
+          <p style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); margin-top: 4px;">
+            {team_description}
+          </p>
         </div>
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
           <ul class="footer-nav-list">
-            <li><a href="../services.html#corporate" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
-            <li><a href="../services.html#audit" class="footer-nav-link">・ 税務調査対策</a></li>
-            <li><a href="../services.html#startup" class="footer-nav-link">・ 会社設立・創業支援</a></li>
-            <li><a href="../services.html#cloud" class="footer-nav-link">・ クラウド会計導入DX</a></li>
-            <li><a href="../services.html#inheritance" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
+            <li><a href="../services.html#service-01" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
+            <li><a href="../services.html#service-02" class="footer-nav-link">・ 税務調査対策</a></li>
+            <li><a href="../services.html#service-03" class="footer-nav-link">・ 会社設立・創業支援</a></li>
+            <li><a href="../services.html#service-05" class="footer-nav-link">・ クラウド会計導入DX</a></li>
+            <li><a href="../services.html#service-06" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
           </ul>
         </div>
         <div>
@@ -178,7 +225,7 @@ def build_blog():
         </div>
       </div>
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
-        <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
+        <p>{copyright_text}</p>
       </div>
     </div>
   </footer>
@@ -199,7 +246,7 @@ def build_blog():
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(art['title'])} | 寺沢景子税理士事務所</title>
+  <title>{html.escape(art['title'])} | {office_name}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
@@ -212,7 +259,7 @@ def build_blog():
       <div style="margin-bottom: 2rem;">
         <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-accent);">{html.escape(art['category'])}</span>
         <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary); margin: 0.8rem 0 1rem; line-height: 1.4;">{html.escape(art['title'])}</h1>
-        <p style="font-size: 0.85rem; color: var(--color-text-muted);">公開日: {html.escape(str(art['date']))} | 執筆: 寺沢景子税理士事務所</p>
+        <p style="font-size: 0.85rem; color: var(--color-text-muted);">公開日: {html.escape(str(art['date']))} | 執筆: {office_name}</p>
       </div>
       {detail_thumb_html}
       <div style="font-size: 1rem; line-height: 2.1; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.5rem;">
@@ -264,10 +311,10 @@ def build_blog():
 """
     else:
         # ★【新設】記事が0件のときに表示するクリーンな空表示
-        cards_html = """
+        cards_html = f"""
       <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--color-text-muted);">
-        <p style="font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.8rem; color: var(--color-primary);">現在公開中のコラムはありません。</p>
-        <p style="font-size: 0.88rem;">新しい記事が投稿されるまでお待ちください。</p>
+        <p style="font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.8rem; color: var(--color-primary);">{html.escape(empty_title)}</p>
+        <p style="font-size: 0.88rem;">{html.escape(empty_description)}</p>
       </div>
 """
 
@@ -276,7 +323,7 @@ def build_blog():
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>税務・経営コラム | 寺沢景子税理士事務所</title>
+  <title>{html.escape(page_title)} | 寺澤景子税理士事務所</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
@@ -287,9 +334,9 @@ def build_blog():
   <section class="athena-hero" style="min-height: 44vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">COLUMN</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
-      <p class="hero-sub-en">TAX &amp; MANAGEMENT INSIGHTS</p>
-      <h1 class="hero-main-title" style="margin-bottom: 1rem;">税務・経営コラム</h1>
-      <p class="hero-lead-text">実務の現場と税務署の視点から、経営に直結する生きた税務情報をお届けします。</p>
+      <p class="hero-sub-en">{html.escape(page_subtitle)}</p>
+      <h1 class="hero-main-title" style="margin-bottom: 1rem;">{html.escape(page_title)}</h1>
+      <p class="hero-lead-text">{html.escape(hero_description)}</p>
     </div>
   </section>
   <main class="container" style="padding-top: 4rem; padding-bottom: 7rem;">

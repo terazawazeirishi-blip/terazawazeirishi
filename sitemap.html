@@ -44,7 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
+<body data-cms-page="sitemap">
 
   <!-- ヘッダー -->
   <header class="site-header" id="siteHeader">
@@ -82,9 +82,9 @@
   <section class="athena-hero" style="min-height: 38vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 2.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SITEMAP</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
-      <p class="hero-sub-en">SITE STRUCTURE</p>
-      <h1 class="hero-main-title" style="margin-bottom: 0.8rem;">サイトマップ</h1>
-      <p class="hero-lead-text">当Webサイトの全ページ構成一覧です。</p>
+      <p class="hero-sub-en" data-cms-value="sitemap.page_subtitle">SITE STRUCTURE</p>
+      <h1 class="hero-main-title" data-cms-value="sitemap.page_title" style="margin-bottom: 0.8rem;">サイトマップ</h1>
+      <p class="hero-lead-text" data-cms-value="sitemap.hero_description">当Webサイトの全ページ構成一覧です。</p>
     </div>
   </section>
 
@@ -96,45 +96,48 @@
         
         <!-- メインメニュー -->
         <div>
-          <h2 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary); border-bottom: 2px solid var(--color-accent); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
+          <h2 data-cms-value="sitemap.main_pages_title" style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary); border-bottom: 2px solid var(--color-accent); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
             メインページ
           </h2>
-          <ul style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
-            <li><a href="./index.html" style="color: var(--color-primary); font-weight: 600;">・ ホーム（トップページ）</a></li>
+          <ul data-cms-list="sitemap.main_pages" style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
+            <li><a href="./index.html" data-cms-href="url" data-cms-value="label" style="color: var(--color-primary); font-weight: 600;">・ ホーム（トップページ）</a></li>
             <li><a href="./profile.html" style="color: var(--color-primary); font-weight: 600;">・ 税理士紹介・事務所概要</a></li>
             <li><a href="./pricing.html" style="color: var(--color-primary); font-weight: 600;">・ 料金案内（顧問料・スポット）</a></li>
             <li><a href="./faq.html" style="color: var(--color-primary); font-weight: 600;">・ よくある質問（FAQ）</a></li>
             <li><a href="./contact.html" style="color: var(--color-accent); font-weight: 700;">・ 初回無料相談・お問い合わせ</a></li>
             <li><a href="./blog/index.html" style="color: var(--color-primary); font-weight: 600;">・ 税務・経営コラム一覧</a></li>
+            <template data-cms-template><li><a href="./index.html" data-cms-href="url" data-cms-value="label" style="color: var(--color-primary); font-weight: 600;">ページ名</a></li></template>
           </ul>
         </div>
 
         <!-- サービス詳細 -->
         <div>
-          <h2 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary); border-bottom: 2px solid var(--color-accent); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
+          <h2 data-cms-value="sitemap.services_title" style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary); border-bottom: 2px solid var(--color-accent); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
             提供サービス一覧
           </h2>
-          <ul style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
-            <li><a href="./services.html#corporate" style="color: var(--color-text-sub);">・ 法人税務顧問・決算申告</a></li>
+          <ul data-cms-list="sitemap.services" style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
+            <li><a href="./services.html#corporate" data-cms-href="url" data-cms-value="label" style="color: var(--color-text-sub);">・ 法人税務顧問・決算申告</a></li>
             <li><a href="./services.html#audit" style="color: var(--color-text-sub);">・ 税務調査対策・事前模擬調査</a></li>
             <li><a href="./services.html#startup" style="color: var(--color-text-sub);">・ 会社設立・創業支援</a></li>
             <li><a href="./services.html#finance" style="color: var(--color-text-sub);">・ 創業融資支援・公庫対策</a></li>
             <li><a href="./services.html#cloud" style="color: var(--color-text-sub);">・ クラウド会計導入（freee/MF）</a></li>
             <li><a href="./services.html#inheritance" style="color: var(--color-text-sub);">・ 相続税申告・事業承継対策</a></li>
             <li><a href="./services.html#labor" style="color: var(--color-text-sub);">・ 助成金受給・労務管理（社労士連携）</a></li>
+            <template data-cms-template><li><a href="./services.html" data-cms-href="url" data-cms-value="label" style="color: var(--color-text-sub);">サービス名</a></li></template>
           </ul>
         </div>
 
         <!-- 規約・その他 -->
         <div>
-          <h2 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary); border-bottom: 2px solid var(--color-accent); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
+          <h2 data-cms-value="sitemap.other_title" style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary); border-bottom: 2px solid var(--color-accent); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
             規約・その他
           </h2>
-          <ul style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
-            <li><a href="./privacy.html" style="color: var(--color-text-sub);">・ 個人情報保護方針・免責事項</a></li>
+          <ul data-cms-list="sitemap.other" style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
+            <li><a href="./privacy.html" data-cms-href="url" data-cms-value="label" style="color: var(--color-text-sub);">・ 個人情報保護方針・免責事項</a></li>
             <li><a href="./sitemap.html" style="color: var(--color-text-sub);">・ サイトマップ（本ページ）</a></li>
             <li><a href="./sitemap.xml" target="_blank" style="color: var(--color-text-muted); font-size: 0.85rem;">・ XMLサイトマップ（検索エンジン用）</a></li>
             <li><a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); font-weight: 600;">・ 提携士業：ザワテラス社労士 &rarr;</a></li>
+            <template data-cms-template><li><a href="./privacy.html" data-cms-href="url" data-cms-value="label" data-cms-external="external" style="color: var(--color-text-sub);">リンク名</a></li></template>
           </ul>
         </div>
 
@@ -154,24 +157,24 @@
         <!-- カラム 1：事務所基本情報 -->
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
-            寺澤景子税理士事務所
+            <span data-cms-value="office.office_name">寺澤景子税理士事務所</span>
           </div>
           <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
-            TERAZAWA TAX &amp; CONSULTING
+            <span data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023<br>
-            熊本県天草市南町5-22<br>
-            TEL: <a href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;">0969-22-1166</a><br>
-            FAX: 0969-22-1167<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            <span data-cms-value="office.postal_code">〒863-0023</span><br>
+            <span data-cms-value="office.address">熊本県天草市南町5-22</span><br>
+            TEL: <a data-cms-href="office.tel" href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;"><span data-cms-value="office.tel">0969-22-1166</span></a><br>
+            FAX: <span data-cms-value="office.fax">0969-22-1167</span><br>
+            <span data-cms-value="office.affiliation">南九州税理士会熊本県連 所属（第154978号）</span>
           </address>
           <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.12);">
             <p style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.65);">
-              提携士業：<a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;">ザワテラス社労士</a>
+              提携士業：<a data-cms-href="office.partner_sr_url" href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent-light); text-decoration: underline;"><span data-cms-value="office.partner_sr_name">ザワテラス社労士</span></a>
             </p>
             <p style="font-size: 0.78rem; color: rgba(255, 255, 255, 0.5); margin-top: 4px;">
-              税理士2人体制（元統括官 寺澤景子 / 税理士歴35年ベテラン税理士）
+              <span data-cms-value="office.team_description">税理士2人体制（元統括官 寺澤景子 / 税理士歴35年ベテラン税理士）</span>
             </p>
           </div>
         </div>

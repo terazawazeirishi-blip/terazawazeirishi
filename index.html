@@ -137,7 +137,7 @@
     }
   </style>
 </head>
-<body>
+<body data-cms-page="home">
 
   <!-- ヘッダーナビゲーション -->
   <header class="site-header" id="siteHeader">
@@ -190,9 +190,10 @@
 
     <div class="container hero-container-front">
       <div class="hero-content-col">
-        <p class="hero-sub-en">TERAZAWA TAX &amp; CONSULTING</p>
-        <h1 class="hero-main-title">数字を、経営の<br>最強の武器に。</h1>
-        <p class="hero-lead-text">
+        <p class="hero-sub-en" data-cms-value="home.hero_badge">TERAZAWA TAX &amp; CONSULTING</p>
+        <h1 class="hero-main-title" data-cms-value="home.hero_catch_main" style="white-space: pre-line;">数字を、経営の
+最強の武器に。</h1>
+        <p class="hero-lead-text" data-cms-value="home.hero_catch_sub" style="white-space: pre-line;">
           <strong>税務署21年在職・元法人統括官の寺澤景子</strong>と、<br>
           <strong>税理士歴35年の税理士</strong>による強固な2人体制。<br>
           「国税の調査着眼点」と「35年の実務経験」による盤石のダブルチェックで、<br>
@@ -215,13 +216,13 @@
           </div>
         </div>
 
-        <div class="hero-cta-group">
-          <a href="./contact.html" class="floating-cta-btn" style="position: static; padding: 1.1rem 2.4rem; font-size: 1.05rem;">
-            <span>初回無料相談に申し込む（来所 / オンライン）</span>
+        <div class="hero-cta-group" data-cms-block-id="block-cta-01">
+          <a data-cms-href="home.hero_cta_url" href="./contact.html" class="floating-cta-btn" style="position: static; padding: 1.1rem 2.4rem; font-size: 1.05rem;">
+            <span data-cms-value="home.hero_cta_label">初回無料相談に申し込む（来所 / オンライン）</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a href="./services.html" class="nav-link" style="font-weight: 600; padding: 0.8rem 1.4rem;">
-            サービス一覧を見る &rarr;
+          <a data-cms-href="home.services_cta_url" href="./services.html" class="nav-link" style="font-weight: 600; padding: 0.8rem 1.4rem;">
+            <span data-cms-value="home.services_cta_label">サービス一覧を見る</span> &rarr;
           </a>
         </div>
       </div>
@@ -229,7 +230,7 @@
   </section>
 
   <!-- お知らせセクション -->
-  <section class="athena-news-section" id="news" style="background-color: var(--color-bg-base); border-bottom: 1px solid var(--color-border);">
+  <section class="athena-news-section" id="news" data-cms-block-id="block-news-01" style="background-color: var(--color-bg-base); border-bottom: 1px solid var(--color-border);">
     <div class="container">
       <div class="athena-news-grid">
         <div>
@@ -238,6 +239,7 @@
         </div>
 
         <div>
+          <!-- NEWS_START -->
           <div class="news-items-wrapper">
             <div class="news-item">
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.4rem; flex-wrap: wrap;">
@@ -252,17 +254,18 @@
               </div>
             </div>
           </div>
+          <!-- NEWS_END -->
         </div>
       </div>
     </div>
   </section>
 
   <!-- 01〜05 ジグザグ写真レイアウト (About Us) -->
-  <section class="athena-about-section" id="about">
+  <section class="athena-about-section" id="about" data-cms-block-id="block-features-01">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title" data-en="ABOUT US">当事務所が選ばれる5つの理由</h2>
-        <p class="section-lead">元統括官の調査眼 × 歴35年のベテラン実務力。強固な2人体制がもたらす圧倒的安心感。</p>
+        <h2 class="section-title" data-en="ABOUT US" data-cms-value="home.features_title">当事務所が選ばれる5つの理由</h2>
+        <p class="section-lead" data-cms-value="home.features_subtitle">元統括官の調査眼 × 歴35年のベテラン実務力。強固な2人体制がもたらす圧倒的安心感。</p>
         <div class="section-flower-divider" aria-hidden="true"></div>
       </div>
 
@@ -273,9 +276,10 @@
           <div class="zigzag-content">
             <span class="athena-num-bg">01</span>
             <span class="zigzag-tag">TWO-SPECIALIST ADVISORY</span>
-            <h3 class="zigzag-heading">税理士2人体制による、<br>死角のない万全のダブルチェック</h3>
-            <p class="zigzag-text">
-              1人の税理士だけに依存する事務所とは異なり、当事務所は<strong>「国税21年在職・元法人統括官の寺澤景子」</strong>と<strong>「税理士歴35年のベテラン税理士」</strong>の2名がすべての重要案件・決算書を多角的に検証。人的ミスを未然に防ぎ、最高品質の申告精度を担保します。
+            <h3 class="zigzag-heading" data-cms-value="home.feature_01_title" style="white-space: pre-line;">税理士2人体制による、
+死角のない万全のダブルチェック</h3>
+            <p class="zigzag-text" data-cms-value="home.feature_01_text">
+              1人の税理士だけに依存する事務所とは異なり、当事務所は「国税21年在職・元法人統括官の寺澤景子」と「税理士歴35年のベテラン税理士」の2名がすべての重要案件・決算書を多角的に検証。人的ミスを未然に防ぎ、最高品質の申告精度を担保します。
             </p>
           </div>
         </div>
@@ -285,8 +289,9 @@
           <div class="zigzag-content">
             <span class="athena-num-bg">02</span>
             <span class="zigzag-tag">TAX AUDIT SPECIALIST</span>
-            <h3 class="zigzag-heading">元法人課税部門統括官が直接導く、<br>圧倒的な税務調査対策と予防</h3>
-            <p class="zigzag-text">
+            <h3 class="zigzag-heading" data-cms-value="home.feature_02_title" style="white-space: pre-line;">元法人課税部門統括官が直接導く、
+圧倒的な税務調査対策と予防</h3>
+            <p class="zigzag-text" data-cms-value="home.feature_02_text">
               国税局・税務署で21年間、数千件に及ぶ調査の最高責任者を務めた寺澤景子が、「税務署側がどのような視点で帳簿をチェックし、どこに疑義を抱くのか」を熟知したうえで事前に対策。理不尽な追徴課税から会社財産を正当に防衛します。
             </p>
           </div>
@@ -297,9 +302,10 @@
           <div class="zigzag-content">
             <span class="athena-num-bg">03</span>
             <span class="zigzag-tag">DEEP EXPERIENCE</span>
-            <h3 class="zigzag-heading">税理士歴35年。<br>あらゆる業種・難局を乗り越えてきた実力</h3>
-            <p class="zigzag-text">
-              共同代表体制を支える<strong>税理士</strong>は、35年にわたり第一線で企業の盛衰や税制改正の変遷を見届けてきた大ベテラン。建設・製造・医療・小売・不動産など、あらゆる業界固有の商慣習や会計処理を熟知し、揺るぎない的確な判断を下します。
+            <h3 class="zigzag-heading" data-cms-value="home.feature_03_title" style="white-space: pre-line;">税理士歴35年。
+あらゆる業種・難局を乗り越えてきた実力</h3>
+            <p class="zigzag-text" data-cms-value="home.feature_03_text">
+              共同代表体制を支える税理士は、35年にわたり第一線で企業の盛衰や税制改正の変遷を見届けてきた大ベテラン。建設・製造・医療・小売・不動産など、あらゆる業界固有の商慣習や会計処理を熟知し、揺るぎない的確な判断を下します。
             </p>
           </div>
         </div>
@@ -309,8 +315,9 @@
           <div class="zigzag-content">
             <span class="athena-num-bg">04</span>
             <span class="zigzag-tag">ONE-STOP ADVISORY</span>
-            <h3 class="zigzag-heading">ザワテラス社労士と強力連携、<br>税務・労務・助成金をワンストップ解決</h3>
-            <p class="zigzag-text">
+            <h3 class="zigzag-heading" data-cms-value="home.feature_04_title" style="white-space: pre-line;">ザワテラス社労士と強力連携、
+税務・労務・助成金をワンストップ解決</h3>
+            <p class="zigzag-text" data-cms-value="home.feature_04_text">
               提携先である「ザワテラス社労士」と強固に連携。雇用関係助成金の申請、就業規則作成、社会保険手続きから税務顧問まで、経営課題をひとつの窓口で一括サポートいたします。
             </p>
             <div style="margin-top: 1.2rem;">
@@ -326,8 +333,9 @@
           <div class="zigzag-content">
             <span class="athena-num-bg">05</span>
             <span class="zigzag-tag">WARM &amp; ACCESSIBLE</span>
-            <h3 class="zigzag-heading">敷居の高さを感じさせない、<br>親身で温かなコミュニケーション</h3>
-            <p class="zigzag-text">
+            <h3 class="zigzag-heading" data-cms-value="home.feature_05_title" style="white-space: pre-line;">敷居の高さを感じさせない、
+親身で温かなコミュニケーション</h3>
+            <p class="zigzag-text" data-cms-value="home.feature_05_text">
               威圧感や堅苦しさは一切ありません。どんな初歩的な疑問にも専門用語を使わず平易にお答えします。女性経営者の方や起業間もない方でも、安心してお話しいただける環境を整えています。
             </p>
           </div>
@@ -338,7 +346,7 @@
   </section>
 
   <!-- Stickyサービスセクション -->
-  <section class="athena-service-section" id="services">
+  <section class="athena-service-section" id="services" data-cms-block-id="block-services-01">
     <div class="container athena-service-layout">
       <div class="athena-service-sticky">
         <div class="section-header text-left">
@@ -358,25 +366,25 @@
       <div class="service-list-cards">
         <article class="service-card-item no-image">
           <div class="service-card-body">
-            <h3 class="service-card-title">法人税務顧問・決算申告</h3>
-            <p class="service-card-desc">月次決算の把握から適正な節税対策まで、2人体制の綿密なレビューで決算書を作成します。</p>
-            <a href="./services.html#corporate" class="service-card-link">詳細を見る &rarr;</a>
+            <h3 class="service-card-title" data-cms-value="services.services.0.title">法人税務顧問・決算申告</h3>
+            <p class="service-card-desc" data-cms-value="services.services.0.summary">月次決算の把握から適正な節税対策まで、2人体制の綿密なレビューで決算書を作成します。</p>
+            <a data-cms-href="services.services.0.link" href="./services.html#service-01" class="service-card-link">詳細を見る &rarr;</a>
           </div>
         </article>
 
         <article class="service-card-item no-image">
           <div class="service-card-body">
-            <h3 class="service-card-title">税務調査対策・事前模擬調査</h3>
-            <p class="service-card-desc">元統括官の寺澤景子が直接立ち会い。調査官の心理を読み解き納税者の権利を護ります。</p>
-            <a href="./services.html#audit" class="service-card-link">詳細を見る &rarr;</a>
+            <h3 class="service-card-title" data-cms-value="services.services.1.title">税務調査対策・事前模擬調査</h3>
+            <p class="service-card-desc" data-cms-value="services.services.1.summary">元統括官の寺澤景子が直接立ち会い。調査官の心理を読み解き納税者の権利を護ります。</p>
+            <a data-cms-href="services.services.1.link" href="./services.html#service-02" class="service-card-link">詳細を見る &rarr;</a>
           </div>
         </article>
 
         <article class="service-card-item no-image">
           <div class="service-card-body">
-            <h3 class="service-card-title">会社設立・創業融資支援</h3>
-            <p class="service-card-desc">設立登記の士業連携から、公庫融資獲得に向けた説得力ある事業計画策定まで伴走します。</p>
-            <a href="./services.html#startup" class="service-card-link">詳細を見る &rarr;</a>
+            <h3 class="service-card-title" data-cms-value="services.services.2.title">会社設立・創業融資支援</h3>
+            <p class="service-card-desc" data-cms-value="services.services.2.summary">設立登記の士業連携から、公庫融資獲得に向けた説得力ある事業計画策定まで伴走します。</p>
+            <a data-cms-href="services.services.2.link" href="./services.html#service-03" class="service-card-link">詳細を見る &rarr;</a>
           </div>
         </article>
       </div>
@@ -384,11 +392,11 @@
   </section>
 
   <!-- ★【完全復元】2人の税理士紹介ブロック（寺澤代表 ＆ 田河副代表 2名体制・説明文完全版） -->
-  <section class="message-section" style="background-color: var(--color-bg-base);" id="team">
+  <section class="message-section" style="background-color: var(--color-bg-base);" id="team" data-cms-block-id="block-profile-01">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title" data-en="TAX ACCOUNTANTS">税理士紹介</h2>
-        <p class="section-lead">異なる専門性を備えた2名の税理士が、多角的な視野で貴社を支えます。</p>
+        <p class="section-lead" data-cms-value="profile.hero_lead" style="white-space: pre-line;">「国税21年の調査眼」×「実務歴35年のベテラン力」。2人の税理士による万全の体制が、貴社の財務基盤を強固に護ります。</p>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 960px; margin: 0 auto;">
@@ -405,13 +413,14 @@
             <span class="representative-overlay-text">Keiko Terazawa</span>
           </div>
           <span class="zigzag-tag">REPRESENTATIVE TAX ACCOUNTANT</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.4rem;">寺沢 景子（てらざわ けいこ）</h3>
+          <h3 data-cms-value="profile.rep_keiko.display_name" style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.4rem;">代表税理士　寺澤 景子（てらざわ けいこ）</h3>
           <p style="font-size: 0.85rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.2rem; line-height: 1.6;">
-            国税・税務署21年在職 / 元法人課税部門統括官<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            <span data-cms-value="profile.rep_keiko.title">国税・税務署21年在職・税務調査のプロフェッショナル</span><br>
+
+            <span data-cms-value="office.affiliation">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</span>
           </p>
-          <p style="font-size: 0.9rem; line-height: 1.85; color: var(--color-text-sub); text-align: left;">
-            税務調査の最前線で培った知見を活かし、税務署目線での事前リスク抽出と法令に則った適正申告を徹底。温かな対話を通じて経営者様の不安を解消します。
+          <p data-cms-value="profile.rep_keiko.message" style="font-size: 0.9rem; line-height: 1.85; color: var(--color-text-sub); text-align: left;">
+            「税務署がどう見るか」を熟知しているからこそ、正当な権利を守り、経営者が事業に専念できる環境を創り出すことができます。
           </p>
         </div>
 
@@ -427,13 +436,12 @@
             <span class="representative-overlay-text">Senior Tax Advisor</span>
           </div>
           <span class="zigzag-tag">SENIOR TAX ACCOUNTANT</span>
-          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.4rem;">田河 定茂（たがわ さだしげ）</h3>
+          <h3 data-cms-value="profile.rep_senior.display_name" style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.4rem;">副代表税理士　田河 定茂（たがわ さだしげ）</h3>
           <p style="font-size: 0.85rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.2rem; line-height: 1.6;">
-            税理士実務歴35年 / ベテラン税理士<br>
-            多様な業種・財務コンサルティング実績
+            <span data-cms-value="profile.rep_senior.title">税理士経験35年・あらゆる税務実務に精通したベテラン税理士</span>
           </p>
-          <p style="font-size: 0.9rem; line-height: 1.85; color: var(--color-text-sub); text-align: left;">
-            35年に及ぶ豊富な実務経験に基づき、難易度の高い税務判断や事業承継、複雑な資産税申告にも万全に対応。経験に裏打ちされた盤石の安心感をお約束します。
+          <p data-cms-value="profile.rep_senior.message" style="font-size: 0.9rem; line-height: 1.85; color: var(--color-text-sub); text-align: left;">
+            35年間の実務で培った経験は、あらゆる業種・あらゆる局面での確かな羅針盤となります。
           </p>
         </div>
 
@@ -516,16 +524,16 @@
       <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
-            寺澤景子税理士事務所
+            <span data-cms-value="office.office_name">寺澤景子税理士事務所</span>
           </div>
           <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
-            TERAZAWA TAX &amp; CONSULTING
+            <span data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: <a href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;">0969-22-1166</a><br>
-            FAX: 0969-22-1167<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            <span data-cms-value="office.postal_code">〒863-0023</span> <span data-cms-value="office.address">熊本県天草市南町5-22</span><br>
+            TEL: <a data-cms-href="office.tel" href="tel:0969221166" style="color: #FFFFFF; font-weight: 600;"><span data-cms-value="office.tel">0969-22-1166</span></a><br>
+            FAX: <span data-cms-value="office.fax">0969-22-1167</span><br>
+            <span data-cms-value="office.affiliation">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</span>
           </address>
         </div>
 
@@ -569,7 +577,7 @@
       </div>
 
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
-        <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
+        <p data-cms-value="office.copyright_text">&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
     </div>
   </footer>

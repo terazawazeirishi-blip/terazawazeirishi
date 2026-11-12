@@ -1,7 +1,7 @@
 {
-  "page_title": "料金案内",
-  "page_subtitle": "PRICING PLANS",
-  "intro_text": "寺澤景子税理士事務所では、明確かつ公正な料金体系を定めております。2人体制によるダブルチェック品質を、適正価格でお届けします。",
+  "page_title": "明瞭な料金案内",
+  "page_subtitle": "TRANSPARENT FEE STRUCTURE",
+  "intro_text": "事業規模やご要望に応じた事前のお見積もりを徹底。\n不透明な追加請求は一切ございません。",
   "plans": [
     {
       "id": "plan-startup",
@@ -60,5 +60,9 @@
       "price": "遺産総額の 0.5%〜",
       "notes": "財産評価・遺産分割協議書作成含む"
     }
-  ]
+  ],
+  "plans_title": "法人税務顧問プラン",
+  "plans_description": "自社の成長フェーズに合わせて最適なプランをお選びいただけます。",
+  "spot_fees_title": "スポット・個別業務料金",
+  "spot_fees_description": "顧問契約のないお客様でも、個別業務を承っております。"
 }

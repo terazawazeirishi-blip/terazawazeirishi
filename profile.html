@@ -87,7 +87,7 @@
     }
   </style>
 </head>
-<body>
+<body data-cms-page="profile">
 
   <!-- 完全統一ヘッダー -->
   <header class="site-header" id="siteHeader">
@@ -129,9 +129,9 @@
   <section class="athena-hero" style="min-height: 48vh; padding-top: calc(var(--header-height) + 2rem); padding-bottom: 3rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">PROFILE</div>
     <div class="container" style="position: relative; z-index: 2; text-align: center;">
-      <p class="hero-sub-en">OUR PROFESSIONALS &amp; OFFICE</p>
-      <h1 class="hero-main-title" style="margin-bottom: 1rem;">税理士紹介・事務所概要</h1>
-      <p class="hero-lead-text" style="max-width: 720px; margin: 0 auto;">
+      <p class="hero-sub-en" data-cms-value="profile.page_subtitle">OUR PROFESSIONALS &amp; OFFICE</p>
+      <h1 class="hero-main-title" style="margin-bottom: 1rem;" data-cms-value="profile.page_title">税理士紹介・事務所概要</h1>
+      <p class="hero-lead-text" style="max-width: 720px; margin: 0 auto; white-space: pre-line;" data-cms-value="profile.hero_lead">
         「国税21年の調査眼」×「実務歴35年のベテラン力」。<br>
         2人の税理士による万全の体制が、貴社の財務基盤を強固に護ります。
       </p>
@@ -144,7 +144,7 @@
     <!-- 税理士 1: 寺澤景子 代表税理士 -->
     <section class="profile-member-grid">
       <div class="profile-photo-col">
-        <div class="representative-photo-frame">
+        <div class="representative-photo-frame" data-cms-image="images.rep_keiko" data-cms-alt="profile.rep_keiko.name">
           <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="800" height="800" fill="#1B2A4A"/>
             <circle cx="400" cy="360" r="160" fill="#FAF8F5" opacity="0.9"/>
@@ -153,25 +153,26 @@
           </svg>
           <span class="representative-overlay-text">Keiko Terazawa</span>
         </div>
-        <div class="profile-info-badge" style="background: var(--color-bg-subtle); padding: 1.1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.7; border: 1px solid var(--color-border);">
+        <div class="profile-info-badge" data-cms-list="profile.rep_keiko.badge_lines" style="background: var(--color-bg-subtle); padding: 1.1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.7; border: 1px solid var(--color-border);">
           <p><strong>南九州税理士会 熊本県連 所属</strong></p>
           <p>税理士登録番号：第154978号</p>
           <p>元国税局・税務署 法人統括官</p>
+          <template data-cms-template><p>写真下の紹介項目</p></template>
         </div>
       </div>
 
       <div class="profile-desc-col">
         <div style="text-align: left;">
           <span class="zigzag-tag">REPRESENTATIVE TAX ACCOUNTANT</span>
-          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--color-primary); margin-bottom: 0.4rem;">
-            代表税理士　寺沢 景子（てらざわ けいこ）
+          <h2 data-cms-value="profile.rep_keiko.display_name" style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--color-primary); margin-bottom: 0.4rem;">
+            代表税理士　寺澤 景子（てらざわ けいこ）
           </h2>
-          <p class="profile-sub-title" style="font-size: 0.95rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
+          <p class="profile-sub-title" data-cms-value="profile.rep_keiko.title" style="font-size: 0.95rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
             国税・税務署21年在職・税務調査のプロフェッショナル
           </p>
         </div>
 
-        <div style="font-size: 0.95rem; line-height: 1.95; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.1rem; text-align: left;">
+        <div data-cms-list="profile.rep_keiko.profile_paragraphs" style="font-size: 0.95rem; line-height: 1.95; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.1rem; text-align: left;">
           <p>
             私は国税局・税務署に21年間在職し、最終役職として法人課税部門の統括官を務めてまいりました。数千社に及ぶ企業の税務調査と申告指導を担当する中で、「税務当局がどこを注視し、どのような会計処理に疑義を持つのか」という現場の肌感覚を徹底的に培いました。
           </p>
@@ -181,15 +182,17 @@
           <p>
             敷居の高い税理士ではなく、経営者の皆様が何でも気兼ねなく打ち明けられるパートナーでありたいと考えています。
           </p>
+          <template data-cms-template><p>紹介文</p></template>
         </div>
 
         <!-- 経歴年表 -->
         <div class="profile-career-box" style="margin-top: 1.8rem; background: var(--color-bg-subtle); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
-          <h4 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.8rem; font-weight: 600;">【主な経歴】</h4>
-          <ul style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--color-text-sub);">
+          <h4 data-cms-value="profile.rep_keiko.career_title" style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.8rem; font-weight: 600;">【主な経歴】</h4>
+          <ul data-cms-list="profile.rep_keiko.career_points" style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--color-text-sub);">
             <li>・国税局・税務署に21年間在職。法人税・消費税・源泉所得税調査に従事。</li>
             <li>・法人課税部門 統括官として、調査指揮および適正申告指導を統括。</li>
             <li>・寺澤景子税理士事務所を開業（登録番号：第154978号）。</li>
+            <template data-cms-template><li>経歴</li></template>
           </ul>
         </div>
       </div>
@@ -198,7 +201,7 @@
     <!-- 税理士 2: ベテラン税理士［お名前仮入力］ -->
     <section class="profile-member-grid">
       <div class="profile-photo-col">
-        <div class="representative-photo-frame">
+        <div class="representative-photo-frame" data-cms-image="images.rep_senior" data-cms-alt="profile.rep_senior.name">
           <svg class="representative-photo-img" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="800" height="800" fill="#5B7065"/>
             <circle cx="400" cy="360" r="160" fill="#FAF8F5" opacity="0.9"/>
@@ -207,39 +210,42 @@
           </svg>
           <span class="representative-overlay-text">Senior Tax Advisor</span>
         </div>
-        <div class="profile-info-badge" style="background: var(--color-bg-subtle); padding: 1.1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.7; border: 1px solid var(--color-border);">
+        <div class="profile-info-badge" data-cms-list="profile.rep_senior.badge_lines" style="background: var(--color-bg-subtle); padding: 1.1rem; border-radius: var(--radius-md); font-size: 0.85rem; line-height: 1.7; border: 1px solid var(--color-border);">
           <p><strong>税理士実務歴35年</strong></p>
           <p>税務・会計・事業承継コンサル</p>
           <p>多業種財務アドバイザリー実績</p>
+          <template data-cms-template><p>写真下の紹介項目</p></template>
         </div>
       </div>
 
       <div class="profile-desc-col">
         <div style="text-align: left;">
           <span class="zigzag-tag">SENIOR TAX ACCOUNTANT</span>
-          <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--color-primary); margin-bottom: 0.4rem;">
-            税理士　
+          <h2 data-cms-value="profile.rep_senior.display_name" style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--color-primary); margin-bottom: 0.4rem;">
+            副代表税理士　田河 定茂（たがわ さだしげ）
           </h2>
-          <p class="profile-sub-title" style="font-size: 0.95rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
+          <p class="profile-sub-title" data-cms-value="profile.rep_senior.title" style="font-size: 0.95rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
             税理士経験35年・あらゆる税務実務に精通したベテラン税理士
           </p>
         </div>
 
-        <div style="font-size: 0.95rem; line-height: 1.95; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.1rem; text-align: left;">
+        <div data-cms-list="profile.rep_senior.profile_paragraphs" style="font-size: 0.95rem; line-height: 1.95; color: var(--color-text-main); display: flex; flex-direction: column; gap: 1.1rem; text-align: left;">
           <p>
             税理士として実務の最前線に立って35年。好況期・不況期を問わず、中小企業が直面する資金繰り、組織再編、事業承継、複雑な資産税申告を数多く手掛けてまいりました。
           </p>
           <p>
             税制は年々複雑化していますが、本質は「経営者が安心して前を向き、会社を次世代へと繋ぐこと」にあります。寺沢代表が持つ国税統括官としての切れ味鋭い調査対策と、私が長年培ってきた実務ノウハウを融合させることで、他にはない盤石のサポートを提供いたします。
           </p>
+          <template data-cms-template><p>紹介文</p></template>
         </div>
 
         <div class="profile-career-box" style="margin-top: 1.8rem; background: var(--color-bg-subtle); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: left;">
-          <h4 style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.8rem; font-weight: 600;">【主な経歴・専門分野】</h4>
-          <ul style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--color-text-sub);">
+          <h4 data-cms-value="profile.rep_senior.career_title" style="font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.8rem; font-weight: 600;">【主な経歴・専門分野】</h4>
+          <ul data-cms-list="profile.rep_senior.career_points" style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--color-text-sub);">
             <li>・税理士登録後、35年にわたり多種多様な法人の税務顧問・決算申告を統括。</li>
             <li>・製造業、建設業、医療法人、小売業など幅広い業界の実務に精通。</li>
             <li>・寺澤景子税理士事務所にて、重要案件のクロスチェックおよび高度税務相談を担当。</li>
+            <template data-cms-template><li>経歴</li></template>
           </ul>
         </div>
       </div>
@@ -257,41 +263,41 @@
           <tbody>
             <tr>
               <th>事務所名</th>
-              <td>寺澤景子税理士事務所（TERAZAWA TAX &amp; CONSULTING）</td>
+              <td><span data-cms-value="office.office_name">寺澤景子税理士事務所</span>（<span data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>）</td>
             </tr>
             <tr>
               <th>体制</th>
-              <td>税理士2名体制（寺澤景子 税理士 ／ 税理士）</td>
+              <td><span data-cms-value="office.team_description">税理士2名体制（寺澤景子 税理士 ／ 田河定茂 税理士）</span></td>
             </tr>
             <tr>
               <th>所属団体</th>
-              <td>南九州税理士会 熊本県連 所属（登録番号：第154978号）</td>
+              <td><span data-cms-value="office.affiliation">南九州税理士会 熊本県連 所属（登録番号：第154978号）</span></td>
             </tr>
             <tr>
               <th>所在地</th>
-              <td>〒863-0023 熊本県天草市南町5-22</td>
+              <td><span data-cms-value="office.postal_code">〒863-0023</span> <span data-cms-value="office.address">熊本県天草市南町5-22</span><br><a data-cms-href="office.google_map_url" href="https://maps.google.com/?q=熊本県天草市南町5-22" target="_blank" rel="noopener noreferrer">地図を開く</a></td>
             </tr>
             <tr>
               <th>電話番号</th>
-              <td><a href="tel:0969221166" style="color: var(--color-primary); font-weight: 600;">0969-22-1166</a></td>
+              <td><a data-cms-href="office.tel" href="tel:0969221166" style="color: var(--color-primary); font-weight: 600;"><span data-cms-value="office.tel">0969-22-1166</span></a></td>
             </tr>
             <tr>
               <th>FAX番号</th>
-              <td>0969-22-1167</td>
+              <td><span data-cms-value="office.fax">0969-22-1167</span></td>
             </tr>
             <tr>
               <th>営業時間</th>
-              <td>平日 9:30〜17:30（土日祝面談は事前予約対応）</td>
+              <td><span data-cms-value="office.business_hours">平日 9:30〜17:30（土日祝面談は事前予約対応）</span></td>
             </tr>
             <tr>
               <th>対応エリア</th>
-              <td>熊本県全域（天草市・熊本市等）および全国オンライン対応</td>
+              <td><span data-cms-value="office.target_area">熊本県全域（天草市・熊本市等）および全国オンライン対応</span></td>
             </tr>
             <tr>
               <th>提携士業</th>
               <td>
-                <strong>ザワテラス社労士</strong>（社会保険労務士と強力連携）<br>
-                <a href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); font-size: 0.88rem;">
+                <strong data-cms-value="office.partner_sr_name">ザワテラス社労士</strong>（社会保険労務士と強力連携）<br>
+                <a data-cms-href="office.partner_sr_url" href="https://terazawa-sr.jbcsite.com/" target="_blank" rel="noopener noreferrer" style="color: var(--color-accent); font-size: 0.88rem;">
                   公式URL: https://terazawa-sr.jbcsite.com/ &rarr;
                 </a>
               </td>
@@ -323,15 +329,15 @@
       <div class="footer-top">
         <div>
           <div class="footer-brand-name" style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: #FFFFFF; letter-spacing: 0.08em; margin-bottom: 0.8rem;">
-            寺澤景子税理士事務所
+            <span data-cms-value="office.office_name">寺澤景子税理士事務所</span>
           </div>
           <p style="font-size: 0.72rem; letter-spacing: 0.16em; color: var(--color-accent-light); margin-bottom: 1.2rem; text-transform: uppercase;">
-            TERAZAWA TAX &amp; CONSULTING
+            <span data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>
           </p>
           <address class="footer-address" style="font-style: normal; font-size: 0.88rem; line-height: 1.85; color: rgba(255, 255, 255, 0.75);">
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: 0969-22-1166 / FAX: 0969-22-1167<br>
-            南九州税理士会熊本県連 所属（第154978号）
+            <span data-cms-value="office.postal_code">〒863-0023</span> <span data-cms-value="office.address">熊本県天草市南町5-22</span><br>
+            TEL: <a data-cms-href="office.tel" href="tel:0969221166"><span data-cms-value="office.tel">0969-22-1166</span></a> / FAX: <span data-cms-value="office.fax">0969-22-1167</span><br>
+            <span data-cms-value="office.affiliation">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</span>
           </address>
         </div>
 
@@ -369,7 +375,7 @@
       </div>
 
       <div class="footer-bottom" style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.5); font-size: 0.82rem;">
-        <p>&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
+        <p data-cms-value="office.copyright_text">&copy; 2026 TERAZAWA TAX &amp; CONSULTING. All Rights Reserved.</p>
       </div>
     </div>
   </footer>

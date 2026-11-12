@@ -28,6 +28,189 @@
     return repoBase + clean + '?v=' + Date.now();
   }
 
+  // Pages CMSの構造化データを、各ページの表示に安全に反映する
+  function getCmsValue(data, path) {
+    if (!data || typeof path !== 'string') return undefined;
+    return path.split('.').reduce(function (value, key) {
+      return value == null ? undefined : value[key];
+    }, data);
+  }
+
+  function setCmsHref(element, value) {
+    if (typeof value !== 'string' || !value.trim()) return;
+    const nextValue = value.trim();
+    const currentHref = element.getAttribute('href') || '';
+
+    if (/^tel:/i.test(currentHref)) {
+      const digits = nextValue.replace(/[^0-9+]/g, '');
+      if (digits) element.setAttribute('href', 'tel:' + digits);
+      return;
+    }
+
+    if (/^(https?:|mailto:|tel:)/i.test(nextValue) ||
+        /^(\.\/|\.\.\/|\/|#)/.test(nextValue)) {
+      element.setAttribute('href', nextValue);
+    }
+  }
+
+  // 配列フィールドは template を複製して描画する。
+  // JSONを読み込めなかった場合は、既存HTMLの表示をそのまま残す。
+  function hydrateCmsScope(root, scope) {
+    if (!root || !scope) return;
+
+    const fieldSelector = '[data-cms-value], [data-cms-href], [data-cms-external]';
+    const fieldElements = [];
+    if (root.nodeType === 1 && root.matches(fieldSelector)) fieldElements.push(root);
+    root.querySelectorAll(fieldSelector).forEach(function (element) {
+      fieldElements.push(element);
+    });
+
+    fieldElements.forEach(function (element) {
+      if (element.closest('[data-cms-list]')) return;
+
+      const valuePath = element.getAttribute('data-cms-value');
+      if (valuePath) {
+        const value = getCmsValue(scope, valuePath);
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          element.textContent = String(value);
+        }
+      }
+
+      const hrefPath = element.getAttribute('data-cms-href');
+      if (hrefPath) setCmsHref(element, getCmsValue(scope, hrefPath));
+
+      const externalPath = element.getAttribute('data-cms-external');
+      if (externalPath) {
+        if (getCmsValue(scope, externalPath) === true) {
+          element.setAttribute('target', '_blank');
+          element.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          element.removeAttribute('target');
+          element.removeAttribute('rel');
+        }
+      }
+    });
+
+    const lists = Array.from(root.querySelectorAll('[data-cms-list]')).filter(function (list) {
+      return !list.parentElement.closest('[data-cms-list]');
+    });
+
+    lists.forEach(function (container) {
+      const values = getCmsValue(scope, container.getAttribute('data-cms-list'));
+      if (!Array.isArray(values)) return;
+
+      const template = Array.from(container.children).find(function (child) {
+        return child.tagName === 'TEMPLATE' && child.hasAttribute('data-cms-template');
+      });
+      if (!template || !template.content.firstElementChild) return;
+
+      const blueprint = template.content.firstElementChild;
+      const rendered = [];
+
+      values.forEach(function (item) {
+        const clone = blueprint.cloneNode(true);
+        if (item && typeof item === 'object' && !Array.isArray(item)) {
+          hydrateCmsScope(clone, item);
+        } else if (item !== null && item !== undefined) {
+          clone.textContent = String(item);
+        }
+        rendered.push(clone);
+      });
+
+      container.replaceChildren(...rendered);
+      container.hidden = rendered.length === 0;
+    });
+  }
+
+  async function syncStructuredCmsContent() {
+    const pageKey = document.body && document.body.getAttribute('data-cms-page');
+    if (!pageKey) return;
+
+    const sourceMap = {
+      profile: [
+        { path: 'content/profile_texts.json', key: 'profile' },
+        { path: 'content/office_info.json', key: 'office' },
+        { path: 'content/site_images.json', key: 'images' }
+      ],
+      privacy: [
+        { path: 'content/legal_texts.json', key: 'legal' },
+        { path: 'content/office_info.json', key: 'office' }
+      ],
+      sitemap: [
+        { path: 'content/sitemap.json', key: 'sitemap' },
+        { path: 'content/office_info.json', key: 'office' }
+      ],
+      contact: [
+        { path: 'content/contact.json', key: 'contact' },
+        { path: 'content/office_info.json', key: 'office' }
+      ],
+      services: [
+        { path: 'content/services.json', key: 'services' },
+        { path: 'content/office_info.json', key: 'office' }
+      ],
+      pricing: [
+        { path: 'content/pricing.json', key: 'pricing' },
+        { path: 'content/office_info.json', key: 'office' }
+      ],
+      faq: [
+        { path: 'content/faq.json', key: 'faq' },
+        { path: 'content/office_info.json', key: 'office' }
+      ],
+      home: [
+        { path: 'content/home_texts.json', key: 'home' },
+        { path: 'content/profile_texts.json', key: 'profile' },
+        { path: 'content/services.json', key: 'services' },
+        { path: 'content/pages/home_blocks.json', key: 'home_blocks' },
+        { path: 'content/site_images.json', key: 'images' },
+        { path: 'content/office_info.json', key: 'office' }
+      ]
+    };
+
+    const sources = sourceMap[pageKey];
+    if (!sources) return;
+
+    const combined = {};
+    await Promise.all(sources.map(async function (source) {
+      try {
+        const response = await fetch(repoBase + source.path + '?v=' + Date.now(), { cache: 'no-store' });
+        if (!response.ok) return;
+        combined[source.key] = await response.json();
+      } catch (error) {
+        console.warn('[TERAZAWA] CMS content load error (' + source.path + '):', error);
+      }
+    }));
+
+    hydrateCmsScope(document, combined);
+
+    // トップページのブロック表示／非表示をCMSの設定と連動
+    if (Array.isArray(combined.home_blocks && combined.home_blocks.blocks)) {
+      const blockElements = Array.from(document.querySelectorAll('[data-cms-block-id]'));
+      combined.home_blocks.blocks.forEach(function (block) {
+        if (!block || typeof block.id !== 'string' || typeof block.visible !== 'boolean') return;
+        const target = blockElements.find(function (element) {
+          return element.getAttribute('data-cms-block-id') === block.id;
+        });
+        if (target) target.hidden = !block.visible;
+      });
+    }
+
+    // プロフィール写真は、画像データがある場合のみプレースホルダーと差し替える
+    document.querySelectorAll('[data-cms-image]').forEach(function (frame) {
+      const imagePath = getCmsValue(combined, frame.getAttribute('data-cms-image'));
+      if (typeof imagePath !== 'string' || !imagePath.trim()) return;
+
+      const existing = frame.querySelector('img, svg');
+      if (!existing) return;
+
+      const image = document.createElement('img');
+      image.src = resolveUrl(imagePath);
+      image.alt = getCmsValue(combined, frame.getAttribute('data-cms-alt')) || '税理士プロフィール写真';
+      image.className = 'representative-photo-img';
+      image.style.cssText = 'width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:8px;';
+      existing.replaceWith(image);
+    });
+  }
+
   // ★【破壊根絶】親カードの文字や説明文を絶対に消さず、写真枠の中だけを安全に差し替える
   function insertPhotoDirect(frameElement, imgUrl, altText, maxW, isSquare) {
     if (!frameElement || !imgUrl) return;
@@ -98,6 +281,93 @@
       if (!res.ok) return;
       const data = await res.json();
       if (!data) return;
+
+      // ------------------------------------------------------------------------
+      // 00. サービス案内を services.json から生成
+      // JSONを取得できない場合は既存HTMLを残し、表示を壊さない
+      // ------------------------------------------------------------------------
+      const servicesContainer = document.getElementById('servicesContainer');
+      if (servicesContainer) {
+        try {
+          const servicesRes = await fetch(repoBase + 'content/services.json?v=' + Date.now(), { cache: 'no-store' });
+          if (servicesRes.ok) {
+            const servicesData = await servicesRes.json();
+            if (servicesData && Array.isArray(servicesData.services) && servicesData.services.length > 0) {
+              const fragment = document.createDocumentFragment();
+
+              servicesData.services.forEach((service, index) => {
+                const article = document.createElement('article');
+                const fallbackNumber = String(index + 1).padStart(2, '0');
+                const number = String(service.num || fallbackNumber);
+                article.id = service.id || ('service-' + number);
+                article.className = 'service-card-item no-image';
+                article.dataset.serviceKey = service.image_key || '';
+
+                const imageSlot = document.createElement('div');
+                imageSlot.className = 'service-card-img-slot';
+                imageSlot.style.display = 'none';
+                article.appendChild(imageSlot);
+
+                const content = document.createElement('div');
+                content.className = 'service-card-content';
+
+                const tag = document.createElement('span');
+                tag.className = 'zigzag-tag';
+                tag.textContent = 'SERVICE ' + number;
+                content.appendChild(tag);
+
+                const heading = document.createElement('h2');
+                heading.className = 'zigzag-heading';
+                heading.style.marginBottom = '0.8rem';
+                heading.textContent = service.title || '';
+                content.appendChild(heading);
+
+                const summary = document.createElement('p');
+                summary.className = 'zigzag-text';
+                summary.style.cssText = 'font-size:1.05rem;font-weight:500;color:var(--color-primary);margin-bottom:0.8rem;';
+                summary.textContent = service.summary || '';
+                content.appendChild(summary);
+
+                const description = document.createElement('p');
+                description.className = 'zigzag-text';
+                description.style.marginBottom = '1.5rem';
+                description.textContent = service.description || '';
+                content.appendChild(description);
+
+                if (typeof service.link === 'string' && service.link.trim()) {
+                  const rawHref = service.link.trim();
+                  const isAllowedHref =
+                    /^(https?:|mailto:|tel:)/i.test(rawHref) ||
+                    /^(\.\/|\.\.\/|\/|#)/.test(rawHref);
+
+                  if (isAllowedHref) {
+                    const link = document.createElement('a');
+                    link.className = 'service-card-link';
+                    link.href = rawHref;
+                    const isExternal = /^https?:\/\//i.test(rawHref) &&
+                      new URL(rawHref, window.location.href).origin !== window.location.origin;
+                    if (isExternal) {
+                      link.target = '_blank';
+                      link.rel = 'noopener noreferrer';
+                      link.textContent = (service.link_label || '提携先サイトを見る') + ' →';
+                    } else {
+                      link.textContent = (service.link_label || '詳細・料金を見る') + ' →';
+                    }
+                    content.appendChild(link);
+                  }
+                }
+
+                article.appendChild(content);
+                fragment.appendChild(article);
+              });
+
+              servicesContainer.replaceChildren(fragment);
+            }
+          }
+        } catch (servicesError) {
+          console.warn('[TERAZAWA] Services JSON sync error:', servicesError);
+        }
+      }
 
       // ------------------------------------------------------------------------
       // 01. ロゴ画像 (logo_img)
@@ -239,8 +509,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncAllCmsData);
+    document.addEventListener('DOMContentLoaded', function () {
+      syncAllCmsData();
+      syncStructuredCmsContent();
+    });
   } else {
     syncAllCmsData();
+    syncStructuredCmsContent();
   }
 })();

@@ -207,7 +207,8 @@ def main():
         "faq": "faq.html",
         "contact": "contact.html",
         "privacy": "privacy.html",
-        "sitemap": "sitemap.html"
+        "sitemap": "sitemap.html",
+        "blog": "blog/index.html"
     }
 
     for key, filename in file_mapping.items():

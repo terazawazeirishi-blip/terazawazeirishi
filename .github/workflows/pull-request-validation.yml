@@ -1,0 +1,49 @@
+name: Pull Request Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-quality-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check Python syntax
+        run: python -m compileall -q scripts
+
+      - name: Check JavaScript syntax
+        run: node --check assets/js/main.js
+
+      - name: Check every JSON file
+        run: |
+          find content -type f -name '*.json' -print0 | while IFS= read -r -d '' file; do
+            python -m json.tool "$file" > /dev/null
+          done
+
+      - name: Check Pages CMS YAML syntax
+        run: ruby -e 'require "yaml"; YAML.load_file(".pages.yml")'
+
+      - name: Rebuild generated blog and SEO pages
+        run: |
+          python scripts/build_blog.py
+          python scripts/build_seo.py
+
+      - name: Run repository quality validator
+        run: python scripts/deterministic_validator.py

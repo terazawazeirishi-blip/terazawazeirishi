@@ -110,7 +110,7 @@
     }
   </style>
 </head>
-<body>
+<body data-cms-page="services">
 
   <!-- 正統ヘッダー -->
   <header class="site-header" id="siteHeader">
@@ -123,7 +123,7 @@
         </svg>
         <div class="brand-text">
           <span class="brand-name">寺澤景子税理士事務所</span>
-          <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
+          <span class="brand-en" data-cms-value="office.english_name">TERAZAWA TAX &amp; CONSULTING</span>
         </div>
       </a>
 
@@ -151,9 +151,9 @@
   <section class="athena-hero" style="min-height: auto; padding-top: calc(var(--header-height) + 5rem); padding-bottom: 3.5rem;">
     <div class="athena-hero-bg-text" aria-hidden="true">SERVICES</div>
     <div class="container hero-container-front" style="text-align: center;">
-      <p class="hero-sub-en">PROFESSIONAL TAX &amp; DX</p>
-      <h1 class="hero-main-title">提供サービス案内</h1>
-      <p class="hero-lead-text" style="max-width: 680px; margin: 0 auto;">国税調査官21年の実績に基づく高度税務調査対策から、クラウド会計DX、事業承継まで。2名の税理士と提携社労士がワンストップで伴走します。</p>
+      <p class="hero-sub-en" data-cms-value="services.section_subtitle">PROFESSIONAL TAX &amp; DX</p>
+      <h1 class="hero-main-title" data-cms-value="services.section_title">提供サービス案内</h1>
+      <p class="hero-lead-text" data-cms-value="services.hero_description" style="max-width: 680px; margin: 0 auto;">国税調査官21年の実績に基づく高度税務調査対策から、クラウド会計DX、事業承継まで。2名の税理士と提携社労士がワンストップで伴走します。</p>
     </div>
   </section>
 
@@ -251,14 +251,14 @@
   <!-- 下部 無料相談CTAバナー -->
   <section class="athena-hero" style="min-height: auto; padding: 5rem 0; background: linear-gradient(135deg, var(--color-bg-subtle) 0%, #FFFFFF 100%); text-align: center;">
     <div class="container">
-      <h2 class="section-title" data-en="CONTACT" style="margin-bottom: 1.5rem;">数字の不安を、未来への確信へ。</h2>
-      <p class="section-lead" style="max-width: 680px; margin: 0 auto 2.5rem auto;">初回面談・お見積りは無料です。天草本所での対面面談はもちろん、全国オンライン（Zoom等）にも即時対応いたします。</p>
+      <h2 class="section-title" data-en="CONTACT" data-cms-value="services.cta_title" style="margin-bottom: 1.5rem;">数字の不安を、未来への確信へ。</h2>
+      <p class="section-lead" data-cms-value="services.cta_description" style="max-width: 680px; margin: 0 auto 2.5rem auto;">初回面談・お見積りは無料です。天草本所での対面面談はもちろん、全国オンライン（Zoom等）にも即時対応いたします。</p>
       <div style="margin-bottom: 2.5rem;">
-        <a href="tel:0969221166" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.4rem;">TEL: 0969-22-1166</a>
-        <p style="font-size: 0.9rem; color: var(--color-text-sub);">平日 9:30 〜 17:30（土日祝面談は事前予約対応）</p>
+        <a data-cms-href="office.tel" href="tel:0969221166" style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.4rem;">TEL: <span data-cms-value="office.tel">0969-22-1166</span></a>
+        <p data-cms-value="office.business_hours" style="font-size: 0.9rem; color: var(--color-text-sub);">平日 9:30 〜 17:30（土日祝面談は事前予約対応）</p>
       </div>
       <div>
-        <a href="./contact.html" class="header-cta-btn" style="padding: 1rem 2.5rem; font-size: 1.05rem;">初回無料相談フォームへ進む</a>
+        <a data-cms-href="services.cta_button_url" href="./contact.html" class="header-cta-btn" style="padding: 1rem 2.5rem; font-size: 1.05rem;"><span data-cms-value="services.cta_button_label">初回無料相談フォームへ進む</span></a>
       </div>
     </div>
   </section>
@@ -269,13 +269,13 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-brand-name">
-            <span class="brand-name">寺澤景子税理士事務所</span><br>
+            <span class="brand-name" data-cms-value="office.office_name">寺澤景子税理士事務所</span><br>
             <span class="brand-en">TERAZAWA TAX &amp; CONSULTING</span>
           </div>
           <address class="footer-address" style="margin-top: 1rem;">
-            〒863-0023 熊本県天草市南町5-22<br>
-            TEL: <a href="tel:0969221166">0969-22-1166</a><br>
-            <small style="color: var(--color-text-sub); display: inline-block; margin-top: 0.5rem;">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</small>
+            <span data-cms-value="office.postal_code">〒863-0023</span> <span data-cms-value="office.address">熊本県天草市南町5-22</span><br>
+            TEL: <a data-cms-href="office.tel" href="tel:0969221166"><span data-cms-value="office.tel">0969-22-1166</span></a> / FAX: <span data-cms-value="office.fax">0969-22-1167</span><br>
+            <small data-cms-value="office.affiliation" style="color: var(--color-text-sub); display: inline-block; margin-top: 0.5rem;">南九州税理士会 熊本県連 所属 / 税理士登録番号：第154978号</small>
           </address>
         </div>
 
