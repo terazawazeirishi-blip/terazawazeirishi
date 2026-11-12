@@ -4,7 +4,7 @@
     {
       "id": "block-hero-01",
       "type": "hero",
-      "visible": false,
+      "visible": true,
       "badge": "税務調査・経営DX・天草と全国対応",
       "title": "数字を、経営の最強の武器に。",
       "subtitle": "元国税調査官 × 実務35年ベテラン税理士の2人体制。圧倒的な税務調査防衛力と、クラウドDXによる未来志向の財務戦略を提供します。",
