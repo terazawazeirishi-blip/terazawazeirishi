@@ -4,35 +4,30 @@
     {
       "id": "block-news-01",
       "type": "news-banner",
-      "visible": true,
-      "title": "寺澤景子税理士事務所 公式Webサイトを開設いたしました"
+      "visible": true
     },
     {
       "id": "block-features-01",
       "type": "features-zigzag",
-      "visible": true,
-      "heading": "選ばれる5つの理由",
-      "subheading": "WHY CHOOSE TERAZAWA"
+      "visible": true
     },
     {
       "id": "block-services-01",
       "type": "services-sticky",
-      "visible": true,
-      "heading": "提供サービス案内",
-      "subheading": "OUR SERVICES"
+      "visible": true
     },
     {
       "id": "block-profile-01",
       "type": "profile-double",
-      "visible": true,
-      "heading": "税理士紹介",
-      "subheading": "PROFESSIONALS"
+      "visible": true
     },
     {
       "id": "block-cta-01",
       "type": "cta-banner",
-      "visible": true,
-      "heading": "初回無料相談を受け付けております"
+      "visible": true
+    },
+    {
+      "visible": true
     }
   ]
 }
