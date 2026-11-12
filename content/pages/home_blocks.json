@@ -25,9 +25,6 @@
       "id": "block-cta-01",
       "type": "cta-banner",
       "visible": true
-    },
-    {
-      "visible": true
     }
   ]
 }
