@@ -1,19 +1,7 @@
 {
-  "logo_img": "assets/images/uploads/white.png",
-  "watermark_crest": "assets/images/uploads/13DFF615-CC6B-4AD5-9AF7-B14F78DC1BAE.png",
-  "rep_keiko": "assets/images/uploads/jin.png",
-  "rep_senior": "assets/images/uploads/Krea2_turbo_00314_.png",
-  "about_01": "assets/images/uploads/bara.png",
-  "hero_illustration": "",
-  "about_02": "",
-  "about_03": "",
-  "about_04": "",
-  "about_05": "",
-  "service_01": "",
-  "service_02": "",
-  "service_03": "",
-  "service_04": "",
-  "service_05": "",
-  "service_06": "",
-  "service_07": ""
+  "logo_img": "/assets/images/uploads/white.png",
+  "watermark_crest": "/assets/images/uploads/13DFF615-CC6B-4AD5-9AF7-B14F78DC1BAE.png",
+  "rep_keiko": "/assets/images/uploads/jin.png",
+  "rep_senior": "/assets/images/uploads/Krea2_turbo_00314_.png",
+  "service_03": "/assets/images/uploads/13DFF615-CC6B-4AD5-9AF7-B14F78DC1BAE.png"
 }
