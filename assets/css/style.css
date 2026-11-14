@@ -1432,3 +1432,107 @@ ul, ol {
     margin: 0 auto !important;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   トップページ「選ばれる5つの理由」：CMS画像の有無に応じたレイアウト
+   - 画像あり：PCでは左右2カラム。2・4件目は反転
+   - 画像なし：画像要素を持たず、テキストを全幅表示
+   - スマホ：DOM順（テキスト→画像）で縦積み
+   -------------------------------------------------------------------------- */
+#about .athena-zigzag-item.has-no-image {
+  display: block;
+  width: 100%;
+  direction: ltr;
+  box-sizing: border-box;
+  background: var(--color-bg-subtle);
+  padding: 3rem 3.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+#about .athena-zigzag-item.has-no-image .zigzag-content {
+  width: 100%;
+  max-width: 100%;
+  direction: ltr;
+  text-align: left;
+}
+
+#about .athena-zigzag-item.has-no-image .athena-num-bg {
+  top: -1.2rem;
+  right: 2rem;
+}
+
+#about .athena-zigzag-item.has-image {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 4.5rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid var(--color-border);
+  direction: ltr;
+}
+
+#about .athena-zigzag-item.has-image.is-reverse {
+  direction: rtl;
+}
+
+#about .athena-zigzag-item.has-image > * {
+  min-width: 0;
+  direction: ltr;
+}
+
+#about .zigzag-visual-slot {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-bg-subtle);
+}
+
+#about .zigzag-visual-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+#about .athena-zigzag-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  #about .athena-zigzag-item.has-no-image {
+    padding: 2rem 1.4rem;
+  }
+
+  #about .athena-zigzag-item.has-image,
+  #about .athena-zigzag-item.has-image.is-reverse {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.2rem;
+    direction: ltr;
+    padding-bottom: 2.5rem;
+  }
+
+  /* DOM順を維持するため、スマホではテキスト→画像の順で表示 */
+  #about .athena-zigzag-item.has-image > .zigzag-content {
+    grid-row: 1;
+  }
+
+  #about .athena-zigzag-item.has-image > .zigzag-visual-slot {
+    grid-row: 2;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-md);
+  }
+
+  #about .zigzag-visual-img {
+    aspect-ratio: 16 / 10;
+  }
+}
