@@ -64,40 +64,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <style>
-    /* 選ばれる理由 & サービスの枠消去・全幅化 */
-    .athena-zigzag-item.has-no-image {
-      display: block !important;
-      direction: ltr !important;
-      background: var(--color-bg-subtle);
-      padding: 3rem 3.5rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
-      box-shadow: var(--shadow-sm);
-    }
-    .athena-zigzag-item.has-no-image .zigzag-visual-slot {
-      display: none !important;
-      width: 0 !important;
-      height: 0 !important;
-    }
-    .athena-zigzag-item.has-no-image .zigzag-content {
-      max-width: 100% !important;
-      width: 100% !important;
-      direction: ltr !important;
-      text-align: left !important;
-    }
-    .athena-zigzag-item.has-no-image .athena-num-bg {
-      top: -1.2rem;
-      right: 2rem;
-    }
-    .athena-zigzag-item:not(.has-no-image) {
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: 5rem;
-    }
-    .athena-zigzag-item:last-child {
-      border-bottom: none !important;
-      padding-bottom: 0 !important;
-    }
-
+    /* 選ばれる理由の画像有無に応じたレイアウトは assets/css/style.css に集約 */
     .service-card-item {
       background: var(--color-bg-card);
       border-radius: var(--radius-lg);
@@ -258,10 +225,11 @@
         <div class="section-flower-divider" aria-hidden="true"></div>
       </div>
 
+      <!-- 写真カラムはCMS画像が設定されている項目にだけJavaScriptで追加します。未設定時は空要素を出力しません。 -->
       <div class="athena-zigzag-list">
         
         <!-- 01: 2人体制のダブルチェック -->
-        <div class="athena-zigzag-item has-no-image">
+        <div class="athena-zigzag-item has-no-image" data-about-key="about_01">
           <div class="zigzag-content">
             <span class="athena-num-bg">01</span>
             <span class="zigzag-tag">TWO-SPECIALIST ADVISORY</span>
@@ -274,7 +242,7 @@
         </div>
 
         <!-- 02: 国税21年・元法人統括官の調査防衛力 -->
-        <div class="athena-zigzag-item has-no-image">
+        <div class="athena-zigzag-item has-no-image" data-about-key="about_02">
           <div class="zigzag-content">
             <span class="athena-num-bg">02</span>
             <span class="zigzag-tag">TAX AUDIT SPECIALIST</span>
@@ -287,7 +255,7 @@
         </div>
 
         <!-- 03: 税理士歴35年の豊富な実績と判断力 -->
-        <div class="athena-zigzag-item has-no-image">
+        <div class="athena-zigzag-item has-no-image" data-about-key="about_03">
           <div class="zigzag-content">
             <span class="athena-num-bg">03</span>
             <span class="zigzag-tag">DEEP EXPERIENCE</span>
@@ -300,7 +268,7 @@
         </div>
 
         <!-- 04: ザワテラス社労士との完全ワンストップ -->
-        <div class="athena-zigzag-item has-no-image">
+        <div class="athena-zigzag-item has-no-image" data-about-key="about_04">
           <div class="zigzag-content">
             <span class="athena-num-bg">04</span>
             <span class="zigzag-tag">ONE-STOP ADVISORY</span>
@@ -318,7 +286,7 @@
         </div>
 
         <!-- 05: 女性税理士ならではの寄り添う対話 -->
-        <div class="athena-zigzag-item has-no-image">
+        <div class="athena-zigzag-item has-no-image" data-about-key="about_05">
           <div class="zigzag-content">
             <span class="athena-num-bg">05</span>
             <span class="zigzag-tag">WARM &amp; ACCESSIBLE</span>

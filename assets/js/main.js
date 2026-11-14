@@ -230,26 +230,6 @@
     const style = document.createElement('style');
     style.id = 'terazawa-geometry-guard';
     style.textContent = `
-      .athena-zigzag-item.has-no-image {
-        display: block !important;
-        direction: ltr !important;
-        background: var(--color-bg-subtle);
-        padding: 3rem 3.5rem;
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--color-border);
-        box-shadow: var(--shadow-sm);
-      }
-      .athena-zigzag-item.has-no-image .zigzag-visual-slot {
-        display: none !important;
-        width: 0 !important;
-        height: 0 !important;
-      }
-      .athena-zigzag-item.has-no-image .zigzag-content {
-        width: 100% !important;
-        max-width: 100% !important;
-        direction: ltr !important;
-        text-align: left !important;
-      }
       .service-card-item.no-image {
         display: block !important;
         grid-template-columns: 1fr !important;
@@ -433,41 +413,59 @@
       }
 
       // ------------------------------------------------------------------------
-      // 05. 選ばれる理由01〜05 (about_01 〜 about_05)
-      // ------------------------------------------------------------------------
+      // 05. 選ばれる理由01〜05（Pages CMS の about_01〜about_05）
+      // 画像が設定された項目にだけ画像カラムを生成し、未設定ならDOM要素自体を作らない。
+      // 交互配置は画像の有無にかかわらず、理由の番号（idx）を基準にする。
       const aboutKeys = ['about_01', 'about_02', 'about_03', 'about_04', 'about_05'];
       const aboutItems = document.querySelectorAll('#about .athena-zigzag-item');
-      let aboutCounter = 0;
 
       aboutItems.forEach((item, idx) => {
         const key = item.getAttribute('data-about-key') || aboutKeys[idx];
-        const rawImg = data[key];
-        const slot = item.querySelector('.zigzag-visual-slot');
+        const rawImg = typeof data[key] === 'string' ? data[key].trim() : '';
+        const content = item.querySelector('.zigzag-content');
+        let slot = item.querySelector('.zigzag-visual-slot');
 
-        if (rawImg && slot) {
-          const isReverse = (aboutCounter % 2 === 1);
-          aboutCounter++;
-          item.classList.remove('has-no-image');
-          if (isReverse) {
-            item.classList.add('is-reverse');
-          } else {
-            item.classList.remove('is-reverse');
-          }
-          slot.style.display = '';
-          slot.textContent = '';
-          const img = document.createElement('img');
-          img.src = resolveUrl(rawImg);
-          img.className = 'zigzag-visual-img';
-          img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
-          slot.appendChild(img);
-        } else if (slot) {
+        // CMSで画像が未設定、または本文がない場合は画像枠を完全に除去する。
+        if (!rawImg || !content) {
+          if (slot) slot.remove();
           item.classList.add('has-no-image');
-          item.classList.remove('is-reverse');
-          slot.style.display = 'none';
+          item.classList.remove('has-image', 'is-reverse');
+          return;
         }
+
+        // 画像がある項目だけ画像カラムを作成。既存の文章や見出しは変更しない。
+        if (!slot) {
+          slot = document.createElement('div');
+          slot.className = 'zigzag-visual-slot';
+          content.insertAdjacentElement('afterend', slot);
+        }
+
+        item.classList.remove('has-no-image');
+        item.classList.add('has-image');
+        item.classList.toggle('is-reverse', idx % 2 === 1);
+
+        const heading = item.querySelector('.zigzag-heading');
+        const altValue = typeof data[key + '_alt'] === 'string' ? data[key + '_alt'].trim() : '';
+        const image = document.createElement('img');
+        image.src = resolveUrl(rawImg);
+        image.alt = altValue || (heading ? heading.textContent.trim().replace(/\s+/g, ' ') : '当事務所が選ばれる理由の写真');
+        image.className = 'zigzag-visual-img';
+        image.width = 1200;
+        image.height = 900;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+
+        // 画像の実寸比を事前に確保し、画像読込時のレイアウト変動を抑制する。
+        slot.replaceChildren(image);
+
+        // CMSに登録された画像ファイルが見つからない場合も、空の画像枠を残さない。
+        image.addEventListener('error', function () {
+          slot.remove();
+          item.classList.add('has-no-image');
+          item.classList.remove('has-image', 'is-reverse');
+        }, { once: true });
       });
 
-      // ------------------------------------------------------------------------
       // 06. 提供サービス (service_01 〜 service_07)
       // ------------------------------------------------------------------------
       const serviceKeys = ['service_01', 'service_02', 'service_03', 'service_04', 'service_05', 'service_06', 'service_07'];
