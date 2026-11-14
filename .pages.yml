@@ -127,18 +127,33 @@ content:
           - name: about_01
             label: 選ばれる理由 1 の写真
             type: image
+          - name: about_01_alt
+            label: 選ばれる理由 1 の写真の代替テキスト（alt）
+            type: string
           - name: about_02
             label: 選ばれる理由 2 の写真
             type: image
+          - name: about_02_alt
+            label: 選ばれる理由 2 の写真の代替テキスト（alt）
+            type: string
           - name: about_03
             label: 選ばれる理由 3 の写真
             type: image
+          - name: about_03_alt
+            label: 選ばれる理由 3 の写真の代替テキスト（alt）
+            type: string
           - name: about_04
             label: 選ばれる理由 4 の写真
             type: image
+          - name: about_04_alt
+            label: 選ばれる理由 4 の写真の代替テキスト（alt）
+            type: string
           - name: about_05
             label: 選ばれる理由 5 の写真
             type: image
+          - name: about_05_alt
+            label: 選ばれる理由 5 の写真の代替テキスト（alt）
+            type: string
           - name: service_01
             label: サービス 1 の写真
             type: image
