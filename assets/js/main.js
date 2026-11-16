@@ -142,6 +142,8 @@
       ],
       contact: [
         { path: 'content/contact.json', key: 'contact' },
+        { path: 'content/pricing.json', key: 'pricing' },
+        { path: 'content/faq.json', key: 'faq' },
         { path: 'content/office_info.json', key: 'office' }
       ],
       services: [
