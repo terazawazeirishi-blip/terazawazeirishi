@@ -10,7 +10,7 @@ media:
 
 content:
   - name: homepage
-    label: トップページ
+    label: トップページ（1ページ構成）
     type: group
     items:
       - name: home-texts
@@ -905,32 +905,32 @@ content:
     type: group
     items:
       - name: home-html
-        label: トップページHTML（お知らせ欄は自動生成）
+        label: トップページHTML（全コンテンツ統合）
         type: file
         path: index.html
         format: code
       - name: services-html
-        label: サービス案内HTML
+        label: 旧サービスURL互換リダイレクトHTML
         type: file
         path: services.html
         format: code
       - name: pricing-html
-        label: 料金案内HTML
+        label: 旧料金URL互換リダイレクトHTML
         type: file
         path: pricing.html
         format: code
       - name: profile-html
-        label: 税理士紹介HTML
+        label: 旧プロフィールURL互換リダイレクトHTML
         type: file
         path: profile.html
         format: code
       - name: faq-html
-        label: よくある質問HTML
+        label: 旧FAQ URL互換リダイレクトHTML
         type: file
         path: faq.html
         format: code
       - name: contact-html
-        label: お問い合わせHTML
+        label: 旧お問い合わせURL互換リダイレクトHTML
         type: file
         path: contact.html
         format: code
