@@ -3,16 +3,6 @@
   "section_subtitle": "PROFESSIONAL TAX & DX",
   "services": [
     {
-      "id": "service-05",
-      "num": "05",
-      "title": "クラウド会計導入・自計化DX",
-      "summary": "マネーフォワード・freee対応。経理業務の自動化を構築。",
-      "description": "通帳・クレジットカード連携、領収書のスマホスキャン管理など、ペーパーレス経理を実現。バックオフィス作業を最大70%削減します。",
-      "link": "#pricing",
-      "link_label": "詳細・料金を見る",
-      "image_key": "service_05"
-    },
-    {
       "id": "service-06",
       "num": "06",
       "title": "相続税申告・事業承継コンサル",
