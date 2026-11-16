@@ -83,10 +83,10 @@ content:
         path: content/pages/home_blocks.json
         format: json
         fields:
-          # ヘッダー内の4つのリンクをPages CMSから個別に削除・非表示にできます。
+          # ヘッダー内の5つのリンクをPages CMSから個別に削除・非表示にできます。
           # リストから項目を削除するか、「ヘッダーに表示する」をOFFにしてください。
           - name: header_links
-            label: ヘッダーナビゲーション（4つのリンク）
+            label: ヘッダーナビゲーション（5項目）
             type: object
             list:
               collapsible:

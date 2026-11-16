@@ -57,6 +57,12 @@
       "visible": false
     },
     {
+      "id": "nav-office",
+      "label": "事務所紹介",
+      "url": "#office",
+      "visible": true
+    },
+    {
       "id": "nav-faq",
       "label": "よくある質問",
       "url": "#faq",
