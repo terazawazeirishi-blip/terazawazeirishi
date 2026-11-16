@@ -288,3 +288,8 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 #servicesContainer .service-card-item.with-image .service-card-img-slot { display:block !important; }
 #servicesContainer .service-card-item.no-image .service-card-img-slot { display:none !important; width:0 !important; height:0 !important; }
 .team-card .representative-photo-frame img { width:100% !important; height:100% !important; max-width:none !important; object-fit:cover !important; }
+
+.reason-card.has-image.is-reverse .zigzag-visual-slot{order:-1;border-radius:calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0}
+@media(max-width:600px){
+ .reason-card.has-image.is-reverse .zigzag-visual-slot{order:-1;border-radius:calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0}
+}
