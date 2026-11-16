@@ -4,7 +4,7 @@
     {
       "id": "block-features-01",
       "type": "features",
-      "visible": false
+      "visible": true
     },
     {
       "id": "block-services-01",
