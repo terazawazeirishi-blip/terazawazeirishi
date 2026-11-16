@@ -36,5 +36,31 @@
       "type": "contact",
       "visible": true
     }
+  ],
+  "header_links": [
+    {
+      "id": "nav-about",
+      "label": "選ばれる理由",
+      "url": "#about",
+      "visible": true
+    },
+    {
+      "id": "nav-services",
+      "label": "サービス",
+      "url": "#services",
+      "visible": true
+    },
+    {
+      "id": "nav-pricing",
+      "label": "料金案内",
+      "url": "#pricing",
+      "visible": true
+    },
+    {
+      "id": "nav-faq",
+      "label": "よくある質問",
+      "url": "#faq",
+      "visible": true
+    }
   ]
 }
