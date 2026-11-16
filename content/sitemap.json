@@ -33,10 +33,6 @@
   ],
   "services": [
     {
-      "label": "・ クラウド会計導入（freee/MF）",
-      "url": "./index.html#services"
-    },
-    {
       "label": "・ 相続税申告・事業承継対策",
       "url": "./index.html#services"
     },
