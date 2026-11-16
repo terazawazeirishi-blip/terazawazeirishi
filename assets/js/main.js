@@ -134,7 +134,8 @@
       ],
       privacy: [
         { path: 'content/legal_texts.json', key: 'legal' },
-        { path: 'content/office_info.json', key: 'office' }
+        { path: 'content/office_info.json', key: 'office' },
+        { path: 'content/pages/home_blocks.json', key: 'home_blocks' }
       ],
       sitemap: [
         { path: 'content/sitemap.json', key: 'sitemap' },
@@ -219,7 +220,10 @@
           element.textContent = settings.label.trim();
         }
         if (typeof settings.url === 'string' && settings.url.trim()) {
-          element.setAttribute('href', settings.url.trim());
+          const targetUrl = settings.url.trim();
+          element.setAttribute('href', pageKey !== 'home' && targetUrl.startsWith('#')
+            ? './index.html' + targetUrl
+            : targetUrl);
         }
       });
     }
@@ -245,7 +249,10 @@
         element.textContent = settings.label.trim();
       }
       if (typeof settings.url === 'string' && settings.url.trim()) {
-        element.setAttribute('href', settings.url.trim());
+        const targetUrl = settings.url.trim();
+          element.setAttribute('href', pageKey !== 'home' && targetUrl.startsWith('#')
+            ? './index.html' + targetUrl
+            : targetUrl);
       }
     });
 
