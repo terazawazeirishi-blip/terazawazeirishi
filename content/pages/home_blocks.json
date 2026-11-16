@@ -9,7 +9,7 @@
     {
       "id": "block-services-01",
       "type": "services",
-      "visible": false
+      "visible": true
     },
     {
       "id": "block-pricing-01",
