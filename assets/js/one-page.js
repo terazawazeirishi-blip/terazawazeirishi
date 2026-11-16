@@ -55,11 +55,27 @@
   }
   async function init(){
     initNavigation();
-    const results=await Promise.allSettled([loadJson('content/pricing.json'),loadJson('content/faq.json')]);
-    if(results[0].status==='fulfilled') renderPricing(results[0].value);
-    else console.warn('[TERAZAWA] Pricing data could not be loaded; static fallback retained.',results[0].reason);
-    if(results[1].status==='fulfilled') renderFaq(results[1].value);
-    else console.warn('[TERAZAWA] FAQ data could not be loaded; static fallback retained.',results[1].reason);
+
+    // 価格表・FAQを表示するページでのみ、それぞれのJSONを読み込みます。
+    // プライバシーページなどでは不要な通信を発生させません。
+    const tasks=[];
+    if(document.getElementById('pricingPlans')){
+      tasks.push({key:'pricing',promise:loadJson('content/pricing.json')});
+    }
+    if(document.getElementById('faqContainer')){
+      tasks.push({key:'faq',promise:loadJson('content/faq.json')});
+    }
+
+    const results=await Promise.allSettled(tasks.map(task=>task.promise));
+    results.forEach((result,index)=>{
+      const key=tasks[index].key;
+      if(result.status==='fulfilled'){
+        if(key==='pricing') renderPricing(result.value);
+        if(key==='faq') renderFaq(result.value);
+      }else{
+        console.warn('[TERAZAWA] '+key+' data could not be loaded; static fallback retained.',result.reason);
+      }
+    });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
