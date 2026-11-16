@@ -476,3 +476,34 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 .site-footer .footer-links [data-cms-footer-id][hidden] {
   display: none !important;
 }
+
+/* ロゴSVGを使わず、事務所名・英字表記をヘッダー／フッターとも左端に揃える */
+.onepage-header .site-brand,
+.onepage-footer .site-brand-footer {
+  gap: 0 !important;
+  justify-content: flex-start;
+}
+
+.onepage-header .site-brand-mark,
+.onepage-footer .site-brand-mark {
+  display: none !important;
+}
+
+.onepage-header .site-brand-copy,
+.onepage-footer .site-brand-copy {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+.onepage-header .site-brand-copy strong,
+.onepage-header .site-brand-copy small,
+.onepage-footer .site-brand-copy strong,
+.onepage-footer .site-brand-copy small {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
