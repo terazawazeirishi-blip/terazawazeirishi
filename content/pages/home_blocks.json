@@ -14,7 +14,7 @@
     {
       "id": "block-pricing-01",
       "type": "pricing",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-profile-01",
