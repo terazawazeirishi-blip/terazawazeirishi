@@ -10,7 +10,7 @@ media:
 
 content:
   - name: homepage
-    label: トップページ
+    label: トップページ（1ページ構成）
     type: group
     items:
       - name: home-texts
@@ -342,6 +342,23 @@ content:
           - name: title
             label: 役職・肩書・紹介文
             type: string
+          - name: message
+            label: プロフィールメッセージ
+            type: text
+          - name: biography
+            label: 経歴・主な職歴
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{year} ({index})"
+            fields:
+              - name: year
+                label: 年・期間
+                type: string
+              - name: desc
+                label: 経歴・内容
+                type: text
           - name: badge_lines
             label: 写真下の紹介項目
             type: string
@@ -370,6 +387,23 @@ content:
           - name: title
             label: 役職・肩書・紹介文
             type: string
+          - name: message
+            label: プロフィールメッセージ
+            type: text
+          - name: biography
+            label: 経歴・主な職歴
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{year} ({index})"
+            fields:
+              - name: year
+                label: 年・期間
+                type: string
+              - name: desc
+                label: 経歴・内容
+                type: text
           - name: badge_lines
             label: 写真下の紹介項目
             type: string
@@ -905,32 +939,32 @@ content:
     type: group
     items:
       - name: home-html
-        label: トップページHTML（お知らせ欄は自動生成）
+        label: トップページHTML（全コンテンツ統合）
         type: file
         path: index.html
         format: code
       - name: services-html
-        label: サービス案内HTML
+        label: 旧サービスURL互換リダイレクトHTML
         type: file
         path: services.html
         format: code
       - name: pricing-html
-        label: 料金案内HTML
+        label: 旧料金URL互換リダイレクトHTML
         type: file
         path: pricing.html
         format: code
       - name: profile-html
-        label: 税理士紹介HTML
+        label: 旧プロフィールURL互換リダイレクトHTML
         type: file
         path: profile.html
         format: code
       - name: faq-html
-        label: よくある質問HTML
+        label: 旧FAQ URL互換リダイレクトHTML
         type: file
         path: faq.html
         format: code
       - name: contact-html
-        label: お問い合わせHTML
+        label: 旧お問い合わせURL互換リダイレクトHTML
         type: file
         path: contact.html
         format: code

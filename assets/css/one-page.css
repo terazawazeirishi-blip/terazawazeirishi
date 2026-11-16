@@ -1,0 +1,295 @@
+/* TERAZAWA ONE-PAGE DESIGN
+   Reference-inspired direction: open space, soft blue, simple service journey.
+   Original layout/copy, mobile-first and accessible. */
+:root {
+  --color-primary:#17436f; --color-primary-light:#2c6598; --color-primary-dark:#0e2b4b;
+  --color-accent:#3c8cc6; --color-accent-light:#79b5de; --color-accent-soft:#eaf4fb;
+  --color-bg-base:#fff; --color-bg-subtle:#f4f8fc; --color-bg-card:#fff;
+  --color-text-main:#203247; --color-text-sub:#5d6d7d; --color-text-muted:#8694a2;
+  --color-border:#dce7f0; --color-border-gold:rgba(60,140,198,.28);
+  --radius-sm:8px; --radius-md:14px; --radius-lg:22px;
+  --shadow-sm:0 5px 18px rgba(31,70,105,.06); --shadow-md:0 14px 36px rgba(31,70,105,.10);
+  --shadow-lg:0 26px 70px rgba(31,70,105,.15); --header-height:82px;
+  --transition-normal:.25s ease;
+}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{color:var(--color-text-main);background:#fff;padding-bottom:0}
+:focus-visible{outline:3px solid rgba(60,140,198,.55);outline-offset:3px}
+.skip-link{position:fixed;left:12px;top:10px;z-index:2000;padding:10px 16px;color:#fff;background:var(--color-primary);border-radius:8px;transform:translateY(-160%)}
+.skip-link:focus{transform:translateY(0)}
+.container{max-width:1200px;padding-inline:28px}
+.narrow-container{max-width:900px}
+.section{padding:clamp(68px,8vw,112px) 0;scroll-margin-top:92px}
+.section-heading{max-width:760px;margin:0 auto 42px;text-align:center}
+.section-kicker{display:inline-block;margin-bottom:12px;color:var(--color-accent);font-size:.7rem;font-weight:700;letter-spacing:.2em}
+.section-heading h2{margin:0 0 13px;color:var(--color-primary);font:600 clamp(1.65rem,3vw,2.4rem)/1.45 "Noto Serif JP",serif;letter-spacing:.02em}
+.section-heading p:not(.section-kicker){color:var(--color-text-sub);font-size:.96rem;line-height:1.9}
+.section-heading-light h2,.section-heading-light p{color:#fff!important}
+.section-heading-light .section-kicker{color:#b9daf0}
+
+/* Header */
+.onepage-header{position:sticky;top:0;z-index:1000;min-height:var(--header-height);background:rgba(255,255,255,.94);border-bottom:1px solid rgba(220,231,240,.9);box-shadow:0 3px 16px rgba(27,62,92,.035);backdrop-filter:blur(14px)}
+.header-inner{min-height:var(--header-height);display:flex;align-items:center;gap:24px}
+.site-brand{display:inline-flex;align-items:center;gap:10px;flex:0 0 auto;color:var(--color-primary)}
+.site-brand-mark{display:grid;place-items:center;width:42px;height:42px;color:var(--color-accent)}
+.site-brand-mark svg{width:100%;height:100%}
+.site-brand-copy{display:flex;flex-direction:column;line-height:1.3}
+.site-brand-copy strong{color:var(--color-primary);font:700 .98rem/1.45 "Noto Serif JP",serif;white-space:nowrap}
+.site-brand-copy small{color:#7890a5;font-size:.54rem;font-weight:600;letter-spacing:.13em}
+.onepage-nav{display:flex;align-items:center;justify-content:center;gap:clamp(12px,1.7vw,24px);margin-left:auto}
+.onepage-nav .nav-link{color:#415a70;font-size:.8rem;font-weight:600;white-space:nowrap}
+.onepage-nav .nav-link:hover,.footer-links a:hover{color:var(--color-accent)}
+.nav-contact{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 18px;border-radius:999px;color:#fff;background:var(--color-primary);font-size:.8rem;font-weight:700;white-space:nowrap;box-shadow:0 6px 16px rgba(23,67,111,.14)}
+.nav-contact:hover,.button-primary:hover{background:var(--color-primary-light);transform:translateY(-2px)}
+.header-phone{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;color:var(--color-primary)}
+.header-phone-icon{display:grid;place-items:center;width:34px;height:34px;color:var(--color-accent);background:var(--color-accent-soft);border-radius:50%}
+.header-phone span:last-child{display:flex;flex-direction:column;line-height:1.2}
+.header-phone small{color:var(--color-text-muted);font-size:.57rem}
+.header-phone strong{font-size:.88rem;font-weight:700;white-space:nowrap}
+.menu-toggle{display:none}
+
+/* Hero */
+.hero-section{position:relative;min-height:clamp(520px,58vw,690px);overflow:hidden;display:flex;align-items:center;background:#f1f7fb;isolation:isolate}
+.hero-photo-wrap{position:absolute;inset:0 0 0 auto;width:66%;z-index:-2}
+.hero-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:55% 50%}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#f3f8fc 0%,rgba(243,248,252,.98) 33%,rgba(243,248,252,.8) 48%,rgba(243,248,252,.1) 73%,transparent 100%)}
+.hero-container{position:relative;z-index:1;width:100%;padding-block:78px 95px}
+.hero-copy{max-width:610px}
+.hero-eyebrow{margin-bottom:19px;color:var(--color-accent);font-size:.71rem;font-weight:700;letter-spacing:.18em}
+.hero-copy h1{margin:0 0 22px;color:var(--color-primary-dark);font:600 clamp(2.45rem,5vw,4.2rem)/1.35 "Noto Serif JP",serif;letter-spacing:.03em;white-space:pre-line}
+.hero-lead{max-width:570px;margin-bottom:28px;color:#41576c;font-size:clamp(.95rem,1.5vw,1.1rem);line-height:2;white-space:pre-line}
+.hero-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:51px;padding:0 24px;border:1px solid transparent;border-radius:999px;font-size:.88rem;font-weight:700;line-height:1.5;transition:var(--transition-normal)}
+.button-primary{color:#fff;background:var(--color-primary);box-shadow:0 8px 22px rgba(23,67,111,.17)}
+.button-ghost{color:var(--color-primary);background:rgba(255,255,255,.72);border-color:#b8cede}
+.button-ghost:hover,.button-outline:hover{background:#fff;border-color:var(--color-accent);transform:translateY(-2px)}
+.hero-note{margin-top:14px;color:#728598;font-size:.74rem}
+.hero-bottom-line{position:absolute;right:5%;bottom:23px;display:flex;gap:7px}
+.hero-bottom-line span{width:24px;height:3px;border-radius:99px;background:rgba(23,67,111,.22)}
+.hero-bottom-line span:first-child{width:45px;background:var(--color-accent)}
+.proof-strip{background:#fff;border-bottom:1px solid var(--color-border)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 1.6fr;align-items:center;min-height:112px}
+.proof-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;border-right:1px solid var(--color-border);text-align:center}
+.proof-item strong{color:var(--color-primary);font:700 2rem/1.2 "Noto Serif JP",serif}
+.proof-item strong span{margin-left:2px;font-size:.85rem}
+.proof-item small{margin-top:5px;color:var(--color-text-sub);font-size:.72rem}
+.proof-message{display:flex;flex-direction:column;align-items:center;padding:12px 20px;text-align:center}
+.proof-message span{color:var(--color-accent);font-size:.61rem;font-weight:700;letter-spacing:.18em}
+.proof-message strong{margin-top:5px;color:var(--color-primary);font:600 .98rem/1.5 "Noto Serif JP",serif}
+
+/* Reasons */
+.section-reasons{background:#fff}
+.reason-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:21px}
+.reason-card{min-width:0;overflow:hidden;display:flex;flex-direction:column;background:#fff;border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.reason-card:hover{transform:translateY(-4px);border-color:#c3d9e9;box-shadow:var(--shadow-md)}
+.reason-card.has-image,.reason-card.has-image.is-reverse{display:flex;direction:ltr}
+.reason-copy{position:relative;flex:1;padding:26px 24px 19px;direction:ltr}
+.reason-number{position:static;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;margin-bottom:15px;border-radius:50%;color:#fff;background:var(--color-primary);font:700 .86rem/1 "Noto Sans JP",sans-serif}
+.reason-tag{display:block;margin:0 0 8px;color:var(--color-accent);font-size:.61rem;font-weight:700;letter-spacing:.13em}
+.reason-card .zigzag-heading{margin:0 0 12px;color:var(--color-primary);font:600 1.1rem/1.65 "Noto Serif JP",serif}
+.reason-card .zigzag-text{color:var(--color-text-sub);font-size:.85rem;line-height:1.95}
+.reason-card .zigzag-visual-slot{order:2;width:100%;min-height:0;margin-top:auto;aspect-ratio:16/10;overflow:hidden;border-radius:0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);background:#edf4f8;box-shadow:none}
+.reason-card .zigzag-visual-img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;border-radius:0}
+.reason-card.has-no-image{display:block;padding-bottom:6px}
+.reason-card.has-no-image .reason-copy{min-height:100%}
+.reason-card.has-no-image .reason-number{background:var(--color-accent)}
+
+/* Services */
+.section-services{background:linear-gradient(180deg,#f3f8fc 0%,#eaf3fa 100%)}
+.service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
+#servicesContainer .service-card-item{min-width:0;display:flex;flex-direction:column;overflow:hidden;margin:0;padding:0;border:1px solid #dce8f1;border-radius:var(--radius-lg);background:#fff;box-shadow:0 8px 22px rgba(29,73,111,.055);transition:var(--transition-normal)}
+#servicesContainer .service-card-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#b7d2e6}
+#servicesContainer .service-card-item.no-image{display:block}
+#servicesContainer .service-card-img-slot{width:100%;margin:0;padding:0;aspect-ratio:16/9;overflow:hidden;background:#e7f0f7}
+#servicesContainer .service-card-img-slot[hidden]{display:none!important}
+#servicesContainer .service-card-img{width:100%;height:100%;object-fit:cover;border-radius:0!important}
+#servicesContainer .service-card-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:24px}
+.service-index{display:inline-block;margin-bottom:12px;color:var(--color-accent);font-size:.67rem;font-weight:700;letter-spacing:.15em}
+#servicesContainer .zigzag-heading{margin:0 0 11px;color:var(--color-primary);font:600 1.05rem/1.6 "Noto Serif JP",serif}
+#servicesContainer .zigzag-text{margin:0 0 16px;color:var(--color-text-sub);font-size:.85rem;line-height:1.9}
+#servicesContainer .service-card-link{display:inline-flex;align-items:center;gap:7px;margin-top:auto;color:var(--color-primary);font-size:.81rem;font-weight:700}
+#servicesContainer .service-card-link:hover{color:var(--color-accent)}
+.service-note{margin-top:22px;color:#71879a;text-align:right;font-size:.71rem}
+
+/* Pricing */
+.section-pricing{background:#fff}
+.pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:22px;max-width:950px;margin:0 auto 50px}
+.plan-card{position:relative;display:flex;flex-direction:column;padding:32px;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
+.plan-card-featured{border:2px solid var(--color-accent);box-shadow:0 14px 34px rgba(60,140,198,.13)}
+.plan-badge{position:absolute;top:-13px;right:22px;padding:4px 13px;border-radius:999px;color:#fff;background:var(--color-accent);font-size:.7rem;font-weight:700}
+.plan-eyebrow{color:var(--color-accent);font-size:.67rem;font-weight:700;letter-spacing:.18em}
+.plan-card h3{margin:11px 0 8px;color:var(--color-primary);font:600 1.23rem/1.55 "Noto Serif JP",serif}
+.plan-target{min-height:48px;color:var(--color-text-sub);font-size:.81rem}
+.plan-price{display:flex;flex-direction:column;margin:20px 0;padding:17px 0;border-block:1px solid var(--color-border)}
+.plan-price small{color:var(--color-text-muted);font-size:.72rem}
+.plan-price strong{color:var(--color-primary);font:700 1.95rem/1.4 "Noto Serif JP",serif}
+.plan-price span{color:var(--color-text-sub);font-size:.77rem}
+.plan-card ul{display:flex;flex-direction:column;gap:9px;margin:0 0 25px;padding:0;list-style:none}
+.plan-card li{position:relative;padding-left:21px;color:var(--color-text-sub);font-size:.82rem;line-height:1.7}
+.plan-card li::before{position:absolute;left:0;top:.05em;color:var(--color-accent);content:"✓";font-weight:700}
+.plan-card .button{margin-top:auto}
+.button-outline{color:var(--color-primary);border-color:#b9d0e1;background:#fff}
+.button-contact{color:#fff;background:#ee8950;box-shadow:0 8px 24px rgba(238,137,80,.22)}
+.button-contact:hover{background:#df783f;transform:translateY(-2px)}
+.spot-fees{max-width:950px;margin:0 auto}
+.spot-fees-heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:14px}
+.spot-fees-heading h3{color:var(--color-primary);font:600 1.18rem/1.5 "Noto Serif JP",serif}
+.spot-fees-heading p{color:var(--color-text-muted);font-size:.77rem}
+.spot-fees-list{overflow:hidden;border:1px solid var(--color-border);border-radius:var(--radius-md)}
+.spot-fee-row{display:grid;grid-template-columns:1.3fr .65fr 1.5fr;gap:14px;align-items:center;padding:14px 19px;background:#fff;border-bottom:1px solid var(--color-border)}
+.spot-fee-row:last-child{border-bottom:0}
+.spot-fee-row strong{color:var(--color-primary);font-size:.85rem}
+.spot-fee-row b{color:var(--color-accent);font-size:.89rem}
+.spot-fee-row span{color:var(--color-text-sub);font-size:.77rem}
+.pricing-note{max-width:950px;margin:15px auto 0;color:var(--color-text-muted);font-size:.71rem;line-height:1.8}
+
+/* Tax accountants and office */
+.section-team{background:#f4f8fc}
+.team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1050px;margin:0 auto}
+.team-card{display:grid;grid-template-columns:180px minmax(0,1fr);overflow:hidden;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
+.representative-photo-frame{width:100%;max-width:none;aspect-ratio:1/1;overflow:hidden;margin:0;background:#e6f0f7;border-radius:0}
+.representative-photo-frame img,.representative-photo-frame svg{width:100%;height:100%;object-fit:cover}
+.team-card-body{min-width:0;padding:22px 20px}
+.team-role{color:var(--color-accent);font-size:.66rem;font-weight:700;letter-spacing:.04em}
+.team-card h3{margin:8px 0;color:var(--color-primary);font:600 1.05rem/1.6 "Noto Serif JP",serif}
+.team-credentials{margin-bottom:10px;color:var(--color-primary-light);font-size:.77rem;font-weight:600;line-height:1.8}
+.team-message{color:var(--color-text-sub);font-size:.81rem;line-height:1.9}
+.career-list{display:flex;flex-direction:column;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--color-border);list-style:none}
+.career-list li{display:grid;grid-template-columns:80px 1fr;gap:7px;color:var(--color-text-sub);font-size:.7rem;line-height:1.6}
+.career-list strong{color:var(--color-primary)}
+.section-office{padding-top:75px;background:#f4f8fc}
+.office-layout{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+.office-information{padding:27px;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:#fff}
+.office-list{display:flex;flex-direction:column}
+.office-list>div{display:grid;grid-template-columns:105px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--color-border)}
+.office-list>div:first-child{padding-top:0}
+.office-list>div:last-child{border-bottom:0}
+.office-list dt{color:var(--color-text-muted);font-size:.77rem;font-weight:600}
+.office-list dd{color:var(--color-text-main);font-size:.83rem;line-height:1.8;overflow-wrap:anywhere}
+.office-list a{color:var(--color-primary);font-weight:700}
+.text-link{display:inline-block;margin-top:15px;color:var(--color-accent);font-size:.81rem;font-weight:700}
+.office-map{min-height:420px;overflow:hidden;border-radius:var(--radius-lg);background:#e9f0f5;box-shadow:var(--shadow-sm)}
+.office-map iframe{display:block;width:100%;height:100%;min-height:420px;border:0}
+.partner-banner{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:24px;padding:24px 29px;border-radius:var(--radius-lg);background:#e6f1f8}
+.partner-banner span{display:block;margin-bottom:5px;color:var(--color-accent);font-size:.61rem;font-weight:700;letter-spacing:.17em}
+.partner-banner strong{color:var(--color-primary);font:600 1.1rem/1.5 "Noto Serif JP",serif}
+.partner-banner p{margin-top:5px;color:var(--color-text-sub);font-size:.79rem}
+.partner-banner a{flex:0 0 auto;padding:11px 19px;border-radius:999px;color:#fff;background:var(--color-primary);font-size:.77rem;font-weight:700}
+
+/* FAQ */
+.section-faq{background:#fff}
+.faq-list{display:flex;flex-direction:column;gap:12px}
+.faq-item{overflow:hidden;border:1px solid var(--color-border);border-radius:var(--radius-md);background:#fff;box-shadow:0 3px 12px rgba(31,70,105,.035)}
+.faq-item summary{position:relative;display:flex;align-items:center;gap:14px;padding:18px 52px 18px 19px;color:var(--color-primary);font-size:.9rem;font-weight:700;line-height:1.7;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::before{flex:0 0 auto;color:var(--color-accent);content:"Q";font:700 1.1rem/1 "Noto Serif JP",serif}
+.faq-item summary::after{position:absolute;right:20px;top:50%;color:var(--color-accent);content:"+";font-size:1.3rem;transform:translateY(-50%)}
+.faq-item[open] summary::after{content:"−"}
+.faq-answer{padding:0 20px 19px 50px;color:var(--color-text-sub);font-size:.85rem;line-height:1.95;white-space:pre-wrap}
+
+/* Contact and footer */
+.section-contact{padding-block:68px;background:#fff}
+.contact-panel{display:grid;grid-template-columns:1.2fr .9fr;gap:38px;align-items:center;padding:clamp(28px,5vw,55px);border-radius:26px;color:#fff;background:linear-gradient(120deg,#143b63 0%,#245e8d 100%);box-shadow:0 22px 55px rgba(19,59,99,.2)}
+.contact-copy .section-kicker{color:#b7d9f0}
+.contact-copy h2{margin:0 0 15px;color:#fff;font:600 clamp(1.5rem,3vw,2.2rem)/1.55 "Noto Serif JP",serif}
+.contact-copy p{color:rgba(255,255,255,.84);font-size:.89rem;line-height:1.9}
+.contact-copy .contact-small{margin-top:13px;color:rgba(255,255,255,.65);font-size:.75rem}
+.contact-actions{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+.contact-phone{display:flex;flex-direction:column;padding:19px 21px;border:1px solid rgba(255,255,255,.2);border-radius:15px;background:rgba(255,255,255,.08)}
+.contact-phone-label{color:rgba(255,255,255,.75);font-size:.71rem}
+.contact-phone strong{color:#fff;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;letter-spacing:.025em}
+.contact-phone small{color:rgba(255,255,255,.72);font-size:.72rem}
+.contact-privacy{color:rgba(255,255,255,.7);font-size:.69rem;text-align:center}
+.contact-privacy a{color:#fff;text-decoration:underline}
+.onepage-footer{padding:43px 0 92px;color:#fff;background:#102e4e}
+.footer-inner{display:grid;grid-template-columns:1fr auto;gap:27px;align-items:center}
+.site-brand-footer .site-brand-copy strong{color:#fff}
+.site-brand-footer .site-brand-copy small{color:rgba(255,255,255,.55)}
+.site-brand-footer .site-brand-mark{color:#9dc5e1}
+.footer-brand p{margin-top:14px;color:rgba(255,255,255,.7);font-size:.75rem;line-height:1.8}
+.footer-brand p a{color:#fff}
+.footer-links{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:13px 20px}
+.footer-links a{color:rgba(255,255,255,.8);font-size:.74rem}
+.footer-bottom{grid-column:1/-1;display:flex;justify-content:space-between;gap:15px;padding-top:17px;border-top:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.55);font-size:.69rem}
+.footer-bottom a{color:rgba(255,255,255,.75)}
+.mobile-action-bar{display:none}
+
+/* Responsive */
+@media(max-width:1120px){
+ .header-inner{gap:15px}.onepage-nav{gap:12px}.onepage-nav .nav-link{font-size:.75rem}.header-phone{display:none}
+ .team-card{grid-template-columns:145px minmax(0,1fr)}.team-card-body{padding:19px 17px}
+}
+@media(max-width:900px){
+ :root{--header-height:72px}
+ .container{padding-inline:22px}
+ .onepage-header .menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;margin-left:auto;padding:9px;border:1px solid var(--color-border);border-radius:50%;background:#fff}
+ .menu-toggle span{display:block;width:100%;height:2px;border-radius:2px;background:var(--color-primary)}
+ .onepage-nav{position:absolute;top:calc(100% + 1px);left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:12px 22px 18px;border-bottom:1px solid var(--color-border);background:#fff;box-shadow:var(--shadow-md)}
+ .onepage-nav.is-open{display:flex}.onepage-nav .nav-link{padding:13px 5px;border-bottom:1px solid #edf2f6;font-size:.9rem}.nav-contact{margin-top:12px;min-height:46px}
+ .hero-section{min-height:625px;align-items:flex-end}.hero-photo-wrap{width:100%;height:58%;inset:0 0 auto}.hero-photo{object-position:58% 45%}
+ .hero-shade{background:linear-gradient(180deg,rgba(242,248,252,.04) 0%,rgba(242,248,252,.08) 30%,#f3f8fc 55%,#f3f8fc 100%)}
+ .hero-container{padding-block:340px 55px}.hero-copy{max-width:100%}.hero-copy h1{max-width:680px;font-size:clamp(2.2rem,6vw,3.2rem)}
+ .proof-grid{grid-template-columns:repeat(3,1fr)}.proof-message{grid-column:1/-1;padding:18px;border-top:1px solid var(--color-border)}
+ .reason-grid,.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .team-grid{grid-template-columns:1fr;max-width:760px}.team-card{grid-template-columns:190px minmax(0,1fr)}
+ .office-layout{grid-template-columns:1fr}.office-map,.office-map iframe{min-height:350px}
+}
+@media(max-width:600px){
+ body{padding-bottom:66px}.container{padding-inline:18px}.section{padding:63px 0;scroll-margin-top:78px}
+ .section-heading{margin-bottom:29px}.section-heading h2{font-size:1.55rem}.section-heading p:not(.section-kicker){font-size:.88rem}
+ .site-brand{gap:7px}.site-brand-mark{width:35px;height:35px}.site-brand-copy strong{font-size:.8rem}.site-brand-copy small{font-size:.47rem}
+ .onepage-header .container{padding-inline:14px}
+ .hero-section{min-height:585px}.hero-photo-wrap{height:51%}.hero-photo{object-position:58% center}
+ .hero-container{padding:285px 18px 37px}.hero-eyebrow{margin-bottom:11px;font-size:.6rem}
+ .hero-copy h1{margin-bottom:15px;font-size:clamp(2rem,8vw,2.55rem);line-height:1.42}
+ .hero-lead{margin-bottom:19px;font-size:.86rem;line-height:1.85}
+ .hero-actions{display:grid;grid-template-columns:1fr;gap:9px}.button{width:100%;min-height:48px;padding-inline:17px;font-size:.83rem}
+ .hero-note{font-size:.67rem;line-height:1.7}.hero-bottom-line{display:none}
+ .proof-grid{grid-template-columns:repeat(3,1fr)}.proof-item{padding:14px 4px}.proof-item strong{font-size:1.48rem}.proof-item small{font-size:.6rem;line-height:1.45}.proof-message strong{font-size:.88rem}
+ .reason-grid,.service-grid,.pricing-grid{grid-template-columns:1fr;gap:13px}
+ .reason-copy{padding:22px 21px 17px}.reason-card .zigzag-heading{font-size:1.03rem}.reason-card .zigzag-text{font-size:.81rem}
+ .reason-card .zigzag-visual-slot{aspect-ratio:16/9}
+ #servicesContainer .service-card-content{padding:21px}#servicesContainer .service-card-item.with-image{display:flex}
+ .service-note{text-align:left;font-size:.67rem}
+ .plan-card{padding:26px 21px}.plan-target{min-height:0}
+ .spot-fees-heading{display:block}.spot-fees-heading p{margin-top:5px}
+ .spot-fee-row{grid-template-columns:1fr auto;gap:5px 10px;padding:13px}
+ .spot-fee-row span{grid-column:1/-1;font-size:.71rem}.spot-fee-row strong,.spot-fee-row b{font-size:.8rem}.spot-fee-row b{text-align:right}
+ .team-card{grid-template-columns:1fr}.representative-photo-frame{width:100%;max-width:none;height:auto;aspect-ratio:16/10}
+ .representative-photo-frame img{max-width:none!important;width:100%!important;height:100%!important}
+ .team-card-body{padding:22px 20px}.team-card h3{font-size:1rem}
+ .career-list li{grid-template-columns:73px 1fr;font-size:.68rem}
+ .office-information{padding:20px 16px}.office-list>div{grid-template-columns:82px 1fr;gap:8px;padding:11px 0}
+ .office-list dt{font-size:.71rem}.office-list dd{font-size:.77rem}
+ .office-map,.office-map iframe{min-height:275px}
+ .partner-banner{flex-direction:column;align-items:flex-start;padding:21px}.partner-banner a{width:100%;text-align:center}
+ .faq-item summary{padding:15px 43px 15px 14px;gap:9px;font-size:.82rem}.faq-item summary::after{right:14px}
+ .faq-answer{padding:0 16px 16px 39px;font-size:.8rem}
+ .contact-panel{grid-template-columns:1fr;gap:21px;padding:26px 20px;border-radius:20px}
+ .contact-copy h2{font-size:1.43rem}.contact-copy p{font-size:.82rem}
+ .contact-phone{padding:15px 17px}.contact-phone strong{font-size:1.7rem}
+ .onepage-footer{padding:34px 0 26px}.footer-inner{grid-template-columns:1fr;gap:19px}
+ .footer-links{justify-content:flex-start;gap:11px 15px}.footer-links a{font-size:.71rem}
+ .footer-bottom{flex-direction:column;font-size:.65rem}
+ .mobile-action-bar{position:fixed;z-index:1050;left:0;right:0;bottom:0;display:grid;grid-template-columns:.85fr 1.15fr;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid rgba(220,231,240,.95);background:rgba(255,255,255,.96);backdrop-filter:blur(12px)}
+ .mobile-action-bar a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:999px;font-weight:700}
+ .mobile-call{border:1px solid #bbd3e5;color:var(--color-primary);background:#fff}
+ .mobile-inquiry{color:#fff;background:var(--color-primary)}
+ .mobile-action-bar small{font-size:.76rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* One-page overrides for inherited zigzag rules in the legacy shared stylesheet. */
+#servicesContainer .service-card-item.is-reverse,
+#servicesContainer .service-card-item.with-image.is-reverse { direction:ltr !important; }
+#servicesContainer .service-card-item.with-image.is-reverse .service-card-img-slot,
+#servicesContainer .service-card-item.with-image.is-reverse .service-card-content { order:initial !important; }
+#servicesContainer .service-card-item.with-image .service-card-img-slot { display:block !important; }
+#servicesContainer .service-card-item.no-image .service-card-img-slot { display:none !important; width:0 !important; height:0 !important; }
+.team-card .representative-photo-frame img { width:100% !important; height:100% !important; max-width:none !important; object-fit:cover !important; }
+
+.reason-card.has-image.is-reverse .zigzag-visual-slot{order:-1;border-radius:calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0}
+@media(max-width:600px){
+ .reason-card.has-image.is-reverse .zigzag-visual-slot{order:-1;border-radius:calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0}
+}

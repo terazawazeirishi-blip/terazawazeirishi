@@ -1,29 +1,39 @@
 {
-  "pageTitle": "寺澤景子税理士事務所 | トップページ",
+  "pageTitle": "寺澤景子税理士事務所 | 1ページサイト",
   "blocks": [
     {
-      "id": "block-news-01",
-      "type": "news-banner",
-      "visible": true
-    },
-    {
       "id": "block-features-01",
-      "type": "features-zigzag",
+      "type": "features",
       "visible": true
     },
     {
       "id": "block-services-01",
-      "type": "services-sticky",
+      "type": "services",
+      "visible": true
+    },
+    {
+      "id": "block-pricing-01",
+      "type": "pricing",
       "visible": true
     },
     {
       "id": "block-profile-01",
-      "type": "profile-double",
+      "type": "tax-accountants",
       "visible": true
     },
     {
-      "id": "block-cta-01",
-      "type": "cta-banner",
+      "id": "block-office-01",
+      "type": "office",
+      "visible": true
+    },
+    {
+      "id": "block-faq-01",
+      "type": "faq",
+      "visible": true
+    },
+    {
+      "id": "block-contact-01",
+      "type": "contact",
       "visible": true
     }
   ]

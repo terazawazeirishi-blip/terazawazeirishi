@@ -1,9 +1,7 @@
 {
-  "hero_badge": "TERAZAWA TAX & CONSULTING",
-  "hero_catch_main": "数字を、経営の\n最強の武器に。",
-  "hero_catch_sub": "企業の挑戦と安定成長を誠実に支え抜きます。",
-  "news_title": "2026-10-31 寺澤景子税理士事務所 公式Webサイトを開設いたしました",
-  "news_url": "./blog/index.html",
+  "hero_badge": "AMAKUSA · KUMAMOTO / TAX & MANAGEMENT",
+  "hero_catch_main": "数字の先にある、\n経営の未来をともに。",
+  "hero_catch_sub": "国税・税務署21年の調査眼と、税理士実務35年の経験。\n2名の税理士が、経営の判断と成長を支えます。",
   "features_title": "当事務所が選ばれる5つの理由",
   "features_subtitle": "元統括官の調査眼 × 歴35年のベテラン実務力。強固な2人体制がもたらす圧倒的安心感。",
   "feature_01_title": "税理士2人体制による、\n死角のない万全のダブルチェック",
@@ -16,8 +14,8 @@
   "feature_04_text": "提携先である「ザワテラス社労士」と強固に連携。雇用関係助成金の申請、就業規則作成、社会保険手続きから税務顧問まで、経営課題をひとつの窓口で一括サポートいたします。",
   "feature_05_title": "敷居の高さを感じさせない、\n親身で温かなコミュニケーション",
   "feature_05_text": "威圧感や堅苦しさは一切ありません。どんな初歩的な疑問にも専門用語を使わず平易にお答えします。女性経営者の方や起業間もない方でも、安心してお話しいただける環境を整えています。",
-  "hero_cta_label": "初回無料相談に申し込む（来所 / オンライン）",
-  "hero_cta_url": "./contact.html",
-  "services_cta_label": "サービス一覧を見る",
-  "services_cta_url": "./services.html"
+  "hero_cta_label": "初回無料相談を申し込む",
+  "hero_cta_url": "#contact",
+  "services_cta_label": "サービスを見る",
+  "services_cta_url": "#services"
 }
