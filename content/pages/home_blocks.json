@@ -74,19 +74,19 @@
       "id": "footer-about",
       "label": "選ばれる理由",
       "url": "#about",
-      "visible": true
+      "visible": false
     },
     {
       "id": "footer-services",
       "label": "サービス",
       "url": "#services",
-      "visible": true
+      "visible": false
     },
     {
       "id": "footer-pricing",
       "label": "料金",
       "url": "#pricing",
-      "visible": true
+      "visible": false
     },
     {
       "id": "footer-office",
@@ -98,7 +98,7 @@
       "id": "footer-faq",
       "label": "よくある質問",
       "url": "#faq",
-      "visible": true
+      "visible": false
     }
   ]
 }
