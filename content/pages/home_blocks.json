@@ -24,7 +24,7 @@
     {
       "id": "block-office-01",
       "type": "office",
-      "visible": false
+      "visible": true
     },
     {
       "id": "block-faq-01",
