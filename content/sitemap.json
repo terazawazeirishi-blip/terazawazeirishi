@@ -33,10 +33,6 @@
   ],
   "services": [
     {
-      "label": "・ 法人税務顧問・決算申告",
-      "url": "./index.html#services"
-    },
-    {
       "label": "・ 税務調査対策・事前模擬調査",
       "url": "./index.html#services"
     },
@@ -64,11 +60,13 @@
   "other": [
     {
       "label": "・ 個人情報保護方針・免責事項",
-      "url": "./privacy.html"
+      "url": "./privacy.html",
+      "external": false
     },
     {
       "label": "・ サイトマップ（本ページ）",
-      "url": "./sitemap.html"
+      "url": "./sitemap.html",
+      "external": false
     },
     {
       "label": "・ XMLサイトマップ（検索エンジン用）",
