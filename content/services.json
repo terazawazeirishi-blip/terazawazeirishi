@@ -3,16 +3,6 @@
   "section_subtitle": "PROFESSIONAL TAX & DX",
   "services": [
     {
-      "id": "service-02",
-      "num": "02",
-      "title": "税務調査対策・事前模擬調査",
-      "summary": "元法人課税部門統括官が直接主導する圧倒的な税務調査防衛力。",
-      "description": "調査通知前からの帳簿総点検、想定問答の作成、模擬税務調査の実施。当日の立ち会いから税務署との折衝まで完全に主導します。",
-      "link": "#pricing",
-      "link_label": "詳細・料金を見る",
-      "image_key": "service_02"
-    },
-    {
       "id": "service-03",
       "num": "03",
       "title": "会社設立・創業支援パック",
