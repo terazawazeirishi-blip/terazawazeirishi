@@ -106,8 +106,8 @@ def build_head_tags(page_key, seo_data, office_data, faq_data):
         }
         json_ld_blocks.append(acc_ld)
 
-    # 2. faq.html 専用 FAQPage
-    if page_key == "faq":
+    # 2. トップページ／FAQの FAQPage
+    if page_key in ("home", "faq"):
         faq_list = faq_data.get("faq_list", [])
         if faq_list:
             faq_entities = []
