@@ -3,16 +3,6 @@
   "section_subtitle": "PROFESSIONAL TAX & DX",
   "services": [
     {
-      "id": "service-06",
-      "num": "06",
-      "title": "相続税申告・事業承継コンサル",
-      "summary": "35年の資産税ノウハウと適正評価による円満な資産承継。",
-      "description": "不動産評価の適正化、生前贈与プランニング、非上場株式の評価と引き継ぎ対策。家族の絆を守る円満な承継を実現します。",
-      "link": "#pricing",
-      "link_label": "詳細・料金を見る",
-      "image_key": "service_06"
-    },
-    {
       "id": "service-07",
       "num": "07",
       "title": "助成金受給・労務管理支援",
