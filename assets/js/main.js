@@ -197,6 +197,33 @@
       });
     }
 
+    // ヘッダーナビゲーションの個別表示設定（Pages CMS）
+    // リストから項目を削除するか visible=false にすると、PC・スマホ共通でリンクを隠します。
+    const headerLinks = combined.home_blocks && combined.home_blocks.header_links;
+    if (Array.isArray(headerLinks)) {
+      const headerNavItems = document.querySelectorAll('#headerNav [data-cms-nav-id]');
+      headerNavItems.forEach(function (element) {
+        const navId = element.getAttribute('data-cms-nav-id');
+        const settings = headerLinks.find(function (item) {
+          return item && item.id === navId;
+        });
+
+        // CMSリストから削除された項目は、ヘッダーからも完全に取り除きます。
+        if (!settings || settings.visible === false) {
+          element.hidden = true;
+          return;
+        }
+
+        element.hidden = false;
+        if (typeof settings.label === 'string' && settings.label.trim()) {
+          element.textContent = settings.label.trim();
+        }
+        if (typeof settings.url === 'string' && settings.url.trim()) {
+          element.setAttribute('href', settings.url.trim());
+        }
+      });
+    }
+
     // プロフィール写真は、画像データがある場合のみプレースホルダーと差し替える
     document.querySelectorAll('[data-cms-image]').forEach(function (frame) {
       const imagePath = getCmsValue(combined, frame.getAttribute('data-cms-image'));
