@@ -344,3 +344,130 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 .site-footer.onepage-footer .footer-bottom {
   border-top-color: #dce7f0;
 }
+
+/* Header layout refinement: brand / navigation / phone are aligned as three clear groups */
+.onepage-header .header-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(12px, 1.45vw, 22px);
+}
+
+.onepage-header .site-brand {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.onepage-header .site-brand-copy {
+  min-width: 0;
+}
+
+.onepage-header .onepage-nav {
+  min-width: 0;
+  margin-left: 0;
+  flex-wrap: nowrap;
+  gap: clamp(8px, 1vw, 15px);
+}
+
+.onepage-header .onepage-nav .nav-link {
+  font-size: clamp(0.7rem, 0.77vw, 0.8rem);
+}
+
+.onepage-header .nav-contact {
+  padding-inline: clamp(12px, 1.2vw, 18px);
+  font-size: 0.77rem;
+}
+
+@media (max-width: 1120px) and (min-width: 981px) {
+  .onepage-header .header-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+  }
+
+  .onepage-header .onepage-nav {
+    gap: 9px;
+  }
+
+  .onepage-header .onepage-nav .nav-link {
+    font-size: 0.73rem;
+  }
+
+  .onepage-header .site-brand-copy strong {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet and mobile: keep the brand and menu button on one clean row */
+@media (max-width: 980px) {
+  .onepage-header .header-inner {
+    display: flex;
+    gap: 12px;
+  }
+
+  .onepage-header .site-brand {
+    flex: 1 1 auto;
+    max-width: calc(100% - 58px);
+    min-width: 0;
+  }
+
+  .onepage-header .menu-toggle {
+    display: flex;
+    flex: 0 0 42px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    margin-left: auto;
+    padding: 9px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .onepage-header .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-primary);
+  }
+
+  .onepage-header .onepage-nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 12px 22px 18px;
+    border-bottom: 1px solid var(--color-border);
+    background: #fff;
+    box-shadow: var(--shadow-md);
+  }
+
+  .onepage-header .onepage-nav.is-open {
+    display: flex;
+  }
+
+  .onepage-header .onepage-nav .nav-link {
+    padding: 13px 5px;
+    border-bottom: 1px solid #edf2f6;
+    font-size: 0.9rem;
+  }
+
+  .onepage-header .nav-contact {
+    margin-top: 12px;
+    min-height: 46px;
+    padding-inline: 18px;
+  }
+}
+
+/* Hidden CMS links must not reserve space in either desktop or mobile navigation */
+#headerNav [data-cms-nav-id][hidden] {
+  display: none !important;
+}
