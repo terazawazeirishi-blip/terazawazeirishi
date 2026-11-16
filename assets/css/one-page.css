@@ -298,3 +298,49 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 #headerNav [data-cms-nav-id][hidden] {
   display: none !important;
 }
+
+/* ヘッダー事務所名の視認性向上：枠内に収めながら読みやすく拡大 */
+.onepage-header .site-brand-copy strong {
+  font-size: clamp(1.12rem, 1.45vw, 1.24rem);
+  line-height: 1.3;
+  letter-spacing: 0.035em;
+}
+
+@media (max-width: 600px) {
+  .onepage-header .site-brand-copy strong {
+    font-size: clamp(0.94rem, 3.8vw, 1.02rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .onepage-header .site-brand-copy strong {
+    font-size: 0.88rem;
+  }
+  .onepage-header .site-brand-copy small {
+    display: none;
+  }
+}
+
+/* フッターは黒文字に統一。明るい背景にしてコントラストを確保 */
+.site-footer.onepage-footer {
+  color: #000000 !important;
+  background: #f4f8fc !important;
+}
+
+.site-footer.onepage-footer .site-brand-footer,
+.site-footer.onepage-footer .site-brand-copy strong,
+.site-footer.onepage-footer .site-brand-copy small,
+.site-footer.onepage-footer .site-brand-mark,
+.site-footer.onepage-footer .footer-brand p,
+.site-footer.onepage-footer .footer-brand p a,
+.site-footer.onepage-footer .footer-links a,
+.site-footer.onepage-footer .footer-links a:hover,
+.site-footer.onepage-footer .footer-bottom,
+.site-footer.onepage-footer .footer-bottom span,
+.site-footer.onepage-footer .footer-bottom a {
+  color: #000000 !important;
+}
+
+.site-footer.onepage-footer .footer-bottom {
+  border-top-color: #dce7f0;
+}
