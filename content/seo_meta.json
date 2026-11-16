@@ -1,7 +1,7 @@
 {
   "site_name": "寺澤景子税理士事務所",
   "base_url": "https://terazawazeirishi-blip.github.io/terazawazeirishi/",
-  "default_og_image": "assets/images/uploads/terazawa-hero.webp",
+  "default_og_image": "assets/images/uploads/onepage-consultation.webp",
   "pages": {
     "home": {
       "file": "index.html",
