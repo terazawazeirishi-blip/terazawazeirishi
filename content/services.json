@@ -1,18 +1,6 @@
 {
   "section_title": "提供サービス案内",
   "section_subtitle": "PROFESSIONAL TAX & DX",
-  "services": [
-    {
-      "id": "service-07",
-      "num": "07",
-      "title": "助成金受給・労務管理支援",
-      "summary": "提携「ザワテラス社労士」との強固なワンストップ支援。",
-      "description": "雇用関係助成金の申請、就業規則の作成、給与計算、社会保険手続きをワンストップで連携。労務・税務を一体で守護します。",
-      "link": "https://terazawa-sr.jbcsite.com/",
-      "link_label": "提携社労士サイトを見る",
-      "image_key": "service_07"
-    }
-  ],
   "hero_description": "国税調査官21年の実績に基づく高度税務調査対策から、クラウド会計DX、事業承継まで。2名の税理士と提携社労士がワンストップで伴走します。",
   "cta_title": "数字の不安を、未来への確信へ。",
   "cta_description": "初回面談・お見積りは無料です。天草本所での対面面談はもちろん、全国オンライン（Zoom等）にも即時対応いたします。",
