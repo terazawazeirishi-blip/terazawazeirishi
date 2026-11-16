@@ -224,6 +224,31 @@
       });
     }
 
+    // フッターナビゲーションの個別表示設定（Pages CMS）
+    // リストから削除するか visible=false にすると、フッターからリンクを隠します。
+    const footerLinks = combined.home_blocks && combined.home_blocks.footer_links;
+    const footerNavItems = document.querySelectorAll('.footer-links [data-cms-footer-id]');
+    footerNavItems.forEach(function (element) {
+      const footerId = element.getAttribute('data-cms-footer-id');
+      const settings = Array.isArray(footerLinks) ? footerLinks.find(function (item) {
+        return item && item.id === footerId;
+      }) : null;
+
+      // CMS設定がない、またはリストから削除されたリンクは表示しません。
+      if (!settings || settings.visible === false) {
+        element.hidden = true;
+        return;
+      }
+
+      element.hidden = false;
+      if (typeof settings.label === 'string' && settings.label.trim()) {
+        element.textContent = settings.label.trim();
+      }
+      if (typeof settings.url === 'string' && settings.url.trim()) {
+        element.setAttribute('href', settings.url.trim());
+      }
+    });
+
     // プロフィール写真は、画像データがある場合のみプレースホルダーと差し替える
     document.querySelectorAll('[data-cms-image]').forEach(function (frame) {
       const imagePath = getCmsValue(combined, frame.getAttribute('data-cms-image'));
