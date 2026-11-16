@@ -162,7 +162,8 @@
         { path: 'content/services.json', key: 'services' },
         { path: 'content/pages/home_blocks.json', key: 'home_blocks' },
         { path: 'content/site_images.json', key: 'images' },
-        { path: 'content/office_info.json', key: 'office' }
+        { path: 'content/office_info.json', key: 'office' },
+        { path: 'content/contact.json', key: 'contact' }
       ]
     };
 
@@ -491,6 +492,11 @@
           slot.textContent = '';
           const img = document.createElement('img');
           img.src = resolveUrl(rawImg);
+          img.alt = (card.querySelector('.zigzag-heading') && card.querySelector('.zigzag-heading').textContent.trim()) || 'サービス案内の写真';
+          img.width = 1000;
+          img.height = 563;
+          img.loading = 'lazy';
+          img.decoding = 'async';
           img.className = 'service-card-img';
           img.style.cssText = 'width:100%; height:100%; object-fit:cover; border-radius:var(--radius-md); display:block;';
           slot.appendChild(img);
