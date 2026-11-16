@@ -299,7 +299,7 @@
                 tag.textContent = 'SERVICE ' + number;
                 content.appendChild(tag);
 
-                const heading = document.createElement('h2');
+                const heading = document.createElement('h3');
                 heading.className = 'zigzag-heading';
                 heading.style.marginBottom = '0.8rem';
                 heading.textContent = service.title || '';
