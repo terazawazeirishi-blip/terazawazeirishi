@@ -293,3 +293,8 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 @media(max-width:600px){
  .reason-card.has-image.is-reverse .zigzag-visual-slot{order:-1;border-radius:calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0}
 }
+
+/* Pages CMSで非表示にしたヘッダーリンクは、PC・スマホどちらでも余白を残さず非表示にする。 */
+#headerNav [data-cms-nav-id][hidden] {
+  display: none !important;
+}
