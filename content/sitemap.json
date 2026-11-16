@@ -1,64 +1,64 @@
 {
   "page_title": "サイトマップ",
   "page_subtitle": "SITE STRUCTURE",
-  "hero_description": "当Webサイトの全ページ構成一覧です。",
+  "hero_description": "トップページ内の各セクションと、個人情報保護方針などの独立ページをご案内します。",
   "main_pages_title": "メインページ",
   "services_title": "提供サービス一覧",
   "other_title": "規約・その他",
   "main_pages": [
     {
-      "label": "・ ホーム（トップページ）",
+      "label": "・ トップページ（すべてのご案内）",
       "url": "./index.html"
     },
     {
+      "label": "・ 提供サービス",
+      "url": "./index.html#services"
+    },
+    {
+      "label": "・ 料金案内",
+      "url": "./index.html#pricing"
+    },
+    {
       "label": "・ 税理士紹介・事務所概要",
-      "url": "./profile.html"
+      "url": "./index.html#office"
     },
     {
-      "label": "・ 料金案内（顧問料・スポット）",
-      "url": "./pricing.html"
-    },
-    {
-      "label": "・ よくある質問（FAQ）",
-      "url": "./faq.html"
+      "label": "・ よくある質問",
+      "url": "./index.html#faq"
     },
     {
       "label": "・ 初回無料相談・お問い合わせ",
-      "url": "./contact.html"
-    },
-    {
-      "label": "・ 税務・経営コラム一覧",
-      "url": "./blog/index.html"
+      "url": "./index.html#contact"
     }
   ],
   "services": [
     {
       "label": "・ 法人税務顧問・決算申告",
-      "url": "./services.html#service-01"
+      "url": "./index.html#services"
     },
     {
       "label": "・ 税務調査対策・事前模擬調査",
-      "url": "./services.html#service-02"
+      "url": "./index.html#services"
     },
     {
       "label": "・ 会社設立・創業支援",
-      "url": "./services.html#service-03"
+      "url": "./index.html#services"
     },
     {
       "label": "・ 創業融資支援・公庫対策",
-      "url": "./services.html#service-04"
+      "url": "./index.html#services"
     },
     {
       "label": "・ クラウド会計導入（freee/MF）",
-      "url": "./services.html#service-05"
+      "url": "./index.html#services"
     },
     {
       "label": "・ 相続税申告・事業承継対策",
-      "url": "./services.html#service-06"
+      "url": "./index.html#services"
     },
     {
       "label": "・ 助成金受給・労務管理（社労士連携）",
-      "url": "./services.html#service-07"
+      "url": "./index.html#services"
     }
   ],
   "other": [
