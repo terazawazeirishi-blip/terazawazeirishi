@@ -4,37 +4,37 @@
     {
       "id": "block-features-01",
       "type": "features",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-services-01",
       "type": "services",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-pricing-01",
       "type": "pricing",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-profile-01",
       "type": "tax-accountants",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-office-01",
       "type": "office",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-faq-01",
       "type": "faq",
-      "visible": true
+      "visible": false
     },
     {
       "id": "block-contact-01",
       "type": "contact",
-      "visible": true
+      "visible": false
     }
   ]
 }
