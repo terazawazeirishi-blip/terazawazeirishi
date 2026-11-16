@@ -471,3 +471,8 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 #headerNav [data-cms-nav-id][hidden] {
   display: none !important;
 }
+
+/* Pages CMSで非表示にしたフッターリンクは余白ごと非表示にする */
+.site-footer .footer-links [data-cms-footer-id][hidden] {
+  display: none !important;
+}

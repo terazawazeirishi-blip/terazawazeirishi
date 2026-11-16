@@ -106,6 +106,29 @@ content:
               - name: visible
                 label: ヘッダーに表示する
                 type: boolean
+          # フッター内の5つのリンクも個別に削除・非表示にできます。
+          # リストから項目を削除するか、「フッターに表示する」をOFFにしてください。
+          - name: footer_links
+            label: フッターナビゲーション（5項目）
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label} ({index})"
+            fields:
+              - name: id
+                label: 管理ID
+                type: string
+                readonly: true
+              - name: label
+                label: リンクの表示文字
+                type: string
+              - name: url
+                label: リンク先
+                type: string
+              - name: visible
+                label: フッターに表示する
+                type: boolean
           - name: blocks
             label: ページ内ブロック
             type: object
