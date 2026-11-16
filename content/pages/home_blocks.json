@@ -34,7 +34,7 @@
     {
       "id": "block-contact-01",
       "type": "contact",
-      "visible": false
+      "visible": true
     }
   ]
 }
