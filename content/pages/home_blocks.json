@@ -42,25 +42,25 @@
       "id": "nav-about",
       "label": "選ばれる理由",
       "url": "#about",
-      "visible": true
+      "visible": false
     },
     {
       "id": "nav-services",
       "label": "サービス",
       "url": "#services",
-      "visible": true
+      "visible": false
     },
     {
       "id": "nav-pricing",
       "label": "料金案内",
       "url": "#pricing",
-      "visible": true
+      "visible": false
     },
     {
       "id": "nav-faq",
       "label": "よくある質問",
       "url": "#faq",
-      "visible": true
+      "visible": false
     }
   ]
 }
