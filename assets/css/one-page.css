@@ -89,7 +89,7 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 .reason-card .zigzag-heading{margin:0 0 12px;color:var(--color-primary);font:600 1.1rem/1.65 "Noto Serif JP",serif}
 .reason-card .zigzag-text{color:var(--color-text-sub);font-size:.85rem;line-height:1.95}
 .reason-card .zigzag-visual-slot{order:2;width:100%;min-height:0;margin-top:auto;aspect-ratio:16/10;overflow:hidden;border-radius:0 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px);background:#edf4f8;box-shadow:none}
-.reason-card .zigzag-visual-img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10}
+.reason-card .zigzag-visual-img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10;border-radius:0}
 .reason-card.has-no-image{display:block;padding-bottom:6px}
 .reason-card.has-no-image .reason-copy{min-height:100%}
 .reason-card.has-no-image .reason-number{background:var(--color-accent)}
@@ -102,7 +102,7 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
 #servicesContainer .service-card-item.no-image{display:block}
 #servicesContainer .service-card-img-slot{width:100%;margin:0;padding:0;aspect-ratio:16/9;overflow:hidden;background:#e7f0f7}
 #servicesContainer .service-card-img-slot[hidden]{display:none!important}
-#servicesContainer .service-card-img{width:100%;height:100%;object-fit:cover}
+#servicesContainer .service-card-img{width:100%;height:100%;object-fit:cover;border-radius:0!important}
 #servicesContainer .service-card-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:24px}
 .service-index{display:inline-block;margin-bottom:12px;color:var(--color-accent);font-size:.67rem;font-weight:700;letter-spacing:.15em}
 #servicesContainer .zigzag-heading{margin:0 0 11px;color:var(--color-primary);font:600 1.05rem/1.6 "Noto Serif JP",serif}
