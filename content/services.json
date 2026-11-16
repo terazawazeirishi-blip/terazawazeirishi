@@ -3,16 +3,6 @@
   "section_subtitle": "PROFESSIONAL TAX & DX",
   "services": [
     {
-      "id": "service-03",
-      "num": "03",
-      "title": "会社設立・創業支援パック",
-      "summary": "設立登記から税務届出、事業開始の初期設定を完全サポート。",
-      "description": "定款作成、公証人認証、税務関係届出書の作成・提出をワンストップで代行。初年度の経営基盤を盤石にします。",
-      "link": "#pricing",
-      "link_label": "詳細・料金を見る",
-      "image_key": "service_03"
-    },
-    {
       "id": "service-04",
       "num": "04",
       "title": "創業融資・公庫資金調達対策",
