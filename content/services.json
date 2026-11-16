@@ -3,16 +3,6 @@
   "section_subtitle": "PROFESSIONAL TAX & DX",
   "services": [
     {
-      "id": "service-04",
-      "num": "04",
-      "title": "創業融資・公庫資金調達対策",
-      "summary": "審査官を納得させる説得力ある事業計画書策定と面談対策。",
-      "description": "日本政策金融公庫や地方銀行の融資審査基準を熟知。自己資金の活用法から実現性の高い収支計画の策定を伴走支援します。",
-      "link": "#pricing",
-      "link_label": "詳細・料金を見る",
-      "image_key": "service_04"
-    },
-    {
       "id": "service-05",
       "num": "05",
       "title": "クラウド会計導入・自計化DX",
