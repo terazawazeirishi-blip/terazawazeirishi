@@ -278,3 +278,13 @@ body{color:var(--color-text-main);background:#fff;padding-bottom:0}
  .mobile-action-bar small{font-size:.76rem}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* One-page overrides for inherited zigzag rules in the legacy shared stylesheet. */
+#servicesContainer .service-card-item.is-reverse,
+#servicesContainer .service-card-item.with-image.is-reverse { direction:ltr !important; }
+#servicesContainer .service-card-item.with-image.is-reverse .service-card-img-slot,
+#servicesContainer .service-card-item.with-image.is-reverse .service-card-content { order:initial !important; }
+#servicesContainer .service-card-item.with-image .service-card-img-slot { display:block !important; }
+#servicesContainer .service-card-item.no-image .service-card-img-slot { display:none !important; width:0 !important; height:0 !important; }
+.team-card .representative-photo-frame img { width:100% !important; height:100% !important; max-width:none !important; object-fit:cover !important; }
