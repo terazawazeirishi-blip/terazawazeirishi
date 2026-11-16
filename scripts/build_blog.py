@@ -159,13 +159,13 @@ def build_blog():
       <nav class="header-nav" id="headerNav">
         <ul class="nav-list">
           <li><a href="../index.html" class="nav-link">ホーム</a></li>
-          <li><a href="../services.html" class="nav-link">サービス案内</a></li>
-          <li><a href="../pricing.html" class="nav-link">料金案内</a></li>
-          <li><a href="../profile.html" class="nav-link">税理士紹介・概要</a></li>
-          <li><a href="../faq.html" class="nav-link">よくある質問</a></li>
+          <li><a href="../index.html#services" class="nav-link">サービス案内</a></li>
+          <li><a href="../index.html#pricing" class="nav-link">料金案内</a></li>
+          <li><a href="../index.html#office" class="nav-link">税理士紹介・概要</a></li>
+          <li><a href="../index.html#faq" class="nav-link">よくある質問</a></li>
           <li><a href="./index.html" class="nav-link is-active">税務コラム</a></li>
         </ul>
-        <a href="../contact.html" class="header-cta-btn">無料相談を予約</a>
+        <a href="../index.html#contact" class="header-cta-btn">無料相談を予約</a>
       </nav>
     </div>
   </header>
@@ -197,22 +197,22 @@ def build_blog():
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">サービス案内</h4>
           <ul class="footer-nav-list">
-            <li><a href="../services.html#service-01" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
-            <li><a href="../services.html#service-02" class="footer-nav-link">・ 税務調査対策</a></li>
-            <li><a href="../services.html#service-03" class="footer-nav-link">・ 会社設立・創業支援</a></li>
-            <li><a href="../services.html#service-05" class="footer-nav-link">・ クラウド会計導入DX</a></li>
-            <li><a href="../services.html#service-06" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
+            <li><a href="../index.html#services#service-01" class="footer-nav-link">・ 法人税務顧問・決算申告</a></li>
+            <li><a href="../index.html#services#service-02" class="footer-nav-link">・ 税務調査対策</a></li>
+            <li><a href="../index.html#services#service-03" class="footer-nav-link">・ 会社設立・創業支援</a></li>
+            <li><a href="../index.html#services#service-05" class="footer-nav-link">・ クラウド会計導入DX</a></li>
+            <li><a href="../index.html#services#service-06" class="footer-nav-link">・ 相続税申告・事業承継</a></li>
           </ul>
         </div>
         <div>
           <h4 class="footer-nav-title" style="font-family: var(--font-serif); font-size: 1rem; color: var(--color-accent-light); margin-bottom: 1.2rem;">事務所案内</h4>
           <ul class="footer-nav-list">
             <li><a href="../index.html" class="footer-nav-link">・ ホーム</a></li>
-            <li><a href="../profile.html" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
-            <li><a href="../pricing.html" class="footer-nav-link">・ 料金案内</a></li>
-            <li><a href="../faq.html" class="footer-nav-link">・ よくある質問</a></li>
+            <li><a href="../index.html#office" class="footer-nav-link">・ 税理士紹介・事務所概要</a></li>
+            <li><a href="../index.html#pricing" class="footer-nav-link">・ 料金案内</a></li>
+            <li><a href="../index.html#faq" class="footer-nav-link">・ よくある質問</a></li>
             <li><a href="./index.html" class="footer-nav-link">・ 税務・経営コラム</a></li>
-            <li><a href="../contact.html" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 無料相談・お問い合わせ</a></li>
+            <li><a href="../index.html#contact" class="footer-nav-link" style="color: var(--color-accent-light); font-weight: 600;">・ 無料相談・お問い合わせ</a></li>
           </ul>
         </div>
         <div>
