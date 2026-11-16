@@ -31,7 +31,7 @@ def build_head_tags(page_key, seo_data, office_data, faq_data):
     p = pages.get(page_key, {})
     site_name = seo_data.get("site_name", "寺澤景子税理士事務所")
     base_url = seo_data.get("base_url", "https://terazawazeirishi-blip.github.io/terazawazeirishi/").rstrip("/") + "/"
-    default_img = seo_data.get("default_og_image", "assets/images/uploads/hero-bg-photo.svg")
+    default_img = seo_data.get("default_og_image", "assets/images/uploads/terazawa-hero.webp")
 
     title = p.get("title", f"{site_name} | 熊本・天草の税理士")
     desc = p.get("description", "")
