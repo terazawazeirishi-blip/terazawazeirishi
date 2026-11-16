@@ -342,6 +342,23 @@ content:
           - name: title
             label: 役職・肩書・紹介文
             type: string
+          - name: message
+            label: プロフィールメッセージ
+            type: text
+          - name: biography
+            label: 経歴・主な職歴
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{year} ({index})"
+            fields:
+              - name: year
+                label: 年・期間
+                type: string
+              - name: desc
+                label: 経歴・内容
+                type: text
           - name: badge_lines
             label: 写真下の紹介項目
             type: string
@@ -370,6 +387,23 @@ content:
           - name: title
             label: 役職・肩書・紹介文
             type: string
+          - name: message
+            label: プロフィールメッセージ
+            type: text
+          - name: biography
+            label: 経歴・主な職歴
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{year} ({index})"
+            fields:
+              - name: year
+                label: 年・期間
+                type: string
+              - name: desc
+                label: 経歴・内容
+                type: text
           - name: badge_lines
             label: 写真下の紹介項目
             type: string
